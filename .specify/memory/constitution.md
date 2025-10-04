@@ -1,50 +1,68 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report:
+- Version change: Initial → 1.0.0
+- Modified principles: All principles defined (initial constitution)
+- Added sections: Core Principles, Game Design Standards, Development Workflow, Governance
+- Removed sections: None (initial setup)
+- Templates requiring updates:
+  ✅ plan-template.md: Constitution Check section aligns with principles
+  ✅ spec-template.md: Scope/requirements alignment confirmed
+  ✅ tasks-template.md: Task categorization reflects principle-driven task types
+  ✅ constitution.prompt.md: No outdated references found
+- Follow-up TODOs: None
+-->
+
+# Cultist Simulator Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Library-First Architecture
+Every feature MUST start as a standalone library with clear boundaries. Libraries MUST be self-contained, independently testable, and thoroughly documented. Each library MUST have a single, well-defined purpose—no organizational-only libraries are permitted.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+**Rationale**: Modular design ensures testability, reusability, and maintainability. This is particularly crucial for a game like Cultist Simulator where complex systems (rituals, cards, narrative) need to interact cleanly.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### II. CLI Interface Requirement
+Every library MUST expose its functionality via a command-line interface. Text-based input/output protocol MUST be followed: stdin/arguments → stdout, errors → stderr. Both JSON and human-readable formats MUST be supported.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+**Rationale**: CLI interfaces ensure debuggability and enable automation. For game development, this allows testing of game mechanics independently of UI/graphics.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### III. Test-First Development (NON-NEGOTIABLE)
+Test-Driven Development is MANDATORY: Tests MUST be written → User approved → Tests MUST fail → Then implement. The Red-Green-Refactor cycle MUST be strictly enforced. No code merges without corresponding tests.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+**Rationale**: Games have complex state interactions and narrative dependencies. TDD ensures mechanics work as intended and prevents regressions in game balance or story flow.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### IV. Integration Testing Requirements
+Integration tests are REQUIRED for: New library contract tests, contract changes, inter-service communication, and shared game schemas (cards, rituals, outcomes). Cross-system testing MUST verify game state consistency.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+**Rationale**: Cultist Simulator's interconnected systems (time passage, ritual outcomes, narrative progression) require comprehensive integration testing to ensure emergent gameplay works correctly.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### V. Observability and Debugging
+All text-based I/O MUST ensure debuggability. Structured logging is REQUIRED for all game state changes, user actions, and system events. Game state MUST be serializable and inspectable at any point.
+
+**Rationale**: Complex narrative games require detailed debugging capabilities to trace unexpected behaviors, balance issues, and story progression problems.
+
+## Game Design Standards
+
+Game mechanics MUST be implemented as pure functions where possible. Random number generation MUST use seeded, reproducible algorithms. All game state transitions MUST be deterministic given the same inputs and random seed.
+
+Save game compatibility MUST be maintained within major versions. Breaking changes to save format require major version increment and migration path documentation.
+
+Performance requirements: Game state updates MUST complete within 16ms for 60fps target. Memory usage MUST not exceed 512MB for base gameplay on target platforms.
+
+## Development Workflow
+
+All features MUST follow the Specify workflow: /specify → /clarify → /plan → /tasks → implementation. Each phase MUST complete successfully before proceeding to the next.
+
+Code reviews MUST verify constitutional compliance before merge. All constitutional violations MUST be documented and justified, or the code MUST be refactored to comply.
+
+Version control MUST follow semantic versioning: MAJOR for breaking changes to save format or core mechanics, MINOR for new features or content, PATCH for bug fixes and balance adjustments.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This Constitution supersedes all other development practices and guidelines. All pull requests and code reviews MUST verify compliance with these principles.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+Amendments to this Constitution require documentation of impact, stakeholder approval, and a clear migration plan for affected systems. Constitutional violations MUST be justified with technical necessity and remediation timeline.
+
+Complexity that violates constitutional principles MUST be justified or the approach MUST be simplified. Use template-based guidance files for runtime development decisions aligned with these principles.
+
+**Version**: 1.0.0 | **Ratified**: 2025-10-04 | **Last Amended**: 2025-10-04
