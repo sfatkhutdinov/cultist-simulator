@@ -1,0 +1,4 @@
+{"log_file": "/Users/stan/Documents/Programming/cultist-simulator/data/logs/agent_20251004_190433.jsonl", "event": "logging_initialized", "logger": "__main__", "level": "info", "timestamp": "2025-10-04T23:04:33.850786Z"}
+{"component": "logging_config", "status": "success", "event": "test_message", "logger": "__main__", "level": "info", "timestamp": "2025-10-04T23:04:33.851170Z"}
+{"details": {"key": "value"}, "event": "debug_message", "logger": "__main__", "level": "debug", "timestamp": "2025-10-04T23:04:33.851222Z"}
+{"alert": "test", "event": "warning_message", "logger": "__main__", "level": "warning", "timestamp": "2025-10-04T23:04:33.851260Z"}

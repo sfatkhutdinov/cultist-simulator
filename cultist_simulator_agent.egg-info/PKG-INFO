@@ -1,0 +1,5 @@
+Metadata-Version: 2.4
+Name: cultist-simulator-agent
+Version: 0.1.0
+Summary: Autonomous AI agent for playing Cultist Simulator
+Requires-Python: >=3.11

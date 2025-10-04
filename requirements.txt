@@ -1,0 +1,35 @@
+# Core Dependencies
+pytest==8.3.3
+pytest-cov==5.0.0
+black==24.10.0
+mypy==1.11.2
+pylint==3.3.1
+
+# Machine Learning & RL
+torch==2.5.0
+stable-baselines3==2.3.2
+gymnasium==0.29.1
+
+# Computer Vision
+opencv-python==4.10.0.84
+ultralytics==8.3.16  # YOLOv8
+easyocr==1.7.2
+
+# NLP
+sentence-transformers==3.2.0
+transformers==4.45.2
+
+# macOS Automation
+pyobjc-core==10.3.1
+pyobjc-framework-Quartz==10.3.1
+pyobjc-framework-ApplicationServices==10.3.1
+
+# Data & Storage
+numpy==1.26.4
+pandas==2.2.3
+sqlalchemy==2.0.35
+
+# Logging & Utilities
+structlog==24.4.0
+pyyaml==6.0.2
+python-dotenv==1.0.1

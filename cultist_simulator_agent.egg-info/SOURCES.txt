@@ -1,0 +1,8 @@
+README.md
+pyproject.toml
+cultist_simulator_agent.egg-info/PKG-INFO
+cultist_simulator_agent.egg-info/SOURCES.txt
+cultist_simulator_agent.egg-info/dependency_links.txt
+cultist_simulator_agent.egg-info/top_level.txt
+src/__init__.py
+tests/test_setup.py

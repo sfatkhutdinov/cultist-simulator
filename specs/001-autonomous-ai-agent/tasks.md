@@ -22,16 +22,16 @@ This tasks document breaks down the implementation of an autonomous AI agent tha
 
 ## Phase 3.1: Setup
 
-- [ ] **T001** Create project directory structure per plan.md (src/, tests/, data/ directories)
-- [ ] **T002** Initialize Python 3.11+ project with virtual environment and requirements.txt
-- [ ] **T003** Install core dependencies (pytest, black, mypy, pylint)
+- [x] **T001** Create project directory structure per plan.md (src/, tests/, data/ directories)
+- [x] **T002** Initialize Python 3.11+ project with virtual environment and requirements.txt
+- [x] **T003** Install core dependencies (pytest, black, mypy, pylint)
 - [ ] **T004** [P] Download YOLO model weights (yolov8n.pt) to models/ directory
 - [ ] **T005** [P] Download sentence-transformers model (all-MiniLM-L6-v2) to models/ directory
 - [ ] **T006** [P] Download EasyOCR model weights for English language
-- [ ] **T007** Initialize SQLite database schema from data-model.md in data/knowledge_base.db
-- [ ] **T008** Configure structured logging with JSON output to data/logs/
-- [ ] **T009** Create shared type definitions in src/lib/types.py (Point, Rect, enums)
-- [ ] **T010** Set up pytest configuration with coverage reporting
+- [x] **T007** Initialize SQLite database schema from data-model.md in data/knowledge_base.db
+- [x] **T008** Configure structured logging with JSON output to data/logs/
+- [x] **T009** Create shared type definitions in src/lib/types.py (Point, Rect, enums)
+- [x] **T010** Set up pytest configuration with coverage reporting
 
 ---
 
@@ -41,27 +41,27 @@ This tasks document breaks down the implementation of an autonomous AI agent tha
 
 ### Contract Tests (Libraries)
 
-- [ ] **T011** [P] Contract test for vision_lib.capture_game_state() in tests/contract/test_vision_contract.py
-- [ ] **T012** [P] Contract test for vision_lib.detect_elements() in tests/contract/test_vision_contract.py
-- [ ] **T013** [P] Contract test for vision_lib.extract_text_regions() in tests/contract/test_vision_contract.py
-- [ ] **T014** [P] Contract test for automation_lib.simulate_click() in tests/contract/test_automation_contract.py
-- [ ] **T015** [P] Contract test for automation_lib.simulate_drag() in tests/contract/test_automation_contract.py
-- [ ] **T016** [P] Contract test for automation_lib.simulate_key_press() in tests/contract/test_automation_contract.py
-- [ ] **T017** [P] Contract test for learning_lib.select_action() in tests/contract/test_learning_contract.py
-- [ ] **T018** [P] Contract test for learning_lib.update_knowledge() in tests/contract/test_learning_contract.py
-- [ ] **T019** [P] Contract test for learning_lib.detect_loop() in tests/contract/test_learning_contract.py
-- [ ] **T020** [P] Contract test for nlp_lib.analyze_text() in tests/contract/test_nlp_contract.py
-- [ ] **T021** [P] Contract test for nlp_lib.extract_goals() in tests/contract/test_nlp_contract.py
-- [ ] **T022** [P] Contract test for safety_lib.validate_action() in tests/contract/test_safety_contract.py
-- [ ] **T023** [P] Contract test for safety_lib.is_within_bounds() in tests/contract/test_safety_contract.py
+- [x] **T011** [P] Contract test for vision_lib.capture_game_state() in tests/contract/test_vision_contract.py
+- [x] **T012** [P] Contract test for vision_lib.detect_elements() in tests/contract/test_vision_contract.py
+- [x] **T013** [P] Contract test for vision_lib.extract_text_regions() in tests/contract/test_vision_contract.py
+- [x] **T014** [P] Contract test for automation_lib.simulate_click() in tests/contract/test_automation_contract.py
+- [x] **T015** [P] Contract test for automation_lib.simulate_drag() in tests/contract/test_automation_contract.py
+- [x] **T016** [P] Contract test for automation_lib.simulate_key_press() in tests/contract/test_automation_contract.py
+- [x] **T017** [P] Contract test for learning_lib.select_action() in tests/contract/test_learning_contract.py
+- [x] **T018** [P] Contract test for learning_lib.update_knowledge() in tests/contract/test_learning_contract.py
+- [x] **T019** [P] Contract test for learning_lib.detect_loop() in tests/contract/test_learning_contract.py
+- [x] **T020** [P] Contract test for nlp_lib.analyze_text() in tests/contract/test_nlp_contract.py
+- [x] **T021** [P] Contract test for nlp_lib.extract_goals() in tests/contract/test_nlp_contract.py
+- [x] **T022** [P] Contract test for safety_lib.validate_action() in tests/contract/test_safety_contract.py
+- [x] **T023** [P] Contract test for safety_lib.is_within_bounds() in tests/contract/test_safety_contract.py
 
 ### Integration Tests
 
-- [ ] **T024** [P] Integration test: vision → automation (detect element → click) in tests/integration/test_vision_automation.py
-- [ ] **T025** [P] Integration test: learning → knowledge base (store/query session) in tests/integration/test_learning_knowledge.py
-- [ ] **T026** [P] Integration test: nlp → learning (extract goals → update strategy) in tests/integration/test_nlp_learning.py
-- [ ] **T027** [P] Integration test: safety → automation (validate → execute) in tests/integration/test_safety_automation.py
-- [ ] **T028** [P] Integration test: full episode simulation (mocked game) in tests/integration/test_episode_flow.py
+- [x] **T024** [P] Integration test: vision → automation (detect element → click) in tests/integration/test_vision_automation.py
+- [x] **T025** [P] Integration test: learning → knowledge base (store/query session) in tests/integration/test_learning_knowledge.py
+- [x] **T026** [P] Integration test: nlp → learning (extract goals → update strategy) in tests/integration/test_nlp_learning.py
+- [x] **T027** [P] Integration test: safety → automation (validate → execute) in tests/integration/test_safety_automation.py
+- [x] **T028** [P] Integration test: full episode simulation (mocked game) in tests/integration/test_episode_flow.py
 
 ### Safety Tests (CRITICAL - 100% Reliability Required)
 
