@@ -85,18 +85,18 @@ This tasks document breaks down the implementation of an autonomous AI agent tha
 
 ### Shared Data Models & Utilities
 
-- [ ] **T037** [P] Implement Point and Rect value objects in src/lib/types.py
-- [ ] **T038** [P] Implement enums (ElementType, ActionType, CardState, etc.) in src/lib/types.py
-- [ ] **T039** [P] Implement GameState entity in src/lib/types.py
-- [ ] **T040** [P] Implement GameElement entity in src/lib/types.py
-- [ ] **T041** [P] Implement Action entity in src/lib/types.py
-- [ ] **T042** [P] Implement Card entity in src/lib/types.py
-- [ ] **T043** [P] Implement Session entity in src/lib/types.py
-- [ ] **T044** [P] Implement Agent entity in src/lib/types.py
-- [ ] **T045** [P] Implement Strategy entity in src/lib/types.py
-- [ ] **T046** [P] Implement PerformanceMetric entity in src/lib/types.py
-- [ ] **T047** [P] Logging configuration with structured JSON output in src/lib/logging_config.py
-- [ ] **T048** [P] Configuration management (load YAML configs) in src/lib/config.py
+- [x] **T037** [P] Implement Point and Rect value objects in src/lib/types.py
+- [x] **T038** [P] Implement enums (ElementType, ActionType, CardState, etc.) in src/lib/types.py
+- [x] **T039** [P] Implement GameState entity in src/lib/types.py
+- [x] **T040** [P] Implement GameElement entity in src/lib/types.py
+- [x] **T041** [P] Implement Action entity in src/lib/types.py
+- [x] **T042** [P] Implement Card entity in src/lib/types.py
+- [x] **T043** [P] Implement Session entity in src/lib/types.py
+- [x] **T044** [P] Implement Agent entity in src/lib/types.py
+- [x] **T045** [P] Implement Strategy entity in src/lib/types.py
+- [x] **T046** [P] Implement PerformanceMetric entity in src/lib/types.py
+- [x] **T047** [P] Logging configuration with structured JSON output in src/lib/logging_config.py
+- [x] **T048** [P] Configuration management (load YAML configs) in src/lib/config.py
 
 ### Vision Library (src/vision/)
 

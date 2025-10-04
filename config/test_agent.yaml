@@ -1,0 +1,43 @@
+vision:
+  screenshot_interval_ms: 500
+  yolo_confidence_threshold: 0.5
+  ocr_confidence_threshold: 0.6
+  max_capture_latency_ms: 500
+  model_path: null
+automation:
+  max_click_latency_ms: 50
+  max_focus_check_latency_ms: 5
+  default_drag_duration_ms: 200
+  click_delay_ms: 10
+learning:
+  max_action_selection_latency_ms: 500
+  max_knowledge_query_latency_ms: 100
+  max_loop_detection_latency_ms: 10
+  learning_rate: 0.001
+  exploration_rate: 0.1
+  discount_factor: 0.99
+  loop_detection_window_size: 20
+  loop_detection_similarity_threshold: 0.8
+nlp:
+  max_analysis_latency_ms: 100
+  model_name: sentence-transformers/all-MiniLM-L6-v2
+  embedding_dim: 384
+  similarity_threshold: 0.7
+safety:
+  max_validation_latency_ms: 10
+  rate_limit_actions_per_second: 10
+  blacklisted_keys:
+  - cmd+q
+  - cmd+w
+  - cmd+tab
+  - cmd+`
+  - escape
+  - f4
+  require_window_focus: true
+  enforce_bounds_checking: true
+database:
+  db_path: data/knowledge_base.db
+  connection_timeout: 30
+  enable_wal: true
+log_level: INFO
+window_name: Cultist Simulator
