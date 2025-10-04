@@ -65,17 +65,17 @@ This tasks document breaks down the implementation of an autonomous AI agent tha
 
 ### Safety Tests (CRITICAL - 100% Reliability Required)
 
-- [ ] **T029** [P] Safety test: block out-of-bounds clicks in tests/contract/test_safety_contract.py
-- [ ] **T030** [P] Safety test: block blacklisted keys (Cmd+Q, etc.) in tests/contract/test_safety_contract.py
-- [ ] **T031** [P] Safety test: block actions when window unfocused in tests/contract/test_safety_contract.py
-- [ ] **T032** [P] Safety test: enforce rate limiting in tests/contract/test_safety_contract.py
-- [ ] **T033** [P] Adversarial safety test: attempt to bypass all constraints in tests/contract/test_safety_contract.py
+- [x] **T029** [P] Safety test: block out-of-bounds clicks in tests/contract/test_safety_contract.py
+- [x] **T030** [P] Safety test: block blacklisted keys (Cmd+Q, etc.) in tests/contract/test_safety_contract.py
+- [x] **T031** [P] Safety test: block actions when window unfocused in tests/contract/test_safety_contract.py
+- [x] **T032** [P] Safety test: enforce rate limiting in tests/contract/test_safety_contract.py
+- [x] **T033** [P] Adversarial safety test: attempt to bypass all constraints in tests/contract/test_safety_contract.py
 
 ### Performance Tests
 
-- [ ] **T034** [P] Performance test: capture_game_state() <500ms in tests/performance/test_vision_performance.py
+- [x] **T034** [P] Performance test: capture_game_state() <500ms in tests/performance/test_vision_performance.py
 - [ ] **T035** [P] Performance test: knowledge query <100ms in tests/performance/test_learning_performance.py
-- [ ] **T036** [P] Performance test: safety validation <10ms in tests/performance/test_safety_performance.py
+- [x] **T036** [P] Performance test: safety validation <10ms in tests/performance/test_safety_performance.py
 
 ---
 
@@ -128,11 +128,11 @@ This tasks document breaks down the implementation of an autonomous AI agent tha
 
 ### Safety Library (src/safety/)
 
-- [ ] **T071** Initialize safety library structure and __init__.py in src/safety/__init__.py
-- [ ] **T072** Implement is_within_bounds() coordinate validation in src/safety/constraint_checker.py
-- [ ] **T073** Implement is_key_blacklisted() with forbidden key list in src/safety/constraint_checker.py
-- [ ] **T074** Implement check_rate_limit() action throttling in src/safety/constraint_checker.py
-- [ ] **T075** Implement validate_action() comprehensive validation in src/safety/constraint_checker.py
+- [x] **T071** Initialize safety library structure and __init__.py in src/safety/__init__.py
+- [x] **T072** Implement is_within_bounds() coordinate validation in src/safety/constraint_checker.py
+- [x] **T073** Implement is_key_blacklisted() with forbidden key list in src/safety/constraint_checker.py
+- [x] **T074** Implement check_rate_limit() action throttling in src/safety/constraint_checker.py
+- [x] **T075** Implement validate_action() comprehensive validation in src/safety/constraint_checker.py
 - [ ] **T076** Implement loop detection using sliding window in src/safety/loop_detector.py
 - [ ] **T077** Implement Levenshtein distance for pattern matching in src/safety/loop_detector.py
 - [ ] **T078** Implement safety violation logging in src/safety/constraint_checker.py
