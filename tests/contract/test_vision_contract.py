@@ -58,12 +58,13 @@ class TestVisionLibContract:
         test_image = np.zeros((100, 100, 3), dtype=np.uint8)
         
         # Should accept the image and element types
-        # This will fail until implementation exists
-        with pytest.raises(Exception):
-            elements = detect_elements(
-                test_image,
-                [ElementType.CARD, ElementType.BUTTON]
-            )
+        elements = detect_elements(
+            test_image,
+            [ElementType.CARD, ElementType.BUTTON]
+        )
+        
+        # Should return a list
+        assert isinstance(elements, list)
 
     def test_extract_text_regions_exists(self):
         """T013: Contract test for vision_lib.extract_text_regions()."""
@@ -87,10 +88,8 @@ class TestVisionLibContract:
         test_regions = [Rect(10, 10, 50, 20)]
         
         # Should return a list (empty or with results)
-        # This will fail until implementation exists
-        with pytest.raises(Exception):
-            result = extract_text_regions(test_image, test_regions)
-            assert isinstance(result, list)
+        result = extract_text_regions(test_image, test_regions)
+        assert isinstance(result, list)
 
     def test_track_element_changes_exists(self):
         """Contract test for vision_lib.track_element_changes()."""
@@ -150,17 +149,15 @@ class TestVisionLibPerformance:
         # Create test image
         test_image = np.zeros((1920, 1080, 3), dtype=np.uint8)
         
-        # This will fail until implementation exists
-        with pytest.raises(Exception):
-            start = time.perf_counter()
-            elements = detect_elements(
-                test_image,
-                [ElementType.CARD, ElementType.BUTTON, ElementType.TIMER]
-            )
-            duration_ms = (time.perf_counter() - start) * 1000
-            
-            # Contract specifies <200ms for element detection
-            assert duration_ms < 200, f"Detection took {duration_ms}ms, must be <200ms"
+        start = time.perf_counter()
+        elements = detect_elements(
+            test_image,
+            [ElementType.CARD, ElementType.BUTTON, ElementType.TIMER]
+        )
+        duration_ms = (time.perf_counter() - start) * 1000
+        
+        # Contract specifies <200ms for element detection
+        assert duration_ms < 200, f"Detection took {duration_ms}ms, must be <200ms"
 
 
 class TestVisionLibErrorHandling:

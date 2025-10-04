@@ -100,16 +100,16 @@ This tasks document breaks down the implementation of an autonomous AI agent tha
 
 ### Vision Library (src/vision/)
 
-- [ ] **T049** Initialize vision library structure and __init__.py in src/vision/__init__.py
-- [ ] **T050** Implement screen capture using Quartz in src/vision/screen_capture.py
-- [ ] **T051** Implement get_window_bounds() for game window location in src/vision/screen_capture.py
-- [ ] **T052** Implement YOLO-based element detection in src/vision/element_detector.py
-- [ ] **T053** Implement template matching for UI elements in src/vision/element_detector.py
-- [ ] **T054** Implement OCR text extraction using EasyOCR in src/vision/ocr.py
-- [ ] **T055** Implement capture_game_state() integrating all vision components in src/vision/__init__.py
-- [ ] **T056** Implement detect_elements() public interface in src/vision/__init__.py
-- [ ] **T057** Implement extract_text_regions() public interface in src/vision/__init__.py
-- [ ] **T058** Implement track_element_changes() state comparison in src/vision/__init__.py
+- [x] **T049** Initialize vision library structure and __init__.py in src/vision/__init__.py
+- [x] **T050** Implement screen capture using Quartz in src/vision/screen_capture.py
+- [x] **T051** Implement get_window_bounds() for game window location in src/vision/screen_capture.py
+- [x] **T052** Implement YOLO-based element detection in src/vision/element_detector.py
+- [x] **T053** Implement template matching for UI elements in src/vision/element_detector.py
+- [x] **T054** Implement OCR text extraction using EasyOCR in src/vision/ocr.py
+- [x] **T055** Implement capture_game_state() integrating all vision components in src/vision/__init__.py
+- [x] **T056** Implement detect_elements() public interface in src/vision/__init__.py
+- [x] **T057** Implement extract_text_regions() public interface in src/vision/__init__.py
+- [x] **T058** Implement track_element_changes() state comparison in src/vision/__init__.py
 - [ ] **T059** Implement vision library CLI in src/vision/cli.py with JSON I/O
 
 ### Automation Library (src/automation/)
