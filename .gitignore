@@ -7,6 +7,8 @@ __pycache__/
 # C extensions
 *.so
 
+*.*pyc*
+
 # Distribution / packaging
 build/
 dist/
@@ -98,3 +100,5 @@ logs/
 *.pyo
 *.pyd
 *.db
+src/automation/__pycache__/__init__.cpython-313.pyc
+src/safety/__pycache__/__init__.cpython-313.pyc

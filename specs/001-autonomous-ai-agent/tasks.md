@@ -114,15 +114,15 @@ This tasks document breaks down the implementation of an autonomous AI agent tha
 
 ### Automation Library (src/automation/)
 
-- [ ] **T060** Initialize automation library structure and __init__.py in src/automation/__init__.py
-- [ ] **T061** Implement Quartz-based mouse click simulation in src/automation/input_simulator.py
-- [ ] **T062** Implement Quartz-based mouse drag simulation in src/automation/input_simulator.py
-- [ ] **T063** Implement Quartz-based keyboard input simulation in src/automation/input_simulator.py
-- [ ] **T064** Implement window focus verification in src/automation/window_manager.py
-- [ ] **T065** Implement simulate_click() with safety pre-validation in src/automation/__init__.py
-- [ ] **T066** Implement simulate_drag() with bounds validation in src/automation/__init__.py
-- [ ] **T067** Implement simulate_key_press() with blacklist checking in src/automation/__init__.py
-- [ ] **T068** Implement wait() function in src/automation/__init__.py
+- [x] **T060** Initialize automation library structure and __init__.py in src/automation/__init__.py
+- [x] **T061** Implement Quartz-based mouse click simulation in src/automation/input_simulator.py
+- [x] **T062** Implement Quartz-based mouse drag simulation in src/automation/input_simulator.py
+- [x] **T063** Implement Quartz-based keyboard input simulation in src/automation/input_simulator.py
+- [x] **T064** Implement window focus verification in src/automation/window_manager.py
+- [x] **T065** Implement simulate_click() with safety pre-validation in src/automation/__init__.py
+- [x] **T066** Implement simulate_drag() with bounds validation in src/automation/__init__.py
+- [x] **T067** Implement simulate_key_press() with blacklist checking in src/automation/__init__.py
+- [x] **T068** Implement wait() function in src/automation/__init__.py
 - [ ] **T069** Implement emergency stop mechanism (F12 key listener) in src/automation/__init__.py
 - [ ] **T070** Implement automation library CLI in src/automation/cli.py with JSON I/O
 
