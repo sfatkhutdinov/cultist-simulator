@@ -35,9 +35,9 @@ This tasks document breaks down the implementation of an autonomous AI agent tha
 - [x] **T001** Create project directory structure per plan.md (src/, tests/, data/ directories)
 - [x] **T002** Initialize Python 3.11+ project with virtual environment and requirements.txt
 - [x] **T003** Install core dependencies (pytest, black, mypy, pylint)
-- [ ] **T004** [P] Download YOLO model weights (yolov8n.pt) to models/ directory
-- [ ] **T005** [P] Download sentence-transformers model (all-MiniLM-L6-v2) to models/ directory
-- [ ] **T006** [P] Download EasyOCR model weights for English language
+- [x] **T004** [P] Download YOLO model weights (yolov8n.pt) to models/ directory
+- [x] **T005** [P] Download sentence-transformers model (all-MiniLM-L6-v2) to models/ directory
+- [x] **T006** [P] Download EasyOCR model weights for English language
 - [x] **T007** Initialize SQLite database schema from data-model.md in data/knowledge_base.db
 - [x] **T008** Configure structured logging with JSON output to data/logs/
 - [x] **T009** Create shared type definitions in src/lib/types.py (Point, Rect, enums)
@@ -144,8 +144,8 @@ This tasks document breaks down the implementation of an autonomous AI agent tha
 - [x] **T073** Implement is_key_blacklisted() with forbidden key list in src/safety/constraint_checker.py
 - [x] **T074** Implement check_rate_limit() action throttling in src/safety/constraint_checker.py
 - [x] **T075** Implement validate_action() comprehensive validation in src/safety/constraint_checker.py
-- [ ] **T076** [BLOCKING] Implement loop detection using sliding window (5-minute window, detect 3+ identical sequences) in src/safety/loop_detector.py
-- [ ] **T077** [BLOCKING] Implement Levenshtein distance for pattern matching in src/safety/loop_detector.py
+- [x] **T076** [BLOCKING] Implement loop detection using sliding window (5-minute window, detect 3+ identical sequences) in src/safety/loop_detector.py
+- [x] **T077** [BLOCKING] Implement Levenshtein distance for pattern matching in src/safety/loop_detector.py
 - [ ] **T078** Implement safety violation logging in src/safety/constraint_checker.py
 - [ ] **T079** Implement safety library CLI in src/safety/cli.py with JSON I/O
 
@@ -160,13 +160,13 @@ This tasks document breaks down the implementation of an autonomous AI agent tha
 - [x] **T086** Implement extract_goals() public interface in src/nlp/__init__.py
 - [x] **T087** Implement find_similar_narratives() with cosine similarity in src/nlp/__init__.py
 - [x] **T088** Implement embedding cache for performance in src/nlp/text_analyzer.py
-- [ ] **T089** Implement NLP library CLI in src/nlp/cli.py with JSON I/O
+- [x] **T089** Implement NLP library CLI in src/nlp/cli.py with JSON I/O
 
 ### Learning Library (src/learning/)
 
 - [x] **T090** Initialize learning library structure and __init__.py in src/learning/__init__.py
-- [ ] **T091** Set up Stable-Baselines3 PPO agent in src/learning/agent.py
-- [ ] **T092** Implement custom gym environment for Cultist Simulator in src/learning/agent.py
+- [x] **T091** Set up Stable-Baselines3 PPO agent in src/learning/agent.py
+- [x] **T092** Implement custom gym environment for Cultist Simulator in src/learning/agent.py
 - [x] **T093** Implement select_action() using trained policy in src/learning/__init__.py
 - [x] **T094** Implement update_knowledge() for experience replay in src/learning/__init__.py
 - [x] **T095** Initialize SQLite knowledge base connection in src/learning/knowledge_base.py

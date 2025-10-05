@@ -105,6 +105,94 @@ class KnowledgeBase:
             reward=reward
         )
     
+    def store_mechanic(
+        self,
+        mechanic_name: str,
+        description: str,
+        conditions: Dict[str, Any],
+        effects: Dict[str, Any]
+    ) -> None:
+        """
+        Store a learned game mechanic.
+        T098: Implement store_mechanic() for game rules.
+        
+        Args:
+            mechanic_name: Name/identifier for the mechanic
+            description: Human-readable description
+            conditions: Conditions that trigger this mechanic
+            effects: Effects/outcomes of the mechanic
+        """
+        try:
+            import json
+            cursor = self.conn.cursor()
+            
+            cursor.execute(
+                """
+                INSERT OR REPLACE INTO mechanics (name, description, conditions, effects, learned_at)
+                VALUES (?, ?, ?, ?, datetime('now'))
+                """,
+                (
+                    mechanic_name,
+                    description,
+                    json.dumps(conditions),
+                    json.dumps(effects)
+                )
+            )
+            
+            self.conn.commit()
+            logger.info(f"Stored mechanic: {mechanic_name}")
+            
+        except Exception as e:
+            logger.error(f"Failed to store mechanic: {e}")
+    
+    def get_mechanic(self, mechanic_name: str) -> Optional[Dict[str, Any]]:
+        """Retrieve a learned mechanic by name."""
+        try:
+            import json
+            cursor = self.conn.cursor()
+            cursor.execute(
+                "SELECT * FROM mechanics WHERE name = ?",
+                (mechanic_name,)
+            )
+            row = cursor.fetchone()
+            
+            if row:
+                return {
+                    "name": row["name"],
+                    "description": row["description"],
+                    "conditions": json.loads(row["conditions"]),
+                    "effects": json.loads(row["effects"]),
+                    "learned_at": row["learned_at"]
+                }
+            return None
+            
+        except Exception as e:
+            logger.error(f"Failed to get mechanic: {e}")
+            return None
+    
+    def list_mechanics(self) -> List[Dict[str, Any]]:
+        """List all learned mechanics."""
+        try:
+            import json
+            cursor = self.conn.cursor()
+            cursor.execute("SELECT * FROM mechanics ORDER BY learned_at DESC")
+            rows = cursor.fetchall()
+            
+            return [
+                {
+                    "name": row["name"],
+                    "description": row["description"],
+                    "conditions": json.loads(row["conditions"]),
+                    "effects": json.loads(row["effects"]),
+                    "learned_at": row["learned_at"]
+                }
+                for row in rows
+            ]
+            
+        except Exception as e:
+            logger.error(f"Failed to list mechanics: {e}")
+            return []
+    
     def close(self) -> None:
         """Close database connection."""
         if self.conn:

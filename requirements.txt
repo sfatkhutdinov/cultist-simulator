@@ -6,7 +6,7 @@ mypy==1.11.2
 pylint==3.3.1
 
 # Machine Learning & RL
-torch==2.5.0
+torch==2.8.0
 stable-baselines3==2.3.2
 gymnasium==0.29.1
 
@@ -33,3 +33,4 @@ sqlalchemy==2.0.35
 structlog==24.4.0
 pyyaml==6.0.2
 python-dotenv==1.0.1
+python-Levenshtein==0.27.1
