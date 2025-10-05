@@ -3,11 +3,11 @@ __pycache__/
 *.py[cod]
 *$py.class
 *.pyc
+*.pyo
+*.pyd
 
 # C extensions
 *.so
-
-*.*pyc*
 
 # Distribution / packaging
 build/
@@ -82,7 +82,8 @@ Desktop.ini
 
 # Secrets and credentials
 .env
-.env.*
+.env.local
+.env.*.local
 secrets.json
 *.pem
 *.key
@@ -94,11 +95,27 @@ secrets.json
 tmp/
 logs/
 
+# Machine Learning / AI artifacts
+models/
+*.h5
+*.pkl
+*.pickle
+*.joblib
+*.model
+*.onnx
+*.pt
+*.pth
+checkpoints/
+wandb/
+mlruns/
+tensorboard/
+
+# Data files (uncomment if needed)
+# data/
+# *.csv
+# *.json
+# *.parquet
+
 # Other common artifacts
 .scrapy
-*.pyc
-*.pyo
-*.pyd
 *.db
-src/automation/__pycache__/__init__.cpython-313.pyc
-src/safety/__pycache__/__init__.cpython-313.pyc
