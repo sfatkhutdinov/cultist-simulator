@@ -41,6 +41,8 @@ logger = get_logger(__name__)
 # Emergency stop flag (T069)
 _emergency_stop_requested = False
 _emergency_stop_lock = threading.Lock()
+_keyboard_listener = None
+_keyboard_listener_active = False
 
 
 # Custom exceptions
@@ -393,29 +395,99 @@ def reset_emergency_stop() -> None:
 
 def start_emergency_stop_listener() -> None:
     """
-    Start background thread to listen for F12 key press.
-
-    T069: Emergency stop mechanism - F12 key listener.
-
-    Note: Implementing a global key listener on macOS requires
-    accessibility permissions and is complex. For now, this is
-    a placeholder. The emergency stop can be triggered programmatically
-    via request_emergency_stop().
-
-    TODO: Implement actual F12 key listener using pynput or similar.
+    Start background thread to listen for Cmd+Shift+Q key combination.
+    
+    T069: Emergency stop mechanism - Global keyboard listener.
+    
+    Listens for Cmd+Shift+Q which is safe (not used by system) and
+    can be pressed from anywhere, even when agent controls the mouse.
+    
+    CRITICAL FOR SINGLE SCREEN: This allows stopping the agent when
+    you can't access the terminal because the agent is moving the mouse.
+    
+    Press: Cmd+Shift+Q to stop the agent immediately.
     """
-    logger.warning(
-        "emergency_stop_listener_not_implemented",
-        message="F12 listener requires pynput package. Use request_emergency_stop() to trigger manually.",
-    )
+    global _keyboard_listener, _keyboard_listener_active
+    
+    # Only start once
+    if _keyboard_listener_active:
+        logger.debug("emergency_stop_listener_already_running")
+        return
+    
+    try:
+        from pynput import keyboard
+        
+        # Track which modifier keys are currently pressed
+        current_modifiers = set()
+        
+        def on_press(key):
+            """Handle key press events."""
+            global _keyboard_listener_active
+            
+            # Track modifiers
+            if key == keyboard.Key.cmd:
+                current_modifiers.add('cmd')
+            elif key == keyboard.Key.shift:
+                current_modifiers.add('shift')
+            
+            # Check for Cmd+Shift+Q
+            if 'cmd' in current_modifiers and 'shift' in current_modifiers:
+                try:
+                    if hasattr(key, 'char') and key.char == 'q':
+                        print("\n" + "=" * 70)
+                        print("🛑 EMERGENCY STOP TRIGGERED (Cmd+Shift+Q)")
+                        print("=" * 70)
+                        print("  Stopping agent immediately...")
+                        print("=" * 70)
+                        print()
+                        request_emergency_stop()
+                        _keyboard_listener_active = False
+                        return False  # Stop listener
+                except AttributeError:
+                    pass
+        
+        def on_release(key):
+            """Handle key release events."""
+            # Clear modifiers
+            if key == keyboard.Key.cmd:
+                current_modifiers.discard('cmd')
+            elif key == keyboard.Key.shift:
+                current_modifiers.discard('shift')
+        
+        # Start listener in background thread
+        _keyboard_listener = keyboard.Listener(
+            on_press=on_press,
+            on_release=on_release
+        )
+        _keyboard_listener.daemon = True  # Exit when main program exits
+        _keyboard_listener.start()
+        _keyboard_listener_active = True
+        
+        logger.info("emergency_stop_listener_started", hotkey="Cmd+Shift+Q")
+        print("\n⚡ Emergency Stop Active: Press Cmd+Shift+Q to stop agent from anywhere\n")
+        
+    except ImportError:
+        logger.warning(
+            "emergency_stop_listener_failed",
+            reason="pynput not installed",
+            message="Install pynput for emergency stop: pip install pynput"
+        )
+    except Exception as e:
+        logger.error(
+            "emergency_stop_listener_error",
+            error=str(e),
+            message="Failed to start keyboard listener"
+        )
 
-    # Future implementation would use pynput:
-    # from pynput import keyboard
-    # def on_press(key):
-    #     if key == keyboard.Key.f12:
-    #         request_emergency_stop()
-    # listener = keyboard.Listener(on_press=on_press)
-    # listener.start()
+
+def stop_emergency_stop_listener() -> None:
+    """Stop the emergency stop keyboard listener."""
+    global _keyboard_listener, _keyboard_listener_active
+    
+    if _keyboard_listener and _keyboard_listener_active:
+        _keyboard_listener.stop()
+        _keyboard_listener_active = False
+        logger.info("emergency_stop_listener_stopped")
 
 
 # Export public API
@@ -430,6 +502,7 @@ __all__ = [
     "request_emergency_stop",
     "reset_emergency_stop",
     "start_emergency_stop_listener",
+    "stop_emergency_stop_listener",
     "OutOfBoundsError",
     "BlacklistedKeyError",
     "WindowNotFocusedError",

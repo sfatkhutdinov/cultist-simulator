@@ -126,24 +126,95 @@ def select_action(game_state: Optional[GameState]) -> Action:
         if _test_mode or _rl_model is None:
             # Random action within game window bounds
             window_bounds = game_state.window_bounds
-            random_x = random.randint(
-                window_bounds.x + 50, window_bounds.x + window_bounds.width - 50
-            )
-            random_y = random.randint(
-                window_bounds.y + 50, window_bounds.y + window_bounds.height - 50
-            )
-
-            action = Action(
-                action_type=ActionType.CLICK,
-                parameters={"point": Point(random_x, random_y)},
-                metadata={
-                    "confidence": 0.5,
-                    "rationale": (
-                        "Random test action" if _test_mode else "Placeholder action"
-                    ),
-                    "test_mode": _test_mode,
-                },
-            )
+            
+            # Helper function to get random point in bounds
+            def random_point():
+                x = random.randint(
+                    window_bounds.x + 50, window_bounds.x + window_bounds.width - 50
+                )
+                y = random.randint(
+                    window_bounds.y + 50, window_bounds.y + window_bounds.height - 50
+                )
+                return Point(x, y)
+            
+            # Choose action type with weighted probabilities
+            # 50% CLICK, 40% DRAG, 10% KEY_PRESS for diverse exploration
+            action_type = random.choices(
+                [ActionType.CLICK, ActionType.DRAG, ActionType.KEY_PRESS],
+                weights=[0.5, 0.4, 0.1],
+                k=1
+            )[0]
+            
+            if action_type == ActionType.CLICK:
+                # Click on element if available, otherwise random point
+                if game_state.elements:
+                    element = random.choice(game_state.elements)
+                    point = element.center
+                    rationale = f"Click on detected {element.element_type.value}"
+                else:
+                    point = random_point()
+                    rationale = "Random click exploration"
+                
+                action = Action(
+                    action_type=ActionType.CLICK,
+                    parameters={"point": point},
+                    metadata={
+                        "confidence": 0.7 if game_state.elements else 0.5,
+                        "rationale": rationale,
+                        "test_mode": _test_mode,
+                    },
+                )
+            
+            elif action_type == ActionType.DRAG:
+                # Drag between elements if available, otherwise random drag
+                if len(game_state.elements) >= 2:
+                    elem1, elem2 = random.sample(game_state.elements, 2)
+                    start = elem1.center
+                    end = elem2.center
+                    rationale = f"Drag {elem1.element_type.value} to {elem2.element_type.value}"
+                else:
+                    start = random_point()
+                    end = random_point()
+                    rationale = "Random drag exploration"
+                
+                action = Action(
+                    action_type=ActionType.DRAG,
+                    parameters={
+                        "start": start,
+                        "end": end,
+                        "duration": random.uniform(150, 400),  # 150-400ms drag
+                    },
+                    metadata={
+                        "confidence": 0.7 if len(game_state.elements) >= 2 else 0.5,
+                        "rationale": rationale,
+                        "test_mode": _test_mode,
+                    },
+                )
+            
+            elif action_type == ActionType.KEY_PRESS:
+                # Try common game keys (escape is blacklisted for safety)
+                key = random.choice(["space", "tab", "return"])
+                action = Action(
+                    action_type=ActionType.KEY_PRESS,
+                    parameters={"key": key},
+                    metadata={
+                        "confidence": 0.3,
+                        "rationale": f"Try keyboard shortcut: {key}",
+                        "test_mode": _test_mode,
+                    },
+                )
+            
+            else:
+                # Fallback to click
+                action = Action(
+                    action_type=ActionType.CLICK,
+                    parameters={"point": random_point()},
+                    metadata={
+                        "confidence": 0.5,
+                        "rationale": "Fallback random click",
+                        "test_mode": _test_mode,
+                    },
+                )
         else:
             # Real implementation with trained model:
             # observation = _encode_game_state(game_state)

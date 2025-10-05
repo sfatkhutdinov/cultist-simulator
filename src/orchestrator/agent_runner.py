@@ -13,6 +13,8 @@ The agent runs episodes, learns from experience, and improves over time.
 """
 
 import time
+import signal
+import sys
 from datetime import datetime
 from typing import Optional, Dict, Any, List
 from pathlib import Path
@@ -47,10 +49,46 @@ from src.automation import (
     BlacklistedKeyError,
     WindowNotFocusedError,
     is_emergency_stop_requested,
+    request_emergency_stop,
+    start_emergency_stop_listener,
 )
 from src.automation.window_manager import require_active_window, is_window_active
 
 logger = get_logger(__name__)
+
+
+# Global flag for interrupt handling
+_interrupt_requested = False
+
+
+def _signal_handler(signum, frame):
+    """Handle Ctrl+C gracefully."""
+    global _interrupt_requested
+    _interrupt_requested = True
+    request_emergency_stop()
+    print("\n⚠️  Interrupt received (Ctrl+C). Stopping agent gracefully...")
+    print("   Press Ctrl+C again to force quit.\n")
+    
+    # Restore default handler so second Ctrl+C will force quit
+    signal.signal(signal.SIGINT, signal.SIG_DFL)
+
+
+def setup_interrupt_handler():
+    """
+    Setup graceful interrupt handlers.
+    
+    Installs two interrupt mechanisms:
+    1. Ctrl+C signal handler (for when you can access terminal)
+    2. Cmd+Shift+Q keyboard listener (for when agent controls mouse)
+    """
+    # Install Ctrl+C handler
+    signal.signal(signal.SIGINT, _signal_handler)
+    logger.debug("interrupt_handler_installed")
+    
+    # Start global keyboard listener for emergency stop
+    # CRITICAL: This allows stopping on single-screen setups where
+    # you can't reach the terminal because agent is moving the mouse
+    start_emergency_stop_listener()
 
 
 class AgentRunner:
@@ -97,6 +135,9 @@ class AgentRunner:
         if self.test_mode:
             enable_learning_test_mode(True)
             logger.info("test_mode_enabled", strategy="random_exploration")
+
+        # Setup graceful interrupt handler
+        setup_interrupt_handler()
 
         # Current episode state
         self.current_session: Optional[Session] = None
@@ -161,6 +202,20 @@ class AgentRunner:
         session = self._start_session()
         episode_start = time.time()
 
+        # Print user-friendly start message
+        print("\n" + "=" * 70)
+        print("🤖 CULTIST SIMULATOR AI AGENT - RUNNING")
+        print("=" * 70)
+        print(f"  Session ID: {session.session_id}")
+        print(f"  Agent ID: {self.agent_id}")
+        print(f"  Max Actions: {self.max_actions_per_episode}")
+        print(f"  Mode: {'Test (Random Exploration)' if self.test_mode else 'Training (RL Model)'}")
+        print("\n  🛑 EMERGENCY STOP:")
+        print("     Press Cmd+Shift+Q to stop from anywhere (even when agent controls mouse)")
+        print("     Or press Ctrl+C in terminal")
+        print("=" * 70)
+        print()
+
         logger.info(
             "episode_started",
             session_id=session.session_id,
@@ -184,7 +239,7 @@ class AgentRunner:
                 # Check emergency stop
                 if is_emergency_stop_requested():
                     logger.warning("emergency_stop_detected")
-                    session.end_condition = EndCondition.INTERRUPTED
+                    session.end_condition = EndCondition.MANUAL_STOP
                     break
 
                 # Check termination conditions
@@ -364,11 +419,31 @@ class AgentRunner:
                     logger.warning("click_missing_point")
                     return False
 
+            elif action.action_type == ActionType.DRAG:
+                start = action.parameters.get("start")
+                end = action.parameters.get("end")
+                duration = action.parameters.get("duration", 200)
+                
+                if start and end:
+                    from src.automation import simulate_drag
+                    simulate_drag(
+                        start=start,
+                        end=end,
+                        duration_ms=duration,
+                        window_bounds=game_state.window_bounds,
+                    )
+                    return True
+                else:
+                    logger.warning("drag_missing_parameters", start=start, end=end)
+                    return False
+
             elif action.action_type == ActionType.KEY_PRESS:
                 key = action.parameters.get("key")
                 if key:
                     simulate_key_press(
-                        key=key, modifiers=action.parameters.get("modifiers", [])
+                        key=key,
+                        modifiers=action.parameters.get("modifiers", []),
+                        window_bounds=game_state.window_bounds,
                     )
                     return True
                 else:
@@ -501,6 +576,21 @@ class AgentRunner:
         """
         session.end_time = datetime.now()
         session.end_condition = end_condition
+
+        # Print user-friendly completion message
+        print("\n" + "=" * 70)
+        print("🏁 EPISODE COMPLETED")
+        print("=" * 70)
+        print(f"  Session ID: {session.session_id}")
+        print(f"  Actions Taken: {session.total_actions}")
+        duration = session.duration_seconds or 0.0
+        actions = session.total_actions or 0
+        print(f"  Duration: {duration:.1f}s")
+        print(f"  End Condition: {end_condition.value}")
+        if actions > 0:
+            print(f"  Avg per Action: {duration/actions:.2f}s")
+        print("=" * 70)
+        print()
 
         # Store session
         try:

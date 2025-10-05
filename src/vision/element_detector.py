@@ -189,18 +189,159 @@ def detect_elements_template_matching(
     return []
 
 
+def detect_elements_color_based(
+    image: np.ndarray,
+    min_area: int = 1000,
+    max_area: int = 50000,
+) -> List[GameElement]:
+    """
+    Detect Cultist Simulator game elements using color-based detection.
+    
+    Cultist Simulator has distinct visual elements:
+    - Cards: Tan/beige colored rectangles (Aspect cards, Tools, Followers, etc.)
+    - Verb slots: Dark colored rectangles (Work, Study, Dream, etc.)
+    - Buttons: Various colors depending on state
+    
+    This function uses HSV color space and contour detection to find these elements.
+    
+    Args:
+        image: RGB image as numpy array (H, W, 3)
+        min_area: Minimum contour area to consider (filters noise)
+        max_area: Maximum contour area to consider (filters background)
+    
+    Returns:
+        List of detected GameElement objects
+        
+    Raises:
+        InvalidImageError: If image format is invalid
+    """
+    validate_image(image)
+    
+    try:
+        import cv2
+        
+        # Convert BGR to HSV for better color detection
+        hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+        
+        elements = []
+        
+        # Detect tan/beige cards (most common in Cultist Simulator)
+        # HSV range for tan/beige: H=15-35, S=30-150, V=80-220
+        tan_lower = np.array([15, 30, 80])
+        tan_upper = np.array([35, 150, 220])
+        tan_mask = cv2.inRange(hsv, tan_lower, tan_upper)
+        
+        # Detect dark verb slots and buttons
+        # HSV range for dark elements: H=0-180 (any hue), S=0-255, V=0-70
+        dark_lower = np.array([0, 0, 0])
+        dark_upper = np.array([180, 255, 70])
+        dark_mask = cv2.inRange(hsv, dark_lower, dark_upper)
+        
+        # Detect bright/highlighted elements (active cards, buttons)
+        # HSV range: H=0-180, S=50-255, V=150-255
+        bright_lower = np.array([0, 50, 150])
+        bright_upper = np.array([180, 255, 255])
+        bright_mask = cv2.inRange(hsv, bright_lower, bright_upper)
+        
+        # Process each color mask
+        detection_configs = [
+            (tan_mask, ElementType.CARD, "tan_cards"),
+            (dark_mask, ElementType.BUTTON, "dark_elements"),
+            (bright_mask, ElementType.OTHER, "bright_elements"),
+        ]
+        
+        for mask, element_type, label in detection_configs:
+            # Apply morphological operations to clean up mask
+            kernel = np.ones((5, 5), np.uint8)
+            mask_cleaned = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
+            mask_cleaned = cv2.morphologyEx(mask_cleaned, cv2.MORPH_OPEN, kernel)
+            
+            # Find contours
+            contours, _ = cv2.findContours(
+                mask_cleaned, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
+            )
+            
+            # Convert contours to GameElement objects
+            for contour in contours:
+                area = cv2.contourArea(contour)
+                
+                # Filter by area
+                if area < min_area or area > max_area:
+                    continue
+                
+                # Get bounding rectangle
+                x, y, w, h = cv2.boundingRect(contour)
+                
+                # Filter by aspect ratio (cards are roughly rectangular)
+                aspect_ratio = w / h if h > 0 else 0
+                if aspect_ratio < 0.3 or aspect_ratio > 3.0:
+                    continue
+                
+                # Create GameElement
+                bounds = Rect(x=x, y=y, width=w, height=h)
+                
+                # Calculate confidence based on area and aspect ratio
+                # Larger, more rectangular elements = higher confidence
+                area_score = min(area / max_area, 1.0)
+                aspect_score = 1.0 - abs(aspect_ratio - 1.0) / 2.0
+                confidence = (area_score + aspect_score) / 2.0
+                
+                element = GameElement(
+                    element_type=element_type,
+                    bounds=bounds,
+                    confidence=confidence,
+                    metadata={
+                        "detection_method": "color_based",
+                        "color_category": label,
+                        "area": int(area),
+                        "aspect_ratio": round(aspect_ratio, 2),
+                    }
+                )
+                elements.append(element)
+        
+        logger.debug(
+            "color_detection_complete",
+            image_shape=image.shape,
+            elements_found=len(elements),
+            min_area=min_area,
+            max_area=max_area,
+        )
+        
+        return elements
+        
+    except ImportError:
+        logger.warning(
+            "color_detection_failed",
+            reason="cv2 not available",
+            fallback="empty_results"
+        )
+        return []
+    except Exception as e:
+        logger.warning(
+            "color_detection_error",
+            error=str(e),
+            fallback="empty_results"
+        )
+        return []
+
+
 def detect_elements(
-    image: np.ndarray, use_yolo: bool = True, use_templates: bool = True
+    image: np.ndarray, 
+    use_yolo: bool = True, 
+    use_templates: bool = True,
+    use_color: bool = True,
 ) -> List[GameElement]:
     """
     Detect all game elements using available methods.
 
-    Combines YOLO detection and template matching for comprehensive element detection.
+    Combines YOLO detection, template matching, and color-based detection
+    for comprehensive element detection.
 
     Args:
         image: RGB image as numpy array (H, W, 3)
         use_yolo: Whether to use YOLO detection
         use_templates: Whether to use template matching
+        use_color: Whether to use color-based detection
 
     Returns:
         List of detected GameElement objects
@@ -219,12 +360,17 @@ def detect_elements(
     if use_templates:
         template_elements = detect_elements_template_matching(image)
         elements.extend(template_elements)
+    
+    if use_color:
+        color_elements = detect_elements_color_based(image)
+        elements.extend(color_elements)
 
     logger.debug(
         "elements_detected",
         total_count=len(elements),
         yolo_enabled=use_yolo,
         templates_enabled=use_templates,
+        color_enabled=use_color,
     )
 
     return elements
