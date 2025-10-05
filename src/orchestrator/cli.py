@@ -15,6 +15,9 @@ import sys
 import json
 import yaml
 import argparse
+import subprocess
+import time
+import signal
 from pathlib import Path
 
 # Add src to path
@@ -30,9 +33,97 @@ from src.orchestrator.tensorboard_vscode import (
     launch_tensorboard_in_vscode,
     create_tensorboard_notice,
 )
-from src.lib.logging_config import get_logger
+from src.lib.logging_config import get_logger, configure_logging
 
 logger = get_logger(__name__)
+
+# Global process tracking for cleanup
+tensorboard_process = None
+
+
+def cleanup_tensorboard():
+    """Clean up TensorBoard process on exit."""
+    global tensorboard_process
+    if tensorboard_process and tensorboard_process.poll() is None:
+        print("\n🛑 Stopping TensorBoard...")
+        tensorboard_process.terminate()
+        try:
+            tensorboard_process.wait(timeout=5)
+        except subprocess.TimeoutExpired:
+            tensorboard_process.kill()
+        print("✓ TensorBoard stopped")
+
+
+def launch_tensorboard_in_safari(tensorboard_dir: Path, verbose: bool = False) -> subprocess.Popen:
+    """
+    Launch TensorBoard and open it in Safari.
+    
+    Args:
+        tensorboard_dir: Directory containing TensorBoard logs
+        verbose: Whether to show TensorBoard output
+        
+    Returns:
+        TensorBoard subprocess
+        
+    Raises:
+        RuntimeError: If TensorBoard fails to start
+    """
+    global tensorboard_process
+    
+    print("📊 Starting TensorBoard...")
+    
+    # Start TensorBoard process
+    try:
+        tensorboard_cmd = ["tensorboard", "--logdir", str(tensorboard_dir), "--host", "localhost", "--port", "6006"]
+        
+        if verbose:
+            tensorboard_process = subprocess.Popen(
+                tensorboard_cmd,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT,
+                text=True,
+                bufsize=1
+            )
+        else:
+            tensorboard_process = subprocess.Popen(
+                tensorboard_cmd,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL
+            )
+        
+        # Wait for TensorBoard to start
+        print("⏳ Waiting for TensorBoard to initialize...")
+        time.sleep(3)
+        
+        # Check if process is still running
+        if tensorboard_process.poll() is not None:
+            raise RuntimeError("TensorBoard process terminated unexpectedly")
+        
+        # Verify TensorBoard is responding
+        import urllib.request
+        try:
+            urllib.request.urlopen("http://localhost:6006", timeout=5)
+        except Exception as e:
+            tensorboard_process.terminate()
+            raise RuntimeError(f"TensorBoard not responding: {e}")
+        
+        print("✓ TensorBoard started successfully")
+        
+        # Open in Safari
+        print("🌐 Opening TensorBoard in Safari...")
+        subprocess.run(["open", "-a", "Safari", "http://localhost:6006"], check=True)
+        print("✓ Safari opened with TensorBoard at http://localhost:6006\n")
+        
+        return tensorboard_process
+        
+    except FileNotFoundError:
+        raise RuntimeError("TensorBoard not found. Install with: pip install tensorboard")
+    except subprocess.CalledProcessError as e:
+        raise RuntimeError(f"Failed to open Safari: {e}")
+    except Exception as e:
+        if tensorboard_process:
+            tensorboard_process.terminate()
+        raise RuntimeError(f"Failed to start TensorBoard: {e}")
 
 
 def load_config(config_path: str = "config/test_agent.yaml") -> dict:
@@ -118,6 +209,11 @@ def cmd_run(args):
 
 def cmd_train(args):
     """Train agent across multiple episodes."""
+    # Configure verbose logging if requested
+    if args.verbose:
+        configure_logging(log_level="DEBUG", log_to_file=True)
+        print("🔍 Verbose logging enabled (DEBUG level)\n")
+    
     # Load configuration
     config = load_config()
 
@@ -136,14 +232,23 @@ def cmd_train(args):
     print(f"OCR enabled: {enable_ocr}")
     print(f"Checkpoint every {args.checkpoint} episodes\n")
 
-    # TensorBoard setup (manual launch option)
+    # TensorBoard setup
+    tensorboard_dir = Path(__file__).parent.parent.parent / "data" / "tensorboard"
+    tensorboard_dir.mkdir(exist_ok=True)
+    
+    # Launch TensorBoard in Safari unless disabled
     if not args.no_tensorboard:
-        tensorboard_dir = Path(__file__).parent.parent.parent / "data" / "tensorboard"
-        tensorboard_dir.mkdir(exist_ok=True)
-
-        print("📊 TensorBoard metrics will be saved to:", str(tensorboard_dir))
-        print("💡 To view metrics, run: tensorboard --logdir", str(tensorboard_dir))
-        print("   Then open http://localhost:6006 in Safari\n")
+        try:
+            launch_tensorboard_in_safari(tensorboard_dir, verbose=args.verbose)
+        except RuntimeError as e:
+            print(f"\n❌ Failed to start TensorBoard: {e}")
+            print("Training aborted.\n")
+            return 1
+        except Exception as e:
+            print(f"\n❌ Unexpected error launching TensorBoard: {e}")
+            print("Training aborted.\n")
+            logger.error("tensorboard_launch_error", error=str(e), exc_info=True)
+            return 1
 
     try:
         sessions = train_agent(
@@ -188,6 +293,10 @@ def cmd_train(args):
         print(f"\nError during training: {e}", file=sys.stderr)
         logger.error("cli_train_error", error=str(e), exc_info=True)
         return 1
+    
+    finally:
+        # Always cleanup TensorBoard on exit
+        cleanup_tensorboard()
 
 
 def cmd_metrics(args):
@@ -314,6 +423,12 @@ Examples:
         "--no-tensorboard",
         action="store_true",
         help="Disable automatic TensorBoard launch",
+    )
+    train_parser.add_argument(
+        "--verbose",
+        "-v",
+        action="store_true",
+        help="Enable verbose logging (DEBUG level)",
     )
     train_parser.set_defaults(func=cmd_train)
 
