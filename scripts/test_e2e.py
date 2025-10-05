@@ -34,7 +34,7 @@ import json
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 from src.vision import capture_game_state, detect_elements, get_window_bounds
-from src.automation import simulate_click, simulate_key_press, check_window_focus
+from src.automation import simulate_click, simulate_key_press, simulate_drag, check_window_focus
 from src.safety import validate_action
 from src.learning import select_action, store_session, enable_test_mode
 from src.lib.types import ActionType, Point, Session
@@ -198,6 +198,12 @@ class E2ETestRunner:
                 key = action.parameters.get("key", "space")
                 modifiers = action.parameters.get("modifiers", [])
                 result = simulate_key_press(key, modifiers, window_bounds)
+
+            elif action_type == ActionType.DRAG:
+                start_point = action.parameters.get("start_point", Point(100, 100))
+                end_point = action.parameters.get("end_point", Point(200, 200))
+                duration = action.parameters.get("duration", 0.5)
+                result = simulate_drag(start_point, end_point, duration, window_bounds)
 
             else:
                 logger.warning(f"⚠️  Unsupported action type: {action_type}")

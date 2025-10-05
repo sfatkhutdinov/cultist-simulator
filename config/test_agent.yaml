@@ -4,6 +4,10 @@ vision:
   ocr_confidence_threshold: 0.6
   max_capture_latency_ms: 500
   model_path: null
+  enable_ocr: true
+  enable_yolo: false
+  enable_template_matching: false
+  enable_color_detection: true
 automation:
   max_click_latency_ms: 50
   max_focus_check_latency_ms: 5
@@ -18,6 +22,8 @@ learning:
   discount_factor: 0.99
   loop_detection_window_size: 20
   loop_detection_similarity_threshold: 0.8
+  max_actions_per_episode: 30
+  episode_timeout_seconds: 60
 nlp:
   max_analysis_latency_ms: 100
   model_name: sentence-transformers/all-MiniLM-L6-v2

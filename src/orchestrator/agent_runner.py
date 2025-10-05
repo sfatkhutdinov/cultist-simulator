@@ -112,6 +112,10 @@ class AgentRunner:
         max_actions_per_episode: int = 1000,
         loop_detection_window: int = 30,
         enable_test_mode: bool = True,
+        enable_ocr: bool = True,
+        enable_yolo: bool = False,
+        enable_template_matching: bool = False,
+        enable_color_detection: bool = True,
     ):
         """
         Initialize agent runner.
@@ -122,13 +126,18 @@ class AgentRunner:
             max_actions_per_episode: Maximum actions before ending episode
             loop_detection_window: History size for loop detection
             enable_test_mode: Enable test mode for random exploration (default: True).
-                            When True: uses random actions, disables OCR for speed.
-                            When False: requires trained RL model, enables full vision.
+                            When True: uses random actions.
+                            When False: requires trained RL model.
+            enable_ocr: Enable OCR text extraction (default: True).
         """
         self.agent_id = agent_id
         self.window_name = window_name
         self.max_actions_per_episode = max_actions_per_episode
         self.loop_detection_window = loop_detection_window
+        self.enable_ocr = enable_ocr
+        self.enable_yolo = enable_yolo
+        self.enable_template_matching = enable_template_matching
+        self.enable_color_detection = enable_color_detection
         self.test_mode = enable_test_mode
 
         # Enable test mode in learning module
@@ -292,10 +301,13 @@ class AgentRunner:
         try:
             # 1. VISION: Capture game state
             logger.debug("step_vision_start")
-            # Disable OCR in test mode for 40-50x speedup (2-5s → <0.1s per action)
+            # Vision components can be configured for performance optimization
             game_state = capture_game_state(
-                self.window_name, 
-                enable_ocr=(not self.test_mode)
+                self.window_name,
+                enable_ocr=self.enable_ocr,
+                enable_yolo=self.enable_yolo,
+                enable_template_matching=self.enable_template_matching,
+                enable_color_detection=self.enable_color_detection,
             )
 
             if not game_state:
@@ -707,8 +719,20 @@ class TrainingRunner:
         """
         self.agent_runner = agent_runner
         self.training_sessions: List[Session] = []
+        self.interrupted = False
+
+        # Setup signal handlers for graceful shutdown
+        signal.signal(signal.SIGINT, self._signal_handler)
+        signal.signal(signal.SIGTERM, self._signal_handler)
 
         logger.info("training_runner_initialized", agent_id=agent_runner.agent_id)
+
+    def _signal_handler(self, signum, frame):
+        """Handle training interruption signals gracefully."""
+        logger.info("training_interrupted", signal=signum)
+        print(f"\n🛑 Training interrupted by signal {signum}. Saving checkpoint...")
+        self.interrupted = True
+
 
     def train(
         self,
@@ -734,6 +758,12 @@ class TrainingRunner:
         )
 
         for episode_num in range(1, num_episodes + 1):
+            # Check for interruption
+            if self.interrupted:
+                logger.info("training_interrupted_gracefully", completed_episodes=episode_num-1)
+                self._save_checkpoint(episode_num - 1)
+                break
+
             logger.info(
                 "training_episode_start", episode=episode_num, total=num_episodes
             )
@@ -760,6 +790,7 @@ class TrainingRunner:
 
             except KeyboardInterrupt:
                 logger.info("training_interrupted", completed_episodes=episode_num - 1)
+                self._save_checkpoint(episode_num - 1)
                 break
 
             except Exception as e:

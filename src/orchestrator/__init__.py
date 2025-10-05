@@ -44,6 +44,10 @@ def _get_or_create_runner(
     agent_id: str,
     window_name: str = "Cultist Simulator",
     max_actions_per_episode: int = 1000,
+    enable_ocr: bool = True,
+    enable_yolo: bool = False,
+    enable_template_matching: bool = False,
+    enable_color_detection: bool = True,
 ) -> AgentRunner:
     """
     Get existing agent runner or create new one.
@@ -52,6 +56,7 @@ def _get_or_create_runner(
         agent_id: Unique agent identifier
         window_name: Game window name
         max_actions_per_episode: Maximum actions per episode
+        enable_ocr: Enable OCR text extraction
 
     Returns:
         AgentRunner instance
@@ -61,6 +66,10 @@ def _get_or_create_runner(
             agent_id=agent_id,
             window_name=window_name,
             max_actions_per_episode=max_actions_per_episode,
+            enable_ocr=enable_ocr,
+            enable_yolo=enable_yolo,
+            enable_template_matching=enable_template_matching,
+            enable_color_detection=enable_color_detection,
         )
         logger.info("agent_runner_created", agent_id=agent_id)
 
@@ -134,6 +143,10 @@ def train_agent(
     max_actions_per_episode: int = 1000,
     max_episode_duration: Optional[float] = 300.0,
     checkpoint_interval: int = 10,
+    enable_ocr: bool = True,
+    enable_yolo: bool = False,
+    enable_template_matching: bool = False,
+    enable_color_detection: bool = True,
 ) -> List[Session]:
     """
     Train agent across multiple episodes.
@@ -170,6 +183,10 @@ def train_agent(
         agent_id=agent_id,
         window_name=window_name,
         max_actions_per_episode=max_actions_per_episode,
+        enable_ocr=enable_ocr,
+        enable_yolo=enable_yolo,
+        enable_template_matching=enable_template_matching,
+        enable_color_detection=enable_color_detection,
     )
 
     trainer = TrainingRunner(runner)

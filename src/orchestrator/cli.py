@@ -13,6 +13,7 @@ T113: Main orchestrator CLI.
 
 import sys
 import json
+import yaml
 import argparse
 from pathlib import Path
 
@@ -32,6 +33,23 @@ from src.orchestrator.tensorboard_vscode import (
 from src.lib.logging_config import get_logger
 
 logger = get_logger(__name__)
+
+
+def load_config(config_path: str = "config/test_agent.yaml") -> dict:
+    """Load configuration from YAML file."""
+    try:
+        config_file = Path(config_path)
+        if config_file.exists():
+            with open(config_file, 'r') as f:
+                return yaml.safe_load(f)
+    except Exception as e:
+        logger.warning(f"Failed to load config from {config_path}: {e}")
+
+    # Return default config
+    return {
+        'vision': {'enable_ocr': True},
+        'learning': {'max_actions_per_episode': 30, 'episode_timeout_seconds': 60}
+    }
 
 
 def cmd_run(args):
@@ -100,31 +118,45 @@ def cmd_run(args):
 
 def cmd_train(args):
     """Train agent across multiple episodes."""
+    # Load configuration
+    config = load_config()
+
+    # Apply config defaults - prioritize config over CLI defaults
+    max_actions = config.get('learning', {}).get('max_actions_per_episode', getattr(args, 'max_actions', 30))
+    vision_config = config.get('vision', {})
+    enable_ocr = vision_config.get('enable_ocr', True)
+    enable_yolo = vision_config.get('enable_yolo', False)
+    enable_template_matching = vision_config.get('enable_template_matching', False)
+    enable_color_detection = vision_config.get('enable_color_detection', True)
+
     print(f"Training agent: {args.agent_id}")
     print(f"Episodes: {args.episodes}")
     print(f"Window: {args.window}")
-    print(f"Max actions per episode: {args.max_actions}")
+    print(f"Max actions per episode: {max_actions}")
+    print(f"OCR enabled: {enable_ocr}")
     print(f"Checkpoint every {args.checkpoint} episodes\n")
 
-    # Launch TensorBoard in VS Code if requested
-    tensorboard_dir = Path(__file__).parent.parent.parent / "data" / "tensorboard"
-
+    # TensorBoard setup (manual launch option)
     if not args.no_tensorboard:
-        print("🚀 Launching TensorBoard in VS Code...")
-        launched = launch_tensorboard_in_vscode(str(tensorboard_dir))
+        tensorboard_dir = Path(__file__).parent.parent.parent / "data" / "tensorboard"
+        tensorboard_dir.mkdir(exist_ok=True)
 
-        if not launched:
-            # Show manual instructions if auto-launch failed
-            print(create_tensorboard_notice(str(tensorboard_dir)))
+        print("📊 TensorBoard metrics will be saved to:", str(tensorboard_dir))
+        print("💡 To view metrics, run: tensorboard --logdir", str(tensorboard_dir))
+        print("   Then open http://localhost:6006 in Safari\n")
 
     try:
         sessions = train_agent(
             agent_id=args.agent_id,
             num_episodes=args.episodes,
             window_name=args.window,
-            max_actions_per_episode=args.max_actions,
+            max_actions_per_episode=max_actions,
             max_episode_duration=args.max_duration,
             checkpoint_interval=args.checkpoint,
+            enable_ocr=enable_ocr,
+            enable_yolo=enable_yolo,
+            enable_template_matching=enable_template_matching,
+            enable_color_detection=enable_color_detection,
         )
 
         print(f"\n{'='*60}")

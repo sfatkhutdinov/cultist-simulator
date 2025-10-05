@@ -156,8 +156,11 @@ def extract_text_regions(
 
 
 def capture_game_state(
-    window_name: str = "Cultist Simulator", 
-    enable_ocr: bool = True
+    window_name: str = "Cultist Simulator",
+    enable_ocr: bool = True,
+    enable_yolo: bool = True,
+    enable_template_matching: bool = True,
+    enable_color_detection: bool = True,
 ) -> GameState:
     """
     Capture complete game state including screenshot, elements, and text.
@@ -167,7 +170,9 @@ def capture_game_state(
     Args:
         window_name: Name of the game window to capture (default: "Cultist Simulator")
         enable_ocr: Whether to run OCR text extraction (default: True).
-                   Set to False during random exploration to speed up 40-50x.
+        enable_yolo: Whether to use YOLO object detection (default: True).
+        enable_template_matching: Whether to use template matching (default: True).
+        enable_color_detection: Whether to use color-based detection (default: True).
 
     Returns:
         GameState object containing all captured information
@@ -181,7 +186,12 @@ def capture_game_state(
     screenshot, window_bounds = capture_window_screenshot(window_name)
 
     # Detect elements in the screenshot
-    elements = detect_elements(screenshot)
+    elements = _detect_elements_internal(
+        screenshot,
+        use_yolo=enable_yolo,
+        use_templates=enable_template_matching,
+        use_color=enable_color_detection,
+    )
 
     # Extract text regions (skip if OCR disabled for performance)
     if enable_ocr:
