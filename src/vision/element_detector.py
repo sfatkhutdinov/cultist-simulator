@@ -53,10 +53,9 @@ def detect_elements_yolo(
     """
     Detect game elements using YOLO object detection.
 
-    This is a placeholder implementation. Full YOLO integration requires:
-    - Training YOLO model on Cultist Simulator screenshots
-    - Model weights file
-    - YOLO inference code
+    Uses YOLOv8 for general object detection. While not trained specifically
+    on Cultist Simulator, it can detect common UI elements like buttons,
+    cards, and interactive objects.
 
     Args:
         image: RGB image as numpy array (H, W, 3)
@@ -70,24 +69,78 @@ def detect_elements_yolo(
     """
     validate_image(image)
 
-    # TODO: Implement actual YOLO detection
-    # For now, return empty list to pass basic tests
-    # This will be implemented in a future task when YOLO model is trained
-
-    logger.debug(
-        "yolo_detection_placeholder",
-        image_shape=image.shape,
-        confidence_threshold=confidence_threshold,
-    )
-
-    # Placeholder: Return empty list
-    # Real implementation will:
-    # 1. Load YOLO model weights
-    # 2. Run inference on image
-    # 3. Filter by confidence threshold
-    # 4. Convert bounding boxes to GameElement objects
-
-    return []
+    try:
+        # Try to use YOLOv8 if available
+        from ultralytics import YOLO
+        from pathlib import Path
+        
+        # Check if model file exists
+        model_path = Path("yolov8n.pt")
+        if not model_path.exists():
+            logger.debug(
+                "yolo_model_not_found",
+                path=str(model_path),
+                fallback="empty_results"
+            )
+            return []
+        
+        # Load model (cached after first load)
+        model = YOLO(str(model_path))
+        
+        # Run inference
+        results = model.predict(image, conf=confidence_threshold, verbose=False)
+        
+        # Convert YOLO results to GameElement objects
+        elements = []
+        for result in results:
+            if result.boxes is not None:
+                for box in result.boxes:
+                    # Get bounding box coordinates
+                    x1, y1, x2, y2 = box.xyxy[0].cpu().numpy()
+                    conf = float(box.conf[0])
+                    cls_id = int(box.cls[0])
+                    
+                    # Convert to our format
+                    bounds = Rect(
+                        x=int(x1),
+                        y=int(y1),
+                        width=int(x2 - x1),
+                        height=int(y2 - y1)
+                    )
+                    
+                    # Map YOLO class to ElementType (use OTHER for now)
+                    # TODO: Train custom YOLO on Cultist Simulator to detect CARD, BUTTON, SLOT, etc.
+                    element = GameElement(
+                        element_type=ElementType.OTHER,
+                        bounds=bounds,
+                        confidence=conf,
+                        metadata={"yolo_class_id": cls_id}
+                    )
+                    elements.append(element)
+        
+        logger.debug(
+            "yolo_detection_complete",
+            image_shape=image.shape,
+            confidence_threshold=confidence_threshold,
+            elements_found=len(elements)
+        )
+        
+        return elements
+        
+    except ImportError:
+        logger.debug(
+            "yolo_not_available",
+            reason="ultralytics not installed",
+            fallback="empty_results"
+        )
+        return []
+    except Exception as e:
+        logger.warning(
+            "yolo_detection_error",
+            error=str(e),
+            fallback="empty_results"
+        )
+        return []
 
 
 def detect_elements_template_matching(

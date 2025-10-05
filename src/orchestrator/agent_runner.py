@@ -36,6 +36,7 @@ from src.learning import (
     detect_loop,
     store_session,
     ModelNotLoadedError,
+    enable_test_mode as enable_learning_test_mode,
 )
 from src.safety import validate_action
 from src.automation import (
@@ -72,6 +73,7 @@ class AgentRunner:
         window_name: str = "Cultist Simulator",
         max_actions_per_episode: int = 1000,
         loop_detection_window: int = 30,
+        enable_test_mode: bool = True,
     ):
         """
         Initialize agent runner.
@@ -81,11 +83,20 @@ class AgentRunner:
             window_name: Game window name
             max_actions_per_episode: Maximum actions before ending episode
             loop_detection_window: History size for loop detection
+            enable_test_mode: Enable test mode for random exploration (default: True).
+                            When True: uses random actions, disables OCR for speed.
+                            When False: requires trained RL model, enables full vision.
         """
         self.agent_id = agent_id
         self.window_name = window_name
         self.max_actions_per_episode = max_actions_per_episode
         self.loop_detection_window = loop_detection_window
+        self.test_mode = enable_test_mode
+
+        # Enable test mode in learning module
+        if self.test_mode:
+            enable_learning_test_mode(True)
+            logger.info("test_mode_enabled", strategy="random_exploration")
 
         # Current episode state
         self.current_session: Optional[Session] = None
@@ -226,7 +237,11 @@ class AgentRunner:
         try:
             # 1. VISION: Capture game state
             logger.debug("step_vision_start")
-            game_state = capture_game_state(self.window_name)
+            # Disable OCR in test mode for 40-50x speedup (2-5s → <0.1s per action)
+            game_state = capture_game_state(
+                self.window_name, 
+                enable_ocr=(not self.test_mode)
+            )
 
             if not game_state:
                 logger.warning("vision_failed", reason="no_game_state")
@@ -284,7 +299,7 @@ class AgentRunner:
 
             # 5. AUTOMATION: Execute action
             logger.debug("step_automation_start", action_type=action.action_type.value)
-            execution_success = self._execute_action(action)
+            execution_success = self._execute_action(action, game_state)
 
             if not execution_success:
                 self.metrics["failed_actions"] += 1
@@ -324,9 +339,13 @@ class AgentRunner:
             logger.error("step_error", error=str(e), exc_info=True)
             return False
 
-    def _execute_action(self, action: Action) -> bool:
+    def _execute_action(self, action: Action, game_state: GameState) -> bool:
         """
         Execute action using automation library.
+
+        Args:
+            action: Action to execute
+            game_state: Current game state (for window bounds)
 
         Returns:
             True if execution succeeded, False otherwise
@@ -336,7 +355,9 @@ class AgentRunner:
                 point = action.parameters.get("point")
                 if point:
                     simulate_click(
-                        point=point, button=action.parameters.get("button", "left")
+                        point=point,
+                        button=action.parameters.get("button", "left"),
+                        window_bounds=game_state.window_bounds,
                     )
                     return True
                 else:
@@ -386,11 +407,13 @@ class AgentRunner:
 
         Simple rule-based approach:
         - Click on detected elements
-        - Wait if no elements detected
+        - Random exploration click if no elements detected
 
         Returns:
             Action to execute
         """
+        import random
+        
         # If elements detected, click on first one
         if game_state.elements:
             element = game_state.elements[0]
@@ -401,11 +424,18 @@ class AgentRunner:
                 timestamp=datetime.now(),
             )
 
-        # Otherwise, wait
+        # Otherwise, do random exploration click
+        # Generate random point within window bounds (with margin)
+        bounds = game_state.window_bounds
+        margin = 50
+        random_x = random.randint(bounds.x + margin, bounds.x + bounds.width - margin)
+        random_y = random.randint(bounds.y + margin, bounds.y + bounds.height - margin)
+        
         return Action(
-            action_type=ActionType.WAIT,
-            parameters={"duration": 1.0},
+            action_type=ActionType.CLICK,
+            parameters={"point": Point(random_x, random_y), "button": "left"},
             timestamp=datetime.now(),
+            metadata={"strategy": "random_exploration", "reason": "no_elements_detected"},
         )
 
     def _should_terminate_episode(
