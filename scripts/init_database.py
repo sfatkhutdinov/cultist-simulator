@@ -21,7 +21,8 @@ def create_database():
     cursor.execute("PRAGMA foreign_keys = ON;")
 
     # Create agents table
-    cursor.execute("""
+    cursor.execute(
+        """
         CREATE TABLE IF NOT EXISTS agents (
             agent_id TEXT PRIMARY KEY,
             created_at TIMESTAMP,
@@ -31,10 +32,12 @@ def create_database():
             model_checkpoint_path TEXT,
             config TEXT
         );
-    """)
+    """
+    )
 
     # Create sessions table
-    cursor.execute("""
+    cursor.execute(
+        """
         CREATE TABLE IF NOT EXISTS sessions (
             session_id TEXT PRIMARY KEY,
             agent_id TEXT REFERENCES agents(agent_id),
@@ -51,7 +54,8 @@ def create_database():
             loop_events INTEGER,
             safety_violations_blocked INTEGER
         );
-    """)
+    """
+    )
     cursor.execute(
         "CREATE INDEX IF NOT EXISTS idx_sessions_agent ON sessions(agent_id);"
     )
@@ -60,7 +64,8 @@ def create_database():
     )
 
     # Create actions table
-    cursor.execute("""
+    cursor.execute(
+        """
         CREATE TABLE IF NOT EXISTS actions (
             action_id TEXT PRIMARY KEY,
             timestamp TIMESTAMP,
@@ -74,7 +79,8 @@ def create_database():
             execution_status TEXT,
             reward_signal REAL
         );
-    """)
+    """
+    )
     cursor.execute(
         "CREATE INDEX IF NOT EXISTS idx_actions_episode ON actions(episode_id);"
     )
@@ -83,7 +89,8 @@ def create_database():
     )
 
     # Create mechanics table
-    cursor.execute("""
+    cursor.execute(
+        """
         CREATE TABLE IF NOT EXISTS mechanics (
             mechanic_id TEXT PRIMARY KEY,
             kb_id TEXT,
@@ -94,13 +101,15 @@ def create_database():
             effects TEXT,
             discovered_session TEXT REFERENCES sessions(session_id)
         );
-    """)
+    """
+    )
     cursor.execute(
         "CREATE INDEX IF NOT EXISTS idx_mechanics_confidence ON mechanics(confidence);"
     )
 
     # Create strategies table
-    cursor.execute("""
+    cursor.execute(
+        """
         CREATE TABLE IF NOT EXISTS strategies (
             strategy_id TEXT PRIMARY KEY,
             name TEXT,
@@ -115,10 +124,12 @@ def create_database():
             avg_survival_time REAL,
             parent_strategy_id TEXT REFERENCES strategies(strategy_id)
         );
-    """)
+    """
+    )
 
     # Create metrics table
-    cursor.execute("""
+    cursor.execute(
+        """
         CREATE TABLE IF NOT EXISTS metrics (
             metric_id TEXT PRIMARY KEY,
             metric_type TEXT,
@@ -130,7 +141,8 @@ def create_database():
             rolling_avg_50 REAL,
             rolling_avg_100 REAL
         );
-    """)
+    """
+    )
     cursor.execute(
         "CREATE INDEX IF NOT EXISTS idx_metrics_agent_type ON metrics(agent_id, metric_type);"
     )
@@ -139,7 +151,8 @@ def create_database():
     )
 
     # Create safety_constraints table
-    cursor.execute("""
+    cursor.execute(
+        """
         CREATE TABLE IF NOT EXISTS safety_constraints (
             constraint_id TEXT PRIMARY KEY,
             constraint_type TEXT,
@@ -151,14 +164,17 @@ def create_database():
             total_blocks INTEGER,
             last_violation TIMESTAMP
         );
-    """)
+    """
+    )
 
     # Commit and close
     conn.commit()
-    
+
     print(f"✓ Database initialized at: {DB_PATH}")
-    print(f"✓ Created {cursor.execute('SELECT COUNT(*) FROM sqlite_master WHERE type=\"table\"').fetchone()[0]} tables")
-    
+    print(
+        f"✓ Created {cursor.execute('SELECT COUNT(*) FROM sqlite_master WHERE type=\"table\"').fetchone()[0]} tables"
+    )
+
     conn.close()
 
 

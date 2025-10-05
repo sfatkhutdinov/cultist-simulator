@@ -18,11 +18,11 @@ LOG_DIR.mkdir(parents=True, exist_ok=True)
 def configure_logging(log_level: str = "INFO", log_to_file: bool = True):
     """
     Configure structured logging with JSON output.
-    
+
     Args:
         log_level: Logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
         log_to_file: Whether to write logs to file
-    
+
     Returns:
         Configured structlog logger
     """
@@ -77,10 +77,10 @@ def configure_logging(log_level: str = "INFO", log_to_file: bool = True):
 def get_logger(name: str = None):
     """
     Get a logger instance.
-    
+
     Args:
         name: Optional logger name (typically __name__)
-    
+
     Returns:
         Structlog logger instance
     """

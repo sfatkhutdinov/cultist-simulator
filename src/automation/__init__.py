@@ -28,16 +28,12 @@ from typing import Optional, List
 import time
 import threading
 
-from src.lib.types import Point, Rect, MouseButton, ActionResult
+from src.lib.types import ActionResult, Point, Rect, MS_PER_SECOND
 from src.safety import validate_action, is_key_blacklisted, BLACKLISTED_KEYS
 from src.lib.logging_config import get_logger
 
 # Import platform-specific implementations
-from .input_simulator import (
-    click_at_point,
-    drag_between_points,
-    press_key_combination
-)
+from .input_simulator import click_at_point, drag_between_points, press_key_combination
 from .window_manager import check_window_focus
 
 logger = get_logger(__name__)
@@ -50,139 +46,121 @@ _emergency_stop_lock = threading.Lock()
 # Custom exceptions
 class OutOfBoundsError(Exception):
     """Raised when action coordinates are outside valid window bounds."""
+
     pass
 
 
 class BlacklistedKeyError(Exception):
     """Raised when attempting to press a blacklisted key combination."""
+
     pass
 
 
 class WindowNotFocusedError(Exception):
     """Raised when window does not have focus but action requires it."""
+
     pass
 
 
 class InvalidDurationError(Exception):
     """Raised when duration parameter is outside valid range."""
+
     pass
 
 
 def simulate_click(
-    point: Point,
-    button: str = "left",
-    window_bounds: Optional[Rect] = None
+    point: Point, button: str = "left", window_bounds: Optional[Rect] = None
 ) -> ActionResult:
     """
     Simulate a mouse click at the specified point.
-    
+
     T065: Safe click simulation with bounds validation.
     CRITICAL: Must validate against safety constraints before execution.
-    
+
     Performance requirement: <50ms execution time.
-    
+
     Args:
         point: Point coordinates to click
         button: Mouse button ("left", "right", "middle")
         window_bounds: Rectangle defining valid click area (REQUIRED)
-        
+
     Returns:
         ActionResult with success status and validation info
-        
+
     Raises:
         OutOfBoundsError: If point is outside window_bounds
         ValueError: If window_bounds is None
     """
     start_time = time.perf_counter()
-    
+
     # Require window bounds (safety constraint)
     if window_bounds is None:
         logger.error("click_rejected_no_bounds", point=str(point))
         raise ValueError("window_bounds is required for safety validation")
-    
+
     # Validate button type
     if button not in ["left", "right", "middle"]:
         logger.error("click_rejected_invalid_button", button=button)
         raise ValueError(f"Invalid button type: {button}")
-    
+
     # Build action for safety validation
-    action = {
-        "action_type": "CLICK",
-        "point": point,
-        "button": button
-    }
-    
+    action = {"action_type": "CLICK", "point": point, "button": button}
+
     context = {
         "window_bounds": window_bounds,
-        "window_focused": True  # Assume focused for now (T064 will implement)
+        "window_focused": True,  # Assume focused for now (T064 will implement)
     }
-    
+
     # CRITICAL: Validate with safety library
     from src.safety import validate_action
+
     result = validate_action(action, context)
-    
+
     if not result.is_allowed:
         logger.warning(
             "click_blocked_safety",
             point=str(point),
             button=button,
-            reason=result.reason
+            reason=result.reason,
         )
         raise OutOfBoundsError(result.reason)
-    
+
     # Execute the click
     try:
         click_at_point(point.x, point.y, button)
-        
-        duration_ms = (time.perf_counter() - start_time) * 1000
+
+        duration_ms = (time.perf_counter() - start_time) * MS_PER_SECOND
         logger.info(
-            "click_executed",
-            point=str(point),
-            button=button,
-            duration_ms=duration_ms
+            "click_executed", point=str(point), button=button, duration_ms=duration_ms
         )
-        
+
         return ActionResult(
-            success=True,
-            safety_validated=True,
-            duration_ms=duration_ms
+            success=True, safety_validated=True, duration_ms=duration_ms
         )
-        
+
     except Exception as e:
-        logger.error(
-            "click_failed",
-            point=str(point),
-            button=button,
-            error=str(e)
-        )
-        return ActionResult(
-            success=False,
-            safety_validated=True,
-            blocked_reason=str(e)
-        )
+        logger.error("click_failed", point=str(point), button=button, error=str(e))
+        return ActionResult(success=False, safety_validated=True, blocked_reason=str(e))
 
 
 def simulate_drag(
-    start: Point,
-    end: Point,
-    duration_ms: float,
-    window_bounds: Optional[Rect] = None
+    start: Point, end: Point, duration_ms: float, window_bounds: Optional[Rect] = None
 ) -> ActionResult:
     """
     Simulate a mouse drag from start to end point.
-    
+
     T066: Safe drag simulation with bounds validation.
     CRITICAL: Both start and end points must be within bounds.
-    
+
     Args:
         start: Starting point coordinates
         end: Ending point coordinates
         duration_ms: Duration of drag in milliseconds (10-5000ms)
         window_bounds: Rectangle defining valid drag area (REQUIRED)
-        
+
     Returns:
         True if drag was executed, False if blocked
-        
+
     Raises:
         OutOfBoundsError: If start or end is outside window_bounds
         InvalidDurationError: If duration is outside valid range
@@ -192,218 +170,163 @@ def simulate_drag(
     if window_bounds is None:
         logger.error("drag_rejected_no_bounds", start=str(start), end=str(end))
         raise ValueError("window_bounds is required for safety validation")
-    
+
     # Validate duration
     if duration_ms < 10 or duration_ms > 5000:
         logger.error(
             "drag_rejected_invalid_duration",
             duration_ms=duration_ms,
-            valid_range="10-5000ms"
+            valid_range="10-5000ms",
         )
-        raise InvalidDurationError(f"Duration {duration_ms}ms outside valid range (10-5000ms)")
-    
+        raise InvalidDurationError(
+            f"Duration {duration_ms}ms outside valid range (10-5000ms)"
+        )
+
     # Validate start point bounds
-    context = {
-        "window_bounds": window_bounds,
-        "window_focused": True
-    }
-    
-    start_action = {
-        "action_type": "CLICK",
-        "point": start
-    }
-    
+    context = {"window_bounds": window_bounds, "window_focused": True}
+
+    start_action = {"action_type": "CLICK", "point": start}
+
     start_result = validate_action(start_action, context)
     if not start_result.is_allowed:
         logger.warning(
-            "drag_blocked_start_point",
-            start=str(start),
-            reason=start_result.reason
+            "drag_blocked_start_point", start=str(start), reason=start_result.reason
         )
         raise OutOfBoundsError(f"Start point: {start_result.reason}")
-    
+
     # Validate end point bounds
-    end_action = {
-        "action_type": "CLICK",
-        "point": end
-    }
-    
+    end_action = {"action_type": "CLICK", "point": end}
+
     end_result = validate_action(end_action, context)
     if not end_result.is_allowed:
-        logger.warning(
-            "drag_blocked_end_point",
-            end=str(end),
-            reason=end_result.reason
-        )
+        logger.warning("drag_blocked_end_point", end=str(end), reason=end_result.reason)
         raise OutOfBoundsError(f"End point: {end_result.reason}")
-    
+
     # Execute the drag
     try:
         drag_between_points(start.x, start.y, end.x, end.y, duration_ms)
-        
+
         logger.info(
-            "drag_executed",
-            start=str(start),
-            end=str(end),
-            duration_ms=duration_ms
+            "drag_executed", start=str(start), end=str(end), duration_ms=duration_ms
         )
-        
+
         return ActionResult(
-            success=True,
-            safety_validated=True,
-            duration_ms=duration_ms
+            success=True, safety_validated=True, duration_ms=duration_ms
         )
-        
+
     except Exception as e:
-        logger.error(
-            "drag_failed",
-            start=str(start),
-            end=str(end),
-            error=str(e)
-        )
-        return ActionResult(
-            success=False,
-            safety_validated=True,
-            blocked_reason=str(e)
-        )
+        logger.error("drag_failed", start=str(start), end=str(end), error=str(e))
+        return ActionResult(success=False, safety_validated=True, blocked_reason=str(e))
 
 
 def simulate_key_press(
     key: str,
     modifiers: Optional[List[str]] = None,
-    window_bounds: Optional[Rect] = None
+    window_bounds: Optional[Rect] = None,
 ) -> ActionResult:
     """
     Simulate a key press with optional modifier keys.
-    
+
     T067: Safe key press with blacklist validation.
     CRITICAL: Dangerous key combinations are BLOCKED (Cmd+Q, Cmd+W, etc.)
-    
+
     Args:
         key: The key to press (lowercase)
         modifiers: List of modifier keys (["cmd"], ["cmd", "shift"], etc.)
         window_bounds: Window bounds (required for context)
-        
+
     Returns:
         True if key press was executed, False if blocked
-        
+
     Raises:
         BlacklistedKeyError: If key combination is blacklisted
         ValueError: If window_bounds is None
     """
     if modifiers is None:
         modifiers = []
-    
+
     # Require window bounds
     if window_bounds is None:
         logger.error("keypress_rejected_no_bounds", key=key, modifiers=modifiers)
         raise ValueError("window_bounds is required for safety validation")
-    
+
     # Check blacklist
     if is_key_blacklisted(key, modifiers):
         combo = "+".join(modifiers + [key])
         logger.warning(
-            "keypress_blocked_blacklist",
-            key=key,
-            modifiers=modifiers,
-            combo=combo
+            "keypress_blocked_blacklist", key=key, modifiers=modifiers, combo=combo
         )
-        raise BlacklistedKeyError(f"Key combination '{combo}' is blacklisted for safety")
-    
+        raise BlacklistedKeyError(
+            f"Key combination '{combo}' is blacklisted for safety"
+        )
+
     # Build action for safety validation
-    action = {
-        "action_type": "KEY_PRESS",
-        "key": key,
-        "modifiers": modifiers
-    }
-    
-    context = {
-        "window_bounds": window_bounds,
-        "window_focused": True
-    }
-    
+    action = {"action_type": "KEY_PRESS", "key": key, "modifiers": modifiers}
+
+    context = {"window_bounds": window_bounds, "window_focused": True}
+
     # Validate with safety library
     result = validate_action(action, context)
-    
+
     if not result.is_allowed:
         logger.warning(
             "keypress_blocked_safety",
             key=key,
             modifiers=modifiers,
-            reason=result.reason
+            reason=result.reason,
         )
         raise BlacklistedKeyError(result.reason)
-    
+
     # Execute the key press
     try:
         press_key_combination(key, modifiers)
-        
-        logger.info(
-            "keypress_executed",
-            key=key,
-            modifiers=modifiers
-        )
-        
-        return ActionResult(
-            success=True,
-            safety_validated=True
-        )
-        
+
+        logger.info("keypress_executed", key=key, modifiers=modifiers)
+
+        return ActionResult(success=True, safety_validated=True)
+
     except Exception as e:
-        logger.error(
-            "keypress_failed",
-            key=key,
-            modifiers=modifiers,
-            error=str(e)
-        )
-        return ActionResult(
-            success=False,
-            safety_validated=True,
-            blocked_reason=str(e)
-        )
+        logger.error("keypress_failed", key=key, modifiers=modifiers, error=str(e))
+        return ActionResult(success=False, safety_validated=True, blocked_reason=str(e))
 
 
 def verify_window_focus(window_name: str) -> bool:
     """
     Check if the specified window has keyboard focus.
-    
+
     T064: Window focus verification.
     Performance requirement: <5ms.
-    
+
     Args:
         window_name: Name of the window to check (e.g., "Cultist Simulator")
-        
+
     Returns:
         True if window has focus, False otherwise
     """
     start_time = time.perf_counter()
-    
+
     try:
         has_focus = check_window_focus(window_name)
-        
-        duration_ms = (time.perf_counter() - start_time) * 1000
+
+        duration_ms = (time.perf_counter() - start_time) * MS_PER_SECOND
         logger.debug(
             "focus_check",
             window_name=window_name,
             has_focus=has_focus,
-            duration_ms=duration_ms
+            duration_ms=duration_ms,
         )
-        
+
         return has_focus
-        
+
     except Exception as e:
-        logger.error(
-            "focus_check_failed",
-            window_name=window_name,
-            error=str(e)
-        )
+        logger.error("focus_check_failed", window_name=window_name, error=str(e))
         return False
 
 
 def get_blacklisted_keys() -> List[str]:
     """
     Get list of blacklisted key combinations.
-    
+
     Returns:
         List of blacklisted key combination strings (e.g., ["cmd+q", "cmd+w"])
     """
@@ -413,26 +336,26 @@ def get_blacklisted_keys() -> List[str]:
 def wait(duration_ms: float) -> None:
     """
     Sleep for the specified duration.
-    
+
     T068: Wait/sleep function.
-    
+
     Args:
         duration_ms: Duration to wait in milliseconds
     """
     if duration_ms < 0:
         raise ValueError("Duration must be non-negative")
-    
-    time.sleep(duration_ms / 1000.0)
-    
+
+    time.sleep(duration_ms / MS_PER_SECOND)
+
     logger.debug("wait_completed", duration_ms=duration_ms)
 
 
 def is_emergency_stop_requested() -> bool:
     """
     Check if emergency stop has been requested.
-    
+
     T069: Emergency stop mechanism.
-    
+
     Returns:
         True if emergency stop was requested, False otherwise
     """
@@ -444,48 +367,48 @@ def is_emergency_stop_requested() -> bool:
 def request_emergency_stop() -> None:
     """
     Request emergency stop of all automation.
-    
+
     T069: Emergency stop mechanism - call this to halt the agent.
     Can be triggered by F12 key press or other emergency conditions.
     """
     global _emergency_stop_requested
     with _emergency_stop_lock:
         _emergency_stop_requested = True
-    
+
     logger.warning("emergency_stop_requested")
 
 
 def reset_emergency_stop() -> None:
     """
     Reset emergency stop flag.
-    
+
     Call this to resume automation after emergency stop.
     """
     global _emergency_stop_requested
     with _emergency_stop_lock:
         _emergency_stop_requested = False
-    
+
     logger.info("emergency_stop_reset")
 
 
 def start_emergency_stop_listener() -> None:
     """
     Start background thread to listen for F12 key press.
-    
+
     T069: Emergency stop mechanism - F12 key listener.
-    
+
     Note: Implementing a global key listener on macOS requires
     accessibility permissions and is complex. For now, this is
     a placeholder. The emergency stop can be triggered programmatically
     via request_emergency_stop().
-    
+
     TODO: Implement actual F12 key listener using pynput or similar.
     """
     logger.warning(
         "emergency_stop_listener_not_implemented",
-        message="F12 listener requires pynput package. Use request_emergency_stop() to trigger manually."
+        message="F12 listener requires pynput package. Use request_emergency_stop() to trigger manually.",
     )
-    
+
     # Future implementation would use pynput:
     # from pynput import keyboard
     # def on_press(key):
@@ -497,18 +420,18 @@ def start_emergency_stop_listener() -> None:
 
 # Export public API
 __all__ = [
-    'simulate_click',
-    'simulate_drag',
-    'simulate_key_press',
-    'verify_window_focus',
-    'get_blacklisted_keys',
-    'wait',
-    'is_emergency_stop_requested',
-    'request_emergency_stop',
-    'reset_emergency_stop',
-    'start_emergency_stop_listener',
-    'OutOfBoundsError',
-    'BlacklistedKeyError',
-    'WindowNotFocusedError',
-    'InvalidDurationError',
+    "simulate_click",
+    "simulate_drag",
+    "simulate_key_press",
+    "verify_window_focus",
+    "get_blacklisted_keys",
+    "wait",
+    "is_emergency_stop_requested",
+    "request_emergency_stop",
+    "reset_emergency_stop",
+    "start_emergency_stop_listener",
+    "OutOfBoundsError",
+    "BlacklistedKeyError",
+    "WindowNotFocusedError",
+    "InvalidDurationError",
 ]

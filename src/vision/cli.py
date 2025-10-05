@@ -24,66 +24,88 @@ def main():
     """Main CLI entry point."""
     parser = argparse.ArgumentParser(description="Vision Library CLI")
     parser.add_argument(
-        "command",
-        choices=["capture", "detect", "ocr"],
-        help="Command to execute"
+        "command", choices=["capture", "detect", "ocr"], help="Command to execute"
     )
+    parser.add_argument("--json", action="store_true", help="Output in JSON format")
     parser.add_argument(
-        "--json",
-        action="store_true",
-        help="Output in JSON format"
+        "--window-name", default="Cultist Simulator", help="Game window name"
     )
-    parser.add_argument(
-        "--window-name",
-        default="Cultist Simulator",
-        help="Game window name"
-    )
-    
+
     args = parser.parse_args()
-    
+
     try:
         if args.command == "capture":
             state = capture_game_state(window_name=args.window_name)
             if args.json:
-                print(json.dumps({
-                    "status": "success",
-                    "elements_count": len(state.elements),
-                    "text_regions_count": len(state.text_regions),
-                    "timestamp": state.timestamp.isoformat()
-                }))
+                print(
+                    json.dumps(
+                        {
+                            "status": "success",
+                            "elements_count": len(state.elements),
+                            "text_regions_count": len(state.text_regions),
+                            "timestamp": state.timestamp.isoformat(),
+                        }
+                    )
+                )
             else:
-                print(f"✓ Captured game state: {len(state.elements)} elements, {len(state.text_regions)} text regions")
-        
+                print(
+                    f"✓ Captured game state: {len(state.elements)} elements, {len(state.text_regions)} text regions"
+                )
+
         elif args.command == "detect":
             state = capture_game_state(window_name=args.window_name)
-            elements = detect_elements(state.screenshot) if state.screenshot is not None else []
+            elements = (
+                detect_elements(state.screenshot)
+                if state.screenshot is not None
+                else []
+            )
             if args.json:
-                print(json.dumps({
-                    "status": "success",
-                    "elements": [
+                print(
+                    json.dumps(
                         {
-                            "type": e.element_type.value,
-                            "bounds": {"x": e.bounds.x, "y": e.bounds.y, "width": e.bounds.width, "height": e.bounds.height}
+                            "status": "success",
+                            "elements": [
+                                {
+                                    "type": e.element_type.value,
+                                    "bounds": {
+                                        "x": e.bounds.x,
+                                        "y": e.bounds.y,
+                                        "width": e.bounds.width,
+                                        "height": e.bounds.height,
+                                    },
+                                }
+                                for e in elements
+                            ],
                         }
-                        for e in elements
-                    ]
-                }))
+                    )
+                )
             else:
                 print(f"✓ Detected {len(elements)} elements")
-        
+
         elif args.command == "ocr":
             state = capture_game_state(window_name=args.window_name)
-            texts = extract_text_regions(state.screenshot) if state.screenshot is not None else []
+            texts = (
+                extract_text_regions(state.screenshot)
+                if state.screenshot is not None
+                else []
+            )
             if args.json:
-                print(json.dumps({
-                    "status": "success",
-                    "texts": [{"text": t.text, "confidence": t.confidence} for t in texts]
-                }))
+                print(
+                    json.dumps(
+                        {
+                            "status": "success",
+                            "texts": [
+                                {"text": t.text, "confidence": t.confidence}
+                                for t in texts
+                            ],
+                        }
+                    )
+                )
             else:
                 print(f"✓ Extracted {len(texts)} text regions")
                 for t in texts[:5]:
                     print(f"  - {t.text} ({t.confidence:.2f})")
-        
+
     except Exception as e:
         if args.json:
             print(json.dumps({"status": "error", "message": str(e)}), file=sys.stderr)

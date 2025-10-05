@@ -15,22 +15,22 @@ logger = get_logger(__name__)
 def launch_tensorboard_in_vscode(log_dir: str) -> bool:
     """
     Launch TensorBoard extension in VS Code for the given log directory.
-    
+
     Args:
         log_dir: Path to TensorBoard logs directory
-        
+
     Returns:
         True if successfully launched, False otherwise
     """
     # Make log_dir absolute first (before try block)
     log_path = Path(log_dir).resolve()
-    
+
     try:
         # Ensure directory exists
         log_path.mkdir(parents=True, exist_ok=True)
-        
+
         logger.info(f"Launching TensorBoard in VS Code", log_dir=str(log_path))
-        
+
         # VS Code command to open TensorBoard
         # The extension listens for this and will auto-launch
         command = [
@@ -38,17 +38,12 @@ def launch_tensorboard_in_vscode(log_dir: str) -> bool:
             "--command",
             f"python.launchTensorBoard",
             "--log-dir",
-            str(log_path)
+            str(log_path),
         ]
-        
+
         # Try to launch via VS Code CLI
-        result = subprocess.run(
-            command,
-            capture_output=True,
-            text=True,
-            timeout=5
-        )
-        
+        result = subprocess.run(command, capture_output=True, text=True, timeout=5)
+
         if result.returncode == 0:
             logger.info(f"TensorBoard launched successfully in VS Code")
             print(f"\n📊 TensorBoard opened in VS Code!")
@@ -56,10 +51,11 @@ def launch_tensorboard_in_vscode(log_dir: str) -> bool:
             print(f"   Look for the 'TensorBoard' tab in VS Code\n")
             return True
         else:
-            logger.warning(f"Failed to launch TensorBoard via VS Code CLI", 
-                          stderr=result.stderr)
+            logger.warning(
+                f"Failed to launch TensorBoard via VS Code CLI", stderr=result.stderr
+            )
             return _launch_tensorboard_manual(log_path)
-            
+
     except subprocess.TimeoutExpired:
         logger.warning("TensorBoard launch timed out")
         return _launch_tensorboard_manual(log_path)
@@ -71,16 +67,16 @@ def launch_tensorboard_in_vscode(log_dir: str) -> bool:
 def _launch_tensorboard_manual(log_path: Path) -> bool:
     """
     Fall back to manual instructions if automatic launch fails.
-    
+
     Args:
         log_path: Path to TensorBoard logs
-        
+
     Returns:
         False (indicates manual action needed)
     """
-    print("\n" + "="*70)
+    print("\n" + "=" * 70)
     print("📊 TENSORBOARD SETUP")
-    print("="*70)
+    print("=" * 70)
     print("\nTo view training metrics in VS Code:")
     print(f"\n1. Open Command Palette (Cmd+Shift+P / Ctrl+Shift+P)")
     print(f"2. Type: 'Python: Launch TensorBoard'")
@@ -88,8 +84,8 @@ def _launch_tensorboard_manual(log_path: Path) -> bool:
     print(f"\nOr run in terminal:")
     print(f"   tensorboard --logdir {log_path}")
     print(f"   Then open: http://localhost:6006")
-    print("="*70 + "\n")
-    
+    print("=" * 70 + "\n")
+
     logger.info("Manual TensorBoard instructions provided")
     return False
 
@@ -97,15 +93,15 @@ def _launch_tensorboard_manual(log_path: Path) -> bool:
 def create_tensorboard_notice(log_dir: str) -> str:
     """
     Create a notice message about TensorBoard availability.
-    
+
     Args:
         log_dir: Path to TensorBoard logs directory
-        
+
     Returns:
         Formatted notice string
     """
     log_path = Path(log_dir).resolve()
-    
+
     return f"""
 ╔══════════════════════════════════════════════════════════════════════╗
 ║                       📊 TENSORBOARD AVAILABLE                        ║

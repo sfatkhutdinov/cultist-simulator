@@ -14,9 +14,11 @@ import numpy as np
 # Value Objects
 # ============================================================================
 
+
 @dataclass(frozen=True)
 class Point:
     """A 2D point representing screen coordinates."""
+
     x: int
     y: int
 
@@ -27,6 +29,7 @@ class Point:
 @dataclass(frozen=True)
 class Rect:
     """A rectangle representing a bounding box."""
+
     x: int
     y: int
     width: int
@@ -34,16 +37,13 @@ class Rect:
 
     def center(self) -> Point:
         """Get the center point of the rectangle."""
-        return Point(
-            x=self.x + self.width // 2,
-            y=self.y + self.height // 2
-        )
+        return Point(x=self.x + self.width // 2, y=self.y + self.height // 2)
 
     def contains(self, point: Point) -> bool:
         """Check if a point is inside the rectangle."""
         return (
-            self.x <= point.x <= self.x + self.width and
-            self.y <= point.y <= self.y + self.height
+            self.x <= point.x <= self.x + self.width
+            and self.y <= point.y <= self.y + self.height
         )
 
     def __str__(self) -> str:
@@ -53,6 +53,7 @@ class Rect:
 @dataclass
 class ActionResult:
     """Result from executing an automation action."""
+
     success: bool
     safety_validated: bool
     blocked_reason: Optional[str] = None
@@ -64,8 +65,10 @@ class ActionResult:
 # Enumerations
 # ============================================================================
 
+
 class ElementType(Enum):
     """Types of game elements that can be detected."""
+
     CARD = "card"
     BUTTON = "button"
     SLOT = "slot"
@@ -77,6 +80,7 @@ class ElementType(Enum):
 
 class ActionType(Enum):
     """Types of actions the agent can perform."""
+
     CLICK = "click"
     DRAG = "drag"
     KEY_PRESS = "key_press"
@@ -86,6 +90,7 @@ class ActionType(Enum):
 
 class CardState(Enum):
     """Possible states of a game card."""
+
     IN_HAND = "in_hand"
     IN_SLOT = "in_slot"
     DRAGGING = "dragging"
@@ -95,6 +100,7 @@ class CardState(Enum):
 
 class MetricType(Enum):
     """Types of performance metrics tracked."""
+
     WIN_RATE = "win_rate"
     SURVIVAL_TIME = "survival_time"
     RESOURCES_ACCUMULATED = "resources_accumulated"
@@ -105,6 +111,7 @@ class MetricType(Enum):
 
 class ConstraintType(Enum):
     """Types of safety constraints."""
+
     WINDOW_BOUNDS = "window_bounds"
     KEY_BLACKLIST = "key_blacklist"
     FOCUS_REQUIRED = "focus_required"
@@ -113,6 +120,7 @@ class ConstraintType(Enum):
 
 class ExecutionStatus(Enum):
     """Status of action execution."""
+
     SUCCESS = "success"
     FAILED = "failed"
     BLOCKED = "blocked"
@@ -122,6 +130,7 @@ class ExecutionStatus(Enum):
 
 class EndCondition(Enum):
     """How a game session ended."""
+
     GAME_OVER = "game_over"
     WIN = "win"
     CRASH = "crash"
@@ -134,8 +143,10 @@ class EndCondition(Enum):
 # Button and Key Constants
 # ============================================================================
 
+
 class MouseButton(Enum):
     """Mouse button identifiers."""
+
     LEFT = "left"
     RIGHT = "right"
     MIDDLE = "middle"
@@ -151,12 +162,10 @@ BLACKLISTED_KEYS = [
     "cmd+option+q",  # Force quit (multiple modifiers)
     "cmd+option+shift+q",  # Force quit with more modifiers
     "cmd+shift+q",  # Log out
-    
     # Windows dangerous combinations
     "alt+f4",  # Close window/app
     "ctrl+shift+escape",  # Task manager
     "ctrl+alt+delete",  # System interrupt
-    
     # Generic dangerous keys
     "escape",  # Often used for menus that could exit
     "f4",  # Potential Alt+F4 key
@@ -182,10 +191,18 @@ DEFAULT_SCREENSHOT_INTERVAL_MS = 500
 DEFAULT_YOLO_CONFIDENCE_THRESHOLD = 0.5
 DEFAULT_OCR_CONFIDENCE_THRESHOLD = 0.6
 
+# Display parameters (for testing/fallback)
+DEFAULT_SCREEN_WIDTH = 1920
+DEFAULT_SCREEN_HEIGHT = 1080
+
+# Time conversion constants
+MS_PER_SECOND = 1000.0
+
 
 # ============================================================================
 # Entity Classes
 # ============================================================================
+
 
 @dataclass
 class GameElement:
@@ -193,6 +210,7 @@ class GameElement:
     Represents a detected UI element in the game.
     T040: Implement GameElement entity.
     """
+
     element_type: ElementType
     bounds: Rect
     confidence: float
@@ -212,10 +230,11 @@ class GameElement:
 @dataclass
 class TextRegion:
     """Represents a region of text extracted from the game screen."""
+
     text: str
     bounds: Rect
     confidence: float
-    
+
     def __str__(self) -> str:
         return f"TextRegion('{self.text[:20]}...', conf={self.confidence:.2f})"
 
@@ -226,6 +245,7 @@ class GameState:
     Complete snapshot of the game state at a point in time.
     T039: Implement GameState entity.
     """
+
     timestamp: datetime
     window_bounds: Rect
     elements: List[GameElement]
@@ -244,7 +264,7 @@ class GameState:
                 "x": self.window_bounds.x,
                 "y": self.window_bounds.y,
                 "width": self.window_bounds.width,
-                "height": self.window_bounds.height
+                "height": self.window_bounds.height,
             },
             "elements": [
                 {
@@ -253,12 +273,12 @@ class GameState:
                         "x": e.bounds.x,
                         "y": e.bounds.y,
                         "width": e.bounds.width,
-                        "height": e.bounds.height
+                        "height": e.bounds.height,
                     },
                     "confidence": e.confidence,
                     "text": e.text,
                     "state": e.state,
-                    "metadata": e.metadata
+                    "metadata": e.metadata,
                 }
                 for e in self.elements
             ],
@@ -269,17 +289,17 @@ class GameState:
                         "x": t.bounds.x,
                         "y": t.bounds.y,
                         "width": t.bounds.width,
-                        "height": t.bounds.height
+                        "height": t.bounds.height,
                     },
-                    "confidence": t.confidence
+                    "confidence": t.confidence,
                 }
                 for t in self.text_regions
             ],
-            "metadata": self.metadata
+            "metadata": self.metadata,
         }
 
     @staticmethod
-    def from_dict(data: Dict[str, Any]) -> 'GameState':
+    def from_dict(data: Dict[str, Any]) -> "GameState":
         """Deserialize GameState from dictionary (T123)."""
         return GameState(
             timestamp=datetime.fromisoformat(data["timestamp"]),
@@ -291,7 +311,7 @@ class GameState:
                     confidence=e["confidence"],
                     text=e.get("text"),
                     state=e.get("state"),
-                    metadata=e.get("metadata", {})
+                    metadata=e.get("metadata", {}),
                 )
                 for e in data["elements"]
             ],
@@ -299,11 +319,11 @@ class GameState:
                 TextRegion(
                     text=t["text"],
                     bounds=Rect(**t["bounds"]),
-                    confidence=t["confidence"]
+                    confidence=t["confidence"],
                 )
                 for t in data["text_regions"]
             ],
-            metadata=data.get("metadata", {})
+            metadata=data.get("metadata", {}),
         )
 
 
@@ -313,6 +333,7 @@ class Action:
     Represents an action to be performed by the agent.
     T041: Implement Action entity.
     """
+
     action_type: ActionType
     parameters: Dict[str, Any]
     timestamp: datetime = field(default_factory=datetime.now)
@@ -329,6 +350,7 @@ class Card:
     Represents a card in Cultist Simulator.
     T042: Implement Card entity.
     """
+
     card_id: str
     name: str
     card_type: str  # aspect, verb, resource, etc.
@@ -348,6 +370,7 @@ class Session:
     Represents a complete game session.
     T043: Implement Session entity.
     """
+
     session_id: str
     agent_id: str
     start_time: datetime
@@ -365,7 +388,11 @@ class Session:
         return None
 
     def __str__(self) -> str:
-        status = "active" if self.end_time is None else f"ended ({self.end_condition.value if self.end_condition else 'unknown'})"
+        status = (
+            "active"
+            if self.end_time is None
+            else f"ended ({self.end_condition.value if self.end_condition else 'unknown'})"
+        )
         return f"Session({self.session_id}, {status}, {self.total_actions} actions)"
 
 
@@ -375,6 +402,7 @@ class Agent:
     Represents the AI agent configuration and state.
     T044: Implement Agent entity.
     """
+
     agent_id: str
     name: str
     created_at: datetime
@@ -394,6 +422,7 @@ class Strategy:
     Represents a learned strategy for achieving goals.
     T045: Implement Strategy entity.
     """
+
     strategy_id: str
     name: str
     goal: str
@@ -413,6 +442,7 @@ class PerformanceMetric:
     Represents a performance metric tracked over time.
     T046: Implement PerformanceMetric entity.
     """
+
     metric_type: MetricType
     value: float
     timestamp: datetime
@@ -426,6 +456,7 @@ class PerformanceMetric:
 @dataclass
 class ValidationResult:
     """Result of a safety validation check."""
+
     is_allowed: bool
     reason: Optional[str] = None
     constraints_violated: List[ConstraintType] = field(default_factory=list)
@@ -444,6 +475,7 @@ class ValidationResult:
 @dataclass
 class ExecutionResult:
     """Result of an action execution."""
+
     success: bool
     status: ExecutionStatus
     message: Optional[str] = None
@@ -457,6 +489,7 @@ class ExecutionResult:
 @dataclass
 class QueryResult:
     """Result of a knowledge base query."""
+
     results: List[Dict[str, Any]]
     result_count: int
     query_time_ms: float
@@ -469,6 +502,7 @@ class QueryResult:
 @dataclass
 class TextAnalysis:
     """Result of NLP text analysis."""
+
     text: str
     embedding: Optional[np.ndarray] = None
     sentiment: Optional[str] = None  # positive, negative, neutral
@@ -482,6 +516,7 @@ class TextAnalysis:
 @dataclass
 class Goal:
     """Extracted goal from narrative text."""
+
     description: str
     confidence: float
     goal_type: Optional[str] = None  # ritual, resource, exploration, etc.
@@ -494,6 +529,7 @@ class Goal:
 @dataclass
 class Narrative:
     """A narrative sequence with semantic embedding."""
+
     narrative_id: str
     text: str
     embedding: Optional[np.ndarray] = None
