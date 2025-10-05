@@ -6,6 +6,7 @@ Public API:
 - is_within_bounds(point, bounds) -> bool
 - is_key_blacklisted(key, modifiers) -> bool
 - check_rate_limit(action_history, max_actions_per_second) -> bool
+- log_violation(violation_type, details) -> None
 
 CRITICAL: This library MUST have 100% reliability (NFR-004).
 Safety violations could affect the system outside the game.
@@ -16,6 +17,9 @@ All validation functions must complete in <10ms (NFR performance requirement).
 import time
 from datetime import datetime
 from typing import List, Dict, Any, Optional
+from pathlib import Path
+import json
+
 from src.lib.types import (
     Point, Rect, Action, ActionType, ValidationResult, 
     ConstraintType, BLACKLISTED_KEYS
@@ -24,12 +28,62 @@ from src.lib.logging_config import get_logger
 
 logger = get_logger(__name__)
 
+# Violation log file (T078)
+VIOLATION_LOG_PATH = Path("data/logs/safety_violations.jsonl")
+
 __all__ = [
     'validate_action',
     'is_within_bounds',
     'is_key_blacklisted',
     'check_rate_limit',
+    'log_violation',
+    'BLACKLISTED_KEYS',
 ]
+
+
+def log_violation(
+    violation_type: str,
+    details: Dict[str, Any],
+    severity: str = "WARNING"
+) -> None:
+    """
+    Log a safety violation to file.
+    
+    T078: Safety violation logging for audit trail.
+    
+    Args:
+        violation_type: Type of violation (e.g., "OUT_OF_BOUNDS", "BLACKLISTED_KEY")
+        details: Additional details about the violation
+        severity: Severity level ("WARNING", "ERROR", "CRITICAL")
+    """
+    try:
+        # Ensure log directory exists
+        VIOLATION_LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
+        
+        # Create log entry
+        log_entry = {
+            "timestamp": datetime.now().isoformat(),
+            "violation_type": violation_type,
+            "severity": severity,
+            "details": details
+        }
+        
+        # Append to log file
+        with open(VIOLATION_LOG_PATH, 'a') as f:
+            f.write(json.dumps(log_entry) + '\n')
+        
+        logger.warning(
+            "safety_violation_logged",
+            violation_type=violation_type,
+            severity=severity
+        )
+        
+    except Exception as e:
+        logger.error(
+            "violation_logging_failed",
+            error=str(e),
+            violation_type=violation_type
+        )
 
 
 def is_within_bounds(point: Point, bounds: Rect) -> bool:
@@ -213,6 +267,16 @@ def validate_action(action: Any, context: Dict[str, Any]) -> ValidationResult:
         constraints_violated.append(ConstraintType.FOCUS_REQUIRED)
         blocked_reason = "Window must be focused before executing actions"
         
+        # T078: Log violation
+        log_violation(
+            "FOCUS_REQUIRED",
+            {
+                "action_type": str(action_type),
+                "reason": blocked_reason
+            },
+            severity="WARNING"
+        )
+        
         logger.warning(
             "action_blocked_focus",
             action_type=str(action_type),
@@ -258,6 +322,18 @@ def validate_action(action: Any, context: Dict[str, Any]) -> ValidationResult:
                 constraints_violated.append(ConstraintType.WINDOW_BOUNDS)
                 blocked_reason = f"Click point {point} is outside window bounds {window_bounds}"
                 
+                # T078: Log violation
+                log_violation(
+                    "OUT_OF_BOUNDS",
+                    {
+                        "action_type": str(action_type),
+                        "point": str(point),
+                        "bounds": str(window_bounds),
+                        "reason": blocked_reason
+                    },
+                    severity="WARNING"
+                )
+                
                 logger.warning(
                     "action_blocked_bounds",
                     action_type=str(action_type),
@@ -281,6 +357,18 @@ def validate_action(action: Any, context: Dict[str, Any]) -> ValidationResult:
         if is_key_blacklisted(key, modifiers):
             constraints_violated.append(ConstraintType.KEY_BLACKLIST)
             blocked_reason = f"Key combination '{'+'.join(modifiers + [key])}' is blacklisted"
+            
+            # T078: Log violation
+            log_violation(
+                "BLACKLISTED_KEY",
+                {
+                    "action_type": str(action_type),
+                    "key": key,
+                    "modifiers": modifiers,
+                    "reason": blocked_reason
+                },
+                severity="WARNING"
+            )
             
             logger.warning(
                 "action_blocked_blacklist",

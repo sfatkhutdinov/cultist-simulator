@@ -26,6 +26,7 @@ Dependencies:
 
 from typing import Optional, List
 import time
+import threading
 
 from src.lib.types import Point, Rect, MouseButton
 from src.safety import validate_action, is_key_blacklisted, BLACKLISTED_KEYS
@@ -40,6 +41,10 @@ from .input_simulator import (
 from .window_manager import check_window_focus
 
 logger = get_logger(__name__)
+
+# Emergency stop flag (T069)
+_emergency_stop_requested = False
+_emergency_stop_lock = threading.Lock()
 
 
 # Custom exceptions
@@ -399,6 +404,74 @@ def wait(duration_ms: float) -> None:
     logger.debug("wait_completed", duration_ms=duration_ms)
 
 
+def is_emergency_stop_requested() -> bool:
+    """
+    Check if emergency stop has been requested.
+    
+    T069: Emergency stop mechanism.
+    
+    Returns:
+        True if emergency stop was requested, False otherwise
+    """
+    global _emergency_stop_requested
+    with _emergency_stop_lock:
+        return _emergency_stop_requested
+
+
+def request_emergency_stop() -> None:
+    """
+    Request emergency stop of all automation.
+    
+    T069: Emergency stop mechanism - call this to halt the agent.
+    Can be triggered by F12 key press or other emergency conditions.
+    """
+    global _emergency_stop_requested
+    with _emergency_stop_lock:
+        _emergency_stop_requested = True
+    
+    logger.warning("emergency_stop_requested")
+
+
+def reset_emergency_stop() -> None:
+    """
+    Reset emergency stop flag.
+    
+    Call this to resume automation after emergency stop.
+    """
+    global _emergency_stop_requested
+    with _emergency_stop_lock:
+        _emergency_stop_requested = False
+    
+    logger.info("emergency_stop_reset")
+
+
+def start_emergency_stop_listener() -> None:
+    """
+    Start background thread to listen for F12 key press.
+    
+    T069: Emergency stop mechanism - F12 key listener.
+    
+    Note: Implementing a global key listener on macOS requires
+    accessibility permissions and is complex. For now, this is
+    a placeholder. The emergency stop can be triggered programmatically
+    via request_emergency_stop().
+    
+    TODO: Implement actual F12 key listener using pynput or similar.
+    """
+    logger.warning(
+        "emergency_stop_listener_not_implemented",
+        message="F12 listener requires pynput package. Use request_emergency_stop() to trigger manually."
+    )
+    
+    # Future implementation would use pynput:
+    # from pynput import keyboard
+    # def on_press(key):
+    #     if key == keyboard.Key.f12:
+    #         request_emergency_stop()
+    # listener = keyboard.Listener(on_press=on_press)
+    # listener.start()
+
+
 # Export public API
 __all__ = [
     'simulate_click',
@@ -407,6 +480,10 @@ __all__ = [
     'verify_window_focus',
     'get_blacklisted_keys',
     'wait',
+    'is_emergency_stop_requested',
+    'request_emergency_stop',
+    'reset_emergency_stop',
+    'start_emergency_stop_listener',
     'OutOfBoundsError',
     'BlacklistedKeyError',
     'WindowNotFocusedError',
