@@ -110,11 +110,11 @@ wandb/
 mlruns/
 tensorboard/
 
-# Data files (uncomment if needed)
-# data/
-# *.csv
-# *.json
-# *.parquet
+# Data files - application data should not be tracked
+data/
+*.csv
+*.json
+*.parquet
 
 # Other common artifacts
 .scrapy
