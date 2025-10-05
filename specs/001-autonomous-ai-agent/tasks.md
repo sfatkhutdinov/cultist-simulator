@@ -190,35 +190,36 @@ This tasks document breaks down the implementation of an autonomous AI agent tha
 
 ### Orchestrator (Main Agent Runner)
 
-- [ ] **T105** Initialize orchestrator structure in src/orchestrator/__init__.py
-- [ ] **T106** Implement episode execution loop in src/orchestrator/agent_runner.py
-- [ ] **T107** Integrate vision → action selection → automation pipeline in src/orchestrator/agent_runner.py
-- [ ] **T108** Implement session recording and persistence in src/orchestrator/agent_runner.py
-- [ ] **T109** Implement training loop (100-500 episodes) in src/orchestrator/agent_runner.py
-- [ ] **T110** Implement real-time metrics tracking in src/orchestrator/agent_runner.py
-- [ ] **T111** Implement articulate_strategy() for human-readable output in src/orchestrator/agent_runner.py
-- [ ] **T112** Implement crash recovery and resume logic in src/orchestrator/agent_runner.py
-- [ ] **T113** Implement main orchestrator CLI in src/orchestrator/cli.py
-- [ ] **T113a** Implement crash detection (monitor game window/process status) in src/orchestrator/agent_runner.py
-- [ ] **T113b** Implement auto-save agent state every N actions (configurable checkpoint frequency) in src/orchestrator/agent_runner.py
-- [ ] **T113c** Implement resume from last checkpoint on restart in src/orchestrator/agent_runner.py
-- [ ] **T113d** Implement load_save_game() to start from saved game state in src/orchestrator/agent_runner.py
-- [ ] **T113e** Implement create_save_game() for training checkpoint persistence in src/orchestrator/agent_runner.py
+- [x] **T105** Initialize orchestrator structure in src/orchestrator/__init__.py ✅
+- [x] **T106** Implement episode execution loop in src/orchestrator/agent_runner.py ✅
+- [x] **T107** Integrate vision → action selection → automation pipeline in src/orchestrator/agent_runner.py ✅
+- [x] **T108** Implement session recording and persistence in src/orchestrator/agent_runner.py ✅
+- [x] **T109** Implement training loop (100-500 episodes) in src/orchestrator/agent_runner.py ✅
+- [x] **T110** Implement real-time metrics tracking in src/orchestrator/agent_runner.py ✅
+- [x] **T111** Implement articulate_strategy() for human-readable output in src/orchestrator/agent_runner.py ✅
+- [x] **T112** Implement crash recovery and resume logic in src/orchestrator/agent_runner.py ✅
+- [x] **T113** Implement main orchestrator CLI in src/orchestrator/cli.py ✅
+- [x] **T113a** Implement crash detection (monitor game window/process status) in src/orchestrator/agent_runner.py ✅
+- [x] **T113b** Implement auto-save agent state every N actions (configurable checkpoint frequency) in src/orchestrator/agent_runner.py ✅
+- [x] **T113c** Implement resume from last checkpoint on restart in src/orchestrator/agent_runner.py ✅
+- [x] **T113d** Implement load_save_game() to start from saved game state in src/orchestrator/agent_runner.py ✅
+- [x] **T113e** Implement create_save_game() for training checkpoint persistence in src/orchestrator/agent_runner.py ✅
+- [ ] **T113f** Integration test: Load save game → verify agent state consistency in tests/integration/test_save_game.py
 - [ ] **T113f** Integration test: Load save game → verify agent state consistency in tests/integration/test_save_game.py
 
 ---
 
 ## Phase 3.4: Integration
 
-- [ ] **T114** Connect vision_lib to automation_lib (element detection → click targeting)
-- [ ] **T115** Connect learning_lib to knowledge_base (session persistence)
-- [ ] **T116** Connect nlp_lib to learning_lib (goal extraction → strategy update)
-- [ ] **T117** Connect safety_lib to automation_lib (pre-validation hooks)
-- [ ] **T118** Integrate all libraries in orchestrator main loop
-- [ ] **T119** Set up TensorBoard logging for training metrics
-- [ ] **T120** Implement session replay functionality
-- [ ] **T121** Add graceful shutdown on crash/interrupt
-- [ ] **T122** Configure macOS permissions check on startup
+- [x] **T114** Connect vision_lib to automation_lib (element detection → click targeting) ✅
+- [x] **T115** Connect learning_lib to knowledge_base (session persistence) ✅
+- [x] **T116** Connect nlp_lib to learning_lib (goal extraction → strategy update) ✅
+- [x] **T117** Connect safety_lib to automation_lib (pre-validation hooks) ✅
+- [x] **T118** Integrate all libraries in orchestrator main loop ✅
+- [x] **T119** Set up TensorBoard logging for training metrics ✅
+- [x] **T120** Implement session replay functionality ✅
+- [x] **T121** Add graceful shutdown on crash/interrupt ✅
+- [x] **T122** Configure macOS permissions check on startup ✅
 
 ---
 
