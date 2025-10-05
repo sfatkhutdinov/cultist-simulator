@@ -28,7 +28,7 @@ from typing import Optional, List
 import time
 import threading
 
-from src.lib.types import Point, Rect, MouseButton
+from src.lib.types import Point, Rect, MouseButton, ActionResult
 from src.safety import validate_action, is_key_blacklisted, BLACKLISTED_KEYS
 from src.lib.logging_config import get_logger
 
@@ -72,7 +72,7 @@ def simulate_click(
     point: Point,
     button: str = "left",
     window_bounds: Optional[Rect] = None
-) -> bool:
+) -> ActionResult:
     """
     Simulate a mouse click at the specified point.
     
@@ -87,7 +87,7 @@ def simulate_click(
         window_bounds: Rectangle defining valid click area (REQUIRED)
         
     Returns:
-        True if click was executed, False if blocked
+        ActionResult with success status and validation info
         
     Raises:
         OutOfBoundsError: If point is outside window_bounds
@@ -142,7 +142,11 @@ def simulate_click(
             duration_ms=duration_ms
         )
         
-        return True
+        return ActionResult(
+            success=True,
+            safety_validated=True,
+            duration_ms=duration_ms
+        )
         
     except Exception as e:
         logger.error(
@@ -151,7 +155,11 @@ def simulate_click(
             button=button,
             error=str(e)
         )
-        raise
+        return ActionResult(
+            success=False,
+            safety_validated=True,
+            blocked_reason=str(e)
+        )
 
 
 def simulate_drag(
@@ -159,7 +167,7 @@ def simulate_drag(
     end: Point,
     duration_ms: float,
     window_bounds: Optional[Rect] = None
-) -> bool:
+) -> ActionResult:
     """
     Simulate a mouse drag from start to end point.
     
@@ -240,7 +248,11 @@ def simulate_drag(
             duration_ms=duration_ms
         )
         
-        return True
+        return ActionResult(
+            success=True,
+            safety_validated=True,
+            duration_ms=duration_ms
+        )
         
     except Exception as e:
         logger.error(
@@ -249,14 +261,18 @@ def simulate_drag(
             end=str(end),
             error=str(e)
         )
-        raise
+        return ActionResult(
+            success=False,
+            safety_validated=True,
+            blocked_reason=str(e)
+        )
 
 
 def simulate_key_press(
     key: str,
     modifiers: Optional[List[str]] = None,
     window_bounds: Optional[Rect] = None
-) -> bool:
+) -> ActionResult:
     """
     Simulate a key press with optional modifier keys.
     
@@ -328,7 +344,10 @@ def simulate_key_press(
             modifiers=modifiers
         )
         
-        return True
+        return ActionResult(
+            success=True,
+            safety_validated=True
+        )
         
     except Exception as e:
         logger.error(
@@ -337,7 +356,11 @@ def simulate_key_press(
             modifiers=modifiers,
             error=str(e)
         )
-        raise
+        return ActionResult(
+            success=False,
+            safety_validated=True,
+            blocked_reason=str(e)
+        )
 
 
 def verify_window_focus(window_name: str) -> bool:

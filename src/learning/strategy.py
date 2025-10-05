@@ -150,9 +150,19 @@ class StrategyManager:
         logger.info(f"Created strategy {strategy_id}")
         return strategy
     
+    def save_strategy(self, strategy: Strategy) -> None:
+        """Save a strategy to the manager."""
+        self.strategies[strategy.strategy_id] = strategy
+        self._save_strategies()
+        logger.debug(f"Saved strategy {strategy.strategy_id}")
+    
     def get_strategy(self, strategy_id: str) -> Optional[Strategy]:
         """Get a strategy by ID."""
         return self.strategies.get(strategy_id)
+    
+    def load_strategy(self, strategy_id: str) -> Optional[Strategy]:
+        """Load a strategy by ID (alias for get_strategy)."""
+        return self.get_strategy(strategy_id)
     
     def update_strategy(self, strategy_id: str, **kwargs) -> Optional[Strategy]:
         """Update strategy attributes."""
@@ -176,6 +186,71 @@ class StrategyManager:
             logger.info(f"Deleted strategy {strategy_id}")
             return True
         return False
+    
+    def update_performance(
+        self,
+        strategy_id: str,
+        won: bool = False,
+        survival_time: float = 0.0
+    ) -> Optional[Strategy]:
+        """
+        Update strategy performance metrics after an episode.
+        
+        Args:
+            strategy_id: The strategy to update
+            won: Whether the episode was won
+            survival_time: How long the agent survived
+        
+        Returns:
+            Updated strategy or None if not found
+        """
+        strategy = self.strategies.get(strategy_id)
+        if not strategy:
+            return None
+        
+        # Update episode count
+        new_episodes = strategy.episodes_played + 1
+        
+        # Update win rate
+        old_wins = strategy.episodes_played * strategy.win_rate
+        new_wins = old_wins + (1 if won else 0)
+        new_win_rate = new_wins / new_episodes
+        
+        # Update survival time
+        old_total_time = strategy.avg_survival_time * strategy.episodes_played
+        new_total_time = old_total_time + survival_time
+        new_avg_survival = new_total_time / new_episodes
+        
+        # Update games_played and wins
+        new_games = strategy.games_played + 1
+        new_total_wins = strategy.wins + (1 if won else 0)
+        
+        # Create updated strategy
+        updated = Strategy(
+            strategy_id=strategy.strategy_id,
+            name=strategy.name,
+            description=strategy.description,
+            goal_priorities=strategy.goal_priorities,
+            exploration_rate=strategy.exploration_rate,
+            risk_tolerance=strategy.risk_tolerance,
+            episodes_played=new_episodes,
+            sessions_played=strategy.sessions_played,
+            win_rate=new_win_rate,
+            wins=new_total_wins,
+            games_played=new_games,
+            avg_survival_time=new_avg_survival,
+            version=strategy.version,
+            created_at=strategy.created_at,
+            parameters=strategy.parameters,
+            performance_score=strategy.performance_score,
+            metadata=strategy.metadata
+        )
+        
+        self.strategies[strategy_id] = updated
+        self._save_strategies()
+        
+        logger.debug(f"Updated performance for {strategy_id}: win_rate={new_win_rate:.3f}, episodes={new_episodes}")
+        return updated
     
     def list_strategies(self) -> List[Strategy]:
         """List all strategies."""
@@ -220,25 +295,81 @@ class StrategyManager:
         logger.info(f"Evolved strategy {base_strategy_id} -> {new_strategy.strategy_id}")
         return new_strategy
     
+    def mutate_strategy(
+        self,
+        strategy: Strategy,
+        mutation_rate: float = 0.1
+    ) -> Strategy:
+        """Mutate a strategy (alias for testing compatibility)."""
+        import random
+        import uuid
+        
+        # Create mutated parameters
+        new_params = strategy.parameters.copy()
+        for key, value in new_params.items():
+            if isinstance(value, (int, float)) and random.random() < mutation_rate:
+                # Mutate numerical parameters
+                mutation = random.gauss(0, 0.1)
+                new_params[key] = value * (1 + mutation)
+        
+        # Create new strategy with modified name
+        new_strategy = Strategy(
+            strategy_id=str(uuid.uuid4()),
+            name=f"{strategy.name}_mutated" if strategy.name else "",
+            description=strategy.description,
+            goal_priorities=strategy.goal_priorities.copy() if strategy.goal_priorities else [],
+            exploration_rate=strategy.exploration_rate,
+            risk_tolerance=strategy.risk_tolerance,
+            episodes_played=strategy.episodes_played,
+            sessions_played=strategy.sessions_played,
+            win_rate=strategy.win_rate,
+            wins=strategy.wins,
+            games_played=strategy.games_played,
+            avg_survival_time=strategy.avg_survival_time,
+            version=strategy.version + 1,
+            created_at=datetime.now(),
+            parameters=new_params,
+            performance_score=strategy.performance_score,
+            metadata={"parent_id": strategy.strategy_id}
+        )
+        
+        logger.info(f"Mutated strategy {strategy.name} -> {new_strategy.name}")
+        return new_strategy
+    
     def merge_strategies(
         self,
-        strategy_id_1: str,
-        strategy_id_2: str,
+        strategy_id_1: str | Strategy,
+        strategy_id_2: str | Strategy,
         weight: float = 0.5
     ) -> Optional[Strategy]:
         """
         Merge two strategies with weighted averaging.
         T101: Strategy evolution through merging.
+        Accepts either strategy IDs (str) or Strategy objects.
         """
-        s1 = self.strategies.get(strategy_id_1)
-        s2 = self.strategies.get(strategy_id_2)
+        # Handle both str IDs and Strategy objects
+        if isinstance(strategy_id_1, Strategy):
+            s1 = strategy_id_1
+        else:
+            s1 = self.strategies.get(strategy_id_1)
+        
+        if isinstance(strategy_id_2, Strategy):
+            s2 = strategy_id_2
+        else:
+            s2 = self.strategies.get(strategy_id_2)
         
         if not s1 or not s2:
             return None
         
         import uuid
         
-        # Merge parameters
+        # Calculate weighted average based on win rates if not specified
+        if weight == 0.5 and s1.win_rate != s2.win_rate:
+            total_win_rate = s1.win_rate + s2.win_rate
+            if total_win_rate > 0:
+                weight = s1.win_rate / total_win_rate
+        
+        # Merge parameters with win-rate weighting
         merged_params = {}
         all_keys = set(s1.parameters.keys()) | set(s2.parameters.keys())
         
@@ -253,12 +384,14 @@ class StrategyManager:
         # Create merged strategy
         merged = Strategy(
             strategy_id=str(uuid.uuid4()),
+            name=f"{s1.name}_{s2.name}_merged" if s1.name and s2.name else "",
+            description=f"Merged from {s1.name} and {s2.name}",
             version=max(s1.version, s2.version) + 1,
             created_at=datetime.now(),
             parameters=merged_params,
             metadata={
-                "parent_1": strategy_id_1,
-                "parent_2": strategy_id_2,
+                "parent_1": s1.strategy_id,
+                "parent_2": s2.strategy_id,
                 "merge_weight": weight
             }
         )
@@ -266,5 +399,5 @@ class StrategyManager:
         self.strategies[merged.strategy_id] = merged
         self._save_strategies()
         
-        logger.info(f"Merged strategies {strategy_id_1} + {strategy_id_2} -> {merged.strategy_id}")
+        logger.info(f"Merged strategies {s1.name} + {s2.name} -> {merged.name}")
         return merged

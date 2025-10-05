@@ -50,6 +50,16 @@ class Rect:
         return f"Rect(x={self.x}, y={self.y}, w={self.width}, h={self.height})"
 
 
+@dataclass
+class ActionResult:
+    """Result from executing an automation action."""
+    success: bool
+    safety_validated: bool
+    blocked_reason: Optional[str] = None
+    duration_ms: Optional[float] = None
+    metadata: Dict[str, Any] = field(default_factory=dict)
+
+
 # ============================================================================
 # Enumerations
 # ============================================================================
@@ -409,6 +419,11 @@ class ValidationResult:
     reason: Optional[str] = None
     constraints_violated: List[ConstraintType] = field(default_factory=list)
     metadata: Dict[str, Any] = field(default_factory=dict)
+
+    @property
+    def blocked_reason(self) -> Optional[str]:
+        """Alias for reason (for test compatibility)."""
+        return self.reason
 
     def __str__(self) -> str:
         status = "ALLOWED" if self.is_allowed else "BLOCKED"

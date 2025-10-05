@@ -19,34 +19,32 @@ class TestVisionAutomationIntegration:
         
         Flow: vision.detect_elements() → automation.simulate_click()
         """
-        # This will fail until both libraries are implemented
-        with pytest.raises(Exception):
-            from src.vision import detect_elements, capture_game_state
-            from src.automation import simulate_click
+        from src.vision import detect_elements, capture_game_state
+        from src.automation import simulate_click
+        
+        # 1. Capture game state
+        game_state = capture_game_state("Cultist Simulator")
+        
+        # 2. Detect clickable elements (e.g., buttons)
+        elements = detect_elements(
+            game_state.screenshot,
+            [ElementType.BUTTON, ElementType.CARD]
+        )
+        
+        # 3. Click the first detected element
+        if elements:
+            element = elements[0]
+            click_point = element.bounds.center()
             
-            # 1. Capture game state
-            game_state = capture_game_state("Cultist Simulator")
-            
-            # 2. Detect clickable elements (e.g., buttons)
-            elements = detect_elements(
-                game_state.screenshot,
-                [ElementType.BUTTON, ElementType.CARD]
+            result = simulate_click(
+                click_point,
+                "left",
+                game_state.window_bounds
             )
             
-            # 3. Click the first detected element
-            if elements:
-                element = elements[0]
-                click_point = element.bounding_box.center()
-                
-                result = simulate_click(
-                    click_point,
-                    "left",
-                    game_state.window_bounds
-                )
-                
-                # Verify click was executed
-                assert result.success is True
-                assert result.safety_validated is True
+            # Verify click was executed
+            assert result.success is True
+            assert result.safety_validated is True
 
     def test_track_changes_after_click(self):
         """
@@ -82,25 +80,23 @@ class TestVisionAutomationIntegration:
         
         Ensures vision_lib.get_window_bounds() provides valid bounds for automation_lib.
         """
-        # This will fail until both libraries are implemented
-        with pytest.raises(Exception):
-            from src.vision import get_window_bounds
-            from src.automation import simulate_click
-            
-            # 1. Get window bounds from vision
-            bounds = get_window_bounds("Cultist Simulator")
-            
-            # 2. Verify bounds are valid Rect
-            assert isinstance(bounds, Rect)
-            assert bounds.width > 0
-            assert bounds.height > 0
-            
-            # 3. Use bounds for automation (should accept valid bounds)
-            center_point = bounds.center()
-            result = simulate_click(center_point, "left", bounds)
-            
-            # Should be allowed (point is within bounds)
-            assert result.safety_validated is True
+        from src.vision import get_window_bounds
+        from src.automation import simulate_click
+        
+        # 1. Get window bounds from vision
+        bounds = get_window_bounds("Cultist Simulator")
+        
+        # 2. Verify bounds are valid Rect
+        assert isinstance(bounds, Rect)
+        assert bounds.width > 0
+        assert bounds.height > 0
+        
+        # 3. Use bounds for automation (should accept valid bounds)
+        center_point = bounds.center()
+        result = simulate_click(center_point, "left", bounds)
+        
+        # Should be allowed (point is within bounds)
+        assert result.safety_validated is True
 
     def test_drag_between_detected_elements(self):
         """
@@ -108,33 +104,31 @@ class TestVisionAutomationIntegration:
         
         Flow: vision.detect_elements() → automation.simulate_drag()
         """
-        # This will fail until both libraries are implemented
-        with pytest.raises(Exception):
-            from src.vision import detect_elements, capture_game_state
-            from src.automation import simulate_drag
+        from src.vision import detect_elements, capture_game_state
+        from src.automation import simulate_drag
+        
+        # 1. Capture game state and detect elements
+        game_state = capture_game_state("Cultist Simulator")
+        elements = detect_elements(
+            game_state.screenshot,
+            [ElementType.CARD, ElementType.SLOT]
+        )
+        
+        # 2. If we have at least 2 elements, drag between them
+        if len(elements) >= 2:
+            start_point = elements[0].bounds.center()
+            end_point = elements[1].bounds.center()
             
-            # 1. Capture game state and detect elements
-            game_state = capture_game_state("Cultist Simulator")
-            elements = detect_elements(
-                game_state.screenshot,
-                [ElementType.CARD, ElementType.SLOT]
+            result = simulate_drag(
+                start_point,
+                end_point,
+                duration_ms=200.0,
+                window_bounds=game_state.window_bounds
             )
             
-            # 2. If we have at least 2 elements, drag between them
-            if len(elements) >= 2:
-                start_point = elements[0].bounding_box.center()
-                end_point = elements[1].bounding_box.center()
-                
-                result = simulate_drag(
-                    start_point,
-                    end_point,
-                    duration_ms=200.0,
-                    window_bounds=game_state.window_bounds
-                )
-                
-                # Verify drag was executed
-                assert result.success is True
-                assert result.safety_validated is True
+            # Verify drag was executed
+            assert result.success is True
+            assert result.safety_validated is True
 
     def test_vision_provides_clickable_targets(self):
         """
@@ -142,26 +136,24 @@ class TestVisionAutomationIntegration:
         
         Ensures detected elements have properties needed for automation.
         """
-        # This will fail until both libraries are implemented
-        with pytest.raises(Exception):
-            from src.vision import detect_elements, capture_game_state
+        from src.vision import detect_elements, capture_game_state
+        
+        # 1. Capture and detect elements
+        game_state = capture_game_state("Cultist Simulator")
+        elements = detect_elements(
+            game_state.screenshot,
+            [ElementType.BUTTON, ElementType.CARD, ElementType.SLOT]
+        )
+        
+        # 2. Verify each element has required properties for automation
+        for element in elements:
+            # Must have bounding box
+            assert hasattr(element, 'bounds')
+            assert isinstance(element.bounds, Rect)
             
-            # 1. Capture and detect elements
-            game_state = capture_game_state("Cultist Simulator")
-            elements = detect_elements(
-                game_state.screenshot,
-                [ElementType.BUTTON, ElementType.CARD, ElementType.SLOT]
-            )
+            # Must be able to get center point for clicking
+            center = element.bounds.center()
+            assert isinstance(center, Point)
             
-            # 2. Verify each element has required properties for automation
-            for element in elements:
-                # Must have bounding box
-                assert hasattr(element, 'bounding_box')
-                assert isinstance(element.bounding_box, Rect)
-                
-                # Must be able to get center point for clicking
-                center = element.bounding_box.center()
-                assert isinstance(center, Point)
-                
-                # Center must be within window bounds
-                assert game_state.window_bounds.contains(center)
+            # Center must be within window bounds
+            assert game_state.window_bounds.contains(center)

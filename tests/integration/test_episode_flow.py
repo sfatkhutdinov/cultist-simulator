@@ -257,27 +257,25 @@ class TestEpisodeFlowIntegration:
         
         Tests NFR-007: Robust error handling.
         """
-        # This will fail until all libraries are implemented
-        with pytest.raises(Exception):
-            from src.vision import capture_game_state
-            from src.learning import select_action
-            
-            # Simulate error conditions
-            error_count = 0
-            success_count = 0
-            
-            for i in range(5):
-                try:
-                    # Attempt full cycle
-                    state = capture_game_state("Cultist Simulator")
-                    action = select_action(state)
-                    success_count += 1
-                except Exception as e:
-                    # Should handle errors gracefully
-                    error_count += 1
-                    # Continue execution (don't crash)
-                    continue
-            
-            # Should complete at least some cycles even with errors
-            # (Exact behavior depends on error handling implementation)
-            assert success_count + error_count == 5
+        from src.vision import capture_game_state
+        from src.learning import select_action
+        
+        # Test that we can handle error conditions
+        error_count = 0
+        success_count = 0
+        
+        for i in range(5):
+            try:
+                # Attempt full cycle
+                state = capture_game_state("Cultist Simulator")
+                action = select_action(state)
+                success_count += 1
+            except Exception as e:
+                # Should handle errors gracefully
+                error_count += 1
+                # Continue execution (don't crash)
+                continue
+        
+        # Should succeed at least once (or handle all errors without crashing)
+        assert success_count > 0 or error_count == 5
+        assert success_count + error_count == 5

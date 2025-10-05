@@ -22,15 +22,16 @@ class TestNarrativeDecisions:
         """Create a base game state with identical visual elements."""
         return GameState(
             timestamp=datetime.now(),
+            window_bounds=Rect(x=0, y=0, width=1920, height=1080),
             elements=[
                 GameElement(
                     element_type=ElementType.CARD,
-                    bounding_box=Rect(x=100, y=100, width=50, height=70),
+                    bounds=Rect(x=100, y=100, width=50, height=70),
                     confidence=0.9
                 ),
                 GameElement(
                     element_type=ElementType.BUTTON,
-                    bounding_box=Rect(x=200, y=200, width=80, height=30),
+                    bounds=Rect(x=200, y=200, width=80, height=30),
                     confidence=0.85
                 )
             ],

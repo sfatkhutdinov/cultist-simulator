@@ -52,7 +52,7 @@ class TestAutomationLibContract:
         # Should accept left, right, middle buttons
         for button in ["left", "right", "middle"]:
             result = simulate_click(valid_point, button, window_bounds)
-            assert result is True
+            assert result.success is True
 
     def test_simulate_drag_exists(self):
         """T015: Contract test for automation_lib.simulate_drag()."""
@@ -263,7 +263,7 @@ class TestAutomationLibSafety:
         # This test would need mocking to properly test focus checking
         # For now, just verify the function works
         result = simulate_key_press("a", [], window_bounds)
-        assert result is True
+        assert result.success is True
 
 
 class TestAutomationLibPerformance:

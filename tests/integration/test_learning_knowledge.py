@@ -75,22 +75,20 @@ class TestLearningKnowledgeIntegration:
         
         Tests NFR-003 performance requirement.
         """
-        # This will fail until learning library is implemented
-        with pytest.raises(Exception):
-            import time
-            from src.learning import query_knowledge
-            
-            # Query should complete within performance budget
-            start = time.perf_counter()
-            result = query_knowledge("mechanics", {"mechanic_type": "test"})
-            duration_ms = (time.perf_counter() - start) * 1000
-            
-            # NFR-003: <100ms for knowledge queries
-            assert duration_ms < 100, f"Query took {duration_ms}ms, must be <100ms"
-            
-            # Should return valid result even if empty
-            assert hasattr(result, 'result_count')
-            assert hasattr(result, 'query_time_ms')
+        import time
+        from src.learning import query_knowledge
+        
+        # Query should complete within performance budget
+        start = time.perf_counter()
+        result = query_knowledge("mechanics", {"mechanic_type": "test"})
+        duration_ms = (time.perf_counter() - start) * 1000
+        
+        # NFR-003: <100ms for knowledge queries
+        assert duration_ms < 100, f"Query took {duration_ms}ms, must be <100ms"
+        
+        # Should return valid result even if empty
+        assert hasattr(result, 'result_count')
+        assert hasattr(result, 'query_time_ms')
 
     def test_session_recording_completeness(self):
         """
@@ -139,19 +137,17 @@ class TestLearningKnowledgeIntegration:
         
         Tests thread safety and data integrity.
         """
-        # This will fail until learning library is implemented
-        with pytest.raises(Exception):
-            from src.learning import update_knowledge
+        from src.learning import update_knowledge
+        
+        # Simulate rapid knowledge updates (as would happen during gameplay)
+        for i in range(10):
+            mock_state = {"state_id": f"state-{i}"}
+            mock_action = {"action_id": f"action-{i}"}
+            mock_next_state = {"state_id": f"state-{i+1}"}
+            mock_reward = float(i * 0.1)
             
-            # Simulate rapid knowledge updates (as would happen during gameplay)
-            for i in range(10):
-                mock_state = {"state_id": f"state-{i}"}
-                mock_action = {"action_id": f"action-{i}"}
-                mock_next_state = {"state_id": f"state-{i+1}"}
-                mock_reward = float(i * 0.1)
-                
-                # Should handle rapid updates without errors
-                update_knowledge(mock_state, mock_action, mock_next_state, mock_reward)
-            
-            # All updates should succeed without database corruption
-            # (Real test would verify database integrity)
+            # Should handle rapid updates without errors
+            update_knowledge(mock_state, mock_action, mock_next_state, mock_reward)
+        
+        # All updates should succeed without database corruption
+        # (Real test would verify database integrity)
