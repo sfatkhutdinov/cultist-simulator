@@ -72,7 +72,7 @@ This tasks document breaks down the implementation of an autonomous AI agent tha
 - [x] **T026** [P] Integration test: nlp → learning (extract goals → update strategy) in tests/integration/test_nlp_learning.py
 - [x] **T027** [P] Integration test: safety → automation (validate → execute) in tests/integration/test_safety_automation.py
 - [x] **T028** [P] Integration test: full episode simulation (mocked game) in tests/integration/test_episode_flow.py
-- [ ] **T028a** [P] Integration test: Same game state with different narrative text → verify agent chooses different actions in tests/integration/test_narrative_decisions.py
+- [x] **T028a** [P] Integration test: Same game state with different narrative text → verify agent chooses different actions in tests/integration/test_narrative_decisions.py
 
 ### Safety Tests (CRITICAL - 100% Reliability Required)
 
@@ -85,7 +85,7 @@ This tasks document breaks down the implementation of an autonomous AI agent tha
 ### Performance Tests
 
 - [x] **T034** [P] Performance test: capture_game_state() <500ms in tests/performance/test_vision_performance.py
-- [ ] **T035** [P] Performance test: knowledge query <100ms in tests/performance/test_learning_performance.py
+- [x] **T035** [P] Performance test: knowledge query <100ms in tests/performance/test_learning_performance.py
 - [x] **T036** [P] Performance test: safety validation <10ms in tests/performance/test_safety_performance.py
 
 ---
@@ -121,7 +121,7 @@ This tasks document breaks down the implementation of an autonomous AI agent tha
 - [x] **T056** Implement detect_elements() public interface in src/vision/__init__.py
 - [x] **T057** Implement extract_text_regions() public interface in src/vision/__init__.py
 - [x] **T058** Implement track_element_changes() state comparison in src/vision/__init__.py
-- [ ] **T059** Implement vision library CLI in src/vision/cli.py with JSON I/O
+- [x] **T059** Implement vision library CLI in src/vision/cli.py with JSON I/O
 
 ### Automation Library (src/automation/)
 
@@ -199,8 +199,7 @@ This tasks document breaks down the implementation of an autonomous AI agent tha
 - [x] **T113c** Implement resume from last checkpoint on restart in src/orchestrator/agent_runner.py ✅
 - [x] **T113d** Implement load_save_game() to start from saved game state in src/orchestrator/agent_runner.py ✅
 - [x] **T113e** Implement create_save_game() for training checkpoint persistence in src/orchestrator/agent_runner.py ✅
-- [ ] **T113f** Integration test: Load save game → verify agent state consistency in tests/integration/test_save_game.py
-- [ ] **T113f** Integration test: Load save game → verify agent state consistency in tests/integration/test_save_game.py
+- [x] **T113f** Integration test: Load save game → verify agent state consistency in tests/integration/test_save_game.py
 
 ---
 
@@ -220,10 +219,10 @@ This tasks document breaks down the implementation of an autonomous AI agent tha
 
 ## Phase 3.5: Polish
 
-- [ ] **T123** [P] Unit test GameState serialization in tests/unit/test_gamestate.py
-- [ ] **T124** [P] Unit test Action validation logic in tests/unit/test_action.py
-- [ ] **T125** [P] Unit test Strategy evolution in tests/unit/test_strategy.py
-- [ ] **T126** [P] Unit test KnowledgeBase queries in tests/unit/test_knowledge.py
+- [x] **T123** [P] Unit test GameState serialization in tests/unit/test_gamestate.py
+- [x] **T124** [P] Unit test Action validation logic in tests/unit/test_action.py
+- [x] **T125** [P] Unit test Strategy evolution in tests/unit/test_strategy.py
+- [x] **T126** [P] Unit test KnowledgeBase queries in tests/unit/test_knowledge.py
 - [ ] **T127** Optimize vision pipeline for <500ms latency
 - [ ] **T128** Optimize knowledge base queries for <100ms response
 - [ ] **T129** Profile and optimize critical path bottlenecks

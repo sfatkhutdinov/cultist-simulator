@@ -215,6 +215,76 @@ class GameState:
     def __str__(self) -> str:
         return f"GameState({len(self.elements)} elements, {len(self.text_regions)} text regions, {self.timestamp})"
 
+    def to_dict(self) -> Dict[str, Any]:
+        """Serialize GameState to dictionary (T123)."""
+        return {
+            "timestamp": self.timestamp.isoformat(),
+            "window_bounds": {
+                "x": self.window_bounds.x,
+                "y": self.window_bounds.y,
+                "width": self.window_bounds.width,
+                "height": self.window_bounds.height
+            },
+            "elements": [
+                {
+                    "element_type": e.element_type.value,
+                    "bounds": {
+                        "x": e.bounds.x,
+                        "y": e.bounds.y,
+                        "width": e.bounds.width,
+                        "height": e.bounds.height
+                    },
+                    "confidence": e.confidence,
+                    "text": e.text,
+                    "state": e.state,
+                    "metadata": e.metadata
+                }
+                for e in self.elements
+            ],
+            "text_regions": [
+                {
+                    "text": t.text,
+                    "bounds": {
+                        "x": t.bounds.x,
+                        "y": t.bounds.y,
+                        "width": t.bounds.width,
+                        "height": t.bounds.height
+                    },
+                    "confidence": t.confidence
+                }
+                for t in self.text_regions
+            ],
+            "metadata": self.metadata
+        }
+
+    @staticmethod
+    def from_dict(data: Dict[str, Any]) -> 'GameState':
+        """Deserialize GameState from dictionary (T123)."""
+        return GameState(
+            timestamp=datetime.fromisoformat(data["timestamp"]),
+            window_bounds=Rect(**data["window_bounds"]),
+            elements=[
+                GameElement(
+                    element_type=ElementType(e["element_type"]),
+                    bounds=Rect(**e["bounds"]),
+                    confidence=e["confidence"],
+                    text=e.get("text"),
+                    state=e.get("state"),
+                    metadata=e.get("metadata", {})
+                )
+                for e in data["elements"]
+            ],
+            text_regions=[
+                TextRegion(
+                    text=t["text"],
+                    bounds=Rect(**t["bounds"]),
+                    confidence=t["confidence"]
+                )
+                for t in data["text_regions"]
+            ],
+            metadata=data.get("metadata", {})
+        )
+
 
 @dataclass
 class Action:

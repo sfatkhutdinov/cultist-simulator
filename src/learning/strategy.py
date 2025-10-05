@@ -19,39 +19,80 @@ class Strategy:
     """
     Represents a high-level gameplay strategy.
     """
-    strategy_id: str
-    version: int
-    created_at: datetime
+    # Make all fields optional with defaults for flexibility
+    strategy_id: str = ""
+    name: str = ""
+    description: str = ""
+    goal_priorities: List[str] = field(default_factory=list)
+    exploration_rate: float = 0.3
+    risk_tolerance: float = 0.5
+    
+    # Performance tracking
+    episodes_played: int = 0  # For test compatibility
+    sessions_played: int = 0
+    win_rate: float = 0.0
+    wins: int = 0
+    games_played: int = 0
+    avg_survival_time: float = 0.0
+    
+    # Legacy/optional fields
+    version: int = 1
+    created_at: datetime = field(default_factory=datetime.now)
     parameters: Dict[str, Any] = field(default_factory=dict)
     performance_score: float = 0.0
-    games_played: int = 0
-    wins: int = 0
     metadata: Dict[str, Any] = field(default_factory=dict)
+    
+    def __post_init__(self):
+        """Set strategy_id from name if not provided."""
+        if not self.strategy_id and self.name:
+            self.strategy_id = self.name.lower().replace(" ", "_")
     
     def to_dict(self) -> Dict[str, Any]:
         """Serialize to dictionary."""
         return {
             "strategy_id": self.strategy_id,
+            "name": self.name,
+            "description": self.description,
+            "goal_priorities": self.goal_priorities,
+            "exploration_rate": self.exploration_rate,
+            "risk_tolerance": self.risk_tolerance,
             "version": self.version,
             "created_at": self.created_at.isoformat(),
             "parameters": self.parameters,
             "performance_score": self.performance_score,
             "games_played": self.games_played,
             "wins": self.wins,
+            "sessions_played": self.sessions_played,
+            "win_rate": self.win_rate,
+            "avg_survival_time": self.avg_survival_time,
             "metadata": self.metadata
         }
     
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> 'Strategy':
         """Deserialize from dictionary."""
+        created_at = data.get("created_at")
+        if isinstance(created_at, str):
+            created_at = datetime.fromisoformat(created_at)
+        elif created_at is None:
+            created_at = datetime.now()
+            
         return cls(
-            strategy_id=data["strategy_id"],
-            version=data["version"],
-            created_at=datetime.fromisoformat(data["created_at"]),
+            strategy_id=data.get("strategy_id", ""),
+            name=data.get("name", ""),
+            description=data.get("description", ""),
+            goal_priorities=data.get("goal_priorities", []),
+            exploration_rate=data.get("exploration_rate", 0.3),
+            risk_tolerance=data.get("risk_tolerance", 0.5),
+            version=data.get("version", 1),
+            created_at=created_at,
             parameters=data.get("parameters", {}),
             performance_score=data.get("performance_score", 0.0),
             games_played=data.get("games_played", 0),
             wins=data.get("wins", 0),
+            sessions_played=data.get("sessions_played", 0),
+            win_rate=data.get("win_rate", 0.0),
+            avg_survival_time=data.get("avg_survival_time", 0.0),
             metadata=data.get("metadata", {})
         )
 

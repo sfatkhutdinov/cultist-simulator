@@ -69,12 +69,24 @@ class KnowledgeBase:
         """
         Initialize database schema if it doesn't exist.
         
-        Note: Schema was created by T007 during setup.
-        This just ensures connection is established.
+        Creates the mechanics table for storing learned game rules.
         """
         try:
             self.conn = sqlite3.connect(str(self.db_path))
             self.conn.row_factory = sqlite3.Row  # Access columns by name
+            
+            # Create mechanics table if it doesn't exist
+            cursor = self.conn.cursor()
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS mechanics (
+                    name TEXT PRIMARY KEY,
+                    description TEXT,
+                    conditions TEXT,
+                    effects TEXT,
+                    learned_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                )
+            """)
+            self.conn.commit()
             
             logger.debug("database_connection_established")
             
@@ -108,9 +120,7 @@ class KnowledgeBase:
     def store_mechanic(
         self,
         mechanic_name: str,
-        description: str,
-        conditions: Dict[str, Any],
-        effects: Dict[str, Any]
+        data: Dict[str, Any]
     ) -> None:
         """
         Store a learned game mechanic.
@@ -118,13 +128,24 @@ class KnowledgeBase:
         
         Args:
             mechanic_name: Name/identifier for the mechanic
-            description: Human-readable description
-            conditions: Conditions that trigger this mechanic
-            effects: Effects/outcomes of the mechanic
+            data: Dictionary containing mechanic data (description, conditions, effects, etc.)
         """
         try:
             import json
             cursor = self.conn.cursor()
+            
+            # Extract standard fields
+            description = data.get('description', '')
+            conditions = data.get('conditions', {})
+            effects = data.get('effects', {})
+            
+            # Store everything as JSON in conditions field for flexibility
+            full_data = {
+                'description': description,
+                'conditions': conditions,
+                'effects': effects,
+                **{k: v for k, v in data.items() if k not in ['description', 'conditions', 'effects']}
+            }
             
             cursor.execute(
                 """
@@ -135,7 +156,7 @@ class KnowledgeBase:
                     mechanic_name,
                     description,
                     json.dumps(conditions),
-                    json.dumps(effects)
+                    json.dumps(full_data)  # Store full data in effects field
                 )
             )
             
@@ -157,13 +178,14 @@ class KnowledgeBase:
             row = cursor.fetchone()
             
             if row:
-                return {
+                # Parse the full data from effects field
+                full_data = json.loads(row["effects"])
+                result = {
+                    "mechanic_id": row["name"],  # Use name as mechanic_id
                     "name": row["name"],
-                    "description": row["description"],
-                    "conditions": json.loads(row["conditions"]),
-                    "effects": json.loads(row["effects"]),
-                    "learned_at": row["learned_at"]
+                    **full_data  # Include all stored fields
                 }
+                return result
             return None
             
         except Exception as e:
@@ -180,6 +202,7 @@ class KnowledgeBase:
             
             return [
                 {
+                    "mechanic_id": row["name"],  # Use name as mechanic_id
                     "name": row["name"],
                     "description": row["description"],
                     "conditions": json.loads(row["conditions"]),
