@@ -1,0 +1,63 @@
+{
+  "start_time": "2025-10-04T23:08:29.338943",
+  "window_name": "Cultist Simulator",
+  "actions": [
+    {
+      "cycle": 1,
+      "timestamp": "2025-10-04T23:08:33.728127",
+      "action": "Action(click, point=Point(406, 382))",
+      "success": true,
+      "capture_time_ms": 4339.241374997073
+    },
+    {
+      "cycle": 1,
+      "timestamp": "2025-10-04T23:08:35.632881",
+      "action": "Action(click, point=Point(464, 744))",
+      "success": true,
+      "capture_time_ms": 1903.374375004205
+    },
+    {
+      "cycle": 1,
+      "timestamp": "2025-10-04T23:08:37.548313",
+      "action": "Action(click, point=Point(497, 688))",
+      "success": true,
+      "capture_time_ms": 1911.5922499913722
+    },
+    {
+      "cycle": 1,
+      "timestamp": "2025-10-04T23:08:39.484575",
+      "action": "Action(click, point=Point(174, 713))",
+      "success": true,
+      "capture_time_ms": 1931.653916995856
+    },
+    {
+      "cycle": 1,
+      "timestamp": "2025-10-04T23:08:41.434532",
+      "action": "Action(click, point=Point(737, 287))",
+      "success": true,
+      "capture_time_ms": 1948.0812499969034
+    },
+    {
+      "cycle": 1,
+      "timestamp": "2025-10-04T23:08:43.351840",
+      "action": "Action(click, point=Point(289, 923))",
+      "success": true,
+      "capture_time_ms": 1914.786000008462
+    }
+  ],
+  "errors": [],
+  "performance": {},
+  "window_bounds": {
+    "x": 0,
+    "y": 34,
+    "width": 864,
+    "height": 998
+  },
+  "end_time": "2025-10-04T23:08:43.352067",
+  "summary": {
+    "actions_executed": 0,
+    "actions_blocked": 0,
+    "errors": 0,
+    "success": false
+  }
+}

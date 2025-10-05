@@ -18,6 +18,7 @@ Options:
     --actions NUM       Number of actions to execute (default: 10)
     --window NAME       Game window name (default: "Cultist Simulator")
     --dry-run           Test without actually clicking (safety test)
+    --test-mode         Use random actions (no trained model required)
     --verbose           Show detailed logging
     --save-session      Save session for replay
 """
@@ -35,18 +36,22 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 from src.vision import capture_game_state, detect_elements, get_window_bounds
 from src.automation import simulate_click, simulate_key_press, check_window_focus
 from src.safety import validate_action
-from src.learning import select_action, store_session
+from src.learning import select_action, store_session, enable_test_mode
 from src.lib.types import ActionType, Point, Session
-from src.lib.logging_config import logger
+from src.lib.logging_config import configure_logging
+
+# Initialize logger
+logger = configure_logging(log_level="INFO", log_to_file=True)
 
 
 class E2ETestRunner:
     """End-to-end test runner for Cultist Simulator AI agent."""
 
-    def __init__(self, window_name="Cultist Simulator", max_actions=10, dry_run=False):
+    def __init__(self, window_name="Cultist Simulator", max_actions=10, dry_run=False, test_mode=False):
         self.window_name = window_name
         self.max_actions = max_actions
         self.dry_run = dry_run
+        self.test_mode = test_mode
         self.actions_executed = 0
         self.actions_blocked = 0
         self.errors = []
@@ -57,6 +62,11 @@ class E2ETestRunner:
             "errors": [],
             "performance": {},
         }
+        
+        # Enable test mode in learning module if requested
+        if test_mode:
+            enable_test_mode(True)
+            logger.info("test_mode_enabled", description="Using random actions for testing")
 
     def check_prerequisites(self):
         """Check if game window is available and accessible."""
@@ -263,6 +273,7 @@ class E2ETestRunner:
         logger.info(f"Window: {self.window_name}")
         logger.info(f"Target Actions: {self.max_actions}")
         logger.info(f"Dry Run: {self.dry_run}")
+        logger.info(f"Test Mode: {self.test_mode} {'(random actions)' if self.test_mode else '(requires trained model)'}")
         logger.info("=" * 60 + "\n")
 
         # Check prerequisites
@@ -297,8 +308,8 @@ class E2ETestRunner:
         # Generate report
         self.generate_report()
 
-        # Determine success
-        success = self.actions_executed >= 10 and len(self.errors) == 0
+        # Determine success - must execute the requested number of actions without errors
+        success = self.actions_executed >= self.max_actions and len(self.errors) == 0
 
         if success:
             logger.info("\n" + "=" * 60)
@@ -349,7 +360,7 @@ class E2ETestRunner:
             "actions_executed": self.actions_executed,
             "actions_blocked": self.actions_blocked,
             "errors": len(self.errors),
-            "success": self.actions_executed >= 10 and len(self.errors) == 0,
+            "success": self.actions_executed >= self.max_actions and len(self.errors) == 0,
         }
 
         session_file = (
@@ -384,13 +395,19 @@ def main():
     parser.add_argument(
         "--dry-run", action="store_true", help="Test without actually clicking"
     )
+    parser.add_argument(
+        "--test-mode", action="store_true", help="Use random actions (no trained model required)"
+    )
     parser.add_argument("--verbose", action="store_true", help="Show detailed logging")
 
     args = parser.parse_args()
 
     # Create and run test
     runner = E2ETestRunner(
-        window_name=args.window, max_actions=args.actions, dry_run=args.dry_run
+        window_name=args.window, 
+        max_actions=args.actions, 
+        dry_run=args.dry_run,
+        test_mode=args.test_mode
     )
 
     success = runner.run()

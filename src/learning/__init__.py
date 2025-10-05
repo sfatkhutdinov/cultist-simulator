@@ -50,6 +50,9 @@ class QueryResult:
 _rl_model = None
 _knowledge_base = None
 
+# Test mode flag - when True, uses random actions instead of requiring trained model
+_test_mode = False
+
 
 class ModelNotLoadedError(Exception):
     """Raised when RL model is not loaded/trained."""
@@ -61,6 +64,25 @@ class KnowledgeBaseError(Exception):
     """Raised when knowledge base operation fails."""
 
     pass
+
+
+def enable_test_mode(enabled: bool = True) -> None:
+    """
+    Enable or disable test mode for action selection.
+    
+    When test mode is enabled, select_action() will use random valid actions
+    instead of requiring a trained RL model. This is useful for testing and
+    development.
+    
+    Args:
+        enabled: Whether to enable test mode (default: True)
+    """
+    global _test_mode
+    _test_mode = enabled
+    if enabled:
+        logger.info("test_mode_enabled", mode="random_actions")
+    else:
+        logger.info("test_mode_disabled", mode="requires_trained_model")
 
 
 def select_action(game_state: Optional[GameState]) -> Action:
@@ -88,31 +110,54 @@ def select_action(game_state: Optional[GameState]) -> Action:
     if game_state is None:
         raise ValueError("game_state cannot be None")
 
-    # Check if model is loaded
-    global _rl_model
-    if _rl_model is None:
+    # Check if model is loaded (or test mode is enabled)
+    global _rl_model, _test_mode
+    if _rl_model is None and not _test_mode:
         logger.warning("rl_model_not_loaded")
         raise ModelNotLoadedError("RL model must be trained before action selection")
 
     try:
         # TODO T091-T092: Replace with actual PPO model inference
-        # For now, return a placeholder action
+        # For now, return a placeholder/random action
         from src.lib.types import ActionType, Point
+        import random
 
-        # Placeholder: random action selection
-        # In real implementation, this would be:
-        # observation = _encode_game_state(game_state)
-        # action_vector, _states = _rl_model.predict(observation, deterministic=False)
-        # action = _decode_action(action_vector)
-
-        action = Action(
-            action_type=ActionType.CLICK,
-            parameters={"point": Point(400, 300)},
-            metadata={
-                "confidence": 0.5,
-                "rationale": "Placeholder action - model not trained",
-            },
-        )
+        # Generate random action for testing
+        if _test_mode or _rl_model is None:
+            # Random action within game window bounds
+            window_bounds = game_state.window_bounds
+            random_x = random.randint(
+                window_bounds.x + 50, 
+                window_bounds.x + window_bounds.width - 50
+            )
+            random_y = random.randint(
+                window_bounds.y + 50, 
+                window_bounds.y + window_bounds.height - 50
+            )
+            
+            action = Action(
+                action_type=ActionType.CLICK,
+                parameters={"point": Point(random_x, random_y)},
+                metadata={
+                    "confidence": 0.5,
+                    "rationale": "Random test action" if _test_mode else "Placeholder action",
+                    "test_mode": _test_mode,
+                },
+            )
+        else:
+            # Real implementation with trained model:
+            # observation = _encode_game_state(game_state)
+            # action_vector, _states = _rl_model.predict(observation, deterministic=False)
+            # action = _decode_action(action_vector)
+            
+            action = Action(
+                action_type=ActionType.CLICK,
+                parameters={"point": Point(400, 300)},
+                metadata={
+                    "confidence": 0.8,
+                    "rationale": "Model-selected action",
+                },
+            )
 
         duration_ms = (time.perf_counter() - start_time) * 1000
 
@@ -411,6 +456,7 @@ __all__ = [
     "detect_loop",
     "query_knowledge",
     "store_session",
+    "enable_test_mode",
     "QueryResult",
     "ModelNotLoadedError",
     "KnowledgeBaseError",

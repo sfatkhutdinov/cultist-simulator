@@ -1,0 +1,20 @@
+{
+  "start_time": "2025-10-04T23:03:41.095075",
+  "window_name": "Cultist Simulator",
+  "actions": [],
+  "errors": [],
+  "performance": {},
+  "window_bounds": {
+    "x": 0,
+    "y": 34,
+    "width": 864,
+    "height": 998
+  },
+  "end_time": "2025-10-04T23:04:22.191214",
+  "summary": {
+    "actions_executed": 0,
+    "actions_blocked": 0,
+    "errors": 20,
+    "success": false
+  }
+}
