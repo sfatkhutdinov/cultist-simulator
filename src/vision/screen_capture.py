@@ -98,74 +98,38 @@ def capture_window_screenshot(window_name: str) -> Tuple[np.ndarray, Rect]:
 
 def capture_screen_region(region: Rect) -> np.ndarray:
     """
-    Capture a specific region of the screen.
+    Capture a region of the screen.
     
     Args:
-        region: Rectangle defining the region to capture
-    
+        region: Screen region to capture
+        
     Returns:
-        Screenshot as np.ndarray (H, W, 3) in RGB format
+        Screenshot as numpy array (RGB)
     """
-    # Create CGRect for the region
-    cg_rect = CG.CGRectMake(region.x, region.y, region.width, region.height)
+    from PIL import ImageGrab
     
-    # Capture the image
-    image_ref = CG.CGWindowListCreateImage(
-        cg_rect,
-        CG.kCGWindowListOptionOnScreenBelowWindow,
-        CG.kCGNullWindowID,
-        CG.kCGWindowImageDefault
-    )
+    # Capture full screen
+    screenshot = ImageGrab.grab()
     
-    if image_ref is None:
-        logger.error("screen_capture_failed", region=str(region))
-        raise RuntimeError(f"Failed to capture screen region: {region}")
+    # Crop to requested region
+    box = (region.x, region.y, region.x + region.width, region.y + region.height)
+    cropped = screenshot.crop(box)
     
-    # Get image properties
-    width = CG.CGImageGetWidth(image_ref)
-    height = CG.CGImageGetHeight(image_ref)
-    bytes_per_row = CG.CGImageGetBytesPerRow(image_ref)
+    # Convert to RGB if needed (removes alpha channel)
+    if cropped.mode != 'RGB':
+        cropped = cropped.convert('RGB')
     
-    # Create bitmap context and extract pixel data
-    color_space = CG.CGColorSpaceCreateDeviceRGB()
-    bitmap_context = CG.CGBitmapContextCreate(
-        None,
-        width,
-        height,
-        8,  # bits per component
-        bytes_per_row,
-        color_space,
-        CG.kCGImageAlphaPremultipliedLast | CG.kCGBitmapByteOrder32Big
-    )
-    
-    # Draw image into context
-    CG.CGContextDrawImage(
-        bitmap_context,
-        CG.CGRectMake(0, 0, width, height),
-        image_ref
-    )
-    
-    # Get pixel data
-    pixel_data = CG.CGBitmapContextGetData(bitmap_context)
-    
-    # Convert to numpy array
-    # Note: Quartz returns RGBA, we want RGB
-    # Convert objc.varlist to bytes first
-    pixel_bytes = bytes(pixel_data)
-    image_array = np.frombuffer(pixel_bytes, dtype=np.uint8)
-    image_array = image_array.reshape((height, width, 4))
-    
-    # Convert RGBA to RGB
-    image_rgb = image_array[:, :, :3].copy()
+    # Convert to numpy array (RGB)
+    image_array = np.array(cropped)
     
     logger.debug(
         "screen_region_captured",
-        width=width,
-        height=height,
-        shape=image_rgb.shape
+        width=region.width,
+        height=region.height,
+        shape=image_array.shape
     )
     
-    return image_rgb
+    return image_array
 
 
 def capture_full_screen() -> np.ndarray:
