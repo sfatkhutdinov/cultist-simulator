@@ -1,0 +1,80 @@
+# Example Configuration: Conservative Exploration
+# Use this for initial testing and safe exploration
+
+agent:
+  id: "safe_explorer_001"
+  window_name: "Cultist Simulator"
+  max_actions_per_episode: 50
+  
+vision:
+  # Vision pipeline settings
+  capture_timeout_ms: 1000
+  detection_confidence: 0.7  # Higher = more confident detections
+  ocr_confidence: 0.6
+  enable_caching: true
+  
+automation:
+  # Input simulation settings
+  action_delay_ms: 1500  # 1.5 seconds between actions (very safe)
+  click_duration_ms: 100
+  enable_focus_check: true
+  
+safety:
+  # Safety constraints (CRITICAL - DO NOT DISABLE)
+  bounds_validation: true
+  rate_limiting: true
+  max_actions_per_second: 1  # Very conservative
+  window_focus_required: true
+  
+  # Blacklisted key combinations (prevent accidents)
+  blacklisted_keys:
+    - "cmd+q"      # Quit
+    - "cmd+w"      # Close window
+    - "cmd+tab"    # Switch apps
+    - "alt+f4"     # Close (Windows style)
+    - "cmd+option+esc"  # Force quit
+    
+  # Allowed areas (percentage of window)
+  safe_area:
+    margin_top_percent: 5     # Avoid menu bar
+    margin_bottom_percent: 5
+    margin_left_percent: 5
+    margin_right_percent: 5
+  
+learning:
+  # RL agent settings
+  algorithm: "PPO"
+  exploration_rate: 0.2  # Low exploration (stick to known actions)
+  learning_rate: 0.0001  # Slow learning
+  gamma: 0.99
+  batch_size: 32
+  
+  # Knowledge base
+  store_all_sessions: true
+  similarity_threshold: 0.8
+  max_history_size: 1000
+  
+nlp:
+  # Text analysis settings
+  model: "all-MiniLM-L6-v2"
+  max_text_length: 512
+  embedding_cache_size: 1000
+  goal_extraction_enabled: true
+  
+orchestrator:
+  # Episode management
+  max_episode_duration_sec: 300  # 5 minutes
+  checkpoint_frequency: 10  # Every 10 actions
+  enable_tensorboard: true
+  enable_session_replay: true
+  
+  # Crash recovery
+  auto_save: true
+  resume_on_restart: true
+  
+logging:
+  level: "INFO"
+  format: "json"
+  output_dir: "data/logs"
+  rotate_logs: true
+  max_log_size_mb: 100

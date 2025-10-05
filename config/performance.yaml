@@ -1,0 +1,91 @@
+# Example Configuration: Performance Testing
+# Optimized for measuring performance and benchmarking
+
+agent:
+  id: "perf_test_001"
+  window_name: "Cultist Simulator"
+  max_actions_per_episode: 100
+  
+vision:
+  # Optimized for speed
+  capture_timeout_ms: 300
+  detection_confidence: 0.6
+  ocr_confidence: 0.5
+  enable_caching: true
+  cache_ttl_ms: 5000  # Cache for 5 seconds
+  
+  # Performance optimizations
+  downscale_factor: 0.5  # Process at half resolution
+  skip_ocr_frequency: 2  # OCR every other frame
+  
+automation:
+  # Minimal delays for max throughput
+  action_delay_ms: 100
+  click_duration_ms: 10
+  enable_focus_check: false  # Skip for speed
+  
+safety:
+  # Safety (keep enabled even in perf tests)
+  bounds_validation: true
+  rate_limiting: true
+  max_actions_per_second: 10  # High throughput
+  window_focus_required: false  # Disabled for testing
+  
+  blacklisted_keys:
+    - "cmd+q"
+    - "cmd+w"
+    
+  safe_area:
+    margin_top_percent: 1
+    margin_bottom_percent: 1
+    margin_left_percent: 1
+    margin_right_percent: 1
+  
+learning:
+  # Minimal learning overhead
+  algorithm: "PPO"
+  exploration_rate: 0.1
+  learning_rate: 0.0001
+  gamma: 0.99
+  batch_size: 16  # Smaller batches
+  
+  # Reduced storage
+  store_all_sessions: false  # Only store successful sessions
+  similarity_threshold: 0.9
+  max_history_size: 100
+  
+nlp:
+  # Minimal NLP processing
+  model: "all-MiniLM-L6-v2"
+  max_text_length: 256
+  embedding_cache_size: 10000
+  goal_extraction_enabled: false  # Disable for perf
+  
+orchestrator:
+  # Short episodes for throughput
+  max_episode_duration_sec: 120
+  checkpoint_frequency: 50
+  enable_tensorboard: false  # Disable for perf
+  enable_session_replay: false
+  
+  # Crash recovery
+  auto_save: false
+  resume_on_restart: false
+  
+logging:
+  level: "WARNING"  # Minimal logging
+  format: "json"
+  output_dir: "data/logs"
+  rotate_logs: false
+  max_log_size_mb: 50
+  
+# Performance tracking
+profiling:
+  enabled: true
+  sample_rate: 100  # Profile every 100th action
+  metrics:
+    - vision_capture_time
+    - action_selection_time
+    - safety_validation_time
+    - execution_time
+    - total_cycle_time
