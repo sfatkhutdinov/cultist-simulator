@@ -34,6 +34,16 @@ markers = [
     "performance: Performance benchmark tests",
     "slow: Tests that take significant time to run",
 ]
+# Filter out known warnings from external dependencies
+filterwarnings = [
+    # Ignore EasyOCR/PyTorch quantization deprecation warnings
+    "ignore:torch.ao.quantization is deprecated:DeprecationWarning:easyocr.*",
+    "ignore:torch.ao.quantization is deprecated:DeprecationWarning:torch.ao.quantization.*",
+    # Ignore Pillow mode parameter deprecation in EasyOCR
+    "ignore:'mode' parameter is deprecated:DeprecationWarning:easyocr.*",
+    # Ignore MPS pin_memory warning on Apple Silicon
+    "ignore:'pin_memory' argument is set as true but not supported on MPS:UserWarning:torch.utils.data.dataloader.*",
+]
 
 [tool.black]
 line-length = 88
