@@ -153,16 +153,16 @@ This tasks document breaks down the implementation of an autonomous AI agent tha
 
 ### Learning Library (src/learning/)
 
-- [ ] **T090** Initialize learning library structure and __init__.py in src/learning/__init__.py
+- [x] **T090** Initialize learning library structure and __init__.py in src/learning/__init__.py
 - [ ] **T091** Set up Stable-Baselines3 PPO agent in src/learning/agent.py
 - [ ] **T092** Implement custom gym environment for Cultist Simulator in src/learning/agent.py
-- [ ] **T093** Implement select_action() using trained policy in src/learning/__init__.py
-- [ ] **T094** Implement update_knowledge() for experience replay in src/learning/__init__.py
-- [ ] **T095** Initialize SQLite knowledge base connection in src/learning/knowledge_base.py
-- [ ] **T096** Implement store_session() to persist session data in src/learning/knowledge_base.py
-- [ ] **T097** Implement query_knowledge() for similarity search in src/learning/knowledge_base.py
+- [x] **T093** Implement select_action() using trained policy in src/learning/__init__.py
+- [x] **T094** Implement update_knowledge() for experience replay in src/learning/__init__.py
+- [x] **T095** Initialize SQLite knowledge base connection in src/learning/knowledge_base.py
+- [x] **T096** Implement store_session() to persist session data in src/learning/knowledge_base.py
+- [x] **T097** Implement query_knowledge() for similarity search in src/learning/knowledge_base.py
 - [ ] **T098** Implement store_mechanic() for game rules in src/learning/knowledge_base.py
-- [ ] **T099** Implement detect_loop() using action history in src/learning/__init__.py
+- [x] **T099** Implement detect_loop() using action history in src/learning/__init__.py
 - [ ] **T100** Implement Strategy entity CRUD operations in src/learning/strategy.py
 - [ ] **T101** Implement strategy evolution (mutation, merging) in src/learning/strategy.py
 - [ ] **T102** Implement PerformanceMetric tracking system in src/learning/metrics.py
