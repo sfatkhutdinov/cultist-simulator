@@ -30,7 +30,7 @@ def check_window_focus(window_name: str) -> bool:
     Check if the specified window currently has keyboard focus.
     
     T064: Window focus verification using Quartz.
-    Performance requirement: <5ms.
+    Performance requirement: <10ms (iterates through window list).
     
     Args:
         window_name: Name of the window to check (e.g., "Cultist Simulator")

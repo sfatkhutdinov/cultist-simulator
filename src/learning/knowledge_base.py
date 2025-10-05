@@ -48,6 +48,23 @@ class KnowledgeBase:
         
         logger.info("knowledge_base_initialized", db_path=str(self.db_path))
     
+    def __enter__(self):
+        """Context manager entry."""
+        return self
+    
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        """Context manager exit - ensure connection is closed."""
+        self.close()
+        return False
+    
+    def __del__(self):
+        """Cleanup - ensure connection is closed."""
+        if hasattr(self, 'conn') and self.conn is not None:
+            try:
+                self.conn.close()
+            except Exception:
+                pass
+    
     def _initialize_database(self) -> None:
         """
         Initialize database schema if it doesn't exist.

@@ -140,15 +140,15 @@ This tasks document breaks down the implementation of an autonomous AI agent tha
 
 ### NLP Library (src/nlp/)
 
-- [ ] **T080** Initialize NLP library structure and __init__.py in src/nlp/__init__.py
-- [ ] **T081** Load sentence-transformers model in src/nlp/text_analyzer.py
-- [ ] **T082** Implement text embedding generation in src/nlp/text_analyzer.py
-- [ ] **T083** Implement semantic similarity search in src/nlp/text_analyzer.py
-- [ ] **T084** Implement analyze_text() with embeddings in src/nlp/__init__.py
-- [ ] **T085** Implement goal extraction from narrative text in src/nlp/goal_extractor.py
-- [ ] **T086** Implement extract_goals() public interface in src/nlp/__init__.py
-- [ ] **T087** Implement find_similar_narratives() with cosine similarity in src/nlp/__init__.py
-- [ ] **T088** Implement embedding cache for performance in src/nlp/text_analyzer.py
+- [x] **T080** Initialize NLP library structure and __init__.py in src/nlp/__init__.py
+- [x] **T081** Load sentence-transformers model in src/nlp/text_analyzer.py
+- [x] **T082** Implement text embedding generation in src/nlp/text_analyzer.py
+- [x] **T083** Implement semantic similarity search in src/nlp/text_analyzer.py
+- [x] **T084** Implement analyze_text() with embeddings in src/nlp/__init__.py
+- [x] **T085** Implement goal extraction from narrative text in src/nlp/goal_extractor.py
+- [x] **T086** Implement extract_goals() public interface in src/nlp/__init__.py
+- [x] **T087** Implement find_similar_narratives() with cosine similarity in src/nlp/__init__.py
+- [x] **T088** Implement embedding cache for performance in src/nlp/text_analyzer.py
 - [ ] **T089** Implement NLP library CLI in src/nlp/cli.py with JSON I/O
 
 ### Learning Library (src/learning/)
