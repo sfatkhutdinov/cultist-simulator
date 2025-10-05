@@ -4,11 +4,15 @@ T054: Implement OCR text extraction using EasyOCR.
 """
 
 import numpy as np
+import warnings
 from typing import List, Optional
 import easyocr
 
 from src.lib.types import TextRegion, Rect
 from src.lib.logging_config import get_logger
+
+# Suppress PyTorch MPS pin_memory warning on macOS
+warnings.filterwarnings('ignore', message='.*pin_memory.*not supported on MPS.*')
 
 logger = get_logger(__name__)
 

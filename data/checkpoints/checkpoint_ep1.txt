@@ -1,0 +1,13 @@
+Episode: 1
+Sessions: 1
+Total Actions: 3
+
+Metrics:
+  episodes_completed: 1
+  total_actions: 3
+  successful_actions: 3
+  failed_actions: 0
+  loops_detected: 0
+  average_episode_length: 3.0
+  success_rate: 1.0
+  current_episode: 1

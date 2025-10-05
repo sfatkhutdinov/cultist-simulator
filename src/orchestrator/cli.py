@@ -25,6 +25,10 @@ from src.orchestrator import (
     get_agent_metrics,
     articulate_strategy
 )
+from src.orchestrator.tensorboard_vscode import (
+    launch_tensorboard_in_vscode,
+    create_tensorboard_notice
+)
 from src.lib.logging_config import get_logger
 
 logger = get_logger(__name__)
@@ -93,6 +97,17 @@ def cmd_train(args):
     print(f"Window: {args.window}")
     print(f"Max actions per episode: {args.max_actions}")
     print(f"Checkpoint every {args.checkpoint} episodes\n")
+    
+    # Launch TensorBoard in VS Code if requested
+    tensorboard_dir = Path(__file__).parent.parent.parent / "data" / "tensorboard"
+    
+    if not args.no_tensorboard:
+        print("🚀 Launching TensorBoard in VS Code...")
+        launched = launch_tensorboard_in_vscode(str(tensorboard_dir))
+        
+        if not launched:
+            # Show manual instructions if auto-launch failed
+            print(create_tensorboard_notice(str(tensorboard_dir)))
     
     try:
         sessions = train_agent(
@@ -227,6 +242,7 @@ Examples:
     train_parser.add_argument('--max-actions', type=int, default=1000, help='Max actions per episode')
     train_parser.add_argument('--max-duration', type=float, default=300.0, help='Max duration per episode (seconds)')
     train_parser.add_argument('--checkpoint', type=int, default=10, help='Checkpoint interval (episodes)')
+    train_parser.add_argument('--no-tensorboard', action='store_true', help='Disable automatic TensorBoard launch')
     train_parser.set_defaults(func=cmd_train)
     
     # Metrics command
