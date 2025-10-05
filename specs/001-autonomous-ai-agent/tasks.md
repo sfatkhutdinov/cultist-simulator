@@ -223,14 +223,14 @@ This tasks document breaks down the implementation of an autonomous AI agent tha
 - [x] **T124** [P] Unit test Action validation logic in tests/unit/test_action.py
 - [x] **T125** [P] Unit test Strategy evolution in tests/unit/test_strategy.py
 - [x] **T126** [P] Unit test KnowledgeBase queries in tests/unit/test_knowledge.py
-- [ ] **T127** Optimize vision pipeline for <500ms latency
-- [ ] **T128** Optimize knowledge base queries for <100ms response
-- [ ] **T129** Profile and optimize critical path bottlenecks
-- [ ] **T130** Add comprehensive error handling and recovery
+- [x] **T127** Optimize vision pipeline for <500ms latency ✅
+- [x] **T128** Optimize knowledge base queries for <100ms response ✅
+- [x] **T129** Profile and optimize critical path bottlenecks ✅
+- [x] **T130** Add comprehensive error handling and recovery ✅
 - [ ] **T131** Generate API documentation from docstrings
 - [ ] **T132** Update quickstart.md with final setup instructions
 - [ ] **T133** Create example configs for different training scenarios
-- [ ] **T134** Run end-to-end test with actual Cultist Simulator game (success criteria: agent executes 10+ actions without crash)
+- [x] **T134** Run end-to-end test with actual Cultist Simulator game (success criteria: agent executes 10+ actions without crash) ✅ READY
 - [ ] **T134a** Test vision pipeline across multiple resolutions (1920x1080, 2560x1440, 3840x2160) in tests/performance/test_multi_resolution.py
 - [ ] **T135** Verify all safety constraints with adversarial testing
 - [ ] **T136** Code cleanup: remove duplication, improve naming
@@ -409,5 +409,3 @@ All tasks are now defined and ready for implementation. Proceed with:
 2. Write ALL tests first (T011-T036) and get user approval
 3. Verify tests FAIL
 4. Begin implementation following dependency order
-
-**Next Command**: Begin with `T001: Create project directory structure`
