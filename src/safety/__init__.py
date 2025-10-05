@@ -227,10 +227,12 @@ def validate_action(action: Any, context: Dict[str, Any]) -> ValidationResult:
     CRITICAL: Must complete in <10ms and have 100% reliability.
     
     This is the main safety validation function that combines all checks:
+    - Action type validation (must be valid ActionType enum)
     - Spatial containment (window bounds)
     - Key blacklist
     - Window focus requirement
     - Rate limiting
+    - Input validation (no malformed inputs)
     
     Args:
         action: Action object or dict to validate
@@ -247,6 +249,15 @@ def validate_action(action: Any, context: Dict[str, Any]) -> ValidationResult:
     constraints_violated = []
     blocked_reason = None
     
+    # CRITICAL: Validate context has required fields
+    if not context or not isinstance(context, dict):
+        return ValidationResult(
+            is_allowed=False,
+            reason="Invalid context - must be a dictionary with required fields",
+            constraints_violated=[],
+            metadata={'performance_ms': (time.perf_counter() - start_time) * 1000}
+        )
+    
     # Handle both Action objects and dicts (for test compatibility)
     if isinstance(action, Action):
         action_type = action.action_type
@@ -257,13 +268,69 @@ def validate_action(action: Any, context: Dict[str, Any]) -> ValidationResult:
     else:
         return ValidationResult(
             is_allowed=False,
-            reason="Invalid action object",
+            reason="Invalid action object - must be Action or dict",
             constraints_violated=[],
-            metadata={}
+            metadata={'performance_ms': (time.perf_counter() - start_time) * 1000}
         )
     
-    # 1. CHECK WINDOW FOCUS (if required in context)
-    if context.get('window_focused') is False:
+    # CRITICAL: Empty dict/action is invalid
+    if isinstance(action, dict) and not action:
+        return ValidationResult(
+            is_allowed=False,
+            reason="Empty action dictionary - must contain action_type and parameters",
+            constraints_violated=[],
+            metadata={'performance_ms': (time.perf_counter() - start_time) * 1000}
+        )
+    
+    # CRITICAL: action_type must not be None
+    if action_type is None:
+        return ValidationResult(
+            is_allowed=False,
+            reason="Action type cannot be None - must be CLICK, DRAG, or KEY_PRESS",
+            constraints_violated=[],
+            metadata={'performance_ms': (time.perf_counter() - start_time) * 1000}
+        )
+    
+    # CRITICAL: Validate action_type is a valid ActionType enum
+    # This blocks arbitrary strings, SQL injection, XSS, path traversal
+    valid_action_types = [ActionType.CLICK, ActionType.DRAG, ActionType.KEY_PRESS]
+    if not isinstance(action_type, ActionType) and action_type not in valid_action_types:
+        # Try to find if it's a string representation
+        try:
+            # If it's a string, it must match exactly
+            if isinstance(action_type, str):
+                found = False
+                for at in valid_action_types:
+                    if action_type == at.value or action_type == str(at):
+                        found = True
+                        break
+                if not found:
+                    return ValidationResult(
+                        is_allowed=False,
+                        reason=f"Invalid action type '{action_type}' - must be CLICK, DRAG, or KEY_PRESS",
+                        constraints_violated=[],
+                        metadata={'performance_ms': (time.perf_counter() - start_time) * 1000}
+                    )
+            else:
+                # Not ActionType enum and not string - reject
+                return ValidationResult(
+                    is_allowed=False,
+                    reason=f"Invalid action type {type(action_type)} - must be ActionType enum",
+                    constraints_violated=[],
+                    metadata={'performance_ms': (time.perf_counter() - start_time) * 1000}
+                )
+        except Exception:
+            return ValidationResult(
+                is_allowed=False,
+                reason=f"Invalid action type - validation error",
+                constraints_violated=[],
+                metadata={'performance_ms': (time.perf_counter() - start_time) * 1000}
+            )
+    
+    # 1. CHECK WINDOW FOCUS (if context has focus field, must be True)
+    # Missing focus field defaults to unfocused for security
+    window_focused = context.get('window_focused', False)
+    if window_focused is False:
         constraints_violated.append(ConstraintType.FOCUS_REQUIRED)
         blocked_reason = "Window must be focused before executing actions"
         
@@ -298,6 +365,26 @@ def validate_action(action: Any, context: Dict[str, Any]) -> ValidationResult:
             # Get point from action
             point = parameters.get('point')
             
+            # CRITICAL: Validate point is a Point object, not string or other type
+            if point is not None and not isinstance(point, Point):
+                constraints_violated.append(ConstraintType.WINDOW_BOUNDS)
+                blocked_reason = f"Point must be Point object, not {type(point).__name__}"
+                
+                logger.warning(
+                    "action_blocked_bounds",
+                    action_type=str(action_type),
+                    point=str(point),
+                    bounds=str(window_bounds),
+                    reason=blocked_reason
+                )
+                
+                return ValidationResult(
+                    is_allowed=False,
+                    reason=blocked_reason,
+                    constraints_violated=constraints_violated,
+                    metadata={'performance_ms': (time.perf_counter() - start_time) * 1000}
+                )
+            
             # Validate point exists and is valid
             if point is None:
                 constraints_violated.append(ConstraintType.WINDOW_BOUNDS)
@@ -307,6 +394,27 @@ def validate_action(action: Any, context: Dict[str, Any]) -> ValidationResult:
                     "action_blocked_bounds",
                     action_type=str(action_type),
                     point=None,
+                    bounds=str(window_bounds),
+                    reason=blocked_reason
+                )
+                
+                return ValidationResult(
+                    is_allowed=False,
+                    reason=blocked_reason,
+                    constraints_violated=constraints_violated,
+                    metadata={'performance_ms': (time.perf_counter() - start_time) * 1000}
+                )
+            
+            # CRITICAL: Check if point coordinates are valid integers
+            # This blocks float injection attacks
+            if not isinstance(point.x, int) or not isinstance(point.y, int):
+                constraints_violated.append(ConstraintType.WINDOW_BOUNDS)
+                blocked_reason = f"Point coordinates must be integers, got x={type(point.x).__name__}, y={type(point.y).__name__}"
+                
+                logger.warning(
+                    "action_blocked_bounds",
+                    action_type=str(action_type),
+                    point=str(point),
                     bounds=str(window_bounds),
                     reason=blocked_reason
                 )

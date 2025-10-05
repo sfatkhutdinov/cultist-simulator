@@ -37,7 +37,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 from src.safety import validate_action
 from src.automation import simulate_click, simulate_key_press
 from src.lib.types import ActionType, Point, Rect
-from src.lib.logging_config import logger
+from src.lib.logging_config import get_logger
+
+logger = get_logger(__name__)
 
 
 class AdversarialTester:
@@ -90,7 +92,6 @@ class AdversarialTester:
             ("Both negative", Point(-500, -500)),
             ("Both beyond", Point(5000, 5000)),
             ("Integer overflow", Point(2147483647, 500)),
-            ("Float injection", Point(100.5, 200.7)),  # Should handle
         ]
         
         for name, point in attacks:
@@ -106,11 +107,38 @@ class AdversarialTester:
             try:
                 validation = validate_action(action, context)
                 blocked = not validation.is_allowed
-                reason = validation.blocked_reason if hasattr(validation, 'blocked_reason') else ""
+                reason = validation.blocked_reason if hasattr(validation, 'blocked_reason') else "Not specified"
                 self.log_attack(f"OOB: {name}", blocked, reason)
             except Exception as e:
                 # Exceptions are also acceptable (crash prevention)
                 self.log_attack(f"OOB: {name}", True, f"Exception: {e}")
+        
+        # Test float injection separately - create Point-like object with float coords
+        class FakePoint:
+            def __init__(self, x, y):
+                self.x = x
+                self.y = y
+            def __str__(self):
+                return f"FakePoint({self.x}, {self.y})"
+        
+        float_point = FakePoint(100.5, 200.7)
+        action = {
+            "action_type": ActionType.CLICK,
+            "point": float_point
+        }
+        context = {
+            "window_bounds": self.window_bounds,
+            "window_focused": True
+        }
+        
+        try:
+            validation = validate_action(action, context)
+            # Should be blocked because coords are not integers
+            blocked = not validation.is_allowed
+            reason = validation.blocked_reason if hasattr(validation, 'blocked_reason') else "Not specified"
+            self.log_attack("OOB: Float injection", blocked, reason)
+        except Exception as e:
+            self.log_attack("OOB: Float injection", True, f"Exception: {e}")
                 
     def test_blacklist_attacks(self):
         """Test 2: Blacklisted key combination attacks."""
@@ -143,7 +171,7 @@ class AdversarialTester:
             try:
                 validation = validate_action(action, context)
                 blocked = not validation.is_allowed
-                reason = validation.blocked_reason if hasattr(validation, 'blocked_reason') else ""
+                reason = validation.blocked_reason if hasattr(validation, 'blocked_reason') else "Not specified"
                 self.log_attack(f"Blacklist: {name}", blocked, reason)
             except Exception as e:
                 self.log_attack(f"Blacklist: {name}", True, f"Exception: {e}")
@@ -154,34 +182,48 @@ class AdversarialTester:
         print("TEST 3: Rate Limiting Attacks")
         print("="*60)
         
-        # Attempt rapid-fire actions
+        # Attempt rapid-fire actions with action history tracking
         action = {
             "action_type": ActionType.CLICK,
             "point": Point(100, 100)
         }
-        context = {
-            "window_bounds": self.window_bounds,
-            "window_focused": True
-        }
         
-        # Try to exceed rate limit (should be ~2-10 actions/sec max)
+        # Simulate action history (recent actions within last second)
+        current_time = time.time()
+        action_history = []
+        
+        # Try to exceed rate limit (max 10 actions/sec)
         attempts = 50
         blocked_count = 0
         start_time = time.time()
         
         for i in range(attempts):
+            # Build context with growing action history
+            context = {
+                "window_bounds": self.window_bounds,
+                "window_focused": True,
+                "recent_actions": action_history.copy(),  # Copy current history
+                "max_actions_per_second": 10
+            }
+            
             try:
                 validation = validate_action(action, context)
                 if not validation.is_allowed:
                     blocked_count += 1
+                else:
+                    # Add to history if allowed
+                    action_history.append({
+                        "timestamp": current_time,
+                        "action_type": ActionType.CLICK
+                    })
             except Exception:
                 blocked_count += 1
                 
         elapsed = time.time() - start_time
         rate = attempts / elapsed
         
-        # If rate limiting works, many should be blocked
-        if blocked_count > attempts * 0.5:  # At least 50% blocked
+        # If rate limiting works, many should be blocked (>=40 out of 50)
+        if blocked_count >= 40:  # At least 40 blocked
             self.log_attack(
                 f"Rate limit bypass ({rate:.1f} req/s)",
                 True,
@@ -214,7 +256,7 @@ class AdversarialTester:
         try:
             validation = validate_action(action, context_unfocused)
             blocked = not validation.is_allowed
-            reason = validation.blocked_reason if hasattr(validation, 'blocked_reason') else ""
+            reason = validation.blocked_reason if hasattr(validation, 'blocked_reason') else "Not specified"
             self.log_attack("Unfocused window click", blocked, reason)
         except Exception as e:
             self.log_attack("Unfocused window click", True, f"Exception: {e}")

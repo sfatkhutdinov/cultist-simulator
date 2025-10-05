@@ -143,12 +143,23 @@ class MouseButton(Enum):
 
 # Blacklisted keys that could exit the game or affect the system
 BLACKLISTED_KEYS = [
+    # macOS dangerous combinations
     "cmd+q",  # Quit application
     "cmd+w",  # Close window
     "cmd+tab",  # Switch application
     "cmd+`",  # Switch window
+    "cmd+option+q",  # Force quit (multiple modifiers)
+    "cmd+option+shift+q",  # Force quit with more modifiers
+    "cmd+shift+q",  # Log out
+    
+    # Windows dangerous combinations
+    "alt+f4",  # Close window/app
+    "ctrl+shift+escape",  # Task manager
+    "ctrl+alt+delete",  # System interrupt
+    
+    # Generic dangerous keys
     "escape",  # Often used for menus that could exit
-    "f4",  # Alt+F4 equivalent
+    "f4",  # Potential Alt+F4 key
 ]
 
 
