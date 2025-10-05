@@ -100,6 +100,8 @@ Build an autonomous AI agent that learns to play and win Cultist Simulator on ma
 - All principles naturally align with AI agent architecture
 - Safety containment (FR-004) ensures reliability (NFR-004)
 
+**GATE RESULT: ✅ PASSED** - All constitutional principles satisfied; ready for Phase 0 research.
+
 ## Project Structure
 
 ### Documentation (this feature)
@@ -389,12 +391,12 @@ The `/tasks` command will generate tasks following this approach:
 
 ### Expected Task Count
 
-Estimated 80-120 tasks total:
+Estimated 85-125 tasks total:
 - Setup: ~10 tasks
-- Contract tests: ~25 tasks (5 per library)
-- Core implementation: ~40 tasks (8 per library)
+- Contract tests: ~26 tasks (5 per library + narrative decision test)
+- Core implementation: ~45 tasks (including crash recovery and save game support)
 - Integration: ~15 tasks
-- Polish: ~10 tasks
+- Polish: ~12 tasks
 
 ---
 *Based on Constitution v1.0.0 - See `.specify/memory/constitution.md`*

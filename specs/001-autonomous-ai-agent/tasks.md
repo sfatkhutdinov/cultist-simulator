@@ -72,6 +72,7 @@ This tasks document breaks down the implementation of an autonomous AI agent tha
 - [x] **T026** [P] Integration test: nlp → learning (extract goals → update strategy) in tests/integration/test_nlp_learning.py
 - [x] **T027** [P] Integration test: safety → automation (validate → execute) in tests/integration/test_safety_automation.py
 - [x] **T028** [P] Integration test: full episode simulation (mocked game) in tests/integration/test_episode_flow.py
+- [ ] **T028a** [P] Integration test: Same game state with different narrative text → verify agent chooses different actions in tests/integration/test_narrative_decisions.py
 
 ### Safety Tests (CRITICAL - 100% Reliability Required)
 
@@ -143,8 +144,8 @@ This tasks document breaks down the implementation of an autonomous AI agent tha
 - [x] **T073** Implement is_key_blacklisted() with forbidden key list in src/safety/constraint_checker.py
 - [x] **T074** Implement check_rate_limit() action throttling in src/safety/constraint_checker.py
 - [x] **T075** Implement validate_action() comprehensive validation in src/safety/constraint_checker.py
-- [ ] **T076** Implement loop detection using sliding window in src/safety/loop_detector.py
-- [ ] **T077** Implement Levenshtein distance for pattern matching in src/safety/loop_detector.py
+- [ ] **T076** [BLOCKING] Implement loop detection using sliding window (5-minute window, detect 3+ identical sequences) in src/safety/loop_detector.py
+- [ ] **T077** [BLOCKING] Implement Levenshtein distance for pattern matching in src/safety/loop_detector.py
 - [ ] **T078** Implement safety violation logging in src/safety/constraint_checker.py
 - [ ] **T079** Implement safety library CLI in src/safety/cli.py with JSON I/O
 
@@ -190,6 +191,12 @@ This tasks document breaks down the implementation of an autonomous AI agent tha
 - [ ] **T111** Implement articulate_strategy() for human-readable output in src/orchestrator/agent_runner.py
 - [ ] **T112** Implement crash recovery and resume logic in src/orchestrator/agent_runner.py
 - [ ] **T113** Implement main orchestrator CLI in src/orchestrator/cli.py
+- [ ] **T113a** Implement crash detection (monitor game window/process status) in src/orchestrator/agent_runner.py
+- [ ] **T113b** Implement auto-save agent state every N actions (configurable checkpoint frequency) in src/orchestrator/agent_runner.py
+- [ ] **T113c** Implement resume from last checkpoint on restart in src/orchestrator/agent_runner.py
+- [ ] **T113d** Implement load_save_game() to start from saved game state in src/orchestrator/agent_runner.py
+- [ ] **T113e** Implement create_save_game() for training checkpoint persistence in src/orchestrator/agent_runner.py
+- [ ] **T113f** Integration test: Load save game → verify agent state consistency in tests/integration/test_save_game.py
 
 ---
 
@@ -220,7 +227,8 @@ This tasks document breaks down the implementation of an autonomous AI agent tha
 - [ ] **T131** Generate API documentation from docstrings
 - [ ] **T132** Update quickstart.md with final setup instructions
 - [ ] **T133** Create example configs for different training scenarios
-- [ ] **T134** Run end-to-end test with actual Cultist Simulator game
+- [ ] **T134** Run end-to-end test with actual Cultist Simulator game (success criteria: agent executes 10+ actions without crash)
+- [ ] **T134a** Test vision pipeline across multiple resolutions (1920x1080, 2560x1440, 3840x2160) in tests/performance/test_multi_resolution.py
 - [ ] **T135** Verify all safety constraints with adversarial testing
 - [ ] **T136** Code cleanup: remove duplication, improve naming
 - [ ] **T137** Final linting and type checking (mypy, black, pylint)
@@ -263,6 +271,7 @@ Polish (T123-T137)
 
 **Integration Phase**:
 - T114-T122 depend on all Phase 3.3 tasks completing
+- **CRITICAL**: T114-T118 are BLOCKED by T076-T077 (loop detection must be complete for integration)
 
 **Polish Phase**:
 - T123-T137 depend on integration completing

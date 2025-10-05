@@ -54,14 +54,14 @@ A researcher or game developer wants to create an AI agent that can autonomously
 - **FR-001**: System MUST capture and interpret the current visual state of the Cultist Simulator game window on macOS
 - **FR-002**: System MUST generate and execute simulated mouse movements, clicks, and drags within the game window
 - **FR-003**: System MUST generate and execute keyboard inputs (typing, hotkeys) to the game
-- **FR-004**: System MUST identify and catalog interactive game elements (cards, buttons, slots, timers) from visual analysis
+- **FR-004**: System MUST identify and catalog game elements (cards, buttons, slots, timers) from visual analysis
 - **FR-005**: System MUST detect game state changes resulting from agent actions
 
 #### Safety & Containment
-- **FR-006**: System MUST restrict all mouse and keyboard inputs to the boundaries of the Cultist Simulator game window
+- **FR-006**: System MUST restrict all mouse and keyboard inputs to the boundaries of the Cultist Simulator game window and maintain game window focus, preventing all focus-loss actions
 - **FR-007**: System MUST prevent execution of game exit actions (quit buttons, window close, Alt+F4/Cmd+Q)
 - **FR-008**: System MUST prevent triggering of macOS system shortcuts or menus (Mission Control, Spotlight, etc.)
-- **FR-009**: System MUST log and block any attempted action that would minimize, hide, or move focus away from the game window
+- **FR-009**: System MUST log and block any attempted action that would minimize, hide, or change the game window state
 - **FR-010**: System MUST provide a manual override mechanism for humans to safely pause or terminate the agent
 
 #### Learning & Decision Making
@@ -96,7 +96,7 @@ A researcher or game developer wants to create an AI agent that can autonomously
 ### Non-Functional Requirements
 
 #### Performance
-- **NFR-001**: System MUST process game state and select actions within 500ms to maintain responsive gameplay [NEEDS CLARIFICATION: Is this latency requirement based on game needs or desired agent responsiveness?]
+- **NFR-001**: System MUST process game state and select actions within 500ms to maintain responsive gameplay (target guideline; may be adjusted during performance tuning)
 - **NFR-002**: Vision/OCR processing MUST not cause significant lag in game interactions
 - **NFR-003**: Knowledge base queries MUST return results within 100ms to support real-time decision making
 
@@ -111,8 +111,8 @@ A researcher or game developer wants to create an AI agent that can autonomously
 - **NFR-009**: Learning progress MUST be quantifiable and trackable over time
 
 #### Compatibility
-- **NFR-010**: System MUST support macOS version [NEEDS CLARIFICATION: minimum macOS version - Ventura, Sonoma, Sequoia?]
-- **NFR-011**: System MUST work with the current version of Cultist Simulator on macOS [NEEDS CLARIFICATION: specific game version or auto-adapt to updates?]
+- **NFR-010**: System MUST support macOS 13+ (Ventura and later) for modern accessibility APIs
+- **NFR-011**: System MUST work with the current version of Cultist Simulator on macOS and auto-adapt to UI changes via YOLO retraining when game updates occur
 - **NFR-012**: System MUST handle different screen resolutions and game window sizes
 
 ### Key Entities
@@ -127,6 +127,13 @@ A researcher or game developer wants to create an AI agent that can autonomously
 - **Safety Constraint**: A rule preventing agent actions outside game boundaries; includes window containment, exit prevention, and system protection
 - **Performance Metric**: Measurable indicator of agent progress; includes win rate, survival time, resource efficiency, and learning rate
 
+### Terminology Glossary
+
+- **Session** / **Episode** / **Playthrough**: Synonymous terms for a complete game run from start to end condition. This specification uses "Session" (matching the data model entity name).
+- **Policy**: The reinforcement learning model's output (probability distribution over actions). Technical RL term.
+- **Strategy**: High-level gameplay approach derived from learned patterns. User-facing term that encompasses policy decisions plus heuristics.
+- **Game Element**: Interactive UI component (cards, buttons, slots, timers). Standardized term throughout this specification.
+
 ---
 
 ## Review & Acceptance Checklist
@@ -138,7 +145,7 @@ A researcher or game developer wants to create an AI agent that can autonomously
 - [x] All mandatory sections completed
 
 ### Requirement Completeness
-- [ ] No [NEEDS CLARIFICATION] markers remain (3 clarification points remain - see Notes below)
+- [x] No [NEEDS CLARIFICATION] markers remain (all 3 clarification points resolved)
 - [x] Requirements are testable and unambiguous
 - [x] Success criteria are measurable
 - [x] Scope is clearly bounded (autonomous game-playing agent for Cultist Simulator on macOS)
@@ -160,16 +167,16 @@ A researcher or game developer wants to create an AI agent that can autonomously
 
 ## Notes for Clarification Phase
 
-### Resolved (5 questions)
+### Resolved (8 questions)
 1. ✅ **Win Condition Discovery**: Autonomous discovery - agent discovers win conditions through experimentation
 2. ✅ **Success Metrics**: Multi-dimensional tracking (survival time, win rate, resources, unique endings)
 3. ✅ **Training Timeline**: 100-500 game attempts for first win
 4. ✅ **Narrative Understanding**: Full semantic understanding required
 5. ✅ **Loop Detection**: Automatic detection and breaking of unproductive patterns
+6. ✅ **Action Latency** (NFR-001): 500ms is target guideline, adjustable during performance tuning
+7. ✅ **macOS Compatibility** (NFR-010): macOS 13+ (Ventura and later) for modern accessibility APIs
+8. ✅ **Game Version** (NFR-011): Auto-adapt to game updates via YOLO retraining
 
-### Deferred to Planning Phase (3 remaining)
-The following lower-priority aspects can be resolved during planning without blocking spec acceptance:
-
-1. **Action Latency** (NFR-001): Is the 500ms action selection requirement critical or adjustable? → *Low impact: Can be adjusted during performance tuning*
-2. **macOS Compatibility** (NFR-010): What is the minimum supported macOS version? → *Deferred: Platform-specific technical decision better suited for planning*
-3. **Game Version** (NFR-011): Should the agent work with a specific game version or adapt to updates? → *Deferred: Implementation strategy decision for planning phase*
+### All Clarifications Complete
+All ambiguities have been resolved. Specification is ready for implementation.
+```

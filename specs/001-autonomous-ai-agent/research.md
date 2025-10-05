@@ -17,6 +17,7 @@
   - Stable training with fewer hyperparameters than DQN
   - Handles continuous/discrete action spaces
   - Good for sparse reward environments (perfect for game-playing)
+  - **Exploration/Exploitation**: PPO uses entropy regularization to balance exploration vs exploitation automatically; no epsilon-greedy needed
 - **Alternatives considered**:
   - Ray RLlib: More scalable but overkill for single-game agent
   - TensorFlow Agents: Less Python-native, smaller community
