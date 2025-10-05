@@ -273,9 +273,16 @@ Polish (T123-T137)
 - T090-T104 (learning) depend on T043-T046 (Session, Agent, Strategy, Metrics)
 - T105-T113 (orchestrator) depend on ALL libraries (T049-T104)
 
+**Test Tasks**:
+- [x] **T028a** [P] Integration test: Same game state with different narrative text → verify agent chooses different actions in tests/integration/test_narrative_decisions.py ✅
+- [x] **T035** [P] Performance test: knowledge query <100ms in tests/performance/test_learning_performance.py ✅
+
 **Integration Phase**:
 - T114-T122 depend on all Phase 3.3 tasks completing
-- **CRITICAL**: T114-T118 are BLOCKED by T076-T077 (loop detection must be complete for integration)
+- **CRITICAL**: T114-T118 are BLOCKED by T076-T077 (loop detection must be complete for integration) ✅ RESOLVED
+
+**Save Game**:
+- [x] **T113f** Integration test: Load save game → verify agent state consistency in tests/integration/test_save_game.py ✅
 
 **Polish Phase**:
 - T123-T137 depend on integration completing
