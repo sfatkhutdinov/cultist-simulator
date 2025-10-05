@@ -1,6 +1,45 @@
 # Training Warnings & What They Mean
 
-This document explains the warnings you might see during training and whether you need to worry about them.
+This document explains the warnings you might see during training and testing and whether you need to worry about them.
+
+---
+
+## 🧪 Test Suite Warnings (RESOLVED ✅)
+
+### Pytest: 225 External Dependency Warnings
+
+**Status**: ✅ **SUPPRESSED** as of 2025-10-04
+
+**What you saw**:
+```
+146 passed, 14 skipped, 225 warnings in 55.01s
+```
+
+**What it means**:
+- All 225 warnings came from external libraries (EasyOCR, PyTorch, Pillow)
+- ZERO warnings from our code
+- These are deprecation notices for APIs that will change in future library versions
+
+**Breakdown**:
+1. **~143 warnings**: PyTorch quantization API deprecation in EasyOCR
+2. **~66 warnings**: Pillow `mode` parameter deprecation in EasyOCR  
+3. **~16 warnings**: MPS `pin_memory` not supported (Apple Silicon)
+
+**Is this a problem?**
+- ❌ **NO** - Everything works perfectly
+- These are warnings about future API changes (2026+)
+- Our code has zero warnings
+
+**Action taken**:
+- Added filters to `pyproject.toml` to suppress known external warnings
+- Test output is now clean: `146 passed, 14 skipped in 50.18s`
+
+**To see suppressed warnings** (if curious):
+```bash
+pytest tests/ -W default -v
+```
+
+---
 
 ## ✅ Normal (Expected) Warnings
 
