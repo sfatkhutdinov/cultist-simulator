@@ -1,0 +1,1457 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>orchestrator API documentation</title>
+<meta name="description" content="Orchestrator - Autonomous AI Agent Coordination …">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Package <code>orchestrator</code></h1>
+</header>
+<section id="section-intro">
+<p>Orchestrator - Autonomous AI Agent Coordination</p>
+<p>This module coordinates all agent libraries into a cohesive autonomous system:
+- Vision: Captures game state
+- NLP: Understands narrative text
+- Learning: Selects actions and learns from experience
+- Safety: Validates all actions (100% reliability)
+- Automation: Executes safe actions</p>
+<p>Public API:
+- run_episode(agent_id, window_name, max_actions) -&gt; Session
+- train_agent(agent_id, num_episodes, window_name) -&gt; List[Session]
+- get_agent_metrics(agent_id) -&gt; Dict
+- articulate_strategy(agent_id) -&gt; str</p>
+<p>The orchestrator implements the perception-decision-action loop and manages
+the agent's learning process across multiple episodes.</p>
+</section>
+<section>
+<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+<dl>
+<dt><code class="name"><a title="orchestrator.agent_runner" href="agent_runner.html">orchestrator.agent_runner</a></code></dt>
+<dd>
+<div class="desc"><p>Agent Runner - Autonomous Episode Execution …</p></div>
+</dd>
+<dt><code class="name"><a title="orchestrator.cli" href="cli.html">orchestrator.cli</a></code></dt>
+<dd>
+<div class="desc"><p>Orchestrator CLI - Command-line interface for autonomous agent …</p></div>
+</dd>
+<dt><code class="name"><a title="orchestrator.permissions" href="permissions.html">orchestrator.permissions</a></code></dt>
+<dd>
+<div class="desc"><p>macOS Permissions Checker …</p></div>
+</dd>
+<dt><code class="name"><a title="orchestrator.session_replay" href="session_replay.html">orchestrator.session_replay</a></code></dt>
+<dd>
+<div class="desc"><p>Session Replay Functionality …</p></div>
+</dd>
+<dt><code class="name"><a title="orchestrator.shutdown" href="shutdown.html">orchestrator.shutdown</a></code></dt>
+<dd>
+<div class="desc"><p>Graceful Shutdown Handler …</p></div>
+</dd>
+<dt><code class="name"><a title="orchestrator.tensorboard_logger" href="tensorboard_logger.html">orchestrator.tensorboard_logger</a></code></dt>
+<dd>
+<div class="desc"><p>TensorBoard Logging for Training Metrics …</p></div>
+</dd>
+<dt><code class="name"><a title="orchestrator.tensorboard_vscode" href="tensorboard_vscode.html">orchestrator.tensorboard_vscode</a></code></dt>
+<dd>
+<div class="desc"><p>TensorBoard VS Code Integration …</p></div>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="orchestrator.articulate_strategy"><code class="name flex">
+<span>def <span class="ident">articulate_strategy</span></span>(<span>agent_id: str = 'agent_001') ‑> str</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def articulate_strategy(agent_id: str = &#34;agent_001&#34;) -&gt; str:
+    &#34;&#34;&#34;
+    Get human-readable description of agent&#39;s current strategy.
+
+    T111: Articulate strategy for human understanding.
+
+    Args:
+        agent_id: Agent identifier
+
+    Returns:
+        Natural language strategy description
+
+    Example:
+        &gt;&gt;&gt; strategy = articulate_strategy(&#34;agent_001&#34;)
+        &gt;&gt;&gt; print(strategy)
+        Agent Strategy Summary (ID: agent_001)
+        ===========================================
+        ...
+    &#34;&#34;&#34;
+    if agent_id not in _agent_runners:
+        return f&#34;Agent &#39;{agent_id}&#39; not found. No strategy available.&#34;
+
+    runner = _agent_runners[agent_id]
+    return runner.articulate_strategy()</code></pre>
+</details>
+<div class="desc"><p>Get human-readable description of agent's current strategy.</p>
+<p>T111: Articulate strategy for human understanding.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>agent_id</code></strong></dt>
+<dd>Agent identifier</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>Natural language strategy description</p>
+<h2 id="example">Example</h2>
+<pre><code class="language-python-repl">&gt;&gt;&gt; strategy = articulate_strategy(&quot;agent_001&quot;)
+&gt;&gt;&gt; print(strategy)
+Agent Strategy Summary (ID: agent_001)
+===========================================
+...
+</code></pre></div>
+</dd>
+<dt id="orchestrator.get_agent_metrics"><code class="name flex">
+<span>def <span class="ident">get_agent_metrics</span></span>(<span>agent_id: str = 'agent_001') ‑> Dict[str, Any]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_agent_metrics(agent_id: str = &#34;agent_001&#34;) -&gt; Dict[str, Any]:
+    &#34;&#34;&#34;
+    Get performance metrics for an agent.
+
+    T110: Real-time metrics tracking.
+
+    Args:
+        agent_id: Agent identifier
+
+    Returns:
+        Dictionary of metrics including:
+        - episodes_completed
+        - total_actions
+        - successful_actions
+        - failed_actions
+        - success_rate
+        - loops_detected
+        - average_episode_length
+
+    Example:
+        &gt;&gt;&gt; metrics = get_agent_metrics(&#34;agent_001&#34;)
+        &gt;&gt;&gt; print(f&#34;Success rate: {metrics[&#39;success_rate&#39;]:.1%}&#34;)
+    &#34;&#34;&#34;
+    if agent_id not in _agent_runners:
+        logger.warning(&#34;agent_not_found&#34;, agent_id=agent_id)
+        return {&#34;error&#34;: &#34;Agent not found&#34;, &#34;agent_id&#34;: agent_id}
+
+    runner = _agent_runners[agent_id]
+    return runner.get_metrics()</code></pre>
+</details>
+<div class="desc"><p>Get performance metrics for an agent.</p>
+<p>T110: Real-time metrics tracking.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>agent_id</code></strong></dt>
+<dd>Agent identifier</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>Dictionary of metrics including:
+- episodes_completed
+- total_actions
+- successful_actions
+- failed_actions
+- success_rate
+- loops_detected
+- average_episode_length</p>
+<h2 id="example">Example</h2>
+<pre><code class="language-python-repl">&gt;&gt;&gt; metrics = get_agent_metrics(&quot;agent_001&quot;)
+&gt;&gt;&gt; print(f&quot;Success rate: {metrics['success_rate']:.1%}&quot;)
+</code></pre></div>
+</dd>
+<dt id="orchestrator.run_episode"><code class="name flex">
+<span>def <span class="ident">run_episode</span></span>(<span>agent_id: str = 'agent_001',<br>window_name: str = 'Cultist Simulator',<br>max_actions: int = 1000,<br>max_duration_seconds: float | None = None) ‑> src.lib.types.Session</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def run_episode(
+    agent_id: str = &#34;agent_001&#34;,
+    window_name: str = &#34;Cultist Simulator&#34;,
+    max_actions: int = 1000,
+    max_duration_seconds: Optional[float] = None,
+) -&gt; Session:
+    &#34;&#34;&#34;
+    Run a single autonomous episode.
+
+    T106-T108: Episode execution with integrated pipeline.
+
+    The agent will:
+    1. Capture game state (vision)
+    2. Understand narrative (NLP)
+    3. Select actions (learning)
+    4. Validate actions (safety)
+    5. Execute actions (automation)
+    6. Record experiences
+    7. Detect and avoid loops
+
+    Args:
+        agent_id: Unique agent identifier
+        window_name: Name of game window to control
+        max_actions: Maximum actions before ending episode
+        max_duration_seconds: Maximum episode duration
+
+    Returns:
+        Completed Session object
+
+    Example:
+        &gt;&gt;&gt; session = run_episode(
+        ...     agent_id=&#34;test_agent&#34;,
+        ...     window_name=&#34;Cultist Simulator&#34;,
+        ...     max_actions=100
+        ... )
+        &gt;&gt;&gt; print(f&#34;Episode completed: {session.total_actions} actions&#34;)
+    &#34;&#34;&#34;
+    runner = _get_or_create_runner(
+        agent_id=agent_id, window_name=window_name, max_actions_per_episode=max_actions
+    )
+
+    logger.info(
+        &#34;run_episode_start&#34;,
+        agent_id=agent_id,
+        window_name=window_name,
+        max_actions=max_actions,
+    )
+
+    session = runner.run_episode(max_duration_seconds=max_duration_seconds)
+
+    logger.info(
+        &#34;run_episode_complete&#34;,
+        agent_id=agent_id,
+        session_id=session.session_id,
+        actions=session.total_actions,
+    )
+
+    return session</code></pre>
+</details>
+<div class="desc"><p>Run a single autonomous episode.</p>
+<p>T106-T108: Episode execution with integrated pipeline.</p>
+<p>The agent will:
+1. Capture game state (vision)
+2. Understand narrative (NLP)
+3. Select actions (learning)
+4. Validate actions (safety)
+5. Execute actions (automation)
+6. Record experiences
+7. Detect and avoid loops</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>agent_id</code></strong></dt>
+<dd>Unique agent identifier</dd>
+<dt><strong><code>window_name</code></strong></dt>
+<dd>Name of game window to control</dd>
+<dt><strong><code>max_actions</code></strong></dt>
+<dd>Maximum actions before ending episode</dd>
+<dt><strong><code>max_duration_seconds</code></strong></dt>
+<dd>Maximum episode duration</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>Completed Session object</p>
+<h2 id="example">Example</h2>
+<pre><code class="language-python-repl">&gt;&gt;&gt; session = run_episode(
+...     agent_id=&quot;test_agent&quot;,
+...     window_name=&quot;Cultist Simulator&quot;,
+...     max_actions=100
+... )
+&gt;&gt;&gt; print(f&quot;Episode completed: {session.total_actions} actions&quot;)
+</code></pre></div>
+</dd>
+<dt id="orchestrator.train_agent"><code class="name flex">
+<span>def <span class="ident">train_agent</span></span>(<span>agent_id: str = 'agent_001',<br>num_episodes: int = 100,<br>window_name: str = 'Cultist Simulator',<br>max_actions_per_episode: int = 1000,<br>max_episode_duration: float | None = 300.0,<br>checkpoint_interval: int = 10) ‑> List[src.lib.types.Session]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def train_agent(
+    agent_id: str = &#34;agent_001&#34;,
+    num_episodes: int = 100,
+    window_name: str = &#34;Cultist Simulator&#34;,
+    max_actions_per_episode: int = 1000,
+    max_episode_duration: Optional[float] = 300.0,
+    checkpoint_interval: int = 10,
+) -&gt; List[Session]:
+    &#34;&#34;&#34;
+    Train agent across multiple episodes.
+
+    T109: Training loop (100-500 episodes).
+    T110: Real-time metrics tracking.
+
+    The training loop will:
+    - Run multiple episodes
+    - Track performance metrics
+    - Save checkpoints
+    - Learn from experience
+
+    Args:
+        agent_id: Unique agent identifier
+        num_episodes: Number of training episodes
+        window_name: Name of game window
+        max_actions_per_episode: Maximum actions per episode
+        max_episode_duration: Maximum seconds per episode
+        checkpoint_interval: Save checkpoint every N episodes
+
+    Returns:
+        List of completed sessions
+
+    Example:
+        &gt;&gt;&gt; sessions = train_agent(
+        ...     agent_id=&#34;learner_001&#34;,
+        ...     num_episodes=50,
+        ...     max_actions_per_episode=500
+        ... )
+        &gt;&gt;&gt; print(f&#34;Training complete: {len(sessions)} episodes&#34;)
+    &#34;&#34;&#34;
+    runner = _get_or_create_runner(
+        agent_id=agent_id,
+        window_name=window_name,
+        max_actions_per_episode=max_actions_per_episode,
+    )
+
+    trainer = TrainingRunner(runner)
+
+    logger.info(&#34;train_agent_start&#34;, agent_id=agent_id, num_episodes=num_episodes)
+
+    sessions = trainer.train(
+        num_episodes=num_episodes,
+        max_episode_duration=max_episode_duration,
+        checkpoint_interval=checkpoint_interval,
+    )
+
+    logger.info(&#34;train_agent_complete&#34;, agent_id=agent_id, episodes=len(sessions))
+
+    return sessions</code></pre>
+</details>
+<div class="desc"><p>Train agent across multiple episodes.</p>
+<p>T109: Training loop (100-500 episodes).
+T110: Real-time metrics tracking.</p>
+<p>The training loop will:
+- Run multiple episodes
+- Track performance metrics
+- Save checkpoints
+- Learn from experience</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>agent_id</code></strong></dt>
+<dd>Unique agent identifier</dd>
+<dt><strong><code>num_episodes</code></strong></dt>
+<dd>Number of training episodes</dd>
+<dt><strong><code>window_name</code></strong></dt>
+<dd>Name of game window</dd>
+<dt><strong><code>max_actions_per_episode</code></strong></dt>
+<dd>Maximum actions per episode</dd>
+<dt><strong><code>max_episode_duration</code></strong></dt>
+<dd>Maximum seconds per episode</dd>
+<dt><strong><code>checkpoint_interval</code></strong></dt>
+<dd>Save checkpoint every N episodes</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>List of completed sessions</p>
+<h2 id="example">Example</h2>
+<pre><code class="language-python-repl">&gt;&gt;&gt; sessions = train_agent(
+...     agent_id=&quot;learner_001&quot;,
+...     num_episodes=50,
+...     max_actions_per_episode=500
+... )
+&gt;&gt;&gt; print(f&quot;Training complete: {len(sessions)} episodes&quot;)
+</code></pre></div>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="orchestrator.AgentRunner"><code class="flex name class">
+<span>class <span class="ident">AgentRunner</span></span>
+<span>(</span><span>agent_id: str,<br>window_name: str = 'Cultist Simulator',<br>max_actions_per_episode: int = 1000,<br>loop_detection_window: int = 30)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class AgentRunner:
+    &#34;&#34;&#34;
+    Orchestrates autonomous agent gameplay episodes.
+
+    Implements the perception-decision-action loop:
+    1. Capture game state (vision)
+    2. Understand narrative (NLP)
+    3. Select action (learning)
+    4. Validate action (safety)
+    5. Execute action (automation)
+    6. Record experience (learning)
+    7. Detect loops and adapt
+    &#34;&#34;&#34;
+
+    def __init__(
+        self,
+        agent_id: str,
+        window_name: str = &#34;Cultist Simulator&#34;,
+        max_actions_per_episode: int = 1000,
+        loop_detection_window: int = 30,
+    ):
+        &#34;&#34;&#34;
+        Initialize agent runner.
+
+        Args:
+            agent_id: Unique agent identifier
+            window_name: Game window name
+            max_actions_per_episode: Maximum actions before ending episode
+            loop_detection_window: History size for loop detection
+        &#34;&#34;&#34;
+        self.agent_id = agent_id
+        self.window_name = window_name
+        self.max_actions_per_episode = max_actions_per_episode
+        self.loop_detection_window = loop_detection_window
+
+        # Current episode state
+        self.current_session: Optional[Session] = None
+        self.action_history: List[Action] = []
+        self.episode_count = 0
+        self.total_actions = 0
+
+        # Metrics
+        self.metrics = {
+            &#34;episodes_completed&#34;: 0,
+            &#34;total_actions&#34;: 0,
+            &#34;successful_actions&#34;: 0,
+            &#34;failed_actions&#34;: 0,
+            &#34;loops_detected&#34;: 0,
+            &#34;average_episode_length&#34;: 0.0,
+        }
+
+        logger.info(
+            &#34;agent_runner_initialized&#34;,
+            agent_id=agent_id,
+            window_name=window_name,
+            max_actions=max_actions_per_episode,
+        )
+
+    def run_episode(self, max_duration_seconds: Optional[float] = None) -&gt; Session:
+        &#34;&#34;&#34;
+        Run a single episode until termination.
+
+        T106: Episode execution loop.
+        T107: Vision → action selection → automation pipeline.
+
+        SAFETY: Validates game window is active before starting.
+        For single-screen setups, this prevents accidental interaction
+        with other applications.
+
+        Args:
+            max_duration_seconds: Maximum episode duration (None = no limit)
+
+        Returns:
+            Completed session object
+
+        Raises:
+            RuntimeError: If episode fails to start or window not active
+        &#34;&#34;&#34;
+        # CRITICAL: Verify game window is active before starting
+        try:
+            window_bounds = require_active_window(self.window_name)
+            logger.info(
+                &#34;active_window_verified&#34;,
+                window_name=self.window_name,
+                bounds=str(window_bounds),
+            )
+        except RuntimeError as e:
+            logger.error(
+                &#34;episode_start_failed_window_inactive&#34;,
+                window_name=self.window_name,
+                error=str(e),
+            )
+            raise
+
+        # Initialize session
+        session = self._start_session()
+        episode_start = time.time()
+
+        logger.info(
+            &#34;episode_started&#34;,
+            session_id=session.session_id,
+            episode_number=self.episode_count,
+        )
+
+        try:
+            # Main episode loop
+            while True:
+                # SAFETY: Check if window is still active
+                if not is_window_active(self.window_name):
+                    logger.warning(
+                        &#34;window_lost_focus&#34;,
+                        window_name=self.window_name,
+                        message=&#34;Game window lost focus - pausing episode&#34;,
+                    )
+                    # Wait for window to regain focus
+                    wait(1000)  # Wait 1 second
+                    continue
+
+                # Check emergency stop
+                if is_emergency_stop_requested():
+                    logger.warning(&#34;emergency_stop_detected&#34;)
+                    session.end_condition = EndCondition.INTERRUPTED
+                    break
+
+                # Check termination conditions
+                if self._should_terminate_episode(
+                    session, episode_start, max_duration_seconds
+                ):
+                    break
+
+                # Execute one step of the perception-action loop
+                step_result = self._execute_step(session)
+
+                if not step_result:
+                    # Step failed, but continue (agent is learning)
+                    continue
+
+                # Small delay between actions (prevent spamming)
+                wait(0.5)
+
+            # End session
+            self._end_session(session, EndCondition.TIMEOUT)
+
+        except KeyboardInterrupt:
+            logger.info(&#34;episode_interrupted&#34;, session_id=session.session_id)
+            self._end_session(session, EndCondition.MANUAL_STOP)
+            raise
+
+        except Exception as e:
+            logger.error(
+                &#34;episode_error&#34;,
+                session_id=session.session_id,
+                error=str(e),
+                exc_info=True,
+            )
+            self._end_session(session, EndCondition.CRASH)
+            raise
+
+        return session
+
+    def _execute_step(self, session: Session) -&gt; bool:
+        &#34;&#34;&#34;
+        Execute one step of the perception-action loop.
+
+        T107: Integrated pipeline.
+
+        Returns:
+            True if step succeeded, False otherwise
+        &#34;&#34;&#34;
+        step_start = time.time()
+
+        try:
+            # 1. VISION: Capture game state
+            logger.debug(&#34;step_vision_start&#34;)
+            game_state = capture_game_state(self.window_name)
+
+            if not game_state:
+                logger.warning(&#34;vision_failed&#34;, reason=&#34;no_game_state&#34;)
+                return False
+
+            # 2. NLP: Analyze narrative text (if any)
+            logger.debug(&#34;step_nlp_start&#34;)
+            narrative_goals = []
+            if game_state.text_regions:
+                # Combine all text regions
+                narrative_text = &#34; &#34;.join([tr.text for tr in game_state.text_regions])
+                narrative_goals = extract_goals(narrative_text)
+
+                if narrative_goals:
+                    logger.debug(
+                        &#34;goals_extracted&#34;,
+                        count=len(narrative_goals),
+                        goals=[g.goal_type.value for g in narrative_goals],
+                    )
+
+            # 3. LEARNING: Select action
+            logger.debug(&#34;step_learning_start&#34;)
+            try:
+                action = select_action(game_state)
+            except ModelNotLoadedError:
+                # RL model not trained yet, use fallback
+                action = self._fallback_action_selection(game_state)
+
+            if not action:
+                logger.warning(&#34;action_selection_failed&#34;)
+                return False
+
+            # 4. SAFETY: Validate action
+            logger.debug(&#34;step_safety_start&#34;, action_type=action.action_type.value)
+
+            # Build context for safety validation
+            context = {
+                &#34;window_bounds&#34;: game_state.window_bounds,
+                &#34;window_focused&#34;: True,  # TODO: Actual focus check
+                &#34;recent_actions&#34;: (
+                    self.action_history[-10:] if self.action_history else []
+                ),
+            }
+
+            validation_result = validate_action(action=action, context=context)
+
+            if not validation_result.is_allowed:
+                logger.warning(
+                    &#34;action_rejected&#34;,
+                    action_type=action.action_type.value,
+                    reason=validation_result.reason,
+                )
+                self.metrics[&#34;failed_actions&#34;] += 1
+                return False
+
+            # 5. AUTOMATION: Execute action
+            logger.debug(&#34;step_automation_start&#34;, action_type=action.action_type.value)
+            execution_success = self._execute_action(action)
+
+            if not execution_success:
+                self.metrics[&#34;failed_actions&#34;] += 1
+                return False
+
+            # 6. RECORD: Update knowledge and history
+            self.action_history.append(action)
+            session.total_actions += 1
+            self.metrics[&#34;successful_actions&#34;] += 1
+            self.metrics[&#34;total_actions&#34;] += 1
+
+            # 7. LOOP DETECTION: Check for repetitive behavior
+            if len(self.action_history) &gt;= self.loop_detection_window:
+                is_looping = detect_loop(
+                    self.action_history, window_size=self.loop_detection_window
+                )
+
+                if is_looping:
+                    logger.warning(
+                        &#34;loop_detected&#34;,
+                        session_id=session.session_id,
+                        actions=session.total_actions,
+                    )
+                    self.metrics[&#34;loops_detected&#34;] += 1
+                    # TODO: Implement loop-breaking strategy
+
+            step_duration = (time.time() - step_start) * 1000
+            logger.debug(
+                &#34;step_completed&#34;,
+                duration_ms=step_duration,
+                total_actions=session.total_actions,
+            )
+
+            return True
+
+        except Exception as e:
+            logger.error(&#34;step_error&#34;, error=str(e), exc_info=True)
+            return False
+
+    def _execute_action(self, action: Action) -&gt; bool:
+        &#34;&#34;&#34;
+        Execute action using automation library.
+
+        Returns:
+            True if execution succeeded, False otherwise
+        &#34;&#34;&#34;
+        try:
+            if action.action_type == ActionType.CLICK:
+                point = action.parameters.get(&#34;point&#34;)
+                if point:
+                    simulate_click(
+                        point=point, button=action.parameters.get(&#34;button&#34;, &#34;left&#34;)
+                    )
+                    return True
+                else:
+                    logger.warning(&#34;click_missing_point&#34;)
+                    return False
+
+            elif action.action_type == ActionType.KEY_PRESS:
+                key = action.parameters.get(&#34;key&#34;)
+                if key:
+                    simulate_key_press(
+                        key=key, modifiers=action.parameters.get(&#34;modifiers&#34;, [])
+                    )
+                    return True
+                else:
+                    logger.warning(&#34;key_press_missing_key&#34;)
+                    return False
+
+            elif action.action_type == ActionType.WAIT:
+                wait(action.parameters.get(&#34;duration&#34;, 1.0))
+                return True
+
+            else:
+                logger.warning(
+                    &#34;unsupported_action_type&#34;, action_type=action.action_type
+                )
+                return False
+
+        except (OutOfBoundsError, BlacklistedKeyError, WindowNotFocusedError) as e:
+            logger.warning(
+                &#34;action_execution_blocked&#34;,
+                action_type=action.action_type.value,
+                reason=str(e),
+            )
+            return False
+
+        except Exception as e:
+            logger.error(
+                &#34;action_execution_error&#34;,
+                action_type=action.action_type.value,
+                error=str(e),
+            )
+            return False
+
+    def _fallback_action_selection(self, game_state: GameState) -&gt; Optional[Action]:
+        &#34;&#34;&#34;
+        Fallback action selection when RL model is not available.
+
+        Simple rule-based approach:
+        - Click on detected elements
+        - Wait if no elements detected
+
+        Returns:
+            Action to execute
+        &#34;&#34;&#34;
+        # If elements detected, click on first one
+        if game_state.elements:
+            element = game_state.elements[0]
+
+            return Action(
+                action_type=ActionType.CLICK,
+                parameters={&#34;point&#34;: element.center, &#34;button&#34;: &#34;left&#34;},
+                timestamp=datetime.now(),
+            )
+
+        # Otherwise, wait
+        return Action(
+            action_type=ActionType.WAIT,
+            parameters={&#34;duration&#34;: 1.0},
+            timestamp=datetime.now(),
+        )
+
+    def _should_terminate_episode(
+        self,
+        session: Session,
+        episode_start: float,
+        max_duration_seconds: Optional[float],
+    ) -&gt; bool:
+        &#34;&#34;&#34;
+        Check if episode should terminate.
+
+        Termination conditions:
+        - Max actions reached
+        - Max duration exceeded
+        - Game over detected (future)
+        - Victory detected (future)
+        &#34;&#34;&#34;
+        # Max actions
+        if session.total_actions &gt;= self.max_actions_per_episode:
+            logger.info(
+                &#34;max_actions_reached&#34;,
+                session_id=session.session_id,
+                actions=session.total_actions,
+            )
+            return True
+
+        # Max duration
+        if max_duration_seconds:
+            elapsed = time.time() - episode_start
+            if elapsed &gt;= max_duration_seconds:
+                logger.info(
+                    &#34;max_duration_reached&#34;,
+                    session_id=session.session_id,
+                    duration=elapsed,
+                )
+                return True
+
+        return False
+
+    def _start_session(self) -&gt; Session:
+        &#34;&#34;&#34;Create and initialize a new session.&#34;&#34;&#34;
+        session_id = self._generate_session_id()
+
+        session = Session(
+            session_id=session_id,
+            agent_id=self.agent_id,
+            start_time=datetime.now(),
+            total_actions=0,
+            total_reward=0.0,
+        )
+
+        self.current_session = session
+        self.action_history = []
+        self.episode_count += 1
+
+        return session
+
+    def _end_session(self, session: Session, end_condition: EndCondition):
+        &#34;&#34;&#34;
+        End session and persist.
+
+        T108: Session recording and persistence.
+        &#34;&#34;&#34;
+        session.end_time = datetime.now()
+        session.end_condition = end_condition
+
+        # Store session
+        try:
+            store_session(session)
+            logger.info(
+                &#34;session_stored&#34;,
+                session_id=session.session_id,
+                actions=session.total_actions,
+                duration=session.duration_seconds,
+            )
+        except Exception as e:
+            logger.error(
+                &#34;session_storage_failed&#34;, session_id=session.session_id, error=str(e)
+            )
+
+        # Update metrics
+        self.metrics[&#34;episodes_completed&#34;] += 1
+        self._update_average_episode_length(session.total_actions)
+
+        self.current_session = None
+
+    def _update_average_episode_length(self, episode_length: int):
+        &#34;&#34;&#34;Update running average of episode length.&#34;&#34;&#34;
+        n = self.metrics[&#34;episodes_completed&#34;]
+        current_avg = self.metrics[&#34;average_episode_length&#34;]
+
+        # Incremental average: avg_n = avg_(n-1) + (x_n - avg_(n-1)) / n
+        new_avg = current_avg + (episode_length - current_avg) / n
+        self.metrics[&#34;average_episode_length&#34;] = new_avg
+
+    def _generate_session_id(self) -&gt; str:
+        &#34;&#34;&#34;Generate unique session ID.&#34;&#34;&#34;
+        unique_str = (
+            f&#34;{self.agent_id}_{datetime.now().isoformat()}_{self.episode_count}&#34;
+        )
+        return hashlib.md5(unique_str.encode()).hexdigest()[:16]
+
+    def get_metrics(self) -&gt; Dict[str, Any]:
+        &#34;&#34;&#34;
+        Get current performance metrics.
+
+        T110: Real-time metrics tracking.
+
+        Returns:
+            Dictionary of metrics
+        &#34;&#34;&#34;
+        success_rate = 0.0
+        if self.metrics[&#34;total_actions&#34;] &gt; 0:
+            success_rate = (
+                self.metrics[&#34;successful_actions&#34;] / self.metrics[&#34;total_actions&#34;]
+            )
+
+        return {
+            **self.metrics,
+            &#34;success_rate&#34;: success_rate,
+            &#34;current_episode&#34;: self.episode_count,
+        }
+
+    def articulate_strategy(self) -&gt; str:
+        &#34;&#34;&#34;
+        Generate human-readable description of current strategy.
+
+        T111: Articulate strategy for human understanding.
+
+        Returns:
+            Natural language strategy description
+        &#34;&#34;&#34;
+        metrics = self.get_metrics()
+
+        strategy = f&#34;&#34;&#34;
+Agent Strategy Summary (ID: {self.agent_id})
+{&#39;=&#39; * 50}
+
+Performance:
+- Episodes Completed: {metrics[&#39;episodes_completed&#39;]}
+- Total Actions: {metrics[&#39;total_actions&#39;]}
+- Success Rate: {metrics[&#39;success_rate&#39;]:.1%}
+- Average Episode Length: {metrics[&#39;average_episode_length&#39;]:.1f} actions
+
+Behavior Patterns:
+- Loops Detected: {metrics[&#39;loops_detected&#39;]}
+- Failed Actions: {metrics[&#39;failed_actions&#39;]}
+
+Current Approach:
+&#34;&#34;&#34;
+
+        if metrics[&#34;total_actions&#34;] == 0:
+            strategy += &#34;- Just starting, gathering initial experience\n&#34;
+        elif metrics[&#34;loops_detected&#34;] &gt; 5:
+            strategy += (
+                &#34;- Experiencing repetitive behavior, needs strategy adjustment\n&#34;
+            )
+        elif metrics[&#34;success_rate&#34;] &gt; 0.8:
+            strategy += &#34;- Performing well, actions mostly successful\n&#34;
+        else:
+            strategy += &#34;- Learning phase, experimenting with different actions\n&#34;
+
+        return strategy.strip()</code></pre>
+</details>
+<div class="desc"><p>Orchestrates autonomous agent gameplay episodes.</p>
+<p>Implements the perception-decision-action loop:
+1. Capture game state (vision)
+2. Understand narrative (NLP)
+3. Select action (learning)
+4. Validate action (safety)
+5. Execute action (automation)
+6. Record experience (learning)
+7. Detect loops and adapt</p>
+<p>Initialize agent runner.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>agent_id</code></strong></dt>
+<dd>Unique agent identifier</dd>
+<dt><strong><code>window_name</code></strong></dt>
+<dd>Game window name</dd>
+<dt><strong><code>max_actions_per_episode</code></strong></dt>
+<dd>Maximum actions before ending episode</dd>
+<dt><strong><code>loop_detection_window</code></strong></dt>
+<dd>History size for loop detection</dd>
+</dl></div>
+<h3>Methods</h3>
+<dl>
+<dt id="orchestrator.AgentRunner.articulate_strategy"><code class="name flex">
+<span>def <span class="ident">articulate_strategy</span></span>(<span>self) ‑> str</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">    def articulate_strategy(self) -&gt; str:
+        &#34;&#34;&#34;
+        Generate human-readable description of current strategy.
+
+        T111: Articulate strategy for human understanding.
+
+        Returns:
+            Natural language strategy description
+        &#34;&#34;&#34;
+        metrics = self.get_metrics()
+
+        strategy = f&#34;&#34;&#34;
+Agent Strategy Summary (ID: {self.agent_id})
+{&#39;=&#39; * 50}
+
+Performance:
+- Episodes Completed: {metrics[&#39;episodes_completed&#39;]}
+- Total Actions: {metrics[&#39;total_actions&#39;]}
+- Success Rate: {metrics[&#39;success_rate&#39;]:.1%}
+- Average Episode Length: {metrics[&#39;average_episode_length&#39;]:.1f} actions
+
+Behavior Patterns:
+- Loops Detected: {metrics[&#39;loops_detected&#39;]}
+- Failed Actions: {metrics[&#39;failed_actions&#39;]}
+
+Current Approach:
+&#34;&#34;&#34;
+
+        if metrics[&#34;total_actions&#34;] == 0:
+            strategy += &#34;- Just starting, gathering initial experience\n&#34;
+        elif metrics[&#34;loops_detected&#34;] &gt; 5:
+            strategy += (
+                &#34;- Experiencing repetitive behavior, needs strategy adjustment\n&#34;
+            )
+        elif metrics[&#34;success_rate&#34;] &gt; 0.8:
+            strategy += &#34;- Performing well, actions mostly successful\n&#34;
+        else:
+            strategy += &#34;- Learning phase, experimenting with different actions\n&#34;
+
+        return strategy.strip()</code></pre>
+</details>
+<div class="desc"><p>Generate human-readable description of current strategy.</p>
+<p>T111: Articulate strategy for human understanding.</p>
+<h2 id="returns">Returns</h2>
+<p>Natural language strategy description</p></div>
+</dd>
+<dt id="orchestrator.AgentRunner.get_metrics"><code class="name flex">
+<span>def <span class="ident">get_metrics</span></span>(<span>self) ‑> Dict[str, Any]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_metrics(self) -&gt; Dict[str, Any]:
+    &#34;&#34;&#34;
+    Get current performance metrics.
+
+    T110: Real-time metrics tracking.
+
+    Returns:
+        Dictionary of metrics
+    &#34;&#34;&#34;
+    success_rate = 0.0
+    if self.metrics[&#34;total_actions&#34;] &gt; 0:
+        success_rate = (
+            self.metrics[&#34;successful_actions&#34;] / self.metrics[&#34;total_actions&#34;]
+        )
+
+    return {
+        **self.metrics,
+        &#34;success_rate&#34;: success_rate,
+        &#34;current_episode&#34;: self.episode_count,
+    }</code></pre>
+</details>
+<div class="desc"><p>Get current performance metrics.</p>
+<p>T110: Real-time metrics tracking.</p>
+<h2 id="returns">Returns</h2>
+<p>Dictionary of metrics</p></div>
+</dd>
+<dt id="orchestrator.AgentRunner.run_episode"><code class="name flex">
+<span>def <span class="ident">run_episode</span></span>(<span>self, max_duration_seconds: float | None = None) ‑> src.lib.types.Session</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def run_episode(self, max_duration_seconds: Optional[float] = None) -&gt; Session:
+    &#34;&#34;&#34;
+    Run a single episode until termination.
+
+    T106: Episode execution loop.
+    T107: Vision → action selection → automation pipeline.
+
+    SAFETY: Validates game window is active before starting.
+    For single-screen setups, this prevents accidental interaction
+    with other applications.
+
+    Args:
+        max_duration_seconds: Maximum episode duration (None = no limit)
+
+    Returns:
+        Completed session object
+
+    Raises:
+        RuntimeError: If episode fails to start or window not active
+    &#34;&#34;&#34;
+    # CRITICAL: Verify game window is active before starting
+    try:
+        window_bounds = require_active_window(self.window_name)
+        logger.info(
+            &#34;active_window_verified&#34;,
+            window_name=self.window_name,
+            bounds=str(window_bounds),
+        )
+    except RuntimeError as e:
+        logger.error(
+            &#34;episode_start_failed_window_inactive&#34;,
+            window_name=self.window_name,
+            error=str(e),
+        )
+        raise
+
+    # Initialize session
+    session = self._start_session()
+    episode_start = time.time()
+
+    logger.info(
+        &#34;episode_started&#34;,
+        session_id=session.session_id,
+        episode_number=self.episode_count,
+    )
+
+    try:
+        # Main episode loop
+        while True:
+            # SAFETY: Check if window is still active
+            if not is_window_active(self.window_name):
+                logger.warning(
+                    &#34;window_lost_focus&#34;,
+                    window_name=self.window_name,
+                    message=&#34;Game window lost focus - pausing episode&#34;,
+                )
+                # Wait for window to regain focus
+                wait(1000)  # Wait 1 second
+                continue
+
+            # Check emergency stop
+            if is_emergency_stop_requested():
+                logger.warning(&#34;emergency_stop_detected&#34;)
+                session.end_condition = EndCondition.INTERRUPTED
+                break
+
+            # Check termination conditions
+            if self._should_terminate_episode(
+                session, episode_start, max_duration_seconds
+            ):
+                break
+
+            # Execute one step of the perception-action loop
+            step_result = self._execute_step(session)
+
+            if not step_result:
+                # Step failed, but continue (agent is learning)
+                continue
+
+            # Small delay between actions (prevent spamming)
+            wait(0.5)
+
+        # End session
+        self._end_session(session, EndCondition.TIMEOUT)
+
+    except KeyboardInterrupt:
+        logger.info(&#34;episode_interrupted&#34;, session_id=session.session_id)
+        self._end_session(session, EndCondition.MANUAL_STOP)
+        raise
+
+    except Exception as e:
+        logger.error(
+            &#34;episode_error&#34;,
+            session_id=session.session_id,
+            error=str(e),
+            exc_info=True,
+        )
+        self._end_session(session, EndCondition.CRASH)
+        raise
+
+    return session</code></pre>
+</details>
+<div class="desc"><p>Run a single episode until termination.</p>
+<p>T106: Episode execution loop.
+T107: Vision → action selection → automation pipeline.</p>
+<p>SAFETY: Validates game window is active before starting.
+For single-screen setups, this prevents accidental interaction
+with other applications.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>max_duration_seconds</code></strong></dt>
+<dd>Maximum episode duration (None = no limit)</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>Completed session object</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>RuntimeError</code></dt>
+<dd>If episode fails to start or window not active</dd>
+</dl></div>
+</dd>
+</dl>
+</dd>
+<dt id="orchestrator.TrainingRunner"><code class="flex name class">
+<span>class <span class="ident">TrainingRunner</span></span>
+<span>(</span><span>agent_runner: <a title="orchestrator.agent_runner.AgentRunner" href="agent_runner.html#orchestrator.agent_runner.AgentRunner">AgentRunner</a>)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class TrainingRunner:
+    &#34;&#34;&#34;
+    Runs multiple training episodes for agent learning.
+
+    T109: Training loop implementation.
+    &#34;&#34;&#34;
+
+    def __init__(self, agent_runner: AgentRunner):
+        &#34;&#34;&#34;
+        Initialize training runner.
+
+        Args:
+            agent_runner: AgentRunner instance to train
+        &#34;&#34;&#34;
+        self.agent_runner = agent_runner
+        self.training_sessions: List[Session] = []
+
+        logger.info(&#34;training_runner_initialized&#34;, agent_id=agent_runner.agent_id)
+
+    def train(
+        self,
+        num_episodes: int = 100,
+        max_episode_duration: Optional[float] = 300.0,
+        checkpoint_interval: int = 10,
+    ) -&gt; List[Session]:
+        &#34;&#34;&#34;
+        Run training episodes.
+
+        Args:
+            num_episodes: Number of episodes to run
+            max_episode_duration: Maximum seconds per episode
+            checkpoint_interval: Save checkpoint every N episodes
+
+        Returns:
+            List of completed sessions
+        &#34;&#34;&#34;
+        logger.info(
+            &#34;training_started&#34;,
+            num_episodes=num_episodes,
+            max_duration=max_episode_duration,
+        )
+
+        for episode_num in range(1, num_episodes + 1):
+            logger.info(
+                &#34;training_episode_start&#34;, episode=episode_num, total=num_episodes
+            )
+
+            try:
+                # Run episode
+                session = self.agent_runner.run_episode(
+                    max_duration_seconds=max_episode_duration
+                )
+                self.training_sessions.append(session)
+
+                # Log progress
+                metrics = self.agent_runner.get_metrics()
+                logger.info(
+                    &#34;training_episode_complete&#34;,
+                    episode=episode_num,
+                    actions=session.total_actions,
+                    success_rate=metrics[&#34;success_rate&#34;],
+                )
+
+                # Checkpoint
+                if episode_num % checkpoint_interval == 0:
+                    self._save_checkpoint(episode_num)
+
+            except KeyboardInterrupt:
+                logger.info(&#34;training_interrupted&#34;, completed_episodes=episode_num - 1)
+                break
+
+            except Exception as e:
+                logger.error(
+                    &#34;training_episode_error&#34;,
+                    episode=episode_num,
+                    error=str(e),
+                    exc_info=True,
+                )
+                # Continue with next episode
+                continue
+
+        logger.info(
+            &#34;training_completed&#34;,
+            episodes=len(self.training_sessions),
+            total_actions=self.agent_runner.metrics[&#34;total_actions&#34;],
+        )
+
+        return self.training_sessions
+
+    def _save_checkpoint(self, episode_num: int):
+        &#34;&#34;&#34;
+        Save training checkpoint.
+
+        T112: Crash recovery and resume logic.
+        &#34;&#34;&#34;
+        checkpoint_dir = Path(&#34;data/checkpoints&#34;)
+        checkpoint_dir.mkdir(parents=True, exist_ok=True)
+
+        checkpoint_file = checkpoint_dir / f&#34;checkpoint_ep{episode_num}.txt&#34;
+
+        try:
+            with open(checkpoint_file, &#34;w&#34;) as f:
+                f.write(f&#34;Episode: {episode_num}\n&#34;)
+                f.write(f&#34;Sessions: {len(self.training_sessions)}\n&#34;)
+                f.write(
+                    f&#34;Total Actions: {self.agent_runner.metrics[&#39;total_actions&#39;]}\n&#34;
+                )
+                f.write(f&#34;\nMetrics:\n&#34;)
+                for key, value in self.agent_runner.get_metrics().items():
+                    f.write(f&#34;  {key}: {value}\n&#34;)
+
+            logger.info(
+                &#34;checkpoint_saved&#34;, episode=episode_num, file=str(checkpoint_file)
+            )
+
+        except Exception as e:
+            logger.error(&#34;checkpoint_save_failed&#34;, episode=episode_num, error=str(e))</code></pre>
+</details>
+<div class="desc"><p>Runs multiple training episodes for agent learning.</p>
+<p>T109: Training loop implementation.</p>
+<p>Initialize training runner.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>agent_runner</code></strong></dt>
+<dd>AgentRunner instance to train</dd>
+</dl></div>
+<h3>Methods</h3>
+<dl>
+<dt id="orchestrator.TrainingRunner.train"><code class="name flex">
+<span>def <span class="ident">train</span></span>(<span>self,<br>num_episodes: int = 100,<br>max_episode_duration: float | None = 300.0,<br>checkpoint_interval: int = 10) ‑> List[src.lib.types.Session]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def train(
+    self,
+    num_episodes: int = 100,
+    max_episode_duration: Optional[float] = 300.0,
+    checkpoint_interval: int = 10,
+) -&gt; List[Session]:
+    &#34;&#34;&#34;
+    Run training episodes.
+
+    Args:
+        num_episodes: Number of episodes to run
+        max_episode_duration: Maximum seconds per episode
+        checkpoint_interval: Save checkpoint every N episodes
+
+    Returns:
+        List of completed sessions
+    &#34;&#34;&#34;
+    logger.info(
+        &#34;training_started&#34;,
+        num_episodes=num_episodes,
+        max_duration=max_episode_duration,
+    )
+
+    for episode_num in range(1, num_episodes + 1):
+        logger.info(
+            &#34;training_episode_start&#34;, episode=episode_num, total=num_episodes
+        )
+
+        try:
+            # Run episode
+            session = self.agent_runner.run_episode(
+                max_duration_seconds=max_episode_duration
+            )
+            self.training_sessions.append(session)
+
+            # Log progress
+            metrics = self.agent_runner.get_metrics()
+            logger.info(
+                &#34;training_episode_complete&#34;,
+                episode=episode_num,
+                actions=session.total_actions,
+                success_rate=metrics[&#34;success_rate&#34;],
+            )
+
+            # Checkpoint
+            if episode_num % checkpoint_interval == 0:
+                self._save_checkpoint(episode_num)
+
+        except KeyboardInterrupt:
+            logger.info(&#34;training_interrupted&#34;, completed_episodes=episode_num - 1)
+            break
+
+        except Exception as e:
+            logger.error(
+                &#34;training_episode_error&#34;,
+                episode=episode_num,
+                error=str(e),
+                exc_info=True,
+            )
+            # Continue with next episode
+            continue
+
+    logger.info(
+        &#34;training_completed&#34;,
+        episodes=len(self.training_sessions),
+        total_actions=self.agent_runner.metrics[&#34;total_actions&#34;],
+    )
+
+    return self.training_sessions</code></pre>
+</details>
+<div class="desc"><p>Run training episodes.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>num_episodes</code></strong></dt>
+<dd>Number of episodes to run</dd>
+<dt><strong><code>max_episode_duration</code></strong></dt>
+<dd>Maximum seconds per episode</dd>
+<dt><strong><code>checkpoint_interval</code></strong></dt>
+<dd>Save checkpoint every N episodes</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>List of completed sessions</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-submodules">Sub-modules</a></h3>
+<ul>
+<li><code><a title="orchestrator.agent_runner" href="agent_runner.html">orchestrator.agent_runner</a></code></li>
+<li><code><a title="orchestrator.cli" href="cli.html">orchestrator.cli</a></code></li>
+<li><code><a title="orchestrator.permissions" href="permissions.html">orchestrator.permissions</a></code></li>
+<li><code><a title="orchestrator.session_replay" href="session_replay.html">orchestrator.session_replay</a></code></li>
+<li><code><a title="orchestrator.shutdown" href="shutdown.html">orchestrator.shutdown</a></code></li>
+<li><code><a title="orchestrator.tensorboard_logger" href="tensorboard_logger.html">orchestrator.tensorboard_logger</a></code></li>
+<li><code><a title="orchestrator.tensorboard_vscode" href="tensorboard_vscode.html">orchestrator.tensorboard_vscode</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="orchestrator.articulate_strategy" href="#orchestrator.articulate_strategy">articulate_strategy</a></code></li>
+<li><code><a title="orchestrator.get_agent_metrics" href="#orchestrator.get_agent_metrics">get_agent_metrics</a></code></li>
+<li><code><a title="orchestrator.run_episode" href="#orchestrator.run_episode">run_episode</a></code></li>
+<li><code><a title="orchestrator.train_agent" href="#orchestrator.train_agent">train_agent</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="orchestrator.AgentRunner" href="#orchestrator.AgentRunner">AgentRunner</a></code></h4>
+<ul class="">
+<li><code><a title="orchestrator.AgentRunner.articulate_strategy" href="#orchestrator.AgentRunner.articulate_strategy">articulate_strategy</a></code></li>
+<li><code><a title="orchestrator.AgentRunner.get_metrics" href="#orchestrator.AgentRunner.get_metrics">get_metrics</a></code></li>
+<li><code><a title="orchestrator.AgentRunner.run_episode" href="#orchestrator.AgentRunner.run_episode">run_episode</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="orchestrator.TrainingRunner" href="#orchestrator.TrainingRunner">TrainingRunner</a></code></h4>
+<ul class="">
+<li><code><a title="orchestrator.TrainingRunner.train" href="#orchestrator.TrainingRunner.train">train</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

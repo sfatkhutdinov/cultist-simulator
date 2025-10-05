@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>learning.metrics API documentation</title>
+<meta name="description" content="Performance Metrics Module …">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>learning.metrics</code></h1>
+</header>
+<section id="section-intro">
+<p>Performance Metrics Module</p>
+<p>Tracks multi-dimensional performance metrics for the RL agent.</p>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="learning.metrics.MetricsTracker"><code class="flex name class">
+<span>class <span class="ident">MetricsTracker</span></span>
+<span>(</span><span>storage_path: str = 'data/metrics.json')</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class MetricsTracker:
+    &#34;&#34;&#34;
+    Tracks and aggregates performance metrics across sessions.
+    &#34;&#34;&#34;
+
+    def __init__(self, storage_path: str = &#34;data/metrics.json&#34;):
+        &#34;&#34;&#34;Initialize metrics tracker.&#34;&#34;&#34;
+        self.storage_path = storage_path
+        self.metrics: List[PerformanceMetric] = []
+        self._load_metrics()
+
+    def _load_metrics(self) -&gt; None:
+        &#34;&#34;&#34;Load metrics from disk.&#34;&#34;&#34;
+        import os
+
+        if os.path.exists(self.storage_path):
+            try:
+                with open(self.storage_path, &#34;r&#34;) as f:
+                    data = json.load(f)
+                    for metric_data in data.get(&#34;metrics&#34;, []):
+                        metric = PerformanceMetric.from_dict(metric_data)
+                        self.metrics.append(metric)
+                logger.info(f&#34;Loaded {len(self.metrics)} metrics&#34;)
+            except Exception as e:
+                logger.error(f&#34;Failed to load metrics: {e}&#34;)
+
+    def _save_metrics(self) -&gt; None:
+        &#34;&#34;&#34;Save metrics to disk.&#34;&#34;&#34;
+        import os
+
+        os.makedirs(os.path.dirname(self.storage_path), exist_ok=True)
+        try:
+            data = {&#34;metrics&#34;: [m.to_dict() for m in self.metrics]}
+            with open(self.storage_path, &#34;w&#34;) as f:
+                json.dump(data, f, indent=2)
+            logger.debug(f&#34;Saved {len(self.metrics)} metrics&#34;)
+        except Exception as e:
+            logger.error(f&#34;Failed to save metrics: {e}&#34;)
+
+    def record_metric(self, metric: PerformanceMetric) -&gt; None:
+        &#34;&#34;&#34;Record a new performance metric.&#34;&#34;&#34;
+        self.metrics.append(metric)
+        self._save_metrics()
+        logger.info(
+            f&#34;Recorded metric for session {metric.session_id}: &#34;
+            f&#34;{metric.game_result}, {metric.survival_time_seconds:.1f}s survival&#34;
+        )
+
+    def get_aggregate_stats(self, last_n: Optional[int] = None) -&gt; Dict[str, Any]:
+        &#34;&#34;&#34;
+        Get aggregated statistics.
+
+        Args:
+            last_n: Only consider last N sessions (None = all)
+
+        Returns:
+            Dictionary of aggregate statistics
+        &#34;&#34;&#34;
+        metrics_to_analyze = self.metrics[-last_n:] if last_n else self.metrics
+
+        if not metrics_to_analyze:
+            return {
+                &#34;total_sessions&#34;: 0,
+                &#34;win_rate&#34;: 0.0,
+                &#34;avg_survival_time&#34;: 0.0,
+                &#34;unique_endings_found&#34;: 0,
+                &#34;total_wins&#34;: 0,
+                &#34;total_losses&#34;: 0,
+            }
+
+        total_sessions = len(metrics_to_analyze)
+        wins = sum(1 for m in metrics_to_analyze if m.game_result == &#34;win&#34;)
+        losses = sum(1 for m in metrics_to_analyze if m.game_result == &#34;loss&#34;)
+        crashes = sum(1 for m in metrics_to_analyze if m.game_result == &#34;crash&#34;)
+
+        avg_survival = (
+            sum(m.survival_time_seconds for m in metrics_to_analyze) / total_sessions
+        )
+
+        unique_endings = set(
+            m.unique_ending_id
+            for m in metrics_to_analyze
+            if m.unique_ending_id is not None
+        )
+
+        total_actions = sum(m.actions_taken for m in metrics_to_analyze)
+        total_loops = sum(m.loops_detected for m in metrics_to_analyze)
+
+        return {
+            &#34;total_sessions&#34;: total_sessions,
+            &#34;win_rate&#34;: wins / total_sessions if total_sessions &gt; 0 else 0.0,
+            &#34;avg_survival_time&#34;: avg_survival,
+            &#34;unique_endings_found&#34;: len(unique_endings),
+            &#34;total_wins&#34;: wins,
+            &#34;total_losses&#34;: losses,
+            &#34;total_crashes&#34;: crashes,
+            &#34;total_actions&#34;: total_actions,
+            &#34;total_loops_detected&#34;: total_loops,
+            &#34;avg_actions_per_session&#34;: (
+                total_actions / total_sessions if total_sessions &gt; 0 else 0
+            ),
+        }
+
+    def get_recent_performance(self, window: int = 10) -&gt; Dict[str, Any]:
+        &#34;&#34;&#34;Get performance over recent sessions.&#34;&#34;&#34;
+        return self.get_aggregate_stats(last_n=window)
+
+    def has_improved(self, window: int = 10, baseline_window: int = 100) -&gt; bool:
+        &#34;&#34;&#34;
+        Check if agent has improved over time.
+
+        Args:
+            window: Recent sessions to compare
+            baseline_window: Baseline sessions for comparison
+
+        Returns:
+            True if recent performance exceeds baseline
+        &#34;&#34;&#34;
+        if len(self.metrics) &lt; window + baseline_window:
+            return False
+
+        baseline_stats = self.get_aggregate_stats(last_n=baseline_window)
+        recent_stats = self.get_recent_performance(window=window)
+
+        # Compare win rate and survival time
+        improved_win_rate = recent_stats[&#34;win_rate&#34;] &gt; baseline_stats[&#34;win_rate&#34;]
+        improved_survival = (
+            recent_stats[&#34;avg_survival_time&#34;] &gt; baseline_stats[&#34;avg_survival_time&#34;]
+        )
+
+        return improved_win_rate or improved_survival
+
+    def clear_metrics(self) -&gt; None:
+        &#34;&#34;&#34;Clear all metrics.&#34;&#34;&#34;
+        self.metrics.clear()
+        self._save_metrics()
+        logger.info(&#34;Cleared all metrics&#34;)</code></pre>
+</details>
+<div class="desc"><p>Tracks and aggregates performance metrics across sessions.</p>
+<p>Initialize metrics tracker.</p></div>
+<h3>Methods</h3>
+<dl>
+<dt id="learning.metrics.MetricsTracker.clear_metrics"><code class="name flex">
+<span>def <span class="ident">clear_metrics</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def clear_metrics(self) -&gt; None:
+    &#34;&#34;&#34;Clear all metrics.&#34;&#34;&#34;
+    self.metrics.clear()
+    self._save_metrics()
+    logger.info(&#34;Cleared all metrics&#34;)</code></pre>
+</details>
+<div class="desc"><p>Clear all metrics.</p></div>
+</dd>
+<dt id="learning.metrics.MetricsTracker.get_aggregate_stats"><code class="name flex">
+<span>def <span class="ident">get_aggregate_stats</span></span>(<span>self, last_n: int | None = None) ‑> Dict[str, Any]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_aggregate_stats(self, last_n: Optional[int] = None) -&gt; Dict[str, Any]:
+    &#34;&#34;&#34;
+    Get aggregated statistics.
+
+    Args:
+        last_n: Only consider last N sessions (None = all)
+
+    Returns:
+        Dictionary of aggregate statistics
+    &#34;&#34;&#34;
+    metrics_to_analyze = self.metrics[-last_n:] if last_n else self.metrics
+
+    if not metrics_to_analyze:
+        return {
+            &#34;total_sessions&#34;: 0,
+            &#34;win_rate&#34;: 0.0,
+            &#34;avg_survival_time&#34;: 0.0,
+            &#34;unique_endings_found&#34;: 0,
+            &#34;total_wins&#34;: 0,
+            &#34;total_losses&#34;: 0,
+        }
+
+    total_sessions = len(metrics_to_analyze)
+    wins = sum(1 for m in metrics_to_analyze if m.game_result == &#34;win&#34;)
+    losses = sum(1 for m in metrics_to_analyze if m.game_result == &#34;loss&#34;)
+    crashes = sum(1 for m in metrics_to_analyze if m.game_result == &#34;crash&#34;)
+
+    avg_survival = (
+        sum(m.survival_time_seconds for m in metrics_to_analyze) / total_sessions
+    )
+
+    unique_endings = set(
+        m.unique_ending_id
+        for m in metrics_to_analyze
+        if m.unique_ending_id is not None
+    )
+
+    total_actions = sum(m.actions_taken for m in metrics_to_analyze)
+    total_loops = sum(m.loops_detected for m in metrics_to_analyze)
+
+    return {
+        &#34;total_sessions&#34;: total_sessions,
+        &#34;win_rate&#34;: wins / total_sessions if total_sessions &gt; 0 else 0.0,
+        &#34;avg_survival_time&#34;: avg_survival,
+        &#34;unique_endings_found&#34;: len(unique_endings),
+        &#34;total_wins&#34;: wins,
+        &#34;total_losses&#34;: losses,
+        &#34;total_crashes&#34;: crashes,
+        &#34;total_actions&#34;: total_actions,
+        &#34;total_loops_detected&#34;: total_loops,
+        &#34;avg_actions_per_session&#34;: (
+            total_actions / total_sessions if total_sessions &gt; 0 else 0
+        ),
+    }</code></pre>
+</details>
+<div class="desc"><p>Get aggregated statistics.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>last_n</code></strong></dt>
+<dd>Only consider last N sessions (None = all)</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>Dictionary of aggregate statistics</p></div>
+</dd>
+<dt id="learning.metrics.MetricsTracker.get_recent_performance"><code class="name flex">
+<span>def <span class="ident">get_recent_performance</span></span>(<span>self, window: int = 10) ‑> Dict[str, Any]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_recent_performance(self, window: int = 10) -&gt; Dict[str, Any]:
+    &#34;&#34;&#34;Get performance over recent sessions.&#34;&#34;&#34;
+    return self.get_aggregate_stats(last_n=window)</code></pre>
+</details>
+<div class="desc"><p>Get performance over recent sessions.</p></div>
+</dd>
+<dt id="learning.metrics.MetricsTracker.has_improved"><code class="name flex">
+<span>def <span class="ident">has_improved</span></span>(<span>self, window: int = 10, baseline_window: int = 100) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def has_improved(self, window: int = 10, baseline_window: int = 100) -&gt; bool:
+    &#34;&#34;&#34;
+    Check if agent has improved over time.
+
+    Args:
+        window: Recent sessions to compare
+        baseline_window: Baseline sessions for comparison
+
+    Returns:
+        True if recent performance exceeds baseline
+    &#34;&#34;&#34;
+    if len(self.metrics) &lt; window + baseline_window:
+        return False
+
+    baseline_stats = self.get_aggregate_stats(last_n=baseline_window)
+    recent_stats = self.get_recent_performance(window=window)
+
+    # Compare win rate and survival time
+    improved_win_rate = recent_stats[&#34;win_rate&#34;] &gt; baseline_stats[&#34;win_rate&#34;]
+    improved_survival = (
+        recent_stats[&#34;avg_survival_time&#34;] &gt; baseline_stats[&#34;avg_survival_time&#34;]
+    )
+
+    return improved_win_rate or improved_survival</code></pre>
+</details>
+<div class="desc"><p>Check if agent has improved over time.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>window</code></strong></dt>
+<dd>Recent sessions to compare</dd>
+<dt><strong><code>baseline_window</code></strong></dt>
+<dd>Baseline sessions for comparison</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>True if recent performance exceeds baseline</p></div>
+</dd>
+<dt id="learning.metrics.MetricsTracker.record_metric"><code class="name flex">
+<span>def <span class="ident">record_metric</span></span>(<span>self,<br>metric: <a title="learning.metrics.PerformanceMetric" href="#learning.metrics.PerformanceMetric">PerformanceMetric</a>) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def record_metric(self, metric: PerformanceMetric) -&gt; None:
+    &#34;&#34;&#34;Record a new performance metric.&#34;&#34;&#34;
+    self.metrics.append(metric)
+    self._save_metrics()
+    logger.info(
+        f&#34;Recorded metric for session {metric.session_id}: &#34;
+        f&#34;{metric.game_result}, {metric.survival_time_seconds:.1f}s survival&#34;
+    )</code></pre>
+</details>
+<div class="desc"><p>Record a new performance metric.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="learning.metrics.PerformanceMetric"><code class="flex name class">
+<span>class <span class="ident">PerformanceMetric</span></span>
+<span>(</span><span>session_id: str,<br>timestamp: datetime.datetime,<br>survival_time_seconds: float = 0.0,<br>game_result: str = 'loss',<br>final_resources: Dict[str, float] = &lt;factory&gt;,<br>max_resources_achieved: Dict[str, float] = &lt;factory&gt;,<br>unique_ending_id: str | None = None,<br>cards_discovered: int = 0,<br>mechanics_learned: int = 0,<br>actions_taken: int = 0,<br>errors_encountered: int = 0,<br>loops_detected: int = 0,<br>metadata: Dict[str, Any] = &lt;factory&gt;)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class PerformanceMetric:
+    &#34;&#34;&#34;
+    Multi-dimensional performance tracking.
+    T102, T103: Performance metric tracking system with survival time,
+    win rate, resources, and unique endings.
+    &#34;&#34;&#34;
+
+    session_id: str
+    timestamp: datetime
+
+    # Core metrics
+    survival_time_seconds: float = 0.0
+    game_result: str = &#34;loss&#34;  # win, loss, crash
+
+    # Resource metrics
+    final_resources: Dict[str, float] = field(default_factory=dict)
+    max_resources_achieved: Dict[str, float] = field(default_factory=dict)
+
+    # Discovery metrics
+    unique_ending_id: Optional[str] = None
+    cards_discovered: int = 0
+    mechanics_learned: int = 0
+
+    # Performance indicators
+    actions_taken: int = 0
+    errors_encountered: int = 0
+    loops_detected: int = 0
+
+    metadata: Dict[str, Any] = field(default_factory=dict)
+
+    def to_dict(self) -&gt; Dict[str, Any]:
+        &#34;&#34;&#34;Serialize to dictionary.&#34;&#34;&#34;
+        return {
+            &#34;session_id&#34;: self.session_id,
+            &#34;timestamp&#34;: self.timestamp.isoformat(),
+            &#34;survival_time_seconds&#34;: self.survival_time_seconds,
+            &#34;game_result&#34;: self.game_result,
+            &#34;final_resources&#34;: self.final_resources,
+            &#34;max_resources_achieved&#34;: self.max_resources_achieved,
+            &#34;unique_ending_id&#34;: self.unique_ending_id,
+            &#34;cards_discovered&#34;: self.cards_discovered,
+            &#34;mechanics_learned&#34;: self.mechanics_learned,
+            &#34;actions_taken&#34;: self.actions_taken,
+            &#34;errors_encountered&#34;: self.errors_encountered,
+            &#34;loops_detected&#34;: self.loops_detected,
+            &#34;metadata&#34;: self.metadata,
+        }
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -&gt; &#34;PerformanceMetric&#34;:
+        &#34;&#34;&#34;Deserialize from dictionary.&#34;&#34;&#34;
+        return cls(
+            session_id=data[&#34;session_id&#34;],
+            timestamp=datetime.fromisoformat(data[&#34;timestamp&#34;]),
+            survival_time_seconds=data.get(&#34;survival_time_seconds&#34;, 0.0),
+            game_result=data.get(&#34;game_result&#34;, &#34;loss&#34;),
+            final_resources=data.get(&#34;final_resources&#34;, {}),
+            max_resources_achieved=data.get(&#34;max_resources_achieved&#34;, {}),
+            unique_ending_id=data.get(&#34;unique_ending_id&#34;),
+            cards_discovered=data.get(&#34;cards_discovered&#34;, 0),
+            mechanics_learned=data.get(&#34;mechanics_learned&#34;, 0),
+            actions_taken=data.get(&#34;actions_taken&#34;, 0),
+            errors_encountered=data.get(&#34;errors_encountered&#34;, 0),
+            loops_detected=data.get(&#34;loops_detected&#34;, 0),
+            metadata=data.get(&#34;metadata&#34;, {}),
+        )</code></pre>
+</details>
+<div class="desc"><p>Multi-dimensional performance tracking.
+T102, T103: Performance metric tracking system with survival time,
+win rate, resources, and unique endings.</p></div>
+<h3>Static methods</h3>
+<dl>
+<dt id="learning.metrics.PerformanceMetric.from_dict"><code class="name flex">
+<span>def <span class="ident">from_dict</span></span>(<span>data: Dict[str, Any]) ‑> <a title="learning.metrics.PerformanceMetric" href="#learning.metrics.PerformanceMetric">PerformanceMetric</a></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Deserialize from dictionary.</p></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="learning.metrics.PerformanceMetric.actions_taken"><code class="name">var <span class="ident">actions_taken</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="learning.metrics.PerformanceMetric.cards_discovered"><code class="name">var <span class="ident">cards_discovered</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="learning.metrics.PerformanceMetric.errors_encountered"><code class="name">var <span class="ident">errors_encountered</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="learning.metrics.PerformanceMetric.final_resources"><code class="name">var <span class="ident">final_resources</span> : Dict[str, float]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="learning.metrics.PerformanceMetric.game_result"><code class="name">var <span class="ident">game_result</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="learning.metrics.PerformanceMetric.loops_detected"><code class="name">var <span class="ident">loops_detected</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="learning.metrics.PerformanceMetric.max_resources_achieved"><code class="name">var <span class="ident">max_resources_achieved</span> : Dict[str, float]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="learning.metrics.PerformanceMetric.mechanics_learned"><code class="name">var <span class="ident">mechanics_learned</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="learning.metrics.PerformanceMetric.metadata"><code class="name">var <span class="ident">metadata</span> : Dict[str, Any]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="learning.metrics.PerformanceMetric.session_id"><code class="name">var <span class="ident">session_id</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="learning.metrics.PerformanceMetric.survival_time_seconds"><code class="name">var <span class="ident">survival_time_seconds</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="learning.metrics.PerformanceMetric.timestamp"><code class="name">var <span class="ident">timestamp</span> : datetime.datetime</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="learning.metrics.PerformanceMetric.unique_ending_id"><code class="name">var <span class="ident">unique_ending_id</span> : str | None</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="learning.metrics.PerformanceMetric.to_dict"><code class="name flex">
+<span>def <span class="ident">to_dict</span></span>(<span>self) ‑> Dict[str, Any]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def to_dict(self) -&gt; Dict[str, Any]:
+    &#34;&#34;&#34;Serialize to dictionary.&#34;&#34;&#34;
+    return {
+        &#34;session_id&#34;: self.session_id,
+        &#34;timestamp&#34;: self.timestamp.isoformat(),
+        &#34;survival_time_seconds&#34;: self.survival_time_seconds,
+        &#34;game_result&#34;: self.game_result,
+        &#34;final_resources&#34;: self.final_resources,
+        &#34;max_resources_achieved&#34;: self.max_resources_achieved,
+        &#34;unique_ending_id&#34;: self.unique_ending_id,
+        &#34;cards_discovered&#34;: self.cards_discovered,
+        &#34;mechanics_learned&#34;: self.mechanics_learned,
+        &#34;actions_taken&#34;: self.actions_taken,
+        &#34;errors_encountered&#34;: self.errors_encountered,
+        &#34;loops_detected&#34;: self.loops_detected,
+        &#34;metadata&#34;: self.metadata,
+    }</code></pre>
+</details>
+<div class="desc"><p>Serialize to dictionary.</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="learning" href="index.html">learning</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="learning.metrics.MetricsTracker" href="#learning.metrics.MetricsTracker">MetricsTracker</a></code></h4>
+<ul class="">
+<li><code><a title="learning.metrics.MetricsTracker.clear_metrics" href="#learning.metrics.MetricsTracker.clear_metrics">clear_metrics</a></code></li>
+<li><code><a title="learning.metrics.MetricsTracker.get_aggregate_stats" href="#learning.metrics.MetricsTracker.get_aggregate_stats">get_aggregate_stats</a></code></li>
+<li><code><a title="learning.metrics.MetricsTracker.get_recent_performance" href="#learning.metrics.MetricsTracker.get_recent_performance">get_recent_performance</a></code></li>
+<li><code><a title="learning.metrics.MetricsTracker.has_improved" href="#learning.metrics.MetricsTracker.has_improved">has_improved</a></code></li>
+<li><code><a title="learning.metrics.MetricsTracker.record_metric" href="#learning.metrics.MetricsTracker.record_metric">record_metric</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="learning.metrics.PerformanceMetric" href="#learning.metrics.PerformanceMetric">PerformanceMetric</a></code></h4>
+<ul class="">
+<li><code><a title="learning.metrics.PerformanceMetric.actions_taken" href="#learning.metrics.PerformanceMetric.actions_taken">actions_taken</a></code></li>
+<li><code><a title="learning.metrics.PerformanceMetric.cards_discovered" href="#learning.metrics.PerformanceMetric.cards_discovered">cards_discovered</a></code></li>
+<li><code><a title="learning.metrics.PerformanceMetric.errors_encountered" href="#learning.metrics.PerformanceMetric.errors_encountered">errors_encountered</a></code></li>
+<li><code><a title="learning.metrics.PerformanceMetric.final_resources" href="#learning.metrics.PerformanceMetric.final_resources">final_resources</a></code></li>
+<li><code><a title="learning.metrics.PerformanceMetric.from_dict" href="#learning.metrics.PerformanceMetric.from_dict">from_dict</a></code></li>
+<li><code><a title="learning.metrics.PerformanceMetric.game_result" href="#learning.metrics.PerformanceMetric.game_result">game_result</a></code></li>
+<li><code><a title="learning.metrics.PerformanceMetric.loops_detected" href="#learning.metrics.PerformanceMetric.loops_detected">loops_detected</a></code></li>
+<li><code><a title="learning.metrics.PerformanceMetric.max_resources_achieved" href="#learning.metrics.PerformanceMetric.max_resources_achieved">max_resources_achieved</a></code></li>
+<li><code><a title="learning.metrics.PerformanceMetric.mechanics_learned" href="#learning.metrics.PerformanceMetric.mechanics_learned">mechanics_learned</a></code></li>
+<li><code><a title="learning.metrics.PerformanceMetric.metadata" href="#learning.metrics.PerformanceMetric.metadata">metadata</a></code></li>
+<li><code><a title="learning.metrics.PerformanceMetric.session_id" href="#learning.metrics.PerformanceMetric.session_id">session_id</a></code></li>
+<li><code><a title="learning.metrics.PerformanceMetric.survival_time_seconds" href="#learning.metrics.PerformanceMetric.survival_time_seconds">survival_time_seconds</a></code></li>
+<li><code><a title="learning.metrics.PerformanceMetric.timestamp" href="#learning.metrics.PerformanceMetric.timestamp">timestamp</a></code></li>
+<li><code><a title="learning.metrics.PerformanceMetric.to_dict" href="#learning.metrics.PerformanceMetric.to_dict">to_dict</a></code></li>
+<li><code><a title="learning.metrics.PerformanceMetric.unique_ending_id" href="#learning.metrics.PerformanceMetric.unique_ending_id">unique_ending_id</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

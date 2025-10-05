@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>orchestrator.cli API documentation</title>
+<meta name="description" content="Orchestrator CLI - Command-line interface for autonomous agent …">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>orchestrator.cli</code></h1>
+</header>
+<section id="section-intro">
+<p>Orchestrator CLI - Command-line interface for autonomous agent.</p>
+<p>Commands:
+- run: Run a single episode
+- train: Train agent across multiple episodes
+- metrics: Show agent performance metrics
+- strategy: Display agent's current strategy</p>
+<p>T113: Main orchestrator CLI.</p>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="orchestrator.cli.cmd_metrics"><code class="name flex">
+<span>def <span class="ident">cmd_metrics</span></span>(<span>args)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def cmd_metrics(args):
+    &#34;&#34;&#34;Show agent metrics.&#34;&#34;&#34;
+    metrics = get_agent_metrics(args.agent_id)
+
+    if &#34;error&#34; in metrics:
+        print(f&#34;Error: {metrics[&#39;error&#39;]}&#34;)
+        return 1
+
+    print(f&#34;\nAgent Metrics: {args.agent_id}&#34;)
+    print(f&#34;{&#39;=&#39;*60}&#34;)
+
+    for key, value in metrics.items():
+        if isinstance(value, float):
+            if &#34;rate&#34; in key:
+                print(f&#34;{key:30s}: {value:6.1%}&#34;)
+            else:
+                print(f&#34;{key:30s}: {value:6.2f}&#34;)
+        else:
+            print(f&#34;{key:30s}: {value:6}&#34;)
+
+    print(f&#34;{&#39;=&#39;*60}\n&#34;)
+
+    if args.output:
+        # Save metrics to JSON
+        output_path = Path(args.output)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+
+        with open(output_path, &#34;w&#34;) as f:
+            json.dump(metrics, f, indent=2)
+
+        print(f&#34;Metrics saved to: {output_path}&#34;)
+
+    return 0</code></pre>
+</details>
+<div class="desc"><p>Show agent metrics.</p></div>
+</dd>
+<dt id="orchestrator.cli.cmd_run"><code class="name flex">
+<span>def <span class="ident">cmd_run</span></span>(<span>args)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def cmd_run(args):
+    &#34;&#34;&#34;Run a single episode.&#34;&#34;&#34;
+    print(f&#34;Starting episode for agent: {args.agent_id}&#34;)
+    print(f&#34;Window: {args.window}&#34;)
+    print(f&#34;Max actions: {args.max_actions}\n&#34;)
+
+    try:
+        session = run_episode(
+            agent_id=args.agent_id,
+            window_name=args.window,
+            max_actions=args.max_actions,
+            max_duration_seconds=args.max_duration,
+        )
+
+        print(f&#34;\n{&#39;=&#39;*60}&#34;)
+        print(f&#34;Episode Complete!&#34;)
+        print(f&#34;{&#39;=&#39;*60}&#34;)
+        print(f&#34;Session ID: {session.session_id}&#34;)
+        print(f&#34;Total Actions: {session.total_actions}&#34;)
+        print(
+            f&#34;Duration: {session.duration_seconds:.1f}s&#34;
+            if session.duration_seconds
+            else &#34;Duration: N/A&#34;
+        )
+        print(
+            f&#34;End Condition: {session.end_condition.value if session.end_condition else &#39;N/A&#39;}&#34;
+        )
+        print(f&#34;{&#39;=&#39;*60}\n&#34;)
+
+        if args.output:
+            # Save session to JSON
+            output_path = Path(args.output)
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+
+            session_data = {
+                &#34;session_id&#34;: session.session_id,
+                &#34;agent_id&#34;: session.agent_id,
+                &#34;start_time&#34;: session.start_time.isoformat(),
+                &#34;end_time&#34;: session.end_time.isoformat() if session.end_time else None,
+                &#34;total_actions&#34;: session.total_actions,
+                &#34;total_reward&#34;: session.total_reward,
+                &#34;end_condition&#34;: (
+                    session.end_condition.value if session.end_condition else None
+                ),
+                &#34;duration_seconds&#34;: session.duration_seconds,
+            }
+
+            with open(output_path, &#34;w&#34;) as f:
+                json.dump(session_data, f, indent=2)
+
+            print(f&#34;Session data saved to: {output_path}&#34;)
+
+        return 0
+
+    except KeyboardInterrupt:
+        print(&#34;\n\nEpisode interrupted by user.&#34;)
+        return 130
+
+    except Exception as e:
+        print(f&#34;\nError running episode: {e}&#34;, file=sys.stderr)
+        logger.error(&#34;cli_run_error&#34;, error=str(e), exc_info=True)
+        return 1</code></pre>
+</details>
+<div class="desc"><p>Run a single episode.</p></div>
+</dd>
+<dt id="orchestrator.cli.cmd_strategy"><code class="name flex">
+<span>def <span class="ident">cmd_strategy</span></span>(<span>args)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def cmd_strategy(args):
+    &#34;&#34;&#34;Display agent strategy.&#34;&#34;&#34;
+    strategy = articulate_strategy(args.agent_id)
+    print(strategy)
+    print()
+
+    if args.output:
+        # Save strategy to text file
+        output_path = Path(args.output)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+
+        with open(output_path, &#34;w&#34;) as f:
+            f.write(strategy)
+
+        print(f&#34;Strategy saved to: {output_path}&#34;)
+
+    return 0</code></pre>
+</details>
+<div class="desc"><p>Display agent strategy.</p></div>
+</dd>
+<dt id="orchestrator.cli.cmd_train"><code class="name flex">
+<span>def <span class="ident">cmd_train</span></span>(<span>args)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def cmd_train(args):
+    &#34;&#34;&#34;Train agent across multiple episodes.&#34;&#34;&#34;
+    print(f&#34;Training agent: {args.agent_id}&#34;)
+    print(f&#34;Episodes: {args.episodes}&#34;)
+    print(f&#34;Window: {args.window}&#34;)
+    print(f&#34;Max actions per episode: {args.max_actions}&#34;)
+    print(f&#34;Checkpoint every {args.checkpoint} episodes\n&#34;)
+
+    # Launch TensorBoard in VS Code if requested
+    tensorboard_dir = Path(__file__).parent.parent.parent / &#34;data&#34; / &#34;tensorboard&#34;
+
+    if not args.no_tensorboard:
+        print(&#34;🚀 Launching TensorBoard in VS Code...&#34;)
+        launched = launch_tensorboard_in_vscode(str(tensorboard_dir))
+
+        if not launched:
+            # Show manual instructions if auto-launch failed
+            print(create_tensorboard_notice(str(tensorboard_dir)))
+
+    try:
+        sessions = train_agent(
+            agent_id=args.agent_id,
+            num_episodes=args.episodes,
+            window_name=args.window,
+            max_actions_per_episode=args.max_actions,
+            max_episode_duration=args.max_duration,
+            checkpoint_interval=args.checkpoint,
+        )
+
+        print(f&#34;\n{&#39;=&#39;*60}&#34;)
+        print(f&#34;Training Complete!&#34;)
+        print(f&#34;{&#39;=&#39;*60}&#34;)
+        print(f&#34;Episodes: {len(sessions)}&#34;)
+        print(f&#34;Total Actions: {sum(s.total_actions for s in sessions)}&#34;)
+        print(
+            f&#34;Average Actions per Episode: {sum(s.total_actions for s in sessions) / len(sessions):.1f}&#34;
+        )
+        print(f&#34;{&#39;=&#39;*60}\n&#34;)
+
+        # Show final metrics
+        metrics = get_agent_metrics(args.agent_id)
+        print(&#34;Final Metrics:&#34;)
+        for key, value in metrics.items():
+            if isinstance(value, float):
+                print(f&#34;  {key}: {value:.2f}&#34;)
+            else:
+                print(f&#34;  {key}: {value}&#34;)
+
+        return 0
+
+    except KeyboardInterrupt:
+        print(&#34;\n\nTraining interrupted by user.&#34;)
+        return 130
+
+    except Exception as e:
+        print(f&#34;\nError during training: {e}&#34;, file=sys.stderr)
+        logger.error(&#34;cli_train_error&#34;, error=str(e), exc_info=True)
+        return 1</code></pre>
+</details>
+<div class="desc"><p>Train agent across multiple episodes.</p></div>
+</dd>
+<dt id="orchestrator.cli.main"><code class="name flex">
+<span>def <span class="ident">main</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def main():
+    &#34;&#34;&#34;Main CLI entry point.&#34;&#34;&#34;
+    parser = argparse.ArgumentParser(
+        description=&#34;Cultist Simulator Autonomous AI Agent - Orchestrator CLI&#34;,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=&#34;&#34;&#34;
+Examples:
+  # Run a single episode
+  %(prog)s run --agent-id my_agent --max-actions 100
+
+  # Train for 50 episodes
+  %(prog)s train --episodes 50 --checkpoint 10
+
+  # View metrics
+  %(prog)s metrics --agent-id my_agent
+
+  # View strategy
+  %(prog)s strategy --agent-id my_agent
+        &#34;&#34;&#34;,
+    )
+
+    subparsers = parser.add_subparsers(dest=&#34;command&#34;, help=&#34;Command to execute&#34;)
+
+    # Run command
+    run_parser = subparsers.add_parser(&#34;run&#34;, help=&#34;Run a single episode&#34;)
+    run_parser.add_argument(&#34;--agent-id&#34;, default=&#34;agent_001&#34;, help=&#34;Agent identifier&#34;)
+    run_parser.add_argument(
+        &#34;--window&#34;, default=&#34;Cultist Simulator&#34;, help=&#34;Game window name&#34;
+    )
+    run_parser.add_argument(
+        &#34;--max-actions&#34;, type=int, default=1000, help=&#34;Maximum actions per episode&#34;
+    )
+    run_parser.add_argument(
+        &#34;--max-duration&#34;,
+        type=float,
+        default=None,
+        help=&#34;Maximum episode duration (seconds)&#34;,
+    )
+    run_parser.add_argument(&#34;--output&#34;, &#34;-o&#34;, help=&#34;Save session data to JSON file&#34;)
+    run_parser.set_defaults(func=cmd_run)
+
+    # Train command
+    train_parser = subparsers.add_parser(
+        &#34;train&#34;, help=&#34;Train agent across multiple episodes&#34;
+    )
+    train_parser.add_argument(
+        &#34;--agent-id&#34;, default=&#34;agent_001&#34;, help=&#34;Agent identifier&#34;
+    )
+    train_parser.add_argument(
+        &#34;--episodes&#34;, &#34;-n&#34;, type=int, default=100, help=&#34;Number of episodes&#34;
+    )
+    train_parser.add_argument(
+        &#34;--window&#34;, default=&#34;Cultist Simulator&#34;, help=&#34;Game window name&#34;
+    )
+    train_parser.add_argument(
+        &#34;--max-actions&#34;, type=int, default=1000, help=&#34;Max actions per episode&#34;
+    )
+    train_parser.add_argument(
+        &#34;--max-duration&#34;,
+        type=float,
+        default=300.0,
+        help=&#34;Max duration per episode (seconds)&#34;,
+    )
+    train_parser.add_argument(
+        &#34;--checkpoint&#34;, type=int, default=10, help=&#34;Checkpoint interval (episodes)&#34;
+    )
+    train_parser.add_argument(
+        &#34;--no-tensorboard&#34;,
+        action=&#34;store_true&#34;,
+        help=&#34;Disable automatic TensorBoard launch&#34;,
+    )
+    train_parser.set_defaults(func=cmd_train)
+
+    # Metrics command
+    metrics_parser = subparsers.add_parser(
+        &#34;metrics&#34;, help=&#34;Show agent performance metrics&#34;
+    )
+    metrics_parser.add_argument(
+        &#34;--agent-id&#34;, default=&#34;agent_001&#34;, help=&#34;Agent identifier&#34;
+    )
+    metrics_parser.add_argument(&#34;--output&#34;, &#34;-o&#34;, help=&#34;Save metrics to JSON file&#34;)
+    metrics_parser.set_defaults(func=cmd_metrics)
+
+    # Strategy command
+    strategy_parser = subparsers.add_parser(&#34;strategy&#34;, help=&#34;Display agent strategy&#34;)
+    strategy_parser.add_argument(
+        &#34;--agent-id&#34;, default=&#34;agent_001&#34;, help=&#34;Agent identifier&#34;
+    )
+    strategy_parser.add_argument(&#34;--output&#34;, &#34;-o&#34;, help=&#34;Save strategy to text file&#34;)
+    strategy_parser.set_defaults(func=cmd_strategy)
+
+    # Parse arguments
+    args = parser.parse_args()
+
+    if not args.command:
+        parser.print_help()
+        return 1
+
+    # Execute command
+    return args.func(args)</code></pre>
+</details>
+<div class="desc"><p>Main CLI entry point.</p></div>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="orchestrator" href="index.html">orchestrator</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="orchestrator.cli.cmd_metrics" href="#orchestrator.cli.cmd_metrics">cmd_metrics</a></code></li>
+<li><code><a title="orchestrator.cli.cmd_run" href="#orchestrator.cli.cmd_run">cmd_run</a></code></li>
+<li><code><a title="orchestrator.cli.cmd_strategy" href="#orchestrator.cli.cmd_strategy">cmd_strategy</a></code></li>
+<li><code><a title="orchestrator.cli.cmd_train" href="#orchestrator.cli.cmd_train">cmd_train</a></code></li>
+<li><code><a title="orchestrator.cli.main" href="#orchestrator.cli.main">main</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

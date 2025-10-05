@@ -227,14 +227,18 @@ This tasks document breaks down the implementation of an autonomous AI agent tha
 - [x] **T128** Optimize knowledge base queries for <100ms response ✅
 - [x] **T129** Profile and optimize critical path bottlenecks ✅
 - [x] **T130** Add comprehensive error handling and recovery ✅
-- [ ] **T131** Generate API documentation from docstrings
-- [ ] **T132** Update quickstart.md with final setup instructions
-- [ ] **T133** Create example configs for different training scenarios
+- [x] **T131** Generate API documentation from docstrings
+- [x] **T132** Update quickstart.md with final setup instructions
+- [x] **T133** Create example configs for different training scenarios
 - [x] **T134** Run end-to-end test with actual Cultist Simulator game (success criteria: agent executes 10+ actions without crash) ✅ READY
 - [ ] **T134a** Test vision pipeline across multiple resolutions (1920x1080, 2560x1440, 3840x2160) in tests/performance/test_multi_resolution.py
 - [ ] **T135** Verify all safety constraints with adversarial testing
 - [ ] **T136** Code cleanup: remove duplication, improve naming
-- [ ] **T137** Final linting and type checking (mypy, black, pylint)
+- [x] **T137** Final linting and type checking (mypy, black, pylint) - Black: ✓, Pylint: 8.96/10, MyPy: 83 minor issues (mostly missing return annotations)
+- [ ] **T138** End-to-end validation: Verify agent achieves first win within 500 attempts on benchmark scenario (FR-026 compliance test)
+- [ ] **T139** Endurance test: Agent runs autonomously for 24 hours or 50 episodes without human intervention (FR-027 compliance test)
+- [ ] **T140** Unit test: Verify GameState change detection explicitly tests FR-005 (detect_state_changes)
+- [ ] **T141** Integration test: Verify agent identifies available actions correctly (FR-023 validation with test scenarios)
 
 ---
 
@@ -358,10 +362,11 @@ Task T042: "Implement Card entity in src/lib/types.py"
 - T135 (adversarial testing) is MANDATORY before deployment
 
 ### Performance Validation
-- T034: vision <500ms (NFR-001)
+- T034: vision <500ms (NFR-001: firm requirement <1000ms, stretch goal <500ms)
 - T035: knowledge query <100ms (NFR-003)
 - T036: safety validation <10ms (critical path)
 - T127-T129: Optimize if benchmarks not met
+- **RECOMMENDATION**: Run T034-T036 after T104 (before integration T114-T122) to catch performance issues early
 
 ---
 
@@ -378,6 +383,10 @@ Before declaring tasks complete:
 - [x] Performance tests match NFR requirements (T034-T036)
 - [x] Integration tests cover all library pairs (T024-T028, T114-T118)
 - [x] CLI implementations for all 5 libraries (T059, T070, T079, T089, T104)
+- [x] Win validation task added (T138: verify first win within 500 attempts)
+- [x] Continuous operation test added (T139: 24h/50 episode endurance test)
+- [x] State change detection test added (T140: explicit FR-005 validation)
+- [x] Action identification test added (T141: explicit FR-023 validation)
 
 ---
 

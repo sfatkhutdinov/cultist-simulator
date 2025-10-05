@@ -69,11 +69,11 @@ class KnowledgeBaseError(Exception):
 def enable_test_mode(enabled: bool = True) -> None:
     """
     Enable or disable test mode for action selection.
-    
+
     When test mode is enabled, select_action() will use random valid actions
     instead of requiring a trained RL model. This is useful for testing and
     development.
-    
+
     Args:
         enabled: Whether to enable test mode (default: True)
     """
@@ -127,20 +127,20 @@ def select_action(game_state: Optional[GameState]) -> Action:
             # Random action within game window bounds
             window_bounds = game_state.window_bounds
             random_x = random.randint(
-                window_bounds.x + 50, 
-                window_bounds.x + window_bounds.width - 50
+                window_bounds.x + 50, window_bounds.x + window_bounds.width - 50
             )
             random_y = random.randint(
-                window_bounds.y + 50, 
-                window_bounds.y + window_bounds.height - 50
+                window_bounds.y + 50, window_bounds.y + window_bounds.height - 50
             )
-            
+
             action = Action(
                 action_type=ActionType.CLICK,
                 parameters={"point": Point(random_x, random_y)},
                 metadata={
                     "confidence": 0.5,
-                    "rationale": "Random test action" if _test_mode else "Placeholder action",
+                    "rationale": (
+                        "Random test action" if _test_mode else "Placeholder action"
+                    ),
                     "test_mode": _test_mode,
                 },
             )
@@ -149,7 +149,7 @@ def select_action(game_state: Optional[GameState]) -> Action:
             # observation = _encode_game_state(game_state)
             # action_vector, _states = _rl_model.predict(observation, deterministic=False)
             # action = _decode_action(action_vector)
-            
+
             action = Action(
                 action_type=ActionType.CLICK,
                 parameters={"point": Point(400, 300)},

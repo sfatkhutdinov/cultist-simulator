@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>automation.input_simulator API documentation</title>
+<meta name="description" content="Input Simulator - Low-level macOS input event generation …">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>automation.input_simulator</code></h1>
+</header>
+<section id="section-intro">
+<p>Input Simulator - Low-level macOS input event generation</p>
+<p>This module uses Quartz (CoreGraphics) to generate mouse and keyboard events
+on macOS. All functions operate at the OS level and should only be called
+after safety validation.</p>
+<p>WARNING: These functions directly control the mouse and keyboard.
+They MUST only be called after validation by the automation layer.</p>
+<p>Functions:
+- click_at_point(x, y, button): Generate mouse click event
+- drag_between_points(x1, y1, x2, y2, duration_ms): Generate drag event
+- press_key_combination(key, modifiers): Generate keyboard event</p>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="automation.input_simulator.CGEventCreateKeyboardEvent"><code class="name flex">
+<span>def <span class="ident">CGEventCreateKeyboardEvent</span></span>(<span>arg0, arg1, arg2, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>CGEventRef CGEventCreateKeyboardEvent(CGEventSourceRef arg0, unsigned short arg1, bool arg2);</p></div>
+</dd>
+<dt id="automation.input_simulator.CGEventCreateMouseEvent"><code class="name flex">
+<span>def <span class="ident">CGEventCreateMouseEvent</span></span>(<span>arg0, arg1, arg2, arg3, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>CGEventRef CGEventCreateMouseEvent(CGEventSourceRef arg0, unsigned int arg1, CoreFoundation.CGPoint arg2, unsigned int arg3);</p></div>
+</dd>
+<dt id="automation.input_simulator.CGEventPost"><code class="name flex">
+<span>def <span class="ident">CGEventPost</span></span>(<span>arg0, arg1, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>void CGEventPost(unsigned int arg0, CGEventRef arg1);</p></div>
+</dd>
+<dt id="automation.input_simulator.CGEventSetFlags"><code class="name flex">
+<span>def <span class="ident">CGEventSetFlags</span></span>(<span>arg0, arg1, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>void CGEventSetFlags(CGEventRef arg0, unsigned long long arg1);</p></div>
+</dd>
+<dt id="automation.input_simulator.click_at_point"><code class="name flex">
+<span>def <span class="ident">click_at_point</span></span>(<span>x: float, y: float, button: str = 'left') ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def click_at_point(x: float, y: float, button: str = &#34;left&#34;) -&gt; None:
+    &#34;&#34;&#34;
+    Generate a mouse click event at the specified coordinates.
+
+    T061: Quartz-based mouse click simulation.
+
+    WARNING: This function directly controls the mouse. It should only be
+    called after safety validation has passed.
+
+    Args:
+        x: X coordinate (screen coordinates)
+        y: Y coordinate (screen coordinates)
+        button: Mouse button (&#34;left&#34;, &#34;right&#34;, &#34;middle&#34;)
+
+    Raises:
+        RuntimeError: If Quartz is not available
+        ValueError: If button type is invalid
+    &#34;&#34;&#34;
+    if not QUARTZ_AVAILABLE:
+        logger.warning(&#34;quartz_unavailable&#34;, action=&#34;click&#34;)
+        raise RuntimeError(&#34;Quartz framework not available (macOS only)&#34;)
+
+    # Select event types based on button
+    if button == &#34;left&#34;:
+        down_event = kCGEventLeftMouseDown
+        up_event = kCGEventLeftMouseUp
+        button_number = 0
+    elif button == &#34;right&#34;:
+        down_event = kCGEventRightMouseDown
+        up_event = kCGEventRightMouseUp
+        button_number = 1
+    elif button == &#34;middle&#34;:
+        down_event = kCGEventOtherMouseDown
+        up_event = kCGEventOtherMouseUp
+        button_number = 2
+    else:
+        raise ValueError(f&#34;Invalid button type: {button}&#34;)
+
+    try:
+        # Create mouse down event
+        mouse_down = CGEventCreateMouseEvent(
+            None, down_event, (x, y), button_number  # No event source
+        )
+
+        # Create mouse up event
+        mouse_up = CGEventCreateMouseEvent(None, up_event, (x, y), button_number)
+
+        # Post the events
+        CGEventPost(kCGHIDEventTap, mouse_down)
+        time.sleep(0.01)  # 10ms delay between down and up
+        CGEventPost(kCGHIDEventTap, mouse_up)
+
+        logger.debug(&#34;click_event_posted&#34;, x=x, y=y, button=button)
+
+    except Exception as e:
+        logger.error(&#34;click_event_failed&#34;, x=x, y=y, button=button, error=str(e))
+        raise</code></pre>
+</details>
+<div class="desc"><p>Generate a mouse click event at the specified coordinates.</p>
+<p>T061: Quartz-based mouse click simulation.</p>
+<p>WARNING: This function directly controls the mouse. It should only be
+called after safety validation has passed.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>x</code></strong></dt>
+<dd>X coordinate (screen coordinates)</dd>
+<dt><strong><code>y</code></strong></dt>
+<dd>Y coordinate (screen coordinates)</dd>
+<dt><strong><code>button</code></strong></dt>
+<dd>Mouse button ("left", "right", "middle")</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>RuntimeError</code></dt>
+<dd>If Quartz is not available</dd>
+<dt><code>ValueError</code></dt>
+<dd>If button type is invalid</dd>
+</dl></div>
+</dd>
+<dt id="automation.input_simulator.drag_between_points"><code class="name flex">
+<span>def <span class="ident">drag_between_points</span></span>(<span>x1: float, y1: float, x2: float, y2: float, duration_ms: float) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def drag_between_points(
+    x1: float, y1: float, x2: float, y2: float, duration_ms: float
+) -&gt; None:
+    &#34;&#34;&#34;
+    Generate a mouse drag event from start to end point.
+
+    T062: Quartz-based mouse drag simulation.
+
+    Implements smooth dragging by interpolating intermediate points.
+
+    WARNING: This function directly controls the mouse. It should only be
+    called after safety validation has passed.
+
+    Args:
+        x1: Start X coordinate
+        y1: Start Y coordinate
+        x2: End X coordinate
+        y2: End Y coordinate
+        duration_ms: Duration of drag in milliseconds
+
+    Raises:
+        RuntimeError: If Quartz is not available
+    &#34;&#34;&#34;
+    if not QUARTZ_AVAILABLE:
+        logger.warning(&#34;quartz_unavailable&#34;, action=&#34;drag&#34;)
+        raise RuntimeError(&#34;Quartz framework not available (macOS only)&#34;)
+
+    try:
+        # Mouse down at start position
+        mouse_down = CGEventCreateMouseEvent(
+            None, kCGEventLeftMouseDown, (x1, y1), 0  # Left button
+        )
+        CGEventPost(kCGHIDEventTap, mouse_down)
+
+        # Calculate number of intermediate steps (at least 10 steps)
+        num_steps = max(10, int(duration_ms / 10))  # One step per 10ms
+        step_duration = duration_ms / num_steps / 1000.0  # Convert to seconds
+
+        # Interpolate between start and end
+        for i in range(1, num_steps + 1):
+            t = i / num_steps  # Interpolation factor (0 to 1)
+            x = x1 + t * (x2 - x1)
+            y = y1 + t * (y2 - y1)
+
+            # Create mouse moved event (with button down)
+            mouse_drag = CGEventCreateMouseEvent(
+                None, kCGEventLeftMouseDragged, (x, y), 0
+            )
+            CGEventPost(kCGHIDEventTap, mouse_drag)
+
+            time.sleep(step_duration)
+
+        # Mouse up at end position
+        mouse_up = CGEventCreateMouseEvent(None, kCGEventLeftMouseUp, (x2, y2), 0)
+        CGEventPost(kCGHIDEventTap, mouse_up)
+
+        logger.debug(
+            &#34;drag_event_posted&#34;,
+            start=f&#34;({x1}, {y1})&#34;,
+            end=f&#34;({x2}, {y2})&#34;,
+            duration_ms=duration_ms,
+            num_steps=num_steps,
+        )
+
+    except Exception as e:
+        logger.error(
+            &#34;drag_event_failed&#34;,
+            start=f&#34;({x1}, {y1})&#34;,
+            end=f&#34;({x2}, {y2})&#34;,
+            error=str(e),
+        )
+        raise</code></pre>
+</details>
+<div class="desc"><p>Generate a mouse drag event from start to end point.</p>
+<p>T062: Quartz-based mouse drag simulation.</p>
+<p>Implements smooth dragging by interpolating intermediate points.</p>
+<p>WARNING: This function directly controls the mouse. It should only be
+called after safety validation has passed.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>x1</code></strong></dt>
+<dd>Start X coordinate</dd>
+<dt><strong><code>y1</code></strong></dt>
+<dd>Start Y coordinate</dd>
+<dt><strong><code>x2</code></strong></dt>
+<dd>End X coordinate</dd>
+<dt><strong><code>y2</code></strong></dt>
+<dd>End Y coordinate</dd>
+<dt><strong><code>duration_ms</code></strong></dt>
+<dd>Duration of drag in milliseconds</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>RuntimeError</code></dt>
+<dd>If Quartz is not available</dd>
+</dl></div>
+</dd>
+<dt id="automation.input_simulator.press_key_combination"><code class="name flex">
+<span>def <span class="ident">press_key_combination</span></span>(<span>key: str, modifiers: List[str] | None = None) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def press_key_combination(key: str, modifiers: Optional[List[str]] = None) -&gt; None:
+    &#34;&#34;&#34;
+    Generate a keyboard event for a key with optional modifiers.
+
+    T063: Quartz-based keyboard input simulation.
+
+    WARNING: This function directly controls the keyboard. It should only be
+    called after safety validation has passed (especially blacklist checking).
+
+    Args:
+        key: The key to press (lowercase string or key name)
+        modifiers: List of modifier keys ([&#34;cmd&#34;], [&#34;cmd&#34;, &#34;shift&#34;], etc.)
+
+    Raises:
+        RuntimeError: If Quartz is not available
+        ValueError: If key is not recognized
+    &#34;&#34;&#34;
+    if not QUARTZ_AVAILABLE:
+        logger.warning(&#34;quartz_unavailable&#34;, action=&#34;keypress&#34;)
+        raise RuntimeError(&#34;Quartz framework not available (macOS only)&#34;)
+
+    if modifiers is None:
+        modifiers = []
+
+    # Get key code
+    key_lower = key.lower()
+    if key_lower not in KEY_CODES:
+        raise ValueError(f&#34;Unknown key: {key}&#34;)
+
+    key_code = KEY_CODES[key_lower]
+
+    # Calculate modifier flags
+    modifier_flags = 0
+    for mod in modifiers:
+        mod_lower = mod.lower()
+        if mod_lower in MODIFIER_FLAGS:
+            modifier_flags |= MODIFIER_FLAGS[mod_lower]
+        else:
+            logger.warning(&#34;unknown_modifier&#34;, modifier=mod)
+
+    try:
+        # Create key down event
+        key_down = CGEventCreateKeyboardEvent(None, key_code, True)
+        if modifier_flags:
+            CGEventSetFlags(key_down, modifier_flags)
+
+        # Create key up event
+        key_up = CGEventCreateKeyboardEvent(None, key_code, False)
+        if modifier_flags:
+            CGEventSetFlags(key_up, modifier_flags)
+
+        # Post the events
+        CGEventPost(kCGHIDEventTap, key_down)
+        time.sleep(0.01)  # 10ms delay between down and up
+        CGEventPost(kCGHIDEventTap, key_up)
+
+        logger.debug(
+            &#34;keypress_event_posted&#34;, key=key, modifiers=modifiers, key_code=key_code
+        )
+
+    except Exception as e:
+        logger.error(
+            &#34;keypress_event_failed&#34;, key=key, modifiers=modifiers, error=str(e)
+        )
+        raise</code></pre>
+</details>
+<div class="desc"><p>Generate a keyboard event for a key with optional modifiers.</p>
+<p>T063: Quartz-based keyboard input simulation.</p>
+<p>WARNING: This function directly controls the keyboard. It should only be
+called after safety validation has passed (especially blacklist checking).</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>key</code></strong></dt>
+<dd>The key to press (lowercase string or key name)</dd>
+<dt><strong><code>modifiers</code></strong></dt>
+<dd>List of modifier keys (["cmd"], ["cmd", "shift"], etc.)</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>RuntimeError</code></dt>
+<dd>If Quartz is not available</dd>
+<dt><code>ValueError</code></dt>
+<dd>If key is not recognized</dd>
+</dl></div>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="automation" href="index.html">automation</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="automation.input_simulator.CGEventCreateKeyboardEvent" href="#automation.input_simulator.CGEventCreateKeyboardEvent">CGEventCreateKeyboardEvent</a></code></li>
+<li><code><a title="automation.input_simulator.CGEventCreateMouseEvent" href="#automation.input_simulator.CGEventCreateMouseEvent">CGEventCreateMouseEvent</a></code></li>
+<li><code><a title="automation.input_simulator.CGEventPost" href="#automation.input_simulator.CGEventPost">CGEventPost</a></code></li>
+<li><code><a title="automation.input_simulator.CGEventSetFlags" href="#automation.input_simulator.CGEventSetFlags">CGEventSetFlags</a></code></li>
+<li><code><a title="automation.input_simulator.click_at_point" href="#automation.input_simulator.click_at_point">click_at_point</a></code></li>
+<li><code><a title="automation.input_simulator.drag_between_points" href="#automation.input_simulator.drag_between_points">drag_between_points</a></code></li>
+<li><code><a title="automation.input_simulator.press_key_combination" href="#automation.input_simulator.press_key_combination">press_key_combination</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

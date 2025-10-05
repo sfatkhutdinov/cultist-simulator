@@ -13,7 +13,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
-from src.nlp import analyze_text, extract_goals, calculate_similarity
+from src.nlp import analyze_text, extract_goals, find_similar_narratives
 
 
 def main():
@@ -51,19 +51,18 @@ def main():
                     json.dumps(
                         {
                             "status": "success",
-                            "entities": (
-                                result.entities if hasattr(result, "entities") else []
-                            ),
-                            "sentiment": (
-                                result.sentiment
-                                if hasattr(result, "sentiment")
-                                else None
-                            ),
+                            "text": result.text,
+                            "embedding_dim": len(result.embedding),
+                            "model": result.model_name,
+                            "processing_time_ms": result.processing_time_ms,
                         }
                     )
                 )
             else:
-                print(f"✓ Analysis complete")
+                print(f"✓ Analyzed text: {result.text[:50]}...")
+                print(f"  Model: {result.model_name}")
+                print(f"  Embedding dimension: {len(result.embedding)}")
+                print(f"  Processing time: {result.processing_time_ms:.2f}ms")
 
         elif args.command == "extract-goals":
             goals = extract_goals(args.text)
@@ -76,10 +75,19 @@ def main():
                     print(f"  - {goal}")
 
         elif args.command == "similarity":
-            score = calculate_similarity(args.text1, args.text2)
+            # Use analyze_text to get embeddings and calculate cosine similarity
+            import numpy as np
+
+            result1 = analyze_text(args.text1)
+            result2 = analyze_text(args.text2)
+
+            # Calculate cosine similarity
+            emb1 = np.array(result1.embedding)
+            emb2 = np.array(result2.embedding)
+            score = np.dot(emb1, emb2) / (np.linalg.norm(emb1) * np.linalg.norm(emb2))
 
             if args.json:
-                print(json.dumps({"status": "success", "similarity": score}))
+                print(json.dumps({"status": "success", "similarity": float(score)}))
             else:
                 print(f"✓ Similarity: {score:.3f}")
 

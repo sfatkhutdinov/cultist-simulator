@@ -48,6 +48,17 @@ A researcher or game developer wants to create an AI agent that can autonomously
 
 ## Requirements
 
+### Assumptions
+
+- **Platform**: macOS 13+ (Ventura or later) for modern accessibility APIs
+- **Game Version**: Cultist Simulator (current macOS version) with stable UI layout
+- **Display**: Minimum screen resolution 1920x1080; game window must be fully visible
+- **System Resources**: Minimum 8GB RAM, 4-core CPU for ML model inference
+- **Disk Space**: 10GB available for models, knowledge base, and session recordings
+- **Network**: Internet connection required for initial model downloads only
+- **Permissions**: Accessibility permissions granted for input simulation and screen capture
+- **Game State**: Game executable available and can be launched/controlled programmatically
+
 ### Functional Requirements
 
 #### Game Interaction & Control
@@ -62,7 +73,7 @@ A researcher or game developer wants to create an AI agent that can autonomously
 - **FR-007**: System MUST prevent execution of game exit actions (quit buttons, window close, Alt+F4/Cmd+Q)
 - **FR-008**: System MUST prevent triggering of macOS system shortcuts or menus (Mission Control, Spotlight, etc.)
 - **FR-009**: System MUST log and block any attempted action that would minimize, hide, or change the game window state
-- **FR-010**: System MUST provide a manual override mechanism for humans to safely pause or terminate the agent
+- **FR-010**: System MUST provide a manual override mechanism (F12 emergency stop key) for humans to safely pause or terminate the agent
 
 #### Learning & Decision Making
 - **FR-011**: Agent MUST maintain a knowledge base of discovered game mechanics, rules, and cause-effect relationships
@@ -70,7 +81,7 @@ A researcher or game developer wants to create an AI agent that can autonomously
 - **FR-013**: Agent MUST analyze past failures to identify patterns and adjust decision-making strategies
 - **FR-014**: Agent MUST develop and refine hypotheses about game mechanics through experimentation
 - **FR-015**: Agent MUST balance exploration (trying new actions) with exploitation (using known successful strategies)
-- **FR-016**: Agent MUST autonomously discover and recognize win conditions and losing conditions through experimentation and pattern recognition in game outcomes
+- **FR-016**: Agent MUST autonomously discover and recognize win conditions and losing conditions through experimentation and pattern recognition in game outcomes. System MUST recognize win signals via: (1) game state terminal flag detection, (2) narrative text pattern matching for victory keywords (e.g., "ascension", "triumph", "victory"), (3) metrics plateau analysis indicating stable end-state achievement
 - **FR-017**: Agent MUST be able to articulate its current understanding of game mechanics and strategy in human-readable form
 - **FR-018**: System MUST detect repetitive action patterns that indicate unproductive loops and automatically switch to alternative strategies
 
@@ -78,7 +89,7 @@ A researcher or game developer wants to create an AI agent that can autonomously
 - **FR-019**: System MUST extract and track numerical values from the game UI (health, funds, time, resources)
 - **FR-020**: System MUST identify and track card types, card states, and card positions in the game space
 - **FR-021**: System MUST recognize and interpret timer states and countdown mechanics
-- **FR-022**: System MUST detect narrative text and dialogue elements and comprehend their semantic meaning to inform decision-making (e.g., understanding quest instructions, story consequences, character motivations)
+- **FR-022**: System MUST detect narrative text and dialogue elements and comprehend their semantic meaning to inform decision-making (e.g., understanding quest instructions, story consequences, character motivations). Agent MUST correctly classify narrative intent (quest/warning/lore/outcome) with >80% accuracy on representative test corpus
 - **FR-023**: System MUST identify available actions at any given game state
 
 #### Performance & Progress
@@ -88,7 +99,7 @@ A researcher or game developer wants to create an AI agent that can autonomously
 
 #### Operational Requirements
 - **FR-027**: System MUST operate continuously without human intervention once started
-- **FR-028**: System MUST gracefully handle and recover from game crashes or freezes
+- **FR-028**: System MUST gracefully handle and recover from game crashes or freezes. System MUST detect crashes via window/process monitoring and auto-restart game within 30 seconds, resuming from last checkpoint with knowledge base intact
 - **FR-029**: System MUST persist its knowledge base between sessions to retain learning
 - **FR-030**: System MUST provide real-time visibility into agent decision-making and current goals
 - **FR-031**: System MUST support starting from a saved game state or beginning new games
@@ -96,8 +107,8 @@ A researcher or game developer wants to create an AI agent that can autonomously
 ### Non-Functional Requirements
 
 #### Performance
-- **NFR-001**: System MUST process game state and select actions within 500ms to maintain responsive gameplay (target guideline; may be adjusted during performance tuning)
-- **NFR-002**: Vision/OCR processing MUST not cause significant lag in game interactions
+- **NFR-001**: System MUST process game state and select actions within 1000ms to maintain responsive gameplay; SHOULD achieve 500ms for optimal performance (firm requirement: <1000ms; stretch goal: <500ms)
+- **NFR-002**: Vision/OCR processing MUST complete within 200ms per frame to avoid interaction lag (measured from screenshot capture to element detection output)
 - **NFR-003**: Knowledge base queries MUST return results within 100ms to support real-time decision making
 
 #### Reliability
@@ -130,6 +141,7 @@ A researcher or game developer wants to create an AI agent that can autonomously
 ### Terminology Glossary
 
 - **Session** / **Episode** / **Playthrough**: Synonymous terms for a complete game run from start to end condition. This specification uses "Session" (matching the data model entity name).
+- **Orchestrator**: Main agent execution loop that coordinates all libraries (vision, automation, learning, NLP, safety). Technical implementation term; see Agent entity in data model for conceptual representation.
 - **Policy**: The reinforcement learning model's output (probability distribution over actions). Technical RL term.
 - **Strategy**: High-level gameplay approach derived from learned patterns. User-facing term that encompasses policy decisions plus heuristics.
 - **Game Element**: Interactive UI component (cards, buttons, slots, timers). Standardized term throughout this specification.

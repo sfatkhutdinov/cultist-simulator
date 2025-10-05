@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>orchestrator.session_replay API documentation</title>
+<meta name="description" content="Session Replay Functionality …">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>orchestrator.session_replay</code></h1>
+</header>
+<section id="section-intro">
+<p>Session Replay Functionality</p>
+<p>T120: Replay recorded sessions for debugging and analysis.</p>
+<p>Enables:
+- Loading past sessions from knowledge base
+- Step-by-step replay with visualization
+- Debugging action sequences
+- Comparing successful vs failed strategies</p>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="orchestrator.session_replay.replay_session"><code class="name flex">
+<span>def <span class="ident">replay_session</span></span>(<span>session_id: str,<br>execute_actions: bool = False,<br>delay_ms: int = 500,<br>knowledge_base_path: str = 'data/knowledge_base.db') ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def replay_session(
+    session_id: str,
+    execute_actions: bool = False,
+    delay_ms: int = 500,
+    knowledge_base_path: str = &#34;data/knowledge_base.db&#34;,
+) -&gt; bool:
+    &#34;&#34;&#34;
+    Convenience function to replay a session.
+
+    Args:
+        session_id: Session to replay
+        execute_actions: Whether to execute actions
+        delay_ms: Delay between actions
+        knowledge_base_path: Path to knowledge base
+
+    Returns:
+        True if successful
+    &#34;&#34;&#34;
+    replayer = SessionReplayer(knowledge_base_path)
+    return replayer.replay_session(session_id, execute_actions, delay_ms)</code></pre>
+</details>
+<div class="desc"><p>Convenience function to replay a session.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>session_id</code></strong></dt>
+<dd>Session to replay</dd>
+<dt><strong><code>execute_actions</code></strong></dt>
+<dd>Whether to execute actions</dd>
+<dt><strong><code>delay_ms</code></strong></dt>
+<dd>Delay between actions</dd>
+<dt><strong><code>knowledge_base_path</code></strong></dt>
+<dd>Path to knowledge base</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>True if successful</p></div>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="orchestrator.session_replay.SessionReplayer"><code class="flex name class">
+<span>class <span class="ident">SessionReplayer</span></span>
+<span>(</span><span>knowledge_base_path: str = 'data/knowledge_base.db')</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class SessionReplayer:
+    &#34;&#34;&#34;
+    Replays recorded game sessions for analysis.
+
+    Loads session data from knowledge base and optionally re-executes
+    actions for debugging or visualization purposes.
+    &#34;&#34;&#34;
+
+    def __init__(self, knowledge_base_path: str = &#34;data/knowledge_base.db&#34;):
+        &#34;&#34;&#34;
+        Initialize session replayer.
+
+        Args:
+            knowledge_base_path: Path to knowledge base database
+        &#34;&#34;&#34;
+        self.kb = KnowledgeBase(knowledge_base_path)
+        logger.info(&#34;session_replayer_initialized&#34;)
+
+    def load_session(self, session_id: str) -&gt; Optional[Session]:
+        &#34;&#34;&#34;
+        Load a session by ID.
+
+        Args:
+            session_id: Session identifier
+
+        Returns:
+            Session object or None if not found
+        &#34;&#34;&#34;
+        try:
+            # TODO: Implement actual session loading from KB
+            # For now, return None
+            logger.warning(&#34;session_load_not_implemented&#34;, session_id=session_id)
+            return None
+        except Exception as e:
+            logger.error(&#34;session_load_failed&#34;, session_id=session_id, error=str(e))
+            return None
+
+    def list_sessions(
+        self, limit: int = 10, filter_by: Optional[Dict[str, Any]] = None
+    ) -&gt; List[Dict[str, Any]]:
+        &#34;&#34;&#34;
+        List available sessions.
+
+        Args:
+            limit: Maximum number of sessions to return
+            filter_by: Optional filters (e.g., {&#34;win&#34;: True})
+
+        Returns:
+            List of session metadata dictionaries
+        &#34;&#34;&#34;
+        try:
+            # TODO: Implement session listing from KB
+            logger.warning(&#34;session_listing_not_implemented&#34;)
+            return []
+        except Exception as e:
+            logger.error(&#34;session_listing_failed&#34;, error=str(e))
+            return []
+
+    def replay_session(
+        self, session_id: str, execute_actions: bool = False, delay_ms: int = 500
+    ) -&gt; bool:
+        &#34;&#34;&#34;
+        Replay a recorded session.
+
+        Args:
+            session_id: Session to replay
+            execute_actions: Whether to actually execute actions (use with caution!)
+            delay_ms: Delay between actions in milliseconds
+
+        Returns:
+            True if replay successful, False otherwise
+        &#34;&#34;&#34;
+        session = self.load_session(session_id)
+
+        if session is None:
+            logger.error(&#34;replay_failed_session_not_found&#34;, session_id=session_id)
+            return False
+
+        logger.info(
+            &#34;replay_started&#34;, session_id=session_id, execute_actions=execute_actions
+        )
+
+        # TODO: Implement actual replay logic
+        # For now, just log the session structure
+
+        if execute_actions:
+            logger.warning(
+                &#34;replay_execution_not_implemented&#34;,
+                message=&#34;Action execution during replay not yet implemented&#34;,
+            )
+
+        return True
+
+    def compare_sessions(self, session_id_1: str, session_id_2: str) -&gt; Dict[str, Any]:
+        &#34;&#34;&#34;
+        Compare two sessions for analysis.
+
+        Args:
+            session_id_1: First session ID
+            session_id_2: Second session ID
+
+        Returns:
+            Dictionary with comparison metrics
+        &#34;&#34;&#34;
+        session1 = self.load_session(session_id_1)
+        session2 = self.load_session(session_id_2)
+
+        if not session1 or not session2:
+            logger.error(&#34;comparison_failed_missing_sessions&#34;)
+            return {}
+
+        # TODO: Implement detailed comparison logic
+        comparison = {
+            &#34;session_1&#34;: session_id_1,
+            &#34;session_2&#34;: session_id_2,
+            &#34;action_count_diff&#34;: 0,  # Placeholder
+            &#34;duration_diff&#34;: 0.0,  # Placeholder
+        }
+
+        logger.info(&#34;session_comparison_complete&#34;, comparison=comparison)
+        return comparison
+
+    def export_session(self, session_id: str, output_path: Path) -&gt; bool:
+        &#34;&#34;&#34;
+        Export session to JSON file.
+
+        Args:
+            session_id: Session to export
+            output_path: Output file path
+
+        Returns:
+            True if export successful
+        &#34;&#34;&#34;
+        import json
+
+        session = self.load_session(session_id)
+        if not session:
+            return False
+
+        try:
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+
+            # Convert session to dict for JSON serialization
+            # TODO: Implement proper session serialization
+            session_data = {
+                &#34;session_id&#34;: session.session_id,
+                &#34;agent_id&#34;: session.agent_id,
+                &#34;timestamp&#34;: datetime.now().isoformat(),
+            }
+
+            with open(output_path, &#34;w&#34;) as f:
+                json.dump(session_data, f, indent=2)
+
+            logger.info(
+                &#34;session_exported&#34;, session_id=session_id, path=str(output_path)
+            )
+            return True
+
+        except Exception as e:
+            logger.error(&#34;session_export_failed&#34;, session_id=session_id, error=str(e))
+            return False</code></pre>
+</details>
+<div class="desc"><p>Replays recorded game sessions for analysis.</p>
+<p>Loads session data from knowledge base and optionally re-executes
+actions for debugging or visualization purposes.</p>
+<p>Initialize session replayer.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>knowledge_base_path</code></strong></dt>
+<dd>Path to knowledge base database</dd>
+</dl></div>
+<h3>Methods</h3>
+<dl>
+<dt id="orchestrator.session_replay.SessionReplayer.compare_sessions"><code class="name flex">
+<span>def <span class="ident">compare_sessions</span></span>(<span>self, session_id_1: str, session_id_2: str) ‑> Dict[str, Any]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compare_sessions(self, session_id_1: str, session_id_2: str) -&gt; Dict[str, Any]:
+    &#34;&#34;&#34;
+    Compare two sessions for analysis.
+
+    Args:
+        session_id_1: First session ID
+        session_id_2: Second session ID
+
+    Returns:
+        Dictionary with comparison metrics
+    &#34;&#34;&#34;
+    session1 = self.load_session(session_id_1)
+    session2 = self.load_session(session_id_2)
+
+    if not session1 or not session2:
+        logger.error(&#34;comparison_failed_missing_sessions&#34;)
+        return {}
+
+    # TODO: Implement detailed comparison logic
+    comparison = {
+        &#34;session_1&#34;: session_id_1,
+        &#34;session_2&#34;: session_id_2,
+        &#34;action_count_diff&#34;: 0,  # Placeholder
+        &#34;duration_diff&#34;: 0.0,  # Placeholder
+    }
+
+    logger.info(&#34;session_comparison_complete&#34;, comparison=comparison)
+    return comparison</code></pre>
+</details>
+<div class="desc"><p>Compare two sessions for analysis.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>session_id_1</code></strong></dt>
+<dd>First session ID</dd>
+<dt><strong><code>session_id_2</code></strong></dt>
+<dd>Second session ID</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>Dictionary with comparison metrics</p></div>
+</dd>
+<dt id="orchestrator.session_replay.SessionReplayer.export_session"><code class="name flex">
+<span>def <span class="ident">export_session</span></span>(<span>self, session_id: str, output_path: pathlib._local.Path) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def export_session(self, session_id: str, output_path: Path) -&gt; bool:
+    &#34;&#34;&#34;
+    Export session to JSON file.
+
+    Args:
+        session_id: Session to export
+        output_path: Output file path
+
+    Returns:
+        True if export successful
+    &#34;&#34;&#34;
+    import json
+
+    session = self.load_session(session_id)
+    if not session:
+        return False
+
+    try:
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+
+        # Convert session to dict for JSON serialization
+        # TODO: Implement proper session serialization
+        session_data = {
+            &#34;session_id&#34;: session.session_id,
+            &#34;agent_id&#34;: session.agent_id,
+            &#34;timestamp&#34;: datetime.now().isoformat(),
+        }
+
+        with open(output_path, &#34;w&#34;) as f:
+            json.dump(session_data, f, indent=2)
+
+        logger.info(
+            &#34;session_exported&#34;, session_id=session_id, path=str(output_path)
+        )
+        return True
+
+    except Exception as e:
+        logger.error(&#34;session_export_failed&#34;, session_id=session_id, error=str(e))
+        return False</code></pre>
+</details>
+<div class="desc"><p>Export session to JSON file.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>session_id</code></strong></dt>
+<dd>Session to export</dd>
+<dt><strong><code>output_path</code></strong></dt>
+<dd>Output file path</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>True if export successful</p></div>
+</dd>
+<dt id="orchestrator.session_replay.SessionReplayer.list_sessions"><code class="name flex">
+<span>def <span class="ident">list_sessions</span></span>(<span>self, limit: int = 10, filter_by: Dict[str, Any] | None = None) ‑> List[Dict[str, Any]]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def list_sessions(
+    self, limit: int = 10, filter_by: Optional[Dict[str, Any]] = None
+) -&gt; List[Dict[str, Any]]:
+    &#34;&#34;&#34;
+    List available sessions.
+
+    Args:
+        limit: Maximum number of sessions to return
+        filter_by: Optional filters (e.g., {&#34;win&#34;: True})
+
+    Returns:
+        List of session metadata dictionaries
+    &#34;&#34;&#34;
+    try:
+        # TODO: Implement session listing from KB
+        logger.warning(&#34;session_listing_not_implemented&#34;)
+        return []
+    except Exception as e:
+        logger.error(&#34;session_listing_failed&#34;, error=str(e))
+        return []</code></pre>
+</details>
+<div class="desc"><p>List available sessions.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>limit</code></strong></dt>
+<dd>Maximum number of sessions to return</dd>
+<dt><strong><code>filter_by</code></strong></dt>
+<dd>Optional filters (e.g., {"win": True})</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>List of session metadata dictionaries</p></div>
+</dd>
+<dt id="orchestrator.session_replay.SessionReplayer.load_session"><code class="name flex">
+<span>def <span class="ident">load_session</span></span>(<span>self, session_id: str) ‑> src.lib.types.Session | None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def load_session(self, session_id: str) -&gt; Optional[Session]:
+    &#34;&#34;&#34;
+    Load a session by ID.
+
+    Args:
+        session_id: Session identifier
+
+    Returns:
+        Session object or None if not found
+    &#34;&#34;&#34;
+    try:
+        # TODO: Implement actual session loading from KB
+        # For now, return None
+        logger.warning(&#34;session_load_not_implemented&#34;, session_id=session_id)
+        return None
+    except Exception as e:
+        logger.error(&#34;session_load_failed&#34;, session_id=session_id, error=str(e))
+        return None</code></pre>
+</details>
+<div class="desc"><p>Load a session by ID.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>session_id</code></strong></dt>
+<dd>Session identifier</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>Session object or None if not found</p></div>
+</dd>
+<dt id="orchestrator.session_replay.SessionReplayer.replay_session"><code class="name flex">
+<span>def <span class="ident">replay_session</span></span>(<span>self, session_id: str, execute_actions: bool = False, delay_ms: int = 500) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def replay_session(
+    self, session_id: str, execute_actions: bool = False, delay_ms: int = 500
+) -&gt; bool:
+    &#34;&#34;&#34;
+    Replay a recorded session.
+
+    Args:
+        session_id: Session to replay
+        execute_actions: Whether to actually execute actions (use with caution!)
+        delay_ms: Delay between actions in milliseconds
+
+    Returns:
+        True if replay successful, False otherwise
+    &#34;&#34;&#34;
+    session = self.load_session(session_id)
+
+    if session is None:
+        logger.error(&#34;replay_failed_session_not_found&#34;, session_id=session_id)
+        return False
+
+    logger.info(
+        &#34;replay_started&#34;, session_id=session_id, execute_actions=execute_actions
+    )
+
+    # TODO: Implement actual replay logic
+    # For now, just log the session structure
+
+    if execute_actions:
+        logger.warning(
+            &#34;replay_execution_not_implemented&#34;,
+            message=&#34;Action execution during replay not yet implemented&#34;,
+        )
+
+    return True</code></pre>
+</details>
+<div class="desc"><p>Replay a recorded session.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>session_id</code></strong></dt>
+<dd>Session to replay</dd>
+<dt><strong><code>execute_actions</code></strong></dt>
+<dd>Whether to actually execute actions (use with caution!)</dd>
+<dt><strong><code>delay_ms</code></strong></dt>
+<dd>Delay between actions in milliseconds</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>True if replay successful, False otherwise</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="orchestrator" href="index.html">orchestrator</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="orchestrator.session_replay.replay_session" href="#orchestrator.session_replay.replay_session">replay_session</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="orchestrator.session_replay.SessionReplayer" href="#orchestrator.session_replay.SessionReplayer">SessionReplayer</a></code></h4>
+<ul class="">
+<li><code><a title="orchestrator.session_replay.SessionReplayer.compare_sessions" href="#orchestrator.session_replay.SessionReplayer.compare_sessions">compare_sessions</a></code></li>
+<li><code><a title="orchestrator.session_replay.SessionReplayer.export_session" href="#orchestrator.session_replay.SessionReplayer.export_session">export_session</a></code></li>
+<li><code><a title="orchestrator.session_replay.SessionReplayer.list_sessions" href="#orchestrator.session_replay.SessionReplayer.list_sessions">list_sessions</a></code></li>
+<li><code><a title="orchestrator.session_replay.SessionReplayer.load_session" href="#orchestrator.session_replay.SessionReplayer.load_session">load_session</a></code></li>
+<li><code><a title="orchestrator.session_replay.SessionReplayer.replay_session" href="#orchestrator.session_replay.SessionReplayer.replay_session">replay_session</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

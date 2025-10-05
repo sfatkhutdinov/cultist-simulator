@@ -1,0 +1,751 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>learning API documentation</title>
+<meta name="description" content="Learning Library - RL Agent and Knowledge Management …">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Package <code>learning</code></h1>
+</header>
+<section id="section-intro">
+<p>Learning Library - RL Agent and Knowledge Management</p>
+<p>This library provides the "brain" of the autonomous agent:
+- Action selection using reinforcement learning
+- Experience replay and knowledge storage
+- Loop detection to prevent stuck states
+- Strategy evolution and articulation</p>
+<p>Public API:
+- select_action(game_state): Choose next action using RL policy
+- update_knowledge(state, action, next_state, reward): Store experience
+- detect_loop(action_history, window_size): Detect repeated patterns
+- query_knowledge(query_type, parameters): Query knowledge base
+- store_session(session): Persist session data</p>
+<p>Performance Requirements (NFRs):
+- NFR-001: select_action() &lt;500ms
+- NFR-003: query_knowledge() &lt;100ms
+- NFR-006: detect_loop() &lt;10ms</p>
+</section>
+<section>
+<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+<dl>
+<dt><code class="name"><a title="learning.agent" href="agent.html">learning.agent</a></code></dt>
+<dd>
+<div class="desc"><p>Reinforcement Learning Agent Module …</p></div>
+</dd>
+<dt><code class="name"><a title="learning.cli" href="cli.html">learning.cli</a></code></dt>
+<dd>
+<div class="desc"><p>Learning Library CLI …</p></div>
+</dd>
+<dt><code class="name"><a title="learning.knowledge_base" href="knowledge_base.html">learning.knowledge_base</a></code></dt>
+<dd>
+<div class="desc"><p>Knowledge Base - SQLite-based Experience Storage …</p></div>
+</dd>
+<dt><code class="name"><a title="learning.metrics" href="metrics.html">learning.metrics</a></code></dt>
+<dd>
+<div class="desc"><p>Performance Metrics Module …</p></div>
+</dd>
+<dt><code class="name"><a title="learning.strategy" href="strategy.html">learning.strategy</a></code></dt>
+<dd>
+<div class="desc"><p>Strategy Module …</p></div>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="learning.detect_loop"><code class="name flex">
+<span>def <span class="ident">detect_loop</span></span>(<span>action_history: List[Any], window_size: int = 30) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def detect_loop(action_history: List[Any], window_size: int = 30) -&gt; bool:
+    &#34;&#34;&#34;
+    Detect if agent is stuck in a repeated action loop.
+
+    T099: Loop detection using sliding window and Levenshtein distance.
+    Performance requirement: &lt;10ms (NFR-006)
+
+    Uses sliding window approach to identify repeated patterns in recent
+    action history. Helps prevent the agent from getting stuck.
+
+    Args:
+        action_history: List of recent actions
+        window_size: Size of sliding window (default: 30)
+
+    Returns:
+        True if loop detected, False otherwise
+    &#34;&#34;&#34;
+    start_time = time.perf_counter()
+
+    # Empty or very short history can&#39;t have loops
+    if len(action_history) &lt; 6:  # Need at least 2 repetitions of 3-action pattern
+        return False
+
+    try:
+        # Simple loop detection: check if recent actions form a repeating pattern
+        # TODO T076-T077: Implement proper Levenshtein distance comparison
+
+        # Need minimum history for pattern detection
+        if len(action_history) &lt; 6:
+            return False
+
+        # Convert all to strings
+        history_str = [str(a) for a in action_history]
+
+        # Strategy: Check if the entire sequence is repetitive
+        # by comparing different sliding windows
+
+        # Try to detect patterns of size 2, 3, 4, 5
+        for pattern_size in range(2, min(6, len(history_str) // 3 + 1)):
+            # Check if last N items match a repeating pattern
+            check_length = min(pattern_size * 3, len(history_str))
+            if check_length &lt; pattern_size * 2:
+                continue
+
+            recent_segment = history_str[-check_length:]
+
+            # Check if this segment is repetitive
+            # by seeing if it&#39;s made of the same pattern repeated
+            pattern = recent_segment[:pattern_size]
+            is_repetitive = True
+
+            for i in range(pattern_size, len(recent_segment), pattern_size):
+                segment = recent_segment[i : i + pattern_size]
+                # Allow partial matches at the end
+                match_length = min(len(segment), len(pattern))
+                matches = sum(
+                    1 for j in range(match_length) if segment[j] == pattern[j]
+                )
+                if matches / match_length &lt; 0.8:  # 80% similarity threshold
+                    is_repetitive = False
+                    break
+
+            if is_repetitive:
+                duration_ms = (time.perf_counter() - start_time) * 1000
+
+                logger.debug(
+                    &#34;loop_detection&#34;,
+                    history_length=len(action_history),
+                    window_size=window_size,
+                    pattern_size=pattern_size,
+                    pattern=pattern,
+                    is_loop=True,
+                    duration_ms=duration_ms,
+                )
+
+                return True
+
+        # No repeating pattern found
+        duration_ms = (time.perf_counter() - start_time) * 1000
+
+        logger.debug(
+            &#34;loop_detection&#34;,
+            history_length=len(action_history),
+            window_size=window_size,
+            is_loop=False,
+            duration_ms=duration_ms,
+        )
+
+        # Verify performance requirement
+        if duration_ms &gt;= 10:
+            logger.warning(
+                &#34;loop_detection_slow&#34;, duration_ms=duration_ms, threshold_ms=10
+            )
+
+        return False
+
+    except Exception as e:
+        logger.error(&#34;loop_detection_failed&#34;, error=str(e))
+        # Return False on error (safer to not interrupt gameplay)
+        return False</code></pre>
+</details>
+<div class="desc"><p>Detect if agent is stuck in a repeated action loop.</p>
+<p>T099: Loop detection using sliding window and Levenshtein distance.
+Performance requirement: &lt;10ms (NFR-006)</p>
+<p>Uses sliding window approach to identify repeated patterns in recent
+action history. Helps prevent the agent from getting stuck.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>action_history</code></strong></dt>
+<dd>List of recent actions</dd>
+<dt><strong><code>window_size</code></strong></dt>
+<dd>Size of sliding window (default: 30)</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>True if loop detected, False otherwise</p></div>
+</dd>
+<dt id="learning.enable_test_mode"><code class="name flex">
+<span>def <span class="ident">enable_test_mode</span></span>(<span>enabled: bool = True) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def enable_test_mode(enabled: bool = True) -&gt; None:
+    &#34;&#34;&#34;
+    Enable or disable test mode for action selection.
+    
+    When test mode is enabled, select_action() will use random valid actions
+    instead of requiring a trained RL model. This is useful for testing and
+    development.
+    
+    Args:
+        enabled: Whether to enable test mode (default: True)
+    &#34;&#34;&#34;
+    global _test_mode
+    _test_mode = enabled
+    if enabled:
+        logger.info(&#34;test_mode_enabled&#34;, mode=&#34;random_actions&#34;)
+    else:
+        logger.info(&#34;test_mode_disabled&#34;, mode=&#34;requires_trained_model&#34;)</code></pre>
+</details>
+<div class="desc"><p>Enable or disable test mode for action selection.</p>
+<p>When test mode is enabled, select_action() will use random valid actions
+instead of requiring a trained RL model. This is useful for testing and
+development.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>enabled</code></strong></dt>
+<dd>Whether to enable test mode (default: True)</dd>
+</dl></div>
+</dd>
+<dt id="learning.query_knowledge"><code class="name flex">
+<span>def <span class="ident">query_knowledge</span></span>(<span>query_type: str, parameters: Dict[str, Any]) ‑> <a title="learning.QueryResult" href="#learning.QueryResult">QueryResult</a></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def query_knowledge(query_type: str, parameters: Dict[str, Any]) -&gt; QueryResult:
+    &#34;&#34;&#34;
+    Query the knowledge base for similar states, strategies, or mechanics.
+
+    T097: Knowledge base queries with similarity search.
+    Performance requirement: &lt;100ms (NFR-003)
+
+    Args:
+        query_type: Type of query (&#34;similar_states&#34;, &#34;best_strategy&#34;, &#34;mechanics&#34;)
+        parameters: Query-specific parameters (e.g., state_hash, context)
+
+    Returns:
+        QueryResult with results and metadata
+
+    Raises:
+        KnowledgeBaseError: If query fails
+    &#34;&#34;&#34;
+    start_time = time.perf_counter()
+
+    try:
+        # TODO T095-T097: Implement actual knowledge base queries
+        # For now, return empty results
+
+        global _knowledge_base
+        if _knowledge_base is None:
+            from .knowledge_base import KnowledgeBase
+
+            _knowledge_base = KnowledgeBase()
+
+        # Placeholder query (in real implementation, would query SQLite)
+        results = []
+
+        duration_ms = (time.perf_counter() - start_time) * 1000
+
+        logger.debug(
+            &#34;knowledge_queried&#34;,
+            query_type=query_type,
+            result_count=len(results),
+            duration_ms=duration_ms,
+        )
+
+        # Verify performance requirement
+        if duration_ms &gt;= 100:
+            logger.warning(
+                &#34;knowledge_query_slow&#34;, duration_ms=duration_ms, threshold_ms=100
+            )
+
+        return QueryResult(
+            result_count=len(results),
+            query_time_ms=duration_ms,
+            results=results,
+            metadata={&#34;query_type&#34;: query_type},
+        )
+
+    except Exception as e:
+        logger.error(&#34;knowledge_query_failed&#34;, query_type=query_type, error=str(e))
+        raise KnowledgeBaseError(f&#34;Failed to query knowledge: {e}&#34;)</code></pre>
+</details>
+<div class="desc"><p>Query the knowledge base for similar states, strategies, or mechanics.</p>
+<p>T097: Knowledge base queries with similarity search.
+Performance requirement: &lt;100ms (NFR-003)</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>query_type</code></strong></dt>
+<dd>Type of query ("similar_states", "best_strategy", "mechanics")</dd>
+<dt><strong><code>parameters</code></strong></dt>
+<dd>Query-specific parameters (e.g., state_hash, context)</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>QueryResult with results and metadata</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code><a title="learning.KnowledgeBaseError" href="#learning.KnowledgeBaseError">KnowledgeBaseError</a></code></dt>
+<dd>If query fails</dd>
+</dl></div>
+</dd>
+<dt id="learning.select_action"><code class="name flex">
+<span>def <span class="ident">select_action</span></span>(<span>game_state: src.lib.types.GameState | None) ‑> src.lib.types.Action</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def select_action(game_state: Optional[GameState]) -&gt; Action:
+    &#34;&#34;&#34;
+    Select the next action to take based on current game state.
+
+    T093: Action selection using trained RL policy.
+    Performance requirement: &lt;500ms (NFR-001)
+
+    Uses Stable-Baselines3 PPO model to choose optimal action based on
+    learned policy from previous episodes.
+
+    Args:
+        game_state: Current game state observation
+
+    Returns:
+        Action to execute
+
+    Raises:
+        ModelNotLoadedError: If RL model hasn&#39;t been trained yet
+        ValueError: If game_state is None
+    &#34;&#34;&#34;
+    start_time = time.perf_counter()
+
+    if game_state is None:
+        raise ValueError(&#34;game_state cannot be None&#34;)
+
+    # Check if model is loaded (or test mode is enabled)
+    global _rl_model, _test_mode
+    if _rl_model is None and not _test_mode:
+        logger.warning(&#34;rl_model_not_loaded&#34;)
+        raise ModelNotLoadedError(&#34;RL model must be trained before action selection&#34;)
+
+    try:
+        # TODO T091-T092: Replace with actual PPO model inference
+        # For now, return a placeholder/random action
+        from src.lib.types import ActionType, Point
+        import random
+
+        # Generate random action for testing
+        if _test_mode or _rl_model is None:
+            # Random action within game window bounds
+            window_bounds = game_state.window_bounds
+            random_x = random.randint(
+                window_bounds.x + 50, 
+                window_bounds.x + window_bounds.width - 50
+            )
+            random_y = random.randint(
+                window_bounds.y + 50, 
+                window_bounds.y + window_bounds.height - 50
+            )
+            
+            action = Action(
+                action_type=ActionType.CLICK,
+                parameters={&#34;point&#34;: Point(random_x, random_y)},
+                metadata={
+                    &#34;confidence&#34;: 0.5,
+                    &#34;rationale&#34;: &#34;Random test action&#34; if _test_mode else &#34;Placeholder action&#34;,
+                    &#34;test_mode&#34;: _test_mode,
+                },
+            )
+        else:
+            # Real implementation with trained model:
+            # observation = _encode_game_state(game_state)
+            # action_vector, _states = _rl_model.predict(observation, deterministic=False)
+            # action = _decode_action(action_vector)
+            
+            action = Action(
+                action_type=ActionType.CLICK,
+                parameters={&#34;point&#34;: Point(400, 300)},
+                metadata={
+                    &#34;confidence&#34;: 0.8,
+                    &#34;rationale&#34;: &#34;Model-selected action&#34;,
+                },
+            )
+
+        duration_ms = (time.perf_counter() - start_time) * 1000
+
+        logger.info(
+            &#34;action_selected&#34;,
+            action_type=str(action.action_type),
+            confidence=action.metadata.get(&#34;confidence&#34;, 0.0),
+            duration_ms=duration_ms,
+        )
+
+        # Verify performance requirement
+        if duration_ms &gt;= 500:
+            logger.warning(
+                &#34;action_selection_slow&#34;, duration_ms=duration_ms, threshold_ms=500
+            )
+
+        return action
+
+    except Exception as e:
+        logger.error(&#34;action_selection_failed&#34;, error=str(e))
+        raise</code></pre>
+</details>
+<div class="desc"><p>Select the next action to take based on current game state.</p>
+<p>T093: Action selection using trained RL policy.
+Performance requirement: &lt;500ms (NFR-001)</p>
+<p>Uses Stable-Baselines3 PPO model to choose optimal action based on
+learned policy from previous episodes.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>game_state</code></strong></dt>
+<dd>Current game state observation</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>Action to execute</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code><a title="learning.ModelNotLoadedError" href="#learning.ModelNotLoadedError">ModelNotLoadedError</a></code></dt>
+<dd>If RL model hasn't been trained yet</dd>
+<dt><code>ValueError</code></dt>
+<dd>If game_state is None</dd>
+</dl></div>
+</dd>
+<dt id="learning.store_session"><code class="name flex">
+<span>def <span class="ident">store_session</span></span>(<span>session: src.lib.types.Session | Dict[str, Any] | None) ‑> str</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def store_session(session: Union[Session, Dict[str, Any], None]) -&gt; str:
+    &#34;&#34;&#34;
+    Store a complete session in the knowledge base.
+
+    T096: Session persistence for later analysis and training.
+
+    Args:
+        session: Session object or dict to persist
+
+    Returns:
+        Session ID (UUID string or session_id from dict)
+
+    Raises:
+        KnowledgeBaseError: If storage fails
+        ValueError: If session is None
+    &#34;&#34;&#34;
+    if session is None:
+        raise ValueError(&#34;session cannot be None&#34;)
+
+    try:
+        global _knowledge_base
+        if _knowledge_base is None:
+            from .knowledge_base import KnowledgeBase
+
+            _knowledge_base = KnowledgeBase()
+
+        # Handle dict input (from tests)
+        if isinstance(session, dict):
+            session_id = session.get(&#34;session_id&#34;, &#34;&#34;)
+            if not session_id:
+                # Generate session ID from session data
+                import json
+
+                session_data = json.dumps(session, sort_keys=True).encode(&#34;utf-8&#34;)
+                session_id = hashlib.sha256(session_data).hexdigest()[:16]
+
+            logger.info(&#34;session_stored&#34;, session_id=session_id, source=&#34;dict&#34;)
+            return session_id
+
+        # Handle Session object
+        # TODO T096: Implement actual session storage in database
+        session_data = str(session).encode(&#34;utf-8&#34;)
+        session_id = hashlib.sha256(session_data).hexdigest()[:16]
+
+        logger.info(&#34;session_stored&#34;, session_id=session_id)
+
+        return session_id
+
+    except Exception as e:
+        logger.error(&#34;session_storage_failed&#34;, error=str(e))
+        raise KnowledgeBaseError(f&#34;Failed to store session: {e}&#34;)</code></pre>
+</details>
+<div class="desc"><p>Store a complete session in the knowledge base.</p>
+<p>T096: Session persistence for later analysis and training.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>session</code></strong></dt>
+<dd>Session object or dict to persist</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>Session ID (UUID string or session_id from dict)</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code><a title="learning.KnowledgeBaseError" href="#learning.KnowledgeBaseError">KnowledgeBaseError</a></code></dt>
+<dd>If storage fails</dd>
+<dt><code>ValueError</code></dt>
+<dd>If session is None</dd>
+</dl></div>
+</dd>
+<dt id="learning.update_knowledge"><code class="name flex">
+<span>def <span class="ident">update_knowledge</span></span>(<span>state: Any | None, action: Any | None, next_state: Any | None, reward: float) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update_knowledge(
+    state: Optional[Any],
+    action: Optional[Any],
+    next_state: Optional[Any],
+    reward: float,
+) -&gt; None:
+    &#34;&#34;&#34;
+    Update knowledge base with experience tuple (SARS).
+
+    T094: Experience replay - store state, action, reward, next_state.
+    Performance requirement: &lt;100ms
+
+    Stores experience in knowledge base for later training and analysis.
+
+    Args:
+        state: Current game state
+        action: Action taken
+        next_state: Resulting game state
+        reward: Reward received
+
+    Raises:
+        KnowledgeBaseError: If storage fails
+    &#34;&#34;&#34;
+    start_time = time.perf_counter()
+
+    try:
+        # TODO T095-T097: Implement actual knowledge base storage
+        # For now, just log the experience
+
+        global _knowledge_base
+        if _knowledge_base is None:
+            from .knowledge_base import KnowledgeBase
+
+            _knowledge_base = KnowledgeBase()
+
+        # Store experience (placeholder implementation)
+        # In real implementation:
+        # _knowledge_base.store_experience(state, action, next_state, reward)
+
+        duration_ms = (time.perf_counter() - start_time) * 1000
+
+        logger.debug(&#34;knowledge_updated&#34;, reward=reward, duration_ms=duration_ms)
+
+        # Verify performance requirement
+        if duration_ms &gt;= 100:
+            logger.warning(
+                &#34;knowledge_update_slow&#34;, duration_ms=duration_ms, threshold_ms=100
+            )
+
+    except Exception as e:
+        logger.error(&#34;knowledge_update_failed&#34;, error=str(e))
+        raise KnowledgeBaseError(f&#34;Failed to update knowledge: {e}&#34;)</code></pre>
+</details>
+<div class="desc"><p>Update knowledge base with experience tuple (SARS).</p>
+<p>T094: Experience replay - store state, action, reward, next_state.
+Performance requirement: &lt;100ms</p>
+<p>Stores experience in knowledge base for later training and analysis.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>state</code></strong></dt>
+<dd>Current game state</dd>
+<dt><strong><code>action</code></strong></dt>
+<dd>Action taken</dd>
+<dt><strong><code>next_state</code></strong></dt>
+<dd>Resulting game state</dd>
+<dt><strong><code>reward</code></strong></dt>
+<dd>Reward received</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code><a title="learning.KnowledgeBaseError" href="#learning.KnowledgeBaseError">KnowledgeBaseError</a></code></dt>
+<dd>If storage fails</dd>
+</dl></div>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="learning.KnowledgeBaseError"><code class="flex name class">
+<span>class <span class="ident">KnowledgeBaseError</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class KnowledgeBaseError(Exception):
+    &#34;&#34;&#34;Raised when knowledge base operation fails.&#34;&#34;&#34;
+
+    pass</code></pre>
+</details>
+<div class="desc"><p>Raised when knowledge base operation fails.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.Exception</li>
+<li>builtins.BaseException</li>
+</ul>
+</dd>
+<dt id="learning.ModelNotLoadedError"><code class="flex name class">
+<span>class <span class="ident">ModelNotLoadedError</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ModelNotLoadedError(Exception):
+    &#34;&#34;&#34;Raised when RL model is not loaded/trained.&#34;&#34;&#34;
+
+    pass</code></pre>
+</details>
+<div class="desc"><p>Raised when RL model is not loaded/trained.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.Exception</li>
+<li>builtins.BaseException</li>
+</ul>
+</dd>
+<dt id="learning.QueryResult"><code class="flex name class">
+<span>class <span class="ident">QueryResult</span></span>
+<span>(</span><span>result_count: int,<br>query_time_ms: float,<br>results: List[Any],<br>metadata: Dict[str, Any])</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class QueryResult:
+    &#34;&#34;&#34;Result from knowledge base query.&#34;&#34;&#34;
+
+    result_count: int
+    query_time_ms: float
+    results: List[Any]
+    metadata: Dict[str, Any]</code></pre>
+</details>
+<div class="desc"><p>Result from knowledge base query.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="learning.QueryResult.metadata"><code class="name">var <span class="ident">metadata</span> : Dict[str, Any]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="learning.QueryResult.query_time_ms"><code class="name">var <span class="ident">query_time_ms</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="learning.QueryResult.result_count"><code class="name">var <span class="ident">result_count</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="learning.QueryResult.results"><code class="name">var <span class="ident">results</span> : List[Any]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-submodules">Sub-modules</a></h3>
+<ul>
+<li><code><a title="learning.agent" href="agent.html">learning.agent</a></code></li>
+<li><code><a title="learning.cli" href="cli.html">learning.cli</a></code></li>
+<li><code><a title="learning.knowledge_base" href="knowledge_base.html">learning.knowledge_base</a></code></li>
+<li><code><a title="learning.metrics" href="metrics.html">learning.metrics</a></code></li>
+<li><code><a title="learning.strategy" href="strategy.html">learning.strategy</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="two-column">
+<li><code><a title="learning.detect_loop" href="#learning.detect_loop">detect_loop</a></code></li>
+<li><code><a title="learning.enable_test_mode" href="#learning.enable_test_mode">enable_test_mode</a></code></li>
+<li><code><a title="learning.query_knowledge" href="#learning.query_knowledge">query_knowledge</a></code></li>
+<li><code><a title="learning.select_action" href="#learning.select_action">select_action</a></code></li>
+<li><code><a title="learning.store_session" href="#learning.store_session">store_session</a></code></li>
+<li><code><a title="learning.update_knowledge" href="#learning.update_knowledge">update_knowledge</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="learning.KnowledgeBaseError" href="#learning.KnowledgeBaseError">KnowledgeBaseError</a></code></h4>
+</li>
+<li>
+<h4><code><a title="learning.ModelNotLoadedError" href="#learning.ModelNotLoadedError">ModelNotLoadedError</a></code></h4>
+</li>
+<li>
+<h4><code><a title="learning.QueryResult" href="#learning.QueryResult">QueryResult</a></code></h4>
+<ul class="">
+<li><code><a title="learning.QueryResult.metadata" href="#learning.QueryResult.metadata">metadata</a></code></li>
+<li><code><a title="learning.QueryResult.query_time_ms" href="#learning.QueryResult.query_time_ms">query_time_ms</a></code></li>
+<li><code><a title="learning.QueryResult.result_count" href="#learning.QueryResult.result_count">result_count</a></code></li>
+<li><code><a title="learning.QueryResult.results" href="#learning.QueryResult.results">results</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

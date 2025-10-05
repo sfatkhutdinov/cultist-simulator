@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>nlp.goal_extractor API documentation</title>
+<meta name="description" content="Goal extraction module for narrative text analysis …">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>nlp.goal_extractor</code></h1>
+</header>
+<section id="section-intro">
+<p>Goal extraction module for narrative text analysis.</p>
+<p>This module extracts gameplay objectives from narrative text using:
+- Pattern matching for explicit goals
+- Keyword analysis for implicit objectives
+- Context understanding via embeddings</p>
+<p>Performance target: &lt;150ms per extraction</p>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="nlp.goal_extractor.Goal"><code class="flex name class">
+<span>class <span class="ident">Goal</span></span>
+<span>(</span><span>description: str,<br>goal_type: <a title="nlp.goal_extractor.GoalType" href="#nlp.goal_extractor.GoalType">GoalType</a>,<br>confidence: float,<br>keywords: List[str])</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class Goal:
+    &#34;&#34;&#34;Represents an extracted goal from narrative text.&#34;&#34;&#34;
+
+    description: str
+    goal_type: GoalType
+    confidence: float  # 0.0 to 1.0
+    keywords: List[str]</code></pre>
+</details>
+<div class="desc"><p>Represents an extracted goal from narrative text.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="nlp.goal_extractor.Goal.confidence"><code class="name">var <span class="ident">confidence</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="nlp.goal_extractor.Goal.description"><code class="name">var <span class="ident">description</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="nlp.goal_extractor.Goal.goal_type"><code class="name">var <span class="ident">goal_type</span> : <a title="nlp.goal_extractor.GoalType" href="#nlp.goal_extractor.GoalType">GoalType</a></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="nlp.goal_extractor.Goal.keywords"><code class="name">var <span class="ident">keywords</span> : List[str]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="nlp.goal_extractor.GoalExtractor"><code class="flex name class">
+<span>class <span class="ident">GoalExtractor</span></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class GoalExtractor:
+    &#34;&#34;&#34;
+    Extracts gameplay objectives from narrative text.
+
+    Uses pattern matching and keyword analysis to identify:
+    - Explicit goals (&#34;You must collect five coins&#34;)
+    - Implicit objectives (&#34;The door is locked&#34;)
+    - Survival imperatives (&#34;The shadows approach&#34;)
+    &#34;&#34;&#34;
+
+    # Pattern matching rules for explicit goals
+    GOAL_PATTERNS = [
+        # Explicit imperatives
+        (
+            r&#34;(?:you must|you need to|you should)\s+(\w+(?:\s+\w+){0,10})&#34;,
+            GoalType.UNKNOWN,
+            0.9,
+        ),
+        (
+            r&#34;(?:collect|gather|obtain|find)\s+(\w+(?:\s+\w+){0,5})&#34;,
+            GoalType.COLLECT,
+            0.8,
+        ),
+        (
+            r&#34;(?:survive|endure|last)\s+(?:until|through|against)?\s*(\w+(?:\s+\w+){0,5})&#34;,
+            GoalType.SURVIVE,
+            0.8,
+        ),
+        (
+            r&#34;(?:reach|get to|travel to|arrive at)\s+(\w+(?:\s+\w+){0,5})&#34;,
+            GoalType.REACH,
+            0.8,
+        ),
+        (
+            r&#34;(?:avoid|escape|flee from|stay away from)\s+(\w+(?:\s+\w+){0,5})&#34;,
+            GoalType.AVOID,
+            0.8,
+        ),
+        (
+            r&#34;(?:unlock|open|unseal)\s+(?:the\s+)?(\w+(?:\s+\w+){0,5})&#34;,
+            GoalType.UNLOCK,
+            0.7,
+        ),
+        (
+            r&#34;(?:discover|learn|uncover|reveal)\s+(\w+(?:\s+\w+){0,5})&#34;,
+            GoalType.DISCOVER,
+            0.7,
+        ),
+        (
+            r&#34;(?:protect|defend|guard|save)\s+(\w+(?:\s+\w+){0,5})&#34;,
+            GoalType.PROTECT,
+            0.8,
+        ),
+    ]
+
+    # Keywords that suggest implicit goals
+    IMPLICIT_KEYWORDS = {
+        GoalType.UNLOCK: [&#34;locked&#34;, &#34;sealed&#34;, &#34;keyhole&#34;, &#34;barrier&#34;, &#34;blocked&#34;],
+        GoalType.COLLECT: [&#34;need&#34;, &#34;require&#34;, &#34;missing&#34;, &#34;insufficient&#34;],
+        GoalType.AVOID: [&#34;danger&#34;, &#34;threat&#34;, &#34;peril&#34;, &#34;hazard&#34;, &#34;deadly&#34;],
+        GoalType.SURVIVE: [&#34;approaching&#34;, &#34;coming&#34;, &#34;imminent&#34;, &#34;dread&#34;, &#34;fear&#34;],
+        GoalType.DISCOVER: [&#34;mystery&#34;, &#34;unknown&#34;, &#34;hidden&#34;, &#34;secret&#34;, &#34;enigma&#34;],
+    }
+
+    def extract_goals(self, narrative_text: str) -&gt; List[Goal]:
+        &#34;&#34;&#34;
+        Extract goals from narrative text.
+
+        Args:
+            narrative_text: Game narrative or description text
+
+        Returns:
+            List of identified goals with types and confidence scores
+
+        Performance:
+            &lt;150ms per extraction (NFR-002)
+        &#34;&#34;&#34;
+        goals = []
+
+        # Handle empty input
+        if not narrative_text or not narrative_text.strip():
+            return goals
+
+        # Extract explicit goals using patterns
+        explicit_goals = self._extract_explicit_goals(narrative_text)
+        goals.extend(explicit_goals)
+
+        # Extract implicit goals from keywords
+        implicit_goals = self._extract_implicit_goals(narrative_text)
+        goals.extend(implicit_goals)
+
+        # Deduplicate similar goals
+        goals = self._deduplicate_goals(goals)
+
+        return goals
+
+    def _extract_explicit_goals(self, text: str) -&gt; List[Goal]:
+        &#34;&#34;&#34;Extract goals using pattern matching.&#34;&#34;&#34;
+        goals = []
+        text_lower = text.lower()
+
+        for pattern, goal_type, confidence in self.GOAL_PATTERNS:
+            matches = re.finditer(pattern, text_lower, re.IGNORECASE)
+
+            for match in matches:
+                description = match.group(1).strip()
+
+                # Extract keywords from description
+                keywords = [w for w in description.split() if len(w) &gt; 2]
+
+                goal = Goal(
+                    description=description,
+                    goal_type=goal_type,
+                    confidence=confidence,
+                    keywords=keywords,
+                )
+                goals.append(goal)
+
+        return goals
+
+    def _extract_implicit_goals(self, text: str) -&gt; List[Goal]:
+        &#34;&#34;&#34;Extract implicit goals from keywords.&#34;&#34;&#34;
+        goals = []
+        text_lower = text.lower()
+
+        for goal_type, keywords in self.IMPLICIT_KEYWORDS.items():
+            # Check if any keywords are present
+            found_keywords = [kw for kw in keywords if kw in text_lower]
+
+            if found_keywords:
+                # Create implicit goal
+                description = f&#34;implied: {goal_type.value}&#34;
+
+                goal = Goal(
+                    description=description,
+                    goal_type=goal_type,
+                    confidence=0.5,  # Lower confidence for implicit goals
+                    keywords=found_keywords,
+                )
+                goals.append(goal)
+
+        return goals
+
+    def _deduplicate_goals(self, goals: List[Goal]) -&gt; List[Goal]:
+        &#34;&#34;&#34;Remove duplicate or very similar goals.&#34;&#34;&#34;
+        if not goals:
+            return goals
+
+        # Simple deduplication by description similarity
+        unique_goals = []
+        seen_descriptions = set()
+
+        for goal in sorted(goals, key=lambda g: g.confidence, reverse=True):
+            # Normalize description for comparison
+            normalized = goal.description.lower().strip()
+
+            # Check if we&#39;ve seen a similar description
+            if normalized not in seen_descriptions:
+                unique_goals.append(goal)
+                seen_descriptions.add(normalized)
+
+        return unique_goals</code></pre>
+</details>
+<div class="desc"><p>Extracts gameplay objectives from narrative text.</p>
+<p>Uses pattern matching and keyword analysis to identify:
+- Explicit goals ("You must collect five coins")
+- Implicit objectives ("The door is locked")
+- Survival imperatives ("The shadows approach")</p></div>
+<h3>Class variables</h3>
+<dl>
+<dt id="nlp.goal_extractor.GoalExtractor.GOAL_PATTERNS"><code class="name">var <span class="ident">GOAL_PATTERNS</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="nlp.goal_extractor.GoalExtractor.IMPLICIT_KEYWORDS"><code class="name">var <span class="ident">IMPLICIT_KEYWORDS</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="nlp.goal_extractor.GoalExtractor.extract_goals"><code class="name flex">
+<span>def <span class="ident">extract_goals</span></span>(<span>self, narrative_text: str) ‑> List[<a title="nlp.goal_extractor.Goal" href="#nlp.goal_extractor.Goal">Goal</a>]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def extract_goals(self, narrative_text: str) -&gt; List[Goal]:
+    &#34;&#34;&#34;
+    Extract goals from narrative text.
+
+    Args:
+        narrative_text: Game narrative or description text
+
+    Returns:
+        List of identified goals with types and confidence scores
+
+    Performance:
+        &lt;150ms per extraction (NFR-002)
+    &#34;&#34;&#34;
+    goals = []
+
+    # Handle empty input
+    if not narrative_text or not narrative_text.strip():
+        return goals
+
+    # Extract explicit goals using patterns
+    explicit_goals = self._extract_explicit_goals(narrative_text)
+    goals.extend(explicit_goals)
+
+    # Extract implicit goals from keywords
+    implicit_goals = self._extract_implicit_goals(narrative_text)
+    goals.extend(implicit_goals)
+
+    # Deduplicate similar goals
+    goals = self._deduplicate_goals(goals)
+
+    return goals</code></pre>
+</details>
+<div class="desc"><p>Extract goals from narrative text.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>narrative_text</code></strong></dt>
+<dd>Game narrative or description text</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>List of identified goals with types and confidence scores</p>
+<h2 id="performance">Performance</h2>
+<p>&lt;150ms per extraction (NFR-002)</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="nlp.goal_extractor.GoalType"><code class="flex name class">
+<span>class <span class="ident">GoalType</span></span>
+<span>(</span><span>*args, **kwds)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class GoalType(Enum):
+    &#34;&#34;&#34;Types of gameplay goals.&#34;&#34;&#34;
+
+    COLLECT = &#34;collect&#34;
+    SURVIVE = &#34;survive&#34;
+    REACH = &#34;reach&#34;
+    AVOID = &#34;avoid&#34;
+    UNLOCK = &#34;unlock&#34;
+    DISCOVER = &#34;discover&#34;
+    PROTECT = &#34;protect&#34;
+    UNKNOWN = &#34;unknown&#34;</code></pre>
+</details>
+<div class="desc"><p>Types of gameplay goals.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="nlp.goal_extractor.GoalType.AVOID"><code class="name">var <span class="ident">AVOID</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="nlp.goal_extractor.GoalType.COLLECT"><code class="name">var <span class="ident">COLLECT</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="nlp.goal_extractor.GoalType.DISCOVER"><code class="name">var <span class="ident">DISCOVER</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="nlp.goal_extractor.GoalType.PROTECT"><code class="name">var <span class="ident">PROTECT</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="nlp.goal_extractor.GoalType.REACH"><code class="name">var <span class="ident">REACH</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="nlp.goal_extractor.GoalType.SURVIVE"><code class="name">var <span class="ident">SURVIVE</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="nlp.goal_extractor.GoalType.UNKNOWN"><code class="name">var <span class="ident">UNKNOWN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="nlp.goal_extractor.GoalType.UNLOCK"><code class="name">var <span class="ident">UNLOCK</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="nlp" href="index.html">nlp</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="nlp.goal_extractor.Goal" href="#nlp.goal_extractor.Goal">Goal</a></code></h4>
+<ul class="">
+<li><code><a title="nlp.goal_extractor.Goal.confidence" href="#nlp.goal_extractor.Goal.confidence">confidence</a></code></li>
+<li><code><a title="nlp.goal_extractor.Goal.description" href="#nlp.goal_extractor.Goal.description">description</a></code></li>
+<li><code><a title="nlp.goal_extractor.Goal.goal_type" href="#nlp.goal_extractor.Goal.goal_type">goal_type</a></code></li>
+<li><code><a title="nlp.goal_extractor.Goal.keywords" href="#nlp.goal_extractor.Goal.keywords">keywords</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="nlp.goal_extractor.GoalExtractor" href="#nlp.goal_extractor.GoalExtractor">GoalExtractor</a></code></h4>
+<ul class="">
+<li><code><a title="nlp.goal_extractor.GoalExtractor.GOAL_PATTERNS" href="#nlp.goal_extractor.GoalExtractor.GOAL_PATTERNS">GOAL_PATTERNS</a></code></li>
+<li><code><a title="nlp.goal_extractor.GoalExtractor.IMPLICIT_KEYWORDS" href="#nlp.goal_extractor.GoalExtractor.IMPLICIT_KEYWORDS">IMPLICIT_KEYWORDS</a></code></li>
+<li><code><a title="nlp.goal_extractor.GoalExtractor.extract_goals" href="#nlp.goal_extractor.GoalExtractor.extract_goals">extract_goals</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="nlp.goal_extractor.GoalType" href="#nlp.goal_extractor.GoalType">GoalType</a></code></h4>
+<ul class="two-column">
+<li><code><a title="nlp.goal_extractor.GoalType.AVOID" href="#nlp.goal_extractor.GoalType.AVOID">AVOID</a></code></li>
+<li><code><a title="nlp.goal_extractor.GoalType.COLLECT" href="#nlp.goal_extractor.GoalType.COLLECT">COLLECT</a></code></li>
+<li><code><a title="nlp.goal_extractor.GoalType.DISCOVER" href="#nlp.goal_extractor.GoalType.DISCOVER">DISCOVER</a></code></li>
+<li><code><a title="nlp.goal_extractor.GoalType.PROTECT" href="#nlp.goal_extractor.GoalType.PROTECT">PROTECT</a></code></li>
+<li><code><a title="nlp.goal_extractor.GoalType.REACH" href="#nlp.goal_extractor.GoalType.REACH">REACH</a></code></li>
+<li><code><a title="nlp.goal_extractor.GoalType.SURVIVE" href="#nlp.goal_extractor.GoalType.SURVIVE">SURVIVE</a></code></li>
+<li><code><a title="nlp.goal_extractor.GoalType.UNKNOWN" href="#nlp.goal_extractor.GoalType.UNKNOWN">UNKNOWN</a></code></li>
+<li><code><a title="nlp.goal_extractor.GoalType.UNLOCK" href="#nlp.goal_extractor.GoalType.UNLOCK">UNLOCK</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

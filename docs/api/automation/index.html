@@ -1,0 +1,756 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>automation API documentation</title>
+<meta name="description" content="Automation Library - Safe macOS Input Simulation …">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Package <code>automation</code></h1>
+</header>
+<section id="section-intro">
+<p>Automation Library - Safe macOS Input Simulation</p>
+<p>This library provides safe, constrained automation of mouse and keyboard inputs
+for interacting with the Cultist Simulator game on macOS.</p>
+<p>CRITICAL SAFETY CONSTRAINTS:
+- All actions MUST be validated by safety_lib before execution
+- Actions outside window bounds are BLOCKED
+- Blacklisted key combinations are BLOCKED (Cmd+Q, Cmd+W, etc.)
+- Actions when window unfocused are BLOCKED
+- Rate limiting prevents excessive rapid actions</p>
+<p>Public API:
+- simulate_click(point, button, window_bounds): Click at coordinates
+- simulate_drag(start, end, duration_ms, window_bounds): Drag between points
+- simulate_key_press(key, modifiers, window_bounds): Press key combination
+- verify_window_focus(window_name): Check if window has focus
+- get_blacklisted_keys(): Get list of forbidden key combinations
+- wait(duration_ms): Sleep for specified duration</p>
+<p>Dependencies:
+- macOS Quartz (PyObjC) for low-level input events
+- safety_lib for constraint validation</p>
+</section>
+<section>
+<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+<dl>
+<dt><code class="name"><a title="automation.cli" href="cli.html">automation.cli</a></code></dt>
+<dd>
+<div class="desc"><p>Automation Library CLI …</p></div>
+</dd>
+<dt><code class="name"><a title="automation.input_simulator" href="input_simulator.html">automation.input_simulator</a></code></dt>
+<dd>
+<div class="desc"><p>Input Simulator - Low-level macOS input event generation …</p></div>
+</dd>
+<dt><code class="name"><a title="automation.window_manager" href="window_manager.html">automation.window_manager</a></code></dt>
+<dd>
+<div class="desc"><p>Window Manager - macOS Window Focus Detection and Bounds …</p></div>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="automation.get_blacklisted_keys"><code class="name flex">
+<span>def <span class="ident">get_blacklisted_keys</span></span>(<span>) ‑> List[str]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_blacklisted_keys() -&gt; List[str]:
+    &#34;&#34;&#34;
+    Get list of blacklisted key combinations.
+
+    Returns:
+        List of blacklisted key combination strings (e.g., [&#34;cmd+q&#34;, &#34;cmd+w&#34;])
+    &#34;&#34;&#34;
+    return list(BLACKLISTED_KEYS)</code></pre>
+</details>
+<div class="desc"><p>Get list of blacklisted key combinations.</p>
+<h2 id="returns">Returns</h2>
+<p>List of blacklisted key combination strings (e.g., ["cmd+q", "cmd+w"])</p></div>
+</dd>
+<dt id="automation.is_emergency_stop_requested"><code class="name flex">
+<span>def <span class="ident">is_emergency_stop_requested</span></span>(<span>) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def is_emergency_stop_requested() -&gt; bool:
+    &#34;&#34;&#34;
+    Check if emergency stop has been requested.
+
+    T069: Emergency stop mechanism.
+
+    Returns:
+        True if emergency stop was requested, False otherwise
+    &#34;&#34;&#34;
+    global _emergency_stop_requested
+    with _emergency_stop_lock:
+        return _emergency_stop_requested</code></pre>
+</details>
+<div class="desc"><p>Check if emergency stop has been requested.</p>
+<p>T069: Emergency stop mechanism.</p>
+<h2 id="returns">Returns</h2>
+<p>True if emergency stop was requested, False otherwise</p></div>
+</dd>
+<dt id="automation.request_emergency_stop"><code class="name flex">
+<span>def <span class="ident">request_emergency_stop</span></span>(<span>) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def request_emergency_stop() -&gt; None:
+    &#34;&#34;&#34;
+    Request emergency stop of all automation.
+
+    T069: Emergency stop mechanism - call this to halt the agent.
+    Can be triggered by F12 key press or other emergency conditions.
+    &#34;&#34;&#34;
+    global _emergency_stop_requested
+    with _emergency_stop_lock:
+        _emergency_stop_requested = True
+
+    logger.warning(&#34;emergency_stop_requested&#34;)</code></pre>
+</details>
+<div class="desc"><p>Request emergency stop of all automation.</p>
+<p>T069: Emergency stop mechanism - call this to halt the agent.
+Can be triggered by F12 key press or other emergency conditions.</p></div>
+</dd>
+<dt id="automation.reset_emergency_stop"><code class="name flex">
+<span>def <span class="ident">reset_emergency_stop</span></span>(<span>) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def reset_emergency_stop() -&gt; None:
+    &#34;&#34;&#34;
+    Reset emergency stop flag.
+
+    Call this to resume automation after emergency stop.
+    &#34;&#34;&#34;
+    global _emergency_stop_requested
+    with _emergency_stop_lock:
+        _emergency_stop_requested = False
+
+    logger.info(&#34;emergency_stop_reset&#34;)</code></pre>
+</details>
+<div class="desc"><p>Reset emergency stop flag.</p>
+<p>Call this to resume automation after emergency stop.</p></div>
+</dd>
+<dt id="automation.simulate_click"><code class="name flex">
+<span>def <span class="ident">simulate_click</span></span>(<span>point: src.lib.types.Point,<br>button: str = 'left',<br>window_bounds: src.lib.types.Rect | None = None) ‑> src.lib.types.ActionResult</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def simulate_click(
+    point: Point, button: str = &#34;left&#34;, window_bounds: Optional[Rect] = None
+) -&gt; ActionResult:
+    &#34;&#34;&#34;
+    Simulate a mouse click at the specified point.
+
+    T065: Safe click simulation with bounds validation.
+    CRITICAL: Must validate against safety constraints before execution.
+
+    Performance requirement: &lt;50ms execution time.
+
+    Args:
+        point: Point coordinates to click
+        button: Mouse button (&#34;left&#34;, &#34;right&#34;, &#34;middle&#34;)
+        window_bounds: Rectangle defining valid click area (REQUIRED)
+
+    Returns:
+        ActionResult with success status and validation info
+
+    Raises:
+        OutOfBoundsError: If point is outside window_bounds
+        ValueError: If window_bounds is None
+    &#34;&#34;&#34;
+    start_time = time.perf_counter()
+
+    # Require window bounds (safety constraint)
+    if window_bounds is None:
+        logger.error(&#34;click_rejected_no_bounds&#34;, point=str(point))
+        raise ValueError(&#34;window_bounds is required for safety validation&#34;)
+
+    # Validate button type
+    if button not in [&#34;left&#34;, &#34;right&#34;, &#34;middle&#34;]:
+        logger.error(&#34;click_rejected_invalid_button&#34;, button=button)
+        raise ValueError(f&#34;Invalid button type: {button}&#34;)
+
+    # Build action for safety validation
+    action = {&#34;action_type&#34;: &#34;CLICK&#34;, &#34;point&#34;: point, &#34;button&#34;: button}
+
+    context = {
+        &#34;window_bounds&#34;: window_bounds,
+        &#34;window_focused&#34;: True,  # Assume focused for now (T064 will implement)
+    }
+
+    # CRITICAL: Validate with safety library
+    from src.safety import validate_action
+
+    result = validate_action(action, context)
+
+    if not result.is_allowed:
+        logger.warning(
+            &#34;click_blocked_safety&#34;,
+            point=str(point),
+            button=button,
+            reason=result.reason,
+        )
+        raise OutOfBoundsError(result.reason)
+
+    # Execute the click
+    try:
+        click_at_point(point.x, point.y, button)
+
+        duration_ms = (time.perf_counter() - start_time) * MS_PER_SECOND
+        logger.info(
+            &#34;click_executed&#34;, point=str(point), button=button, duration_ms=duration_ms
+        )
+
+        return ActionResult(
+            success=True, safety_validated=True, duration_ms=duration_ms
+        )
+
+    except Exception as e:
+        logger.error(&#34;click_failed&#34;, point=str(point), button=button, error=str(e))
+        return ActionResult(success=False, safety_validated=True, blocked_reason=str(e))</code></pre>
+</details>
+<div class="desc"><p>Simulate a mouse click at the specified point.</p>
+<p>T065: Safe click simulation with bounds validation.
+CRITICAL: Must validate against safety constraints before execution.</p>
+<p>Performance requirement: &lt;50ms execution time.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>point</code></strong></dt>
+<dd>Point coordinates to click</dd>
+<dt><strong><code>button</code></strong></dt>
+<dd>Mouse button ("left", "right", "middle")</dd>
+<dt><strong><code>window_bounds</code></strong></dt>
+<dd>Rectangle defining valid click area (REQUIRED)</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>ActionResult with success status and validation info</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code><a title="automation.OutOfBoundsError" href="#automation.OutOfBoundsError">OutOfBoundsError</a></code></dt>
+<dd>If point is outside window_bounds</dd>
+<dt><code>ValueError</code></dt>
+<dd>If window_bounds is None</dd>
+</dl></div>
+</dd>
+<dt id="automation.simulate_drag"><code class="name flex">
+<span>def <span class="ident">simulate_drag</span></span>(<span>start: src.lib.types.Point,<br>end: src.lib.types.Point,<br>duration_ms: float,<br>window_bounds: src.lib.types.Rect | None = None) ‑> src.lib.types.ActionResult</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def simulate_drag(
+    start: Point, end: Point, duration_ms: float, window_bounds: Optional[Rect] = None
+) -&gt; ActionResult:
+    &#34;&#34;&#34;
+    Simulate a mouse drag from start to end point.
+
+    T066: Safe drag simulation with bounds validation.
+    CRITICAL: Both start and end points must be within bounds.
+
+    Args:
+        start: Starting point coordinates
+        end: Ending point coordinates
+        duration_ms: Duration of drag in milliseconds (10-5000ms)
+        window_bounds: Rectangle defining valid drag area (REQUIRED)
+
+    Returns:
+        True if drag was executed, False if blocked
+
+    Raises:
+        OutOfBoundsError: If start or end is outside window_bounds
+        InvalidDurationError: If duration is outside valid range
+        ValueError: If window_bounds is None
+    &#34;&#34;&#34;
+    # Require window bounds
+    if window_bounds is None:
+        logger.error(&#34;drag_rejected_no_bounds&#34;, start=str(start), end=str(end))
+        raise ValueError(&#34;window_bounds is required for safety validation&#34;)
+
+    # Validate duration
+    if duration_ms &lt; 10 or duration_ms &gt; 5000:
+        logger.error(
+            &#34;drag_rejected_invalid_duration&#34;,
+            duration_ms=duration_ms,
+            valid_range=&#34;10-5000ms&#34;,
+        )
+        raise InvalidDurationError(
+            f&#34;Duration {duration_ms}ms outside valid range (10-5000ms)&#34;
+        )
+
+    # Validate start point bounds
+    context = {&#34;window_bounds&#34;: window_bounds, &#34;window_focused&#34;: True}
+
+    start_action = {&#34;action_type&#34;: &#34;CLICK&#34;, &#34;point&#34;: start}
+
+    start_result = validate_action(start_action, context)
+    if not start_result.is_allowed:
+        logger.warning(
+            &#34;drag_blocked_start_point&#34;, start=str(start), reason=start_result.reason
+        )
+        raise OutOfBoundsError(f&#34;Start point: {start_result.reason}&#34;)
+
+    # Validate end point bounds
+    end_action = {&#34;action_type&#34;: &#34;CLICK&#34;, &#34;point&#34;: end}
+
+    end_result = validate_action(end_action, context)
+    if not end_result.is_allowed:
+        logger.warning(&#34;drag_blocked_end_point&#34;, end=str(end), reason=end_result.reason)
+        raise OutOfBoundsError(f&#34;End point: {end_result.reason}&#34;)
+
+    # Execute the drag
+    try:
+        drag_between_points(start.x, start.y, end.x, end.y, duration_ms)
+
+        logger.info(
+            &#34;drag_executed&#34;, start=str(start), end=str(end), duration_ms=duration_ms
+        )
+
+        return ActionResult(
+            success=True, safety_validated=True, duration_ms=duration_ms
+        )
+
+    except Exception as e:
+        logger.error(&#34;drag_failed&#34;, start=str(start), end=str(end), error=str(e))
+        return ActionResult(success=False, safety_validated=True, blocked_reason=str(e))</code></pre>
+</details>
+<div class="desc"><p>Simulate a mouse drag from start to end point.</p>
+<p>T066: Safe drag simulation with bounds validation.
+CRITICAL: Both start and end points must be within bounds.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>start</code></strong></dt>
+<dd>Starting point coordinates</dd>
+<dt><strong><code>end</code></strong></dt>
+<dd>Ending point coordinates</dd>
+<dt><strong><code>duration_ms</code></strong></dt>
+<dd>Duration of drag in milliseconds (10-5000ms)</dd>
+<dt><strong><code>window_bounds</code></strong></dt>
+<dd>Rectangle defining valid drag area (REQUIRED)</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>True if drag was executed, False if blocked</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code><a title="automation.OutOfBoundsError" href="#automation.OutOfBoundsError">OutOfBoundsError</a></code></dt>
+<dd>If start or end is outside window_bounds</dd>
+<dt><code><a title="automation.InvalidDurationError" href="#automation.InvalidDurationError">InvalidDurationError</a></code></dt>
+<dd>If duration is outside valid range</dd>
+<dt><code>ValueError</code></dt>
+<dd>If window_bounds is None</dd>
+</dl></div>
+</dd>
+<dt id="automation.simulate_key_press"><code class="name flex">
+<span>def <span class="ident">simulate_key_press</span></span>(<span>key: str,<br>modifiers: List[str] | None = None,<br>window_bounds: src.lib.types.Rect | None = None) ‑> src.lib.types.ActionResult</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def simulate_key_press(
+    key: str,
+    modifiers: Optional[List[str]] = None,
+    window_bounds: Optional[Rect] = None,
+) -&gt; ActionResult:
+    &#34;&#34;&#34;
+    Simulate a key press with optional modifier keys.
+
+    T067: Safe key press with blacklist validation.
+    CRITICAL: Dangerous key combinations are BLOCKED (Cmd+Q, Cmd+W, etc.)
+
+    Args:
+        key: The key to press (lowercase)
+        modifiers: List of modifier keys ([&#34;cmd&#34;], [&#34;cmd&#34;, &#34;shift&#34;], etc.)
+        window_bounds: Window bounds (required for context)
+
+    Returns:
+        True if key press was executed, False if blocked
+
+    Raises:
+        BlacklistedKeyError: If key combination is blacklisted
+        ValueError: If window_bounds is None
+    &#34;&#34;&#34;
+    if modifiers is None:
+        modifiers = []
+
+    # Require window bounds
+    if window_bounds is None:
+        logger.error(&#34;keypress_rejected_no_bounds&#34;, key=key, modifiers=modifiers)
+        raise ValueError(&#34;window_bounds is required for safety validation&#34;)
+
+    # Check blacklist
+    if is_key_blacklisted(key, modifiers):
+        combo = &#34;+&#34;.join(modifiers + [key])
+        logger.warning(
+            &#34;keypress_blocked_blacklist&#34;, key=key, modifiers=modifiers, combo=combo
+        )
+        raise BlacklistedKeyError(
+            f&#34;Key combination &#39;{combo}&#39; is blacklisted for safety&#34;
+        )
+
+    # Build action for safety validation
+    action = {&#34;action_type&#34;: &#34;KEY_PRESS&#34;, &#34;key&#34;: key, &#34;modifiers&#34;: modifiers}
+
+    context = {&#34;window_bounds&#34;: window_bounds, &#34;window_focused&#34;: True}
+
+    # Validate with safety library
+    result = validate_action(action, context)
+
+    if not result.is_allowed:
+        logger.warning(
+            &#34;keypress_blocked_safety&#34;,
+            key=key,
+            modifiers=modifiers,
+            reason=result.reason,
+        )
+        raise BlacklistedKeyError(result.reason)
+
+    # Execute the key press
+    try:
+        press_key_combination(key, modifiers)
+
+        logger.info(&#34;keypress_executed&#34;, key=key, modifiers=modifiers)
+
+        return ActionResult(success=True, safety_validated=True)
+
+    except Exception as e:
+        logger.error(&#34;keypress_failed&#34;, key=key, modifiers=modifiers, error=str(e))
+        return ActionResult(success=False, safety_validated=True, blocked_reason=str(e))</code></pre>
+</details>
+<div class="desc"><p>Simulate a key press with optional modifier keys.</p>
+<p>T067: Safe key press with blacklist validation.
+CRITICAL: Dangerous key combinations are BLOCKED (Cmd+Q, Cmd+W, etc.)</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>key</code></strong></dt>
+<dd>The key to press (lowercase)</dd>
+<dt><strong><code>modifiers</code></strong></dt>
+<dd>List of modifier keys (["cmd"], ["cmd", "shift"], etc.)</dd>
+<dt><strong><code>window_bounds</code></strong></dt>
+<dd>Window bounds (required for context)</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>True if key press was executed, False if blocked</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code><a title="automation.BlacklistedKeyError" href="#automation.BlacklistedKeyError">BlacklistedKeyError</a></code></dt>
+<dd>If key combination is blacklisted</dd>
+<dt><code>ValueError</code></dt>
+<dd>If window_bounds is None</dd>
+</dl></div>
+</dd>
+<dt id="automation.start_emergency_stop_listener"><code class="name flex">
+<span>def <span class="ident">start_emergency_stop_listener</span></span>(<span>) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def start_emergency_stop_listener() -&gt; None:
+    &#34;&#34;&#34;
+    Start background thread to listen for F12 key press.
+
+    T069: Emergency stop mechanism - F12 key listener.
+
+    Note: Implementing a global key listener on macOS requires
+    accessibility permissions and is complex. For now, this is
+    a placeholder. The emergency stop can be triggered programmatically
+    via request_emergency_stop().
+
+    TODO: Implement actual F12 key listener using pynput or similar.
+    &#34;&#34;&#34;
+    logger.warning(
+        &#34;emergency_stop_listener_not_implemented&#34;,
+        message=&#34;F12 listener requires pynput package. Use request_emergency_stop() to trigger manually.&#34;,
+    )
+
+    # Future implementation would use pynput:
+    # from pynput import keyboard
+    # def on_press(key):
+    #     if key == keyboard.Key.f12:
+    #         request_emergency_stop()
+    # listener = keyboard.Listener(on_press=on_press)
+    # listener.start()</code></pre>
+</details>
+<div class="desc"><p>Start background thread to listen for F12 key press.</p>
+<p>T069: Emergency stop mechanism - F12 key listener.</p>
+<p>Note: Implementing a global key listener on macOS requires
+accessibility permissions and is complex. For now, this is
+a placeholder. The emergency stop can be triggered programmatically
+via request_emergency_stop().</p>
+<p>TODO: Implement actual F12 key listener using pynput or similar.</p></div>
+</dd>
+<dt id="automation.verify_window_focus"><code class="name flex">
+<span>def <span class="ident">verify_window_focus</span></span>(<span>window_name: str) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def verify_window_focus(window_name: str) -&gt; bool:
+    &#34;&#34;&#34;
+    Check if the specified window has keyboard focus.
+
+    T064: Window focus verification.
+    Performance requirement: &lt;5ms.
+
+    Args:
+        window_name: Name of the window to check (e.g., &#34;Cultist Simulator&#34;)
+
+    Returns:
+        True if window has focus, False otherwise
+    &#34;&#34;&#34;
+    start_time = time.perf_counter()
+
+    try:
+        has_focus = check_window_focus(window_name)
+
+        duration_ms = (time.perf_counter() - start_time) * MS_PER_SECOND
+        logger.debug(
+            &#34;focus_check&#34;,
+            window_name=window_name,
+            has_focus=has_focus,
+            duration_ms=duration_ms,
+        )
+
+        return has_focus
+
+    except Exception as e:
+        logger.error(&#34;focus_check_failed&#34;, window_name=window_name, error=str(e))
+        return False</code></pre>
+</details>
+<div class="desc"><p>Check if the specified window has keyboard focus.</p>
+<p>T064: Window focus verification.
+Performance requirement: &lt;5ms.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>window_name</code></strong></dt>
+<dd>Name of the window to check (e.g., "Cultist Simulator")</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>True if window has focus, False otherwise</p></div>
+</dd>
+<dt id="automation.wait"><code class="name flex">
+<span>def <span class="ident">wait</span></span>(<span>duration_ms: float) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def wait(duration_ms: float) -&gt; None:
+    &#34;&#34;&#34;
+    Sleep for the specified duration.
+
+    T068: Wait/sleep function.
+
+    Args:
+        duration_ms: Duration to wait in milliseconds
+    &#34;&#34;&#34;
+    if duration_ms &lt; 0:
+        raise ValueError(&#34;Duration must be non-negative&#34;)
+
+    time.sleep(duration_ms / MS_PER_SECOND)
+
+    logger.debug(&#34;wait_completed&#34;, duration_ms=duration_ms)</code></pre>
+</details>
+<div class="desc"><p>Sleep for the specified duration.</p>
+<p>T068: Wait/sleep function.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>duration_ms</code></strong></dt>
+<dd>Duration to wait in milliseconds</dd>
+</dl></div>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="automation.BlacklistedKeyError"><code class="flex name class">
+<span>class <span class="ident">BlacklistedKeyError</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class BlacklistedKeyError(Exception):
+    &#34;&#34;&#34;Raised when attempting to press a blacklisted key combination.&#34;&#34;&#34;
+
+    pass</code></pre>
+</details>
+<div class="desc"><p>Raised when attempting to press a blacklisted key combination.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.Exception</li>
+<li>builtins.BaseException</li>
+</ul>
+</dd>
+<dt id="automation.InvalidDurationError"><code class="flex name class">
+<span>class <span class="ident">InvalidDurationError</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class InvalidDurationError(Exception):
+    &#34;&#34;&#34;Raised when duration parameter is outside valid range.&#34;&#34;&#34;
+
+    pass</code></pre>
+</details>
+<div class="desc"><p>Raised when duration parameter is outside valid range.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.Exception</li>
+<li>builtins.BaseException</li>
+</ul>
+</dd>
+<dt id="automation.OutOfBoundsError"><code class="flex name class">
+<span>class <span class="ident">OutOfBoundsError</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class OutOfBoundsError(Exception):
+    &#34;&#34;&#34;Raised when action coordinates are outside valid window bounds.&#34;&#34;&#34;
+
+    pass</code></pre>
+</details>
+<div class="desc"><p>Raised when action coordinates are outside valid window bounds.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.Exception</li>
+<li>builtins.BaseException</li>
+</ul>
+</dd>
+<dt id="automation.WindowNotFocusedError"><code class="flex name class">
+<span>class <span class="ident">WindowNotFocusedError</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class WindowNotFocusedError(Exception):
+    &#34;&#34;&#34;Raised when window does not have focus but action requires it.&#34;&#34;&#34;
+
+    pass</code></pre>
+</details>
+<div class="desc"><p>Raised when window does not have focus but action requires it.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.Exception</li>
+<li>builtins.BaseException</li>
+</ul>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-submodules">Sub-modules</a></h3>
+<ul>
+<li><code><a title="automation.cli" href="cli.html">automation.cli</a></code></li>
+<li><code><a title="automation.input_simulator" href="input_simulator.html">automation.input_simulator</a></code></li>
+<li><code><a title="automation.window_manager" href="window_manager.html">automation.window_manager</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="automation.get_blacklisted_keys" href="#automation.get_blacklisted_keys">get_blacklisted_keys</a></code></li>
+<li><code><a title="automation.is_emergency_stop_requested" href="#automation.is_emergency_stop_requested">is_emergency_stop_requested</a></code></li>
+<li><code><a title="automation.request_emergency_stop" href="#automation.request_emergency_stop">request_emergency_stop</a></code></li>
+<li><code><a title="automation.reset_emergency_stop" href="#automation.reset_emergency_stop">reset_emergency_stop</a></code></li>
+<li><code><a title="automation.simulate_click" href="#automation.simulate_click">simulate_click</a></code></li>
+<li><code><a title="automation.simulate_drag" href="#automation.simulate_drag">simulate_drag</a></code></li>
+<li><code><a title="automation.simulate_key_press" href="#automation.simulate_key_press">simulate_key_press</a></code></li>
+<li><code><a title="automation.start_emergency_stop_listener" href="#automation.start_emergency_stop_listener">start_emergency_stop_listener</a></code></li>
+<li><code><a title="automation.verify_window_focus" href="#automation.verify_window_focus">verify_window_focus</a></code></li>
+<li><code><a title="automation.wait" href="#automation.wait">wait</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="automation.BlacklistedKeyError" href="#automation.BlacklistedKeyError">BlacklistedKeyError</a></code></h4>
+</li>
+<li>
+<h4><code><a title="automation.InvalidDurationError" href="#automation.InvalidDurationError">InvalidDurationError</a></code></h4>
+</li>
+<li>
+<h4><code><a title="automation.OutOfBoundsError" href="#automation.OutOfBoundsError">OutOfBoundsError</a></code></h4>
+</li>
+<li>
+<h4><code><a title="automation.WindowNotFocusedError" href="#automation.WindowNotFocusedError">WindowNotFocusedError</a></code></h4>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

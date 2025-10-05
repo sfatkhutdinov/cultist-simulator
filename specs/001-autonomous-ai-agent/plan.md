@@ -313,10 +313,11 @@ All contracts include:
 ## Complexity Tracking
 *Fill ONLY if Constitution Check has violations that must be justified*
 
+**Note**: This section is intentionally empty. Constitution Check passed with no violations. All design decisions align with constitutional principles.
+
 | Violation | Why Needed | Simpler Alternative Rejected Because |
 |-----------|------------|-------------------------------------|
-| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
-| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
+| N/A | N/A | N/A |
 
 
 ## Progress Tracking
@@ -391,12 +392,13 @@ The `/tasks` command will generate tasks following this approach:
 
 ### Expected Task Count
 
-Estimated 85-125 tasks total:
+Estimated 145-155 tasks total (updated from initial 85-125 estimate):
 - Setup: ~10 tasks
 - Contract tests: ~26 tasks (5 per library + narrative decision test)
-- Core implementation: ~45 tasks (including crash recovery and save game support)
+- Core implementation: ~50 tasks (including crash recovery, save game support, and subtasks T113a-f)
 - Integration: ~15 tasks
-- Polish: ~12 tasks
+- Polish: ~15 tasks (including validation tasks T138-T141)
+- Performance/validation: ~8 tasks (multi-resolution, endurance, win validation)
 
 ---
 *Based on Constitution v1.0.0 - See `.specify/memory/constitution.md`*

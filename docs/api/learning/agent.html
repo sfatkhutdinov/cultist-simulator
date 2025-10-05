@@ -1,0 +1,1019 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>learning.agent API documentation</title>
+<meta name="description" content="Reinforcement Learning Agent Module …">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>learning.agent</code></h1>
+</header>
+<section id="section-intro">
+<p>Reinforcement Learning Agent Module</p>
+<p>Implements PPO agent using Stable-Baselines3 and custom Gym environment
+for Cultist Simulator gameplay.</p>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="learning.agent.CultistSimulatorEnv"><code class="flex name class">
+<span>class <span class="ident">CultistSimulatorEnv</span></span>
+<span>(</span><span>vision_lib=None,<br>automation_lib=None,<br>nlp_lib=None,<br>safety_lib=None,<br>max_steps: int = 1000,<br>grid_resolution: Tuple[int, int] = (10, 10),<br>render_mode: str | None = None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class CultistSimulatorEnv(gym.Env):
+    &#34;&#34;&#34;
+    Custom Gym environment for Cultist Simulator.
+
+    Observation Space:
+        - Flattened vector representation of game state
+        - Includes: element positions, resources, card states, narrative embeddings
+
+    Action Space:
+        - Discrete actions: click at grid position, drag card, wait, etc.
+        - Mapped to actual game interactions through automation library
+
+    Reward:
+        - Sparse rewards for achieving goals (win condition, survival milestones)
+        - Small penalties for failures and time passage
+        - Shaped rewards for progress (new discoveries, resource gains)
+    &#34;&#34;&#34;
+
+    metadata = {&#34;render_modes&#34;: [&#34;human&#34;, &#34;rgb_array&#34;], &#34;render_fps&#34;: 4}
+
+    def __init__(
+        self,
+        vision_lib=None,
+        automation_lib=None,
+        nlp_lib=None,
+        safety_lib=None,
+        max_steps: int = 1000,
+        grid_resolution: Tuple[int, int] = (10, 10),
+        render_mode: Optional[str] = None,
+    ):
+        &#34;&#34;&#34;
+        Initialize the Cultist Simulator Gym environment.
+
+        Args:
+            vision_lib: Vision library for game state capture
+            automation_lib: Automation library for action execution
+            nlp_lib: NLP library for narrative understanding
+            safety_lib: Safety library for action validation
+            max_steps: Maximum steps per episode
+            grid_resolution: Grid size for click positions (10x10 = 100 positions)
+            render_mode: Rendering mode (None, &#34;human&#34;, or &#34;rgb_array&#34;)
+        &#34;&#34;&#34;
+        super().__init__()
+
+        self.vision_lib = vision_lib
+        self.automation_lib = automation_lib
+        self.nlp_lib = nlp_lib
+        self.safety_lib = safety_lib
+        self.max_steps = max_steps
+        self.grid_resolution = grid_resolution
+        self.render_mode = render_mode
+
+        # State tracking
+        self.current_state: Optional[GameState] = None
+        self.step_count: int = 0
+        self.total_reward: float = 0.0
+        self.episode_start_time: Optional[float] = None
+
+        # Define observation space
+        # Components: grid elements (100), resources (10), card states (50),
+        # narrative embedding (384), misc (6) = 550 dimensions
+        obs_dim = (grid_resolution[0] * grid_resolution[1]) + 10 + 50 + 384 + 6
+        self.observation_space = spaces.Box(
+            low=-np.inf, high=np.inf, shape=(obs_dim,), dtype=np.float32
+        )
+
+        # Define action space
+        # Action types: click (100 grid positions) + drag (100x100) + wait (1) + special (10)
+        # Simplified: 100 click positions + 10 special actions = 110 discrete actions
+        self.action_space = spaces.Discrete(110)
+
+        logger.info(
+            f&#34;Initialized CultistSimulatorEnv with obs_space={self.observation_space.shape}, &#34;
+            f&#34;action_space={self.action_space.n}&#34;
+        )
+
+    def reset(
+        self, seed: Optional[int] = None, options: Optional[Dict[str, Any]] = None
+    ) -&gt; Tuple[np.ndarray, Dict[str, Any]]:
+        &#34;&#34;&#34;
+        Reset the environment to initial state.
+
+        Args:
+            seed: Random seed for reproducibility
+            options: Additional options
+
+        Returns:
+            Tuple of (observation, info_dict)
+        &#34;&#34;&#34;
+        super().reset(seed=seed)
+
+        self.step_count = 0
+        self.total_reward = 0.0
+
+        # Capture initial game state
+        if self.vision_lib:
+            self.current_state = self.vision_lib.capture_game_state()
+        else:
+            # Mock state for testing
+            self.current_state = self._create_mock_state()
+
+        observation = self._state_to_observation(self.current_state)
+        info = {
+            &#34;step&#34;: self.step_count,
+            &#34;total_reward&#34;: self.total_reward,
+            &#34;game_state&#34;: str(self.current_state) if self.current_state else None,
+        }
+
+        logger.info(f&#34;Environment reset - episode starting&#34;)
+        return observation, info
+
+    def step(self, action: int) -&gt; Tuple[np.ndarray, float, bool, bool, Dict[str, Any]]:
+        &#34;&#34;&#34;
+        Execute one step in the environment.
+
+        Args:
+            action: Integer action from action space
+
+        Returns:
+            Tuple of (observation, reward, terminated, truncated, info)
+        &#34;&#34;&#34;
+        self.step_count += 1
+
+        # Convert action integer to actual game action
+        game_action = self._action_to_game_action(action)
+
+        # Execute action through automation library
+        if self.automation_lib and self.safety_lib:
+            # Validate action
+            validation = self.safety_lib.validate_action(game_action)
+
+            if validation.is_valid:
+                # Execute action
+                execution_result = self.automation_lib.execute_action(game_action)
+            else:
+                logger.warning(f&#34;Action blocked by safety: {validation.reason}&#34;)
+                execution_result = None
+        else:
+            execution_result = None
+
+        # Capture new game state
+        previous_state = self.current_state
+        if self.vision_lib:
+            self.current_state = self.vision_lib.capture_game_state()
+        else:
+            self.current_state = self._create_mock_state()
+
+        # Calculate reward
+        reward = self._calculate_reward(previous_state, self.current_state, game_action)
+        self.total_reward += reward
+
+        # Check termination conditions
+        terminated = self._is_terminated(self.current_state)
+        truncated = self.step_count &gt;= self.max_steps
+
+        # Create observation
+        observation = self._state_to_observation(self.current_state)
+
+        info = {
+            &#34;step&#34;: self.step_count,
+            &#34;total_reward&#34;: self.total_reward,
+            &#34;action_executed&#34;: game_action.action_type if game_action else None,
+            &#34;reward_breakdown&#34;: self._get_reward_breakdown(
+                previous_state, self.current_state
+            ),
+            &#34;game_state&#34;: str(self.current_state) if self.current_state else None,
+        }
+
+        return observation, reward, terminated, truncated, info
+
+    def _action_to_game_action(self, action: int) -&gt; Action:
+        &#34;&#34;&#34;
+        Convert discrete action integer to game Action object.
+
+        Args:
+            action: Integer from action space (0-109)
+
+        Returns:
+            Action object to execute
+        &#34;&#34;&#34;
+        from datetime import datetime
+
+        if action &lt; 100:
+            # Click action (0-99)
+            grid_x = action % self.grid_resolution[0]
+            grid_y = action // self.grid_resolution[0]
+
+            # Convert grid position to screen coordinates
+            # Assuming 1280x720 window (will be replaced by actual window bounds)
+            screen_x = int((grid_x + 0.5) * 1280 / self.grid_resolution[0])
+            screen_y = int((grid_y + 0.5) * 720 / self.grid_resolution[1])
+
+            return Action(
+                action_type=ActionType.CLICK,
+                parameters={&#34;x&#34;: screen_x, &#34;y&#34;: screen_y, &#34;button&#34;: &#34;left&#34;},
+                timestamp=datetime.now(),
+            )
+
+        elif action == 100:
+            # Wait action
+            return Action(
+                action_type=ActionType.WAIT,
+                parameters={&#34;duration&#34;: 1.0},
+                timestamp=datetime.now(),
+            )
+
+        else:
+            # Special actions (101-109) - to be defined based on game mechanics
+            # For now, default to wait
+            return Action(
+                action_type=ActionType.WAIT,
+                parameters={&#34;duration&#34;: 0.5},
+                timestamp=datetime.now(),
+            )
+
+    def _state_to_observation(self, state: Optional[GameState]) -&gt; np.ndarray:
+        &#34;&#34;&#34;
+        Convert GameState to observation vector.
+
+        Args:
+            state: Current game state
+
+        Returns:
+            Numpy array observation
+        &#34;&#34;&#34;
+        if state is None or self.observation_space.shape is None:
+            # Return zero observation
+            obs_shape = (
+                self.observation_space.shape if self.observation_space.shape else (550,)
+            )
+            return np.zeros(obs_shape, dtype=np.float32)
+
+        observation_parts = []
+
+        # 1. Grid element presence (100 dimensions)
+        grid = np.zeros(
+            (self.grid_resolution[0], self.grid_resolution[1]), dtype=np.float32
+        )
+        if state.elements:
+            for element in state.elements:
+                if element.bounds:
+                    # Map element to grid cell
+                    center_x = element.bounds.x + element.bounds.width / 2
+                    center_y = element.bounds.y + element.bounds.height / 2
+                    grid_x = int(center_x * self.grid_resolution[0] / 1280)
+                    grid_y = int(center_y * self.grid_resolution[1] / 720)
+                    if (
+                        0 &lt;= grid_x &lt; self.grid_resolution[0]
+                        and 0 &lt;= grid_y &lt; self.grid_resolution[1]
+                    ):
+                        grid[grid_y, grid_x] = 1.0
+        observation_parts.append(grid.flatten())
+
+        # 2. Resources (10 dimensions) - normalized
+        # Extract from metadata if available
+        resources = np.zeros(10, dtype=np.float32)
+        if state.metadata and &#34;resources&#34; in state.metadata:
+            resource_dict = state.metadata[&#34;resources&#34;]
+            for i, (key, value) in enumerate(list(resource_dict.items())[:10]):
+                resources[i] = min(float(value) / 100.0, 1.0)  # Normalize
+        observation_parts.append(resources)
+
+        # 3. Card states (50 dimensions)
+        # Extract from metadata if available
+        card_states = np.zeros(50, dtype=np.float32)
+        if state.metadata and &#34;cards&#34; in state.metadata:
+            cards = state.metadata[&#34;cards&#34;]
+            for i, card in enumerate(cards[:50]):
+                card_states[i] = 1.0 if card.get(&#34;state&#34;) == &#34;active&#34; else 0.5
+        observation_parts.append(card_states)
+
+        # 4. Narrative embedding (384 dimensions from sentence-transformers)
+        narrative_embedding = np.zeros(384, dtype=np.float32)
+        if state.text_regions and self.nlp_lib:
+            # Combine narrative texts
+            narrative = &#34; &#34;.join([tr.text for tr in state.text_regions[:3]])
+            if narrative:
+                try:
+                    analysis = self.nlp_lib.analyze_text(narrative)
+                    if analysis and &#34;embedding&#34; in analysis:
+                        narrative_embedding = np.array(
+                            analysis[&#34;embedding&#34;], dtype=np.float32
+                        )
+                except Exception as e:
+                    logger.warning(f&#34;Failed to analyze narrative: {e}&#34;)
+        observation_parts.append(narrative_embedding)
+
+        # 5. Miscellaneous (6 dimensions)
+        has_focus = state.metadata.get(&#34;has_focus&#34;, True) if state.metadata else True
+        is_game_over = (
+            state.metadata.get(&#34;is_game_over&#34;, False) if state.metadata else False
+        )
+        is_win = state.metadata.get(&#34;is_win_state&#34;, False) if state.metadata else False
+
+        misc = np.array(
+            [
+                1.0 if has_focus else 0.0,
+                1.0 if is_game_over else 0.0,
+                1.0 if is_win else 0.0,
+                len(state.elements) / 100.0 if state.elements else 0.0,
+                len(state.text_regions) / 50.0 if state.text_regions else 0.0,
+                self.step_count / self.max_steps,
+            ],
+            dtype=np.float32,
+        )
+        observation_parts.append(misc)
+
+        # Concatenate all parts
+        observation = np.concatenate(observation_parts)
+
+        return observation
+
+    def _calculate_reward(
+        self,
+        prev_state: Optional[GameState],
+        curr_state: Optional[GameState],
+        action: Action,
+    ) -&gt; float:
+        &#34;&#34;&#34;
+        Calculate reward for the transition.
+
+        Reward structure:
+        - Win condition: +1000
+        - Survival: +1 per step
+        - New discoveries: +10
+        - Resource gains: +0.1 per unit
+        - Game over: -100
+        - Blocked action: -1
+
+        Args:
+            prev_state: Previous game state
+            curr_state: Current game state
+            action: Action taken
+
+        Returns:
+            Reward value
+        &#34;&#34;&#34;
+        if curr_state is None:
+            return -10.0  # Penalty for invalid state
+
+        reward = 0.0
+
+        # Check metadata for game status
+        is_win = (
+            curr_state.metadata.get(&#34;is_win_state&#34;, False)
+            if curr_state.metadata
+            else False
+        )
+        is_game_over = (
+            curr_state.metadata.get(&#34;is_game_over&#34;, False)
+            if curr_state.metadata
+            else False
+        )
+
+        # Win condition
+        if is_win:
+            reward += 1000.0
+            logger.info(&#34;Win condition detected! +1000 reward&#34;)
+
+        # Game over penalty
+        elif is_game_over:
+            reward -= 100.0
+            logger.info(&#34;Game over detected. -100 reward&#34;)
+
+        # Survival reward (small positive reward for each step)
+        else:
+            reward += 1.0
+
+        # Resource changes (from metadata)
+        if prev_state and prev_state.metadata and curr_state.metadata:
+            prev_resources = prev_state.metadata.get(&#34;resources&#34;, {})
+            curr_resources = curr_state.metadata.get(&#34;resources&#34;, {})
+            for key in curr_resources:
+                if key in prev_resources:
+                    delta = float(curr_resources[key]) - float(prev_resources[key])
+                    reward += delta * 0.1
+
+        # New element discoveries
+        if prev_state and curr_state.elements:
+            new_elements = len(curr_state.elements) - (
+                len(prev_state.elements) if prev_state.elements else 0
+            )
+            if new_elements &gt; 0:
+                reward += new_elements * 10.0
+
+        # Blocked action penalty (check metadata)
+        if action.metadata and action.metadata.get(&#34;was_blocked&#34;, False):
+            reward -= 1.0
+
+        return reward
+
+    def _is_terminated(self, state: Optional[GameState]) -&gt; bool:
+        &#34;&#34;&#34;Check if episode should terminate.&#34;&#34;&#34;
+        if state is None:
+            return True
+
+        # Check metadata for termination conditions
+        is_game_over = (
+            state.metadata.get(&#34;is_game_over&#34;, False) if state.metadata else False
+        )
+        is_win = state.metadata.get(&#34;is_win_state&#34;, False) if state.metadata else False
+
+        # Terminate on win or game over
+        if is_game_over or is_win:
+            return True
+
+        return False
+
+    def _get_reward_breakdown(
+        self, prev_state: Optional[GameState], curr_state: Optional[GameState]
+    ) -&gt; Dict[str, float]:
+        &#34;&#34;&#34;Get detailed reward breakdown for logging.&#34;&#34;&#34;
+        is_game_over = False
+        is_win = False
+
+        if curr_state and curr_state.metadata:
+            is_game_over = curr_state.metadata.get(&#34;is_game_over&#34;, False)
+            is_win = curr_state.metadata.get(&#34;is_win_state&#34;, False)
+
+        breakdown = {
+            &#34;survival&#34;: 1.0 if curr_state and not is_game_over else 0.0,
+            &#34;win_bonus&#34;: 1000.0 if is_win else 0.0,
+            &#34;game_over_penalty&#34;: -100.0 if is_game_over else 0.0,
+            &#34;resource_delta&#34;: 0.0,
+            &#34;discovery_bonus&#34;: 0.0,
+        }
+        return breakdown
+
+    def _create_mock_state(self) -&gt; GameState:
+        &#34;&#34;&#34;Create a mock game state for testing without actual game.&#34;&#34;&#34;
+        from datetime import datetime
+
+        return GameState(
+            timestamp=datetime.now(),
+            window_bounds=Rect(x=0, y=0, width=1280, height=720),
+            elements=[],
+            text_regions=[],
+            screenshot=None,
+            metadata={
+                &#34;has_focus&#34;: True,
+                &#34;is_game_over&#34;: False,
+                &#34;is_win_state&#34;: False,
+                &#34;resources&#34;: {},
+                &#34;cards&#34;: [],
+            },
+        )
+
+    def render(self):
+        &#34;&#34;&#34;Render the environment (optional).&#34;&#34;&#34;
+        if self.render_mode == &#34;human&#34;:
+            logger.info(f&#34;Step {self.step_count}: Reward={self.total_reward:.2f}&#34;)
+        elif self.render_mode == &#34;rgb_array&#34;:
+            # Return screenshot as numpy array
+            if self.current_state and self.current_state.screenshot is not None:
+                return self.current_state.screenshot
+        return None
+
+    def close(self):
+        &#34;&#34;&#34;Clean up resources.&#34;&#34;&#34;
+        logger.info(&#34;Closing Cultist Simulator environment&#34;)
+        super().close()</code></pre>
+</details>
+<div class="desc"><p>Custom Gym environment for Cultist Simulator.</p>
+<p>Observation Space:
+- Flattened vector representation of game state
+- Includes: element positions, resources, card states, narrative embeddings</p>
+<p>Action Space:
+- Discrete actions: click at grid position, drag card, wait, etc.
+- Mapped to actual game interactions through automation library</p>
+<h2 id="reward">Reward</h2>
+<ul>
+<li>Sparse rewards for achieving goals (win condition, survival milestones)</li>
+<li>Small penalties for failures and time passage</li>
+<li>Shaped rewards for progress (new discoveries, resource gains)</li>
+</ul>
+<p>Initialize the Cultist Simulator Gym environment.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>vision_lib</code></strong></dt>
+<dd>Vision library for game state capture</dd>
+<dt><strong><code>automation_lib</code></strong></dt>
+<dd>Automation library for action execution</dd>
+<dt><strong><code>nlp_lib</code></strong></dt>
+<dd>NLP library for narrative understanding</dd>
+<dt><strong><code>safety_lib</code></strong></dt>
+<dd>Safety library for action validation</dd>
+<dt><strong><code>max_steps</code></strong></dt>
+<dd>Maximum steps per episode</dd>
+<dt><strong><code>grid_resolution</code></strong></dt>
+<dd>Grid size for click positions (10x10 = 100 positions)</dd>
+<dt><strong><code>render_mode</code></strong></dt>
+<dd>Rendering mode (None, "human", or "rgb_array")</dd>
+</dl></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>gymnasium.core.Env</li>
+<li>typing.Generic</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="learning.agent.CultistSimulatorEnv.metadata"><code class="name">var <span class="ident">metadata</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="learning.agent.CultistSimulatorEnv.close"><code class="name flex">
+<span>def <span class="ident">close</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def close(self):
+    &#34;&#34;&#34;Clean up resources.&#34;&#34;&#34;
+    logger.info(&#34;Closing Cultist Simulator environment&#34;)
+    super().close()</code></pre>
+</details>
+<div class="desc"><p>Clean up resources.</p></div>
+</dd>
+<dt id="learning.agent.CultistSimulatorEnv.render"><code class="name flex">
+<span>def <span class="ident">render</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def render(self):
+    &#34;&#34;&#34;Render the environment (optional).&#34;&#34;&#34;
+    if self.render_mode == &#34;human&#34;:
+        logger.info(f&#34;Step {self.step_count}: Reward={self.total_reward:.2f}&#34;)
+    elif self.render_mode == &#34;rgb_array&#34;:
+        # Return screenshot as numpy array
+        if self.current_state and self.current_state.screenshot is not None:
+            return self.current_state.screenshot
+    return None</code></pre>
+</details>
+<div class="desc"><p>Render the environment (optional).</p></div>
+</dd>
+<dt id="learning.agent.CultistSimulatorEnv.reset"><code class="name flex">
+<span>def <span class="ident">reset</span></span>(<span>self, seed: int | None = None, options: Dict[str, Any] | None = None) ‑> Tuple[numpy.ndarray, Dict[str, Any]]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def reset(
+    self, seed: Optional[int] = None, options: Optional[Dict[str, Any]] = None
+) -&gt; Tuple[np.ndarray, Dict[str, Any]]:
+    &#34;&#34;&#34;
+    Reset the environment to initial state.
+
+    Args:
+        seed: Random seed for reproducibility
+        options: Additional options
+
+    Returns:
+        Tuple of (observation, info_dict)
+    &#34;&#34;&#34;
+    super().reset(seed=seed)
+
+    self.step_count = 0
+    self.total_reward = 0.0
+
+    # Capture initial game state
+    if self.vision_lib:
+        self.current_state = self.vision_lib.capture_game_state()
+    else:
+        # Mock state for testing
+        self.current_state = self._create_mock_state()
+
+    observation = self._state_to_observation(self.current_state)
+    info = {
+        &#34;step&#34;: self.step_count,
+        &#34;total_reward&#34;: self.total_reward,
+        &#34;game_state&#34;: str(self.current_state) if self.current_state else None,
+    }
+
+    logger.info(f&#34;Environment reset - episode starting&#34;)
+    return observation, info</code></pre>
+</details>
+<div class="desc"><p>Reset the environment to initial state.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>seed</code></strong></dt>
+<dd>Random seed for reproducibility</dd>
+<dt><strong><code>options</code></strong></dt>
+<dd>Additional options</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>Tuple of (observation, info_dict)</p></div>
+</dd>
+<dt id="learning.agent.CultistSimulatorEnv.step"><code class="name flex">
+<span>def <span class="ident">step</span></span>(<span>self, action: int) ‑> Tuple[numpy.ndarray, float, bool, bool, Dict[str, Any]]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def step(self, action: int) -&gt; Tuple[np.ndarray, float, bool, bool, Dict[str, Any]]:
+    &#34;&#34;&#34;
+    Execute one step in the environment.
+
+    Args:
+        action: Integer action from action space
+
+    Returns:
+        Tuple of (observation, reward, terminated, truncated, info)
+    &#34;&#34;&#34;
+    self.step_count += 1
+
+    # Convert action integer to actual game action
+    game_action = self._action_to_game_action(action)
+
+    # Execute action through automation library
+    if self.automation_lib and self.safety_lib:
+        # Validate action
+        validation = self.safety_lib.validate_action(game_action)
+
+        if validation.is_valid:
+            # Execute action
+            execution_result = self.automation_lib.execute_action(game_action)
+        else:
+            logger.warning(f&#34;Action blocked by safety: {validation.reason}&#34;)
+            execution_result = None
+    else:
+        execution_result = None
+
+    # Capture new game state
+    previous_state = self.current_state
+    if self.vision_lib:
+        self.current_state = self.vision_lib.capture_game_state()
+    else:
+        self.current_state = self._create_mock_state()
+
+    # Calculate reward
+    reward = self._calculate_reward(previous_state, self.current_state, game_action)
+    self.total_reward += reward
+
+    # Check termination conditions
+    terminated = self._is_terminated(self.current_state)
+    truncated = self.step_count &gt;= self.max_steps
+
+    # Create observation
+    observation = self._state_to_observation(self.current_state)
+
+    info = {
+        &#34;step&#34;: self.step_count,
+        &#34;total_reward&#34;: self.total_reward,
+        &#34;action_executed&#34;: game_action.action_type if game_action else None,
+        &#34;reward_breakdown&#34;: self._get_reward_breakdown(
+            previous_state, self.current_state
+        ),
+        &#34;game_state&#34;: str(self.current_state) if self.current_state else None,
+    }
+
+    return observation, reward, terminated, truncated, info</code></pre>
+</details>
+<div class="desc"><p>Execute one step in the environment.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>action</code></strong></dt>
+<dd>Integer action from action space</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>Tuple of (observation, reward, terminated, truncated, info)</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="learning.agent.PPOAgent"><code class="flex name class">
+<span>class <span class="ident">PPOAgent</span></span>
+<span>(</span><span>env: <a title="learning.agent.CultistSimulatorEnv" href="#learning.agent.CultistSimulatorEnv">CultistSimulatorEnv</a>,<br>learning_rate: float = 0.0003,<br>n_steps: int = 2048,<br>batch_size: int = 64,<br>n_epochs: int = 10,<br>gamma: float = 0.99,<br>gae_lambda: float = 0.95,<br>clip_range: float = 0.2,<br>ent_coef: float = 0.01,<br>device: str = 'auto')</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PPOAgent:
+    &#34;&#34;&#34;
+    PPO-based RL agent for Cultist Simulator.
+
+    Wraps Stable-Baselines3 PPO with custom training and evaluation logic.
+    &#34;&#34;&#34;
+
+    def __init__(
+        self,
+        env: CultistSimulatorEnv,
+        learning_rate: float = 3e-4,
+        n_steps: int = 2048,
+        batch_size: int = 64,
+        n_epochs: int = 10,
+        gamma: float = 0.99,
+        gae_lambda: float = 0.95,
+        clip_range: float = 0.2,
+        ent_coef: float = 0.01,
+        device: str = &#34;auto&#34;,
+    ):
+        &#34;&#34;&#34;
+        Initialize PPO agent.
+
+        Args:
+            env: Cultist Simulator gym environment
+            learning_rate: Learning rate for optimizer
+            n_steps: Number of steps to run per environment per update
+            batch_size: Minibatch size
+            n_epochs: Number of epochs for optimization
+            gamma: Discount factor
+            gae_lambda: GAE lambda parameter
+            clip_range: PPO clipping parameter
+            ent_coef: Entropy coefficient (for exploration)
+            device: Device to run on (&#34;auto&#34;, &#34;cpu&#34;, or &#34;cuda&#34;)
+        &#34;&#34;&#34;
+        self.env = env
+
+        # Create vectorized environment (required by SB3)
+        vec_env = DummyVecEnv([lambda: env])
+
+        # Initialize PPO model
+        self.model = PPO(
+            policy=&#34;MlpPolicy&#34;,
+            env=vec_env,
+            learning_rate=learning_rate,
+            n_steps=n_steps,
+            batch_size=batch_size,
+            n_epochs=n_epochs,
+            gamma=gamma,
+            gae_lambda=gae_lambda,
+            clip_range=clip_range,
+            ent_coef=ent_coef,
+            verbose=1,
+            device=device,
+            tensorboard_log=&#34;./data/logs/tensorboard/&#34;,
+        )
+
+        logger.info(
+            f&#34;Initialized PPO agent with lr={learning_rate}, &#34;
+            f&#34;entropy_coef={ent_coef} (exploration/exploitation balance)&#34;
+        )
+
+    def train(
+        self, total_timesteps: int, callback: Optional[BaseCallback] = None
+    ) -&gt; None:
+        &#34;&#34;&#34;
+        Train the agent.
+
+        Args:
+            total_timesteps: Total number of timesteps to train
+            callback: Optional callback for logging/checkpointing
+        &#34;&#34;&#34;
+        logger.info(f&#34;Starting training for {total_timesteps} timesteps&#34;)
+        self.model.learn(
+            total_timesteps=total_timesteps, callback=callback, progress_bar=True
+        )
+        logger.info(&#34;Training complete&#34;)
+
+    def predict(
+        self, observation: np.ndarray, deterministic: bool = False
+    ) -&gt; Tuple[np.ndarray, Optional[np.ndarray]]:
+        &#34;&#34;&#34;
+        Predict action for given observation.
+
+        Args:
+            observation: Current observation
+            deterministic: If True, use deterministic policy (no exploration)
+
+        Returns:
+            Tuple of (action, state) where state is for recurrent policies
+        &#34;&#34;&#34;
+        action, state = self.model.predict(observation, deterministic=deterministic)
+        return action, state
+
+    def save(self, path: str) -&gt; None:
+        &#34;&#34;&#34;Save the model to disk.&#34;&#34;&#34;
+        self.model.save(path)
+        logger.info(f&#34;Model saved to {path}&#34;)
+
+    def load(self, path: str) -&gt; None:
+        &#34;&#34;&#34;Load the model from disk.&#34;&#34;&#34;
+        self.model = PPO.load(path, env=self.model.get_env())
+        logger.info(f&#34;Model loaded from {path}&#34;)</code></pre>
+</details>
+<div class="desc"><p>PPO-based RL agent for Cultist Simulator.</p>
+<p>Wraps Stable-Baselines3 PPO with custom training and evaluation logic.</p>
+<p>Initialize PPO agent.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>env</code></strong></dt>
+<dd>Cultist Simulator gym environment</dd>
+<dt><strong><code>learning_rate</code></strong></dt>
+<dd>Learning rate for optimizer</dd>
+<dt><strong><code>n_steps</code></strong></dt>
+<dd>Number of steps to run per environment per update</dd>
+<dt><strong><code>batch_size</code></strong></dt>
+<dd>Minibatch size</dd>
+<dt><strong><code>n_epochs</code></strong></dt>
+<dd>Number of epochs for optimization</dd>
+<dt><strong><code>gamma</code></strong></dt>
+<dd>Discount factor</dd>
+<dt><strong><code>gae_lambda</code></strong></dt>
+<dd>GAE lambda parameter</dd>
+<dt><strong><code>clip_range</code></strong></dt>
+<dd>PPO clipping parameter</dd>
+<dt><strong><code>ent_coef</code></strong></dt>
+<dd>Entropy coefficient (for exploration)</dd>
+<dt><strong><code>device</code></strong></dt>
+<dd>Device to run on ("auto", "cpu", or "cuda")</dd>
+</dl></div>
+<h3>Methods</h3>
+<dl>
+<dt id="learning.agent.PPOAgent.load"><code class="name flex">
+<span>def <span class="ident">load</span></span>(<span>self, path: str) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def load(self, path: str) -&gt; None:
+    &#34;&#34;&#34;Load the model from disk.&#34;&#34;&#34;
+    self.model = PPO.load(path, env=self.model.get_env())
+    logger.info(f&#34;Model loaded from {path}&#34;)</code></pre>
+</details>
+<div class="desc"><p>Load the model from disk.</p></div>
+</dd>
+<dt id="learning.agent.PPOAgent.predict"><code class="name flex">
+<span>def <span class="ident">predict</span></span>(<span>self, observation: numpy.ndarray, deterministic: bool = False) ‑> Tuple[numpy.ndarray, numpy.ndarray | None]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def predict(
+    self, observation: np.ndarray, deterministic: bool = False
+) -&gt; Tuple[np.ndarray, Optional[np.ndarray]]:
+    &#34;&#34;&#34;
+    Predict action for given observation.
+
+    Args:
+        observation: Current observation
+        deterministic: If True, use deterministic policy (no exploration)
+
+    Returns:
+        Tuple of (action, state) where state is for recurrent policies
+    &#34;&#34;&#34;
+    action, state = self.model.predict(observation, deterministic=deterministic)
+    return action, state</code></pre>
+</details>
+<div class="desc"><p>Predict action for given observation.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>observation</code></strong></dt>
+<dd>Current observation</dd>
+<dt><strong><code>deterministic</code></strong></dt>
+<dd>If True, use deterministic policy (no exploration)</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>Tuple of (action, state) where state is for recurrent policies</p></div>
+</dd>
+<dt id="learning.agent.PPOAgent.save"><code class="name flex">
+<span>def <span class="ident">save</span></span>(<span>self, path: str) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def save(self, path: str) -&gt; None:
+    &#34;&#34;&#34;Save the model to disk.&#34;&#34;&#34;
+    self.model.save(path)
+    logger.info(f&#34;Model saved to {path}&#34;)</code></pre>
+</details>
+<div class="desc"><p>Save the model to disk.</p></div>
+</dd>
+<dt id="learning.agent.PPOAgent.train"><code class="name flex">
+<span>def <span class="ident">train</span></span>(<span>self,<br>total_timesteps: int,<br>callback: stable_baselines3.common.callbacks.BaseCallback | None = None) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def train(
+    self, total_timesteps: int, callback: Optional[BaseCallback] = None
+) -&gt; None:
+    &#34;&#34;&#34;
+    Train the agent.
+
+    Args:
+        total_timesteps: Total number of timesteps to train
+        callback: Optional callback for logging/checkpointing
+    &#34;&#34;&#34;
+    logger.info(f&#34;Starting training for {total_timesteps} timesteps&#34;)
+    self.model.learn(
+        total_timesteps=total_timesteps, callback=callback, progress_bar=True
+    )
+    logger.info(&#34;Training complete&#34;)</code></pre>
+</details>
+<div class="desc"><p>Train the agent.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>total_timesteps</code></strong></dt>
+<dd>Total number of timesteps to train</dd>
+<dt><strong><code>callback</code></strong></dt>
+<dd>Optional callback for logging/checkpointing</dd>
+</dl></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="learning" href="index.html">learning</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="learning.agent.CultistSimulatorEnv" href="#learning.agent.CultistSimulatorEnv">CultistSimulatorEnv</a></code></h4>
+<ul class="">
+<li><code><a title="learning.agent.CultistSimulatorEnv.close" href="#learning.agent.CultistSimulatorEnv.close">close</a></code></li>
+<li><code><a title="learning.agent.CultistSimulatorEnv.metadata" href="#learning.agent.CultistSimulatorEnv.metadata">metadata</a></code></li>
+<li><code><a title="learning.agent.CultistSimulatorEnv.render" href="#learning.agent.CultistSimulatorEnv.render">render</a></code></li>
+<li><code><a title="learning.agent.CultistSimulatorEnv.reset" href="#learning.agent.CultistSimulatorEnv.reset">reset</a></code></li>
+<li><code><a title="learning.agent.CultistSimulatorEnv.step" href="#learning.agent.CultistSimulatorEnv.step">step</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="learning.agent.PPOAgent" href="#learning.agent.PPOAgent">PPOAgent</a></code></h4>
+<ul class="">
+<li><code><a title="learning.agent.PPOAgent.load" href="#learning.agent.PPOAgent.load">load</a></code></li>
+<li><code><a title="learning.agent.PPOAgent.predict" href="#learning.agent.PPOAgent.predict">predict</a></code></li>
+<li><code><a title="learning.agent.PPOAgent.save" href="#learning.agent.PPOAgent.save">save</a></code></li>
+<li><code><a title="learning.agent.PPOAgent.train" href="#learning.agent.PPOAgent.train">train</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

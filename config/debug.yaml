@@ -1,0 +1,144 @@
+# Example Configuration: Debug Mode
+# Use this for development, testing, and troubleshooting
+# Verbose logging, slower execution, comprehensive validation
+
+agent:
+  id: "debug_agent_001"
+  window_name: "Cultist Simulator"
+  max_actions_per_episode: 50  # Short episodes for testing
+  checkpoint_frequency: 10  # Frequent saves for debugging
+  enable_debug_mode: true
+  
+vision:
+  # High-quality capture for debugging
+  capture_timeout_ms: 1000  # Allow more time
+  detection_confidence: 0.7  # High threshold for accuracy
+  ocr_confidence: 0.6
+  enable_caching: false  # Disable caching to see real-time results
+  save_screenshots: true  # Save all captures for inspection
+  screenshot_dir: "data/debug/screenshots/"
+  annotate_detections: true  # Draw bounding boxes on screenshots
+  
+automation:
+  # Slow execution for observation
+  action_delay_ms: 2000  # 2 seconds between actions
+  click_duration_ms: 100
+  drag_duration_ms: 300
+  enable_focus_check: true
+  log_every_action: true  # Verbose action logging
+  
+safety:
+  # Maximum safety validation (MANDATORY)
+  bounds_validation: true
+  rate_limiting: true
+  max_actions_per_second: 0.5  # Very slow for safety
+  window_focus_required: true
+  emergency_stop_key: "f12"
+  log_all_violations: true
+  
+  # Comprehensive blacklist
+  blacklisted_keys:
+    - "cmd+q"
+    - "cmd+w"
+    - "cmd+tab"
+    - "alt+f4"
+    - "cmd+option+esc"
+    - "escape"
+    - "cmd+h"  # Hide window
+    - "cmd+m"  # Minimize
+    
+  # Very conservative safe area
+  safe_area:
+    margin_top_percent: 10
+    margin_bottom_percent: 10
+    margin_left_percent: 10
+    margin_right_percent: 10
+  
+  # Extra validation
+  double_check_actions: true
+  simulate_only: false  # Set to true to test without executing
+  
+learning:
+  # Minimal learning for debugging
+  algorithm: "PPO"
+  exploration_rate: 0.8  # Very high for testing variety
+  learning_rate: 0.0001  # Slow learning
+  gamma: 0.95
+  batch_size: 16
+  
+  # Knowledge base debugging
+  kb_path: "data/debug/knowledge_base.db"
+  log_all_transitions: true
+  validate_transitions: true
+  
+nlp:
+  # Text analysis with debugging
+  model_name: "sentence-transformers/all-MiniLM-L6-v2"
+  max_analysis_latency_ms: 200  # Allow more time
+  embedding_cache_size: 100  # Small cache for testing
+  similarity_threshold: 0.6
+  log_all_analyses: true
+  save_embeddings: true  # Save for inspection
+  
+loop_detection:
+  # Sensitive loop detection
+  window_size: 15
+  similarity_threshold: 0.85  # Higher threshold
+  timeout_minutes: 3  # Break loops quickly
+  log_detected_loops: true
+  
+metrics:
+  # Comprehensive metrics tracking
+  track_survival_time: true
+  track_win_rate: true
+  track_resources: true
+  track_unique_endings: true
+  track_action_distribution: true
+  track_state_transitions: true
+  rolling_window_size: 5
+  
+tensorboard:
+  # Full TensorBoard logging
+  log_dir: "data/debug/tensorboard/"
+  update_interval_steps: 1  # Log every step
+  enable_histograms: true
+  enable_images: true  # Save images for debugging
+  enable_graphs: true
+  
+logging:
+  # Maximum verbosity
+  level: "DEBUG"
+  json_output: true
+  log_dir: "data/debug/logs/"
+  console_output: true
+  log_to_file: true
+  rotate_size_mb: 50
+  backup_count: 10
+  
+  # Component-specific logging
+  vision_log_level: "DEBUG"
+  automation_log_level: "DEBUG"
+  safety_log_level: "DEBUG"
+  learning_log_level: "DEBUG"
+  nlp_log_level: "DEBUG"
+  
+performance:
+  # Relaxed performance targets for debugging
+  target_action_selection_ms: 2000
+  max_action_selection_ms: 5000
+  target_vision_processing_ms: 500
+  max_vision_processing_ms: 1000
+  max_knowledge_query_ms: 500
+  max_safety_validation_ms: 100
+  
+  # Performance profiling
+  enable_profiling: true
+  profile_output_dir: "data/debug/profiles/"
+  
+validation:
+  # Extra validation checks
+  validate_game_state: true
+  validate_actions: true
+  validate_knowledge_base: true
+  check_memory_leaks: true
+  report_anomalies: true

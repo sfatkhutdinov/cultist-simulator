@@ -1,0 +1,1031 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>learning.strategy API documentation</title>
+<meta name="description" content="Strategy Module …">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>learning.strategy</code></h1>
+</header>
+<section id="section-intro">
+<p>Strategy Module</p>
+<p>Handles strategy evolution and management for the RL agent.</p>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="learning.strategy.Strategy"><code class="flex name class">
+<span>class <span class="ident">Strategy</span></span>
+<span>(</span><span>strategy_id: str = '',<br>name: str = '',<br>description: str = '',<br>goal_priorities: List[str] = &lt;factory&gt;,<br>exploration_rate: float = 0.3,<br>risk_tolerance: float = 0.5,<br>episodes_played: int = 0,<br>sessions_played: int = 0,<br>win_rate: float = 0.0,<br>wins: int = 0,<br>games_played: int = 0,<br>avg_survival_time: float = 0.0,<br>version: int = 1,<br>created_at: datetime.datetime = &lt;factory&gt;,<br>parameters: Dict[str, Any] = &lt;factory&gt;,<br>performance_score: float = 0.0,<br>metadata: Dict[str, Any] = &lt;factory&gt;)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class Strategy:
+    &#34;&#34;&#34;
+    Represents a high-level gameplay strategy.
+    &#34;&#34;&#34;
+
+    # Make all fields optional with defaults for flexibility
+    strategy_id: str = &#34;&#34;
+    name: str = &#34;&#34;
+    description: str = &#34;&#34;
+    goal_priorities: List[str] = field(default_factory=list)
+    exploration_rate: float = 0.3
+    risk_tolerance: float = 0.5
+
+    # Performance tracking
+    episodes_played: int = 0  # For test compatibility
+    sessions_played: int = 0
+    win_rate: float = 0.0
+    wins: int = 0
+    games_played: int = 0
+    avg_survival_time: float = 0.0
+
+    # Legacy/optional fields
+    version: int = 1
+    created_at: datetime = field(default_factory=datetime.now)
+    parameters: Dict[str, Any] = field(default_factory=dict)
+    performance_score: float = 0.0
+    metadata: Dict[str, Any] = field(default_factory=dict)
+
+    def __post_init__(self):
+        &#34;&#34;&#34;Set strategy_id from name if not provided.&#34;&#34;&#34;
+        if not self.strategy_id and self.name:
+            self.strategy_id = self.name.lower().replace(&#34; &#34;, &#34;_&#34;)
+
+    def to_dict(self) -&gt; Dict[str, Any]:
+        &#34;&#34;&#34;Serialize to dictionary.&#34;&#34;&#34;
+        return {
+            &#34;strategy_id&#34;: self.strategy_id,
+            &#34;name&#34;: self.name,
+            &#34;description&#34;: self.description,
+            &#34;goal_priorities&#34;: self.goal_priorities,
+            &#34;exploration_rate&#34;: self.exploration_rate,
+            &#34;risk_tolerance&#34;: self.risk_tolerance,
+            &#34;version&#34;: self.version,
+            &#34;created_at&#34;: self.created_at.isoformat(),
+            &#34;parameters&#34;: self.parameters,
+            &#34;performance_score&#34;: self.performance_score,
+            &#34;games_played&#34;: self.games_played,
+            &#34;wins&#34;: self.wins,
+            &#34;sessions_played&#34;: self.sessions_played,
+            &#34;win_rate&#34;: self.win_rate,
+            &#34;avg_survival_time&#34;: self.avg_survival_time,
+            &#34;metadata&#34;: self.metadata,
+        }
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -&gt; &#34;Strategy&#34;:
+        &#34;&#34;&#34;Deserialize from dictionary.&#34;&#34;&#34;
+        created_at = data.get(&#34;created_at&#34;)
+        if isinstance(created_at, str):
+            created_at = datetime.fromisoformat(created_at)
+        elif created_at is None:
+            created_at = datetime.now()
+
+        return cls(
+            strategy_id=data.get(&#34;strategy_id&#34;, &#34;&#34;),
+            name=data.get(&#34;name&#34;, &#34;&#34;),
+            description=data.get(&#34;description&#34;, &#34;&#34;),
+            goal_priorities=data.get(&#34;goal_priorities&#34;, []),
+            exploration_rate=data.get(&#34;exploration_rate&#34;, 0.3),
+            risk_tolerance=data.get(&#34;risk_tolerance&#34;, 0.5),
+            version=data.get(&#34;version&#34;, 1),
+            created_at=created_at,
+            parameters=data.get(&#34;parameters&#34;, {}),
+            performance_score=data.get(&#34;performance_score&#34;, 0.0),
+            games_played=data.get(&#34;games_played&#34;, 0),
+            wins=data.get(&#34;wins&#34;, 0),
+            sessions_played=data.get(&#34;sessions_played&#34;, 0),
+            win_rate=data.get(&#34;win_rate&#34;, 0.0),
+            avg_survival_time=data.get(&#34;avg_survival_time&#34;, 0.0),
+            metadata=data.get(&#34;metadata&#34;, {}),
+        )</code></pre>
+</details>
+<div class="desc"><p>Represents a high-level gameplay strategy.</p></div>
+<h3>Static methods</h3>
+<dl>
+<dt id="learning.strategy.Strategy.from_dict"><code class="name flex">
+<span>def <span class="ident">from_dict</span></span>(<span>data: Dict[str, Any]) ‑> <a title="learning.strategy.Strategy" href="#learning.strategy.Strategy">Strategy</a></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Deserialize from dictionary.</p></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="learning.strategy.Strategy.avg_survival_time"><code class="name">var <span class="ident">avg_survival_time</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="learning.strategy.Strategy.created_at"><code class="name">var <span class="ident">created_at</span> : datetime.datetime</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="learning.strategy.Strategy.description"><code class="name">var <span class="ident">description</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="learning.strategy.Strategy.episodes_played"><code class="name">var <span class="ident">episodes_played</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="learning.strategy.Strategy.exploration_rate"><code class="name">var <span class="ident">exploration_rate</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="learning.strategy.Strategy.games_played"><code class="name">var <span class="ident">games_played</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="learning.strategy.Strategy.goal_priorities"><code class="name">var <span class="ident">goal_priorities</span> : List[str]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="learning.strategy.Strategy.metadata"><code class="name">var <span class="ident">metadata</span> : Dict[str, Any]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="learning.strategy.Strategy.name"><code class="name">var <span class="ident">name</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="learning.strategy.Strategy.parameters"><code class="name">var <span class="ident">parameters</span> : Dict[str, Any]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="learning.strategy.Strategy.performance_score"><code class="name">var <span class="ident">performance_score</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="learning.strategy.Strategy.risk_tolerance"><code class="name">var <span class="ident">risk_tolerance</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="learning.strategy.Strategy.sessions_played"><code class="name">var <span class="ident">sessions_played</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="learning.strategy.Strategy.strategy_id"><code class="name">var <span class="ident">strategy_id</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="learning.strategy.Strategy.version"><code class="name">var <span class="ident">version</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="learning.strategy.Strategy.win_rate"><code class="name">var <span class="ident">win_rate</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="learning.strategy.Strategy.wins"><code class="name">var <span class="ident">wins</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="learning.strategy.Strategy.to_dict"><code class="name flex">
+<span>def <span class="ident">to_dict</span></span>(<span>self) ‑> Dict[str, Any]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def to_dict(self) -&gt; Dict[str, Any]:
+    &#34;&#34;&#34;Serialize to dictionary.&#34;&#34;&#34;
+    return {
+        &#34;strategy_id&#34;: self.strategy_id,
+        &#34;name&#34;: self.name,
+        &#34;description&#34;: self.description,
+        &#34;goal_priorities&#34;: self.goal_priorities,
+        &#34;exploration_rate&#34;: self.exploration_rate,
+        &#34;risk_tolerance&#34;: self.risk_tolerance,
+        &#34;version&#34;: self.version,
+        &#34;created_at&#34;: self.created_at.isoformat(),
+        &#34;parameters&#34;: self.parameters,
+        &#34;performance_score&#34;: self.performance_score,
+        &#34;games_played&#34;: self.games_played,
+        &#34;wins&#34;: self.wins,
+        &#34;sessions_played&#34;: self.sessions_played,
+        &#34;win_rate&#34;: self.win_rate,
+        &#34;avg_survival_time&#34;: self.avg_survival_time,
+        &#34;metadata&#34;: self.metadata,
+    }</code></pre>
+</details>
+<div class="desc"><p>Serialize to dictionary.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="learning.strategy.StrategyManager"><code class="flex name class">
+<span>class <span class="ident">StrategyManager</span></span>
+<span>(</span><span>storage_path: str = 'data/strategies.json')</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class StrategyManager:
+    &#34;&#34;&#34;
+    Manages strategy CRUD operations and evolution.
+    T100, T101: Strategy entity operations and evolution.
+    &#34;&#34;&#34;
+
+    def __init__(self, storage_path: str = &#34;data/strategies.json&#34;):
+        &#34;&#34;&#34;Initialize strategy manager.&#34;&#34;&#34;
+        self.storage_path = storage_path
+        self.strategies: Dict[str, Strategy] = {}
+        self._load_strategies()
+
+    def _load_strategies(self) -&gt; None:
+        &#34;&#34;&#34;Load strategies from disk.&#34;&#34;&#34;
+        import os
+
+        if os.path.exists(self.storage_path):
+            try:
+                with open(self.storage_path, &#34;r&#34;) as f:
+                    data = json.load(f)
+                    for strategy_data in data.get(&#34;strategies&#34;, []):
+                        strategy = Strategy.from_dict(strategy_data)
+                        self.strategies[strategy.strategy_id] = strategy
+                logger.info(f&#34;Loaded {len(self.strategies)} strategies&#34;)
+            except Exception as e:
+                logger.error(f&#34;Failed to load strategies: {e}&#34;)
+
+    def _save_strategies(self) -&gt; None:
+        &#34;&#34;&#34;Save strategies to disk.&#34;&#34;&#34;
+        import os
+
+        os.makedirs(os.path.dirname(self.storage_path), exist_ok=True)
+        try:
+            data = {&#34;strategies&#34;: [s.to_dict() for s in self.strategies.values()]}
+            with open(self.storage_path, &#34;w&#34;) as f:
+                json.dump(data, f, indent=2)
+            logger.debug(f&#34;Saved {len(self.strategies)} strategies&#34;)
+        except Exception as e:
+            logger.error(f&#34;Failed to save strategies: {e}&#34;)
+
+    def create_strategy(self, strategy_id: str, parameters: Dict[str, Any]) -&gt; Strategy:
+        &#34;&#34;&#34;Create a new strategy.&#34;&#34;&#34;
+        strategy = Strategy(
+            strategy_id=strategy_id,
+            version=1,
+            created_at=datetime.now(),
+            parameters=parameters,
+        )
+        self.strategies[strategy_id] = strategy
+        self._save_strategies()
+        logger.info(f&#34;Created strategy {strategy_id}&#34;)
+        return strategy
+
+    def save_strategy(self, strategy: Strategy) -&gt; None:
+        &#34;&#34;&#34;Save a strategy to the manager.&#34;&#34;&#34;
+        self.strategies[strategy.strategy_id] = strategy
+        self._save_strategies()
+        logger.debug(f&#34;Saved strategy {strategy.strategy_id}&#34;)
+
+    def get_strategy(self, strategy_id: str) -&gt; Optional[Strategy]:
+        &#34;&#34;&#34;Get a strategy by ID.&#34;&#34;&#34;
+        return self.strategies.get(strategy_id)
+
+    def load_strategy(self, strategy_id: str) -&gt; Optional[Strategy]:
+        &#34;&#34;&#34;Load a strategy by ID (alias for get_strategy).&#34;&#34;&#34;
+        return self.get_strategy(strategy_id)
+
+    def update_strategy(self, strategy_id: str, **kwargs) -&gt; Optional[Strategy]:
+        &#34;&#34;&#34;Update strategy attributes.&#34;&#34;&#34;
+        strategy = self.strategies.get(strategy_id)
+        if not strategy:
+            return None
+
+        for key, value in kwargs.items():
+            if hasattr(strategy, key):
+                setattr(strategy, key, value)
+
+        self._save_strategies()
+        logger.debug(f&#34;Updated strategy {strategy_id}&#34;)
+        return strategy
+
+    def delete_strategy(self, strategy_id: str) -&gt; bool:
+        &#34;&#34;&#34;Delete a strategy.&#34;&#34;&#34;
+        if strategy_id in self.strategies:
+            del self.strategies[strategy_id]
+            self._save_strategies()
+            logger.info(f&#34;Deleted strategy {strategy_id}&#34;)
+            return True
+        return False
+
+    def update_performance(
+        self, strategy_id: str, won: bool = False, survival_time: float = 0.0
+    ) -&gt; Optional[Strategy]:
+        &#34;&#34;&#34;
+        Update strategy performance metrics after an episode.
+
+        Args:
+            strategy_id: The strategy to update
+            won: Whether the episode was won
+            survival_time: How long the agent survived
+
+        Returns:
+            Updated strategy or None if not found
+        &#34;&#34;&#34;
+        strategy = self.strategies.get(strategy_id)
+        if not strategy:
+            return None
+
+        # Update episode count
+        new_episodes = strategy.episodes_played + 1
+
+        # Update win rate
+        old_wins = strategy.episodes_played * strategy.win_rate
+        new_wins = old_wins + (1 if won else 0)
+        new_win_rate = new_wins / new_episodes
+
+        # Update survival time
+        old_total_time = strategy.avg_survival_time * strategy.episodes_played
+        new_total_time = old_total_time + survival_time
+        new_avg_survival = new_total_time / new_episodes
+
+        # Update games_played and wins
+        new_games = strategy.games_played + 1
+        new_total_wins = strategy.wins + (1 if won else 0)
+
+        # Create updated strategy
+        updated = Strategy(
+            strategy_id=strategy.strategy_id,
+            name=strategy.name,
+            description=strategy.description,
+            goal_priorities=strategy.goal_priorities,
+            exploration_rate=strategy.exploration_rate,
+            risk_tolerance=strategy.risk_tolerance,
+            episodes_played=new_episodes,
+            sessions_played=strategy.sessions_played,
+            win_rate=new_win_rate,
+            wins=new_total_wins,
+            games_played=new_games,
+            avg_survival_time=new_avg_survival,
+            version=strategy.version,
+            created_at=strategy.created_at,
+            parameters=strategy.parameters,
+            performance_score=strategy.performance_score,
+            metadata=strategy.metadata,
+        )
+
+        self.strategies[strategy_id] = updated
+        self._save_strategies()
+
+        logger.debug(
+            f&#34;Updated performance for {strategy_id}: win_rate={new_win_rate:.3f}, episodes={new_episodes}&#34;
+        )
+        return updated
+
+    def list_strategies(self) -&gt; List[Strategy]:
+        &#34;&#34;&#34;List all strategies.&#34;&#34;&#34;
+        return list(self.strategies.values())
+
+    def evolve_strategy(
+        self, base_strategy_id: str, mutation_rate: float = 0.1
+    ) -&gt; Optional[Strategy]:
+        &#34;&#34;&#34;
+        Create a mutated version of a strategy.
+        T101: Strategy evolution through mutation.
+        &#34;&#34;&#34;
+        base = self.strategies.get(base_strategy_id)
+        if not base:
+            return None
+
+        import random
+        import uuid
+
+        # Create mutated parameters
+        new_params = base.parameters.copy()
+        for key, value in new_params.items():
+            if isinstance(value, (int, float)) and random.random() &lt; mutation_rate:
+                # Mutate numerical parameters
+                mutation = random.gauss(0, 0.1)
+                new_params[key] = value * (1 + mutation)
+
+        # Create new strategy
+        new_strategy = Strategy(
+            strategy_id=str(uuid.uuid4()),
+            version=base.version + 1,
+            created_at=datetime.now(),
+            parameters=new_params,
+            metadata={&#34;parent_id&#34;: base_strategy_id},
+        )
+
+        self.strategies[new_strategy.strategy_id] = new_strategy
+        self._save_strategies()
+
+        logger.info(
+            f&#34;Evolved strategy {base_strategy_id} -&gt; {new_strategy.strategy_id}&#34;
+        )
+        return new_strategy
+
+    def mutate_strategy(
+        self, strategy: Strategy, mutation_rate: float = 0.1
+    ) -&gt; Strategy:
+        &#34;&#34;&#34;Mutate a strategy (alias for testing compatibility).&#34;&#34;&#34;
+        import random
+        import uuid
+
+        # Create mutated parameters
+        new_params = strategy.parameters.copy()
+        for key, value in new_params.items():
+            if isinstance(value, (int, float)) and random.random() &lt; mutation_rate:
+                # Mutate numerical parameters
+                mutation = random.gauss(0, 0.1)
+                new_params[key] = value * (1 + mutation)
+
+        # Create new strategy with modified name
+        new_strategy = Strategy(
+            strategy_id=str(uuid.uuid4()),
+            name=f&#34;{strategy.name}_mutated&#34; if strategy.name else &#34;&#34;,
+            description=strategy.description,
+            goal_priorities=(
+                strategy.goal_priorities.copy() if strategy.goal_priorities else []
+            ),
+            exploration_rate=strategy.exploration_rate,
+            risk_tolerance=strategy.risk_tolerance,
+            episodes_played=strategy.episodes_played,
+            sessions_played=strategy.sessions_played,
+            win_rate=strategy.win_rate,
+            wins=strategy.wins,
+            games_played=strategy.games_played,
+            avg_survival_time=strategy.avg_survival_time,
+            version=strategy.version + 1,
+            created_at=datetime.now(),
+            parameters=new_params,
+            performance_score=strategy.performance_score,
+            metadata={&#34;parent_id&#34;: strategy.strategy_id},
+        )
+
+        logger.info(f&#34;Mutated strategy {strategy.name} -&gt; {new_strategy.name}&#34;)
+        return new_strategy
+
+    def merge_strategies(
+        self,
+        strategy_id_1: str | Strategy,
+        strategy_id_2: str | Strategy,
+        weight: float = 0.5,
+    ) -&gt; Optional[Strategy]:
+        &#34;&#34;&#34;
+        Merge two strategies with weighted averaging.
+        T101: Strategy evolution through merging.
+        Accepts either strategy IDs (str) or Strategy objects.
+        &#34;&#34;&#34;
+        # Handle both str IDs and Strategy objects
+        if isinstance(strategy_id_1, Strategy):
+            s1 = strategy_id_1
+        else:
+            s1 = self.strategies.get(strategy_id_1)
+
+        if isinstance(strategy_id_2, Strategy):
+            s2 = strategy_id_2
+        else:
+            s2 = self.strategies.get(strategy_id_2)
+
+        if not s1 or not s2:
+            return None
+
+        import uuid
+
+        # Calculate weighted average based on win rates if not specified
+        if weight == 0.5 and s1.win_rate != s2.win_rate:
+            total_win_rate = s1.win_rate + s2.win_rate
+            if total_win_rate &gt; 0:
+                weight = s1.win_rate / total_win_rate
+
+        # Merge parameters with win-rate weighting
+        merged_params = {}
+        all_keys = set(s1.parameters.keys()) | set(s2.parameters.keys())
+
+        for key in all_keys:
+            v1 = s1.parameters.get(key, 0)
+            v2 = s2.parameters.get(key, 0)
+            if isinstance(v1, (int, float)) and isinstance(v2, (int, float)):
+                merged_params[key] = v1 * weight + v2 * (1 - weight)
+            else:
+                merged_params[key] = v1 if weight &gt; 0.5 else v2
+
+        # Create merged strategy
+        merged = Strategy(
+            strategy_id=str(uuid.uuid4()),
+            name=f&#34;{s1.name}_{s2.name}_merged&#34; if s1.name and s2.name else &#34;&#34;,
+            description=f&#34;Merged from {s1.name} and {s2.name}&#34;,
+            version=max(s1.version, s2.version) + 1,
+            created_at=datetime.now(),
+            parameters=merged_params,
+            metadata={
+                &#34;parent_1&#34;: s1.strategy_id,
+                &#34;parent_2&#34;: s2.strategy_id,
+                &#34;merge_weight&#34;: weight,
+            },
+        )
+
+        self.strategies[merged.strategy_id] = merged
+        self._save_strategies()
+
+        logger.info(f&#34;Merged strategies {s1.name} + {s2.name} -&gt; {merged.name}&#34;)
+        return merged</code></pre>
+</details>
+<div class="desc"><p>Manages strategy CRUD operations and evolution.
+T100, T101: Strategy entity operations and evolution.</p>
+<p>Initialize strategy manager.</p></div>
+<h3>Methods</h3>
+<dl>
+<dt id="learning.strategy.StrategyManager.create_strategy"><code class="name flex">
+<span>def <span class="ident">create_strategy</span></span>(<span>self, strategy_id: str, parameters: Dict[str, Any]) ‑> <a title="learning.strategy.Strategy" href="#learning.strategy.Strategy">Strategy</a></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_strategy(self, strategy_id: str, parameters: Dict[str, Any]) -&gt; Strategy:
+    &#34;&#34;&#34;Create a new strategy.&#34;&#34;&#34;
+    strategy = Strategy(
+        strategy_id=strategy_id,
+        version=1,
+        created_at=datetime.now(),
+        parameters=parameters,
+    )
+    self.strategies[strategy_id] = strategy
+    self._save_strategies()
+    logger.info(f&#34;Created strategy {strategy_id}&#34;)
+    return strategy</code></pre>
+</details>
+<div class="desc"><p>Create a new strategy.</p></div>
+</dd>
+<dt id="learning.strategy.StrategyManager.delete_strategy"><code class="name flex">
+<span>def <span class="ident">delete_strategy</span></span>(<span>self, strategy_id: str) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def delete_strategy(self, strategy_id: str) -&gt; bool:
+    &#34;&#34;&#34;Delete a strategy.&#34;&#34;&#34;
+    if strategy_id in self.strategies:
+        del self.strategies[strategy_id]
+        self._save_strategies()
+        logger.info(f&#34;Deleted strategy {strategy_id}&#34;)
+        return True
+    return False</code></pre>
+</details>
+<div class="desc"><p>Delete a strategy.</p></div>
+</dd>
+<dt id="learning.strategy.StrategyManager.evolve_strategy"><code class="name flex">
+<span>def <span class="ident">evolve_strategy</span></span>(<span>self, base_strategy_id: str, mutation_rate: float = 0.1) ‑> <a title="learning.strategy.Strategy" href="#learning.strategy.Strategy">Strategy</a> | None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def evolve_strategy(
+    self, base_strategy_id: str, mutation_rate: float = 0.1
+) -&gt; Optional[Strategy]:
+    &#34;&#34;&#34;
+    Create a mutated version of a strategy.
+    T101: Strategy evolution through mutation.
+    &#34;&#34;&#34;
+    base = self.strategies.get(base_strategy_id)
+    if not base:
+        return None
+
+    import random
+    import uuid
+
+    # Create mutated parameters
+    new_params = base.parameters.copy()
+    for key, value in new_params.items():
+        if isinstance(value, (int, float)) and random.random() &lt; mutation_rate:
+            # Mutate numerical parameters
+            mutation = random.gauss(0, 0.1)
+            new_params[key] = value * (1 + mutation)
+
+    # Create new strategy
+    new_strategy = Strategy(
+        strategy_id=str(uuid.uuid4()),
+        version=base.version + 1,
+        created_at=datetime.now(),
+        parameters=new_params,
+        metadata={&#34;parent_id&#34;: base_strategy_id},
+    )
+
+    self.strategies[new_strategy.strategy_id] = new_strategy
+    self._save_strategies()
+
+    logger.info(
+        f&#34;Evolved strategy {base_strategy_id} -&gt; {new_strategy.strategy_id}&#34;
+    )
+    return new_strategy</code></pre>
+</details>
+<div class="desc"><p>Create a mutated version of a strategy.
+T101: Strategy evolution through mutation.</p></div>
+</dd>
+<dt id="learning.strategy.StrategyManager.get_strategy"><code class="name flex">
+<span>def <span class="ident">get_strategy</span></span>(<span>self, strategy_id: str) ‑> <a title="learning.strategy.Strategy" href="#learning.strategy.Strategy">Strategy</a> | None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_strategy(self, strategy_id: str) -&gt; Optional[Strategy]:
+    &#34;&#34;&#34;Get a strategy by ID.&#34;&#34;&#34;
+    return self.strategies.get(strategy_id)</code></pre>
+</details>
+<div class="desc"><p>Get a strategy by ID.</p></div>
+</dd>
+<dt id="learning.strategy.StrategyManager.list_strategies"><code class="name flex">
+<span>def <span class="ident">list_strategies</span></span>(<span>self) ‑> List[<a title="learning.strategy.Strategy" href="#learning.strategy.Strategy">Strategy</a>]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def list_strategies(self) -&gt; List[Strategy]:
+    &#34;&#34;&#34;List all strategies.&#34;&#34;&#34;
+    return list(self.strategies.values())</code></pre>
+</details>
+<div class="desc"><p>List all strategies.</p></div>
+</dd>
+<dt id="learning.strategy.StrategyManager.load_strategy"><code class="name flex">
+<span>def <span class="ident">load_strategy</span></span>(<span>self, strategy_id: str) ‑> <a title="learning.strategy.Strategy" href="#learning.strategy.Strategy">Strategy</a> | None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def load_strategy(self, strategy_id: str) -&gt; Optional[Strategy]:
+    &#34;&#34;&#34;Load a strategy by ID (alias for get_strategy).&#34;&#34;&#34;
+    return self.get_strategy(strategy_id)</code></pre>
+</details>
+<div class="desc"><p>Load a strategy by ID (alias for get_strategy).</p></div>
+</dd>
+<dt id="learning.strategy.StrategyManager.merge_strategies"><code class="name flex">
+<span>def <span class="ident">merge_strategies</span></span>(<span>self,<br>strategy_id_1: str | <a title="learning.strategy.Strategy" href="#learning.strategy.Strategy">Strategy</a>,<br>strategy_id_2: str | <a title="learning.strategy.Strategy" href="#learning.strategy.Strategy">Strategy</a>,<br>weight: float = 0.5) ‑> <a title="learning.strategy.Strategy" href="#learning.strategy.Strategy">Strategy</a> | None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def merge_strategies(
+    self,
+    strategy_id_1: str | Strategy,
+    strategy_id_2: str | Strategy,
+    weight: float = 0.5,
+) -&gt; Optional[Strategy]:
+    &#34;&#34;&#34;
+    Merge two strategies with weighted averaging.
+    T101: Strategy evolution through merging.
+    Accepts either strategy IDs (str) or Strategy objects.
+    &#34;&#34;&#34;
+    # Handle both str IDs and Strategy objects
+    if isinstance(strategy_id_1, Strategy):
+        s1 = strategy_id_1
+    else:
+        s1 = self.strategies.get(strategy_id_1)
+
+    if isinstance(strategy_id_2, Strategy):
+        s2 = strategy_id_2
+    else:
+        s2 = self.strategies.get(strategy_id_2)
+
+    if not s1 or not s2:
+        return None
+
+    import uuid
+
+    # Calculate weighted average based on win rates if not specified
+    if weight == 0.5 and s1.win_rate != s2.win_rate:
+        total_win_rate = s1.win_rate + s2.win_rate
+        if total_win_rate &gt; 0:
+            weight = s1.win_rate / total_win_rate
+
+    # Merge parameters with win-rate weighting
+    merged_params = {}
+    all_keys = set(s1.parameters.keys()) | set(s2.parameters.keys())
+
+    for key in all_keys:
+        v1 = s1.parameters.get(key, 0)
+        v2 = s2.parameters.get(key, 0)
+        if isinstance(v1, (int, float)) and isinstance(v2, (int, float)):
+            merged_params[key] = v1 * weight + v2 * (1 - weight)
+        else:
+            merged_params[key] = v1 if weight &gt; 0.5 else v2
+
+    # Create merged strategy
+    merged = Strategy(
+        strategy_id=str(uuid.uuid4()),
+        name=f&#34;{s1.name}_{s2.name}_merged&#34; if s1.name and s2.name else &#34;&#34;,
+        description=f&#34;Merged from {s1.name} and {s2.name}&#34;,
+        version=max(s1.version, s2.version) + 1,
+        created_at=datetime.now(),
+        parameters=merged_params,
+        metadata={
+            &#34;parent_1&#34;: s1.strategy_id,
+            &#34;parent_2&#34;: s2.strategy_id,
+            &#34;merge_weight&#34;: weight,
+        },
+    )
+
+    self.strategies[merged.strategy_id] = merged
+    self._save_strategies()
+
+    logger.info(f&#34;Merged strategies {s1.name} + {s2.name} -&gt; {merged.name}&#34;)
+    return merged</code></pre>
+</details>
+<div class="desc"><p>Merge two strategies with weighted averaging.
+T101: Strategy evolution through merging.
+Accepts either strategy IDs (str) or Strategy objects.</p></div>
+</dd>
+<dt id="learning.strategy.StrategyManager.mutate_strategy"><code class="name flex">
+<span>def <span class="ident">mutate_strategy</span></span>(<span>self,<br>strategy: <a title="learning.strategy.Strategy" href="#learning.strategy.Strategy">Strategy</a>,<br>mutation_rate: float = 0.1) ‑> <a title="learning.strategy.Strategy" href="#learning.strategy.Strategy">Strategy</a></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def mutate_strategy(
+    self, strategy: Strategy, mutation_rate: float = 0.1
+) -&gt; Strategy:
+    &#34;&#34;&#34;Mutate a strategy (alias for testing compatibility).&#34;&#34;&#34;
+    import random
+    import uuid
+
+    # Create mutated parameters
+    new_params = strategy.parameters.copy()
+    for key, value in new_params.items():
+        if isinstance(value, (int, float)) and random.random() &lt; mutation_rate:
+            # Mutate numerical parameters
+            mutation = random.gauss(0, 0.1)
+            new_params[key] = value * (1 + mutation)
+
+    # Create new strategy with modified name
+    new_strategy = Strategy(
+        strategy_id=str(uuid.uuid4()),
+        name=f&#34;{strategy.name}_mutated&#34; if strategy.name else &#34;&#34;,
+        description=strategy.description,
+        goal_priorities=(
+            strategy.goal_priorities.copy() if strategy.goal_priorities else []
+        ),
+        exploration_rate=strategy.exploration_rate,
+        risk_tolerance=strategy.risk_tolerance,
+        episodes_played=strategy.episodes_played,
+        sessions_played=strategy.sessions_played,
+        win_rate=strategy.win_rate,
+        wins=strategy.wins,
+        games_played=strategy.games_played,
+        avg_survival_time=strategy.avg_survival_time,
+        version=strategy.version + 1,
+        created_at=datetime.now(),
+        parameters=new_params,
+        performance_score=strategy.performance_score,
+        metadata={&#34;parent_id&#34;: strategy.strategy_id},
+    )
+
+    logger.info(f&#34;Mutated strategy {strategy.name} -&gt; {new_strategy.name}&#34;)
+    return new_strategy</code></pre>
+</details>
+<div class="desc"><p>Mutate a strategy (alias for testing compatibility).</p></div>
+</dd>
+<dt id="learning.strategy.StrategyManager.save_strategy"><code class="name flex">
+<span>def <span class="ident">save_strategy</span></span>(<span>self,<br>strategy: <a title="learning.strategy.Strategy" href="#learning.strategy.Strategy">Strategy</a>) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def save_strategy(self, strategy: Strategy) -&gt; None:
+    &#34;&#34;&#34;Save a strategy to the manager.&#34;&#34;&#34;
+    self.strategies[strategy.strategy_id] = strategy
+    self._save_strategies()
+    logger.debug(f&#34;Saved strategy {strategy.strategy_id}&#34;)</code></pre>
+</details>
+<div class="desc"><p>Save a strategy to the manager.</p></div>
+</dd>
+<dt id="learning.strategy.StrategyManager.update_performance"><code class="name flex">
+<span>def <span class="ident">update_performance</span></span>(<span>self, strategy_id: str, won: bool = False, survival_time: float = 0.0) ‑> <a title="learning.strategy.Strategy" href="#learning.strategy.Strategy">Strategy</a> | None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update_performance(
+    self, strategy_id: str, won: bool = False, survival_time: float = 0.0
+) -&gt; Optional[Strategy]:
+    &#34;&#34;&#34;
+    Update strategy performance metrics after an episode.
+
+    Args:
+        strategy_id: The strategy to update
+        won: Whether the episode was won
+        survival_time: How long the agent survived
+
+    Returns:
+        Updated strategy or None if not found
+    &#34;&#34;&#34;
+    strategy = self.strategies.get(strategy_id)
+    if not strategy:
+        return None
+
+    # Update episode count
+    new_episodes = strategy.episodes_played + 1
+
+    # Update win rate
+    old_wins = strategy.episodes_played * strategy.win_rate
+    new_wins = old_wins + (1 if won else 0)
+    new_win_rate = new_wins / new_episodes
+
+    # Update survival time
+    old_total_time = strategy.avg_survival_time * strategy.episodes_played
+    new_total_time = old_total_time + survival_time
+    new_avg_survival = new_total_time / new_episodes
+
+    # Update games_played and wins
+    new_games = strategy.games_played + 1
+    new_total_wins = strategy.wins + (1 if won else 0)
+
+    # Create updated strategy
+    updated = Strategy(
+        strategy_id=strategy.strategy_id,
+        name=strategy.name,
+        description=strategy.description,
+        goal_priorities=strategy.goal_priorities,
+        exploration_rate=strategy.exploration_rate,
+        risk_tolerance=strategy.risk_tolerance,
+        episodes_played=new_episodes,
+        sessions_played=strategy.sessions_played,
+        win_rate=new_win_rate,
+        wins=new_total_wins,
+        games_played=new_games,
+        avg_survival_time=new_avg_survival,
+        version=strategy.version,
+        created_at=strategy.created_at,
+        parameters=strategy.parameters,
+        performance_score=strategy.performance_score,
+        metadata=strategy.metadata,
+    )
+
+    self.strategies[strategy_id] = updated
+    self._save_strategies()
+
+    logger.debug(
+        f&#34;Updated performance for {strategy_id}: win_rate={new_win_rate:.3f}, episodes={new_episodes}&#34;
+    )
+    return updated</code></pre>
+</details>
+<div class="desc"><p>Update strategy performance metrics after an episode.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>strategy_id</code></strong></dt>
+<dd>The strategy to update</dd>
+<dt><strong><code>won</code></strong></dt>
+<dd>Whether the episode was won</dd>
+<dt><strong><code>survival_time</code></strong></dt>
+<dd>How long the agent survived</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>Updated strategy or None if not found</p></div>
+</dd>
+<dt id="learning.strategy.StrategyManager.update_strategy"><code class="name flex">
+<span>def <span class="ident">update_strategy</span></span>(<span>self, strategy_id: str, **kwargs) ‑> <a title="learning.strategy.Strategy" href="#learning.strategy.Strategy">Strategy</a> | None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update_strategy(self, strategy_id: str, **kwargs) -&gt; Optional[Strategy]:
+    &#34;&#34;&#34;Update strategy attributes.&#34;&#34;&#34;
+    strategy = self.strategies.get(strategy_id)
+    if not strategy:
+        return None
+
+    for key, value in kwargs.items():
+        if hasattr(strategy, key):
+            setattr(strategy, key, value)
+
+    self._save_strategies()
+    logger.debug(f&#34;Updated strategy {strategy_id}&#34;)
+    return strategy</code></pre>
+</details>
+<div class="desc"><p>Update strategy attributes.</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="learning" href="index.html">learning</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="learning.strategy.Strategy" href="#learning.strategy.Strategy">Strategy</a></code></h4>
+<ul class="two-column">
+<li><code><a title="learning.strategy.Strategy.avg_survival_time" href="#learning.strategy.Strategy.avg_survival_time">avg_survival_time</a></code></li>
+<li><code><a title="learning.strategy.Strategy.created_at" href="#learning.strategy.Strategy.created_at">created_at</a></code></li>
+<li><code><a title="learning.strategy.Strategy.description" href="#learning.strategy.Strategy.description">description</a></code></li>
+<li><code><a title="learning.strategy.Strategy.episodes_played" href="#learning.strategy.Strategy.episodes_played">episodes_played</a></code></li>
+<li><code><a title="learning.strategy.Strategy.exploration_rate" href="#learning.strategy.Strategy.exploration_rate">exploration_rate</a></code></li>
+<li><code><a title="learning.strategy.Strategy.from_dict" href="#learning.strategy.Strategy.from_dict">from_dict</a></code></li>
+<li><code><a title="learning.strategy.Strategy.games_played" href="#learning.strategy.Strategy.games_played">games_played</a></code></li>
+<li><code><a title="learning.strategy.Strategy.goal_priorities" href="#learning.strategy.Strategy.goal_priorities">goal_priorities</a></code></li>
+<li><code><a title="learning.strategy.Strategy.metadata" href="#learning.strategy.Strategy.metadata">metadata</a></code></li>
+<li><code><a title="learning.strategy.Strategy.name" href="#learning.strategy.Strategy.name">name</a></code></li>
+<li><code><a title="learning.strategy.Strategy.parameters" href="#learning.strategy.Strategy.parameters">parameters</a></code></li>
+<li><code><a title="learning.strategy.Strategy.performance_score" href="#learning.strategy.Strategy.performance_score">performance_score</a></code></li>
+<li><code><a title="learning.strategy.Strategy.risk_tolerance" href="#learning.strategy.Strategy.risk_tolerance">risk_tolerance</a></code></li>
+<li><code><a title="learning.strategy.Strategy.sessions_played" href="#learning.strategy.Strategy.sessions_played">sessions_played</a></code></li>
+<li><code><a title="learning.strategy.Strategy.strategy_id" href="#learning.strategy.Strategy.strategy_id">strategy_id</a></code></li>
+<li><code><a title="learning.strategy.Strategy.to_dict" href="#learning.strategy.Strategy.to_dict">to_dict</a></code></li>
+<li><code><a title="learning.strategy.Strategy.version" href="#learning.strategy.Strategy.version">version</a></code></li>
+<li><code><a title="learning.strategy.Strategy.win_rate" href="#learning.strategy.Strategy.win_rate">win_rate</a></code></li>
+<li><code><a title="learning.strategy.Strategy.wins" href="#learning.strategy.Strategy.wins">wins</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="learning.strategy.StrategyManager" href="#learning.strategy.StrategyManager">StrategyManager</a></code></h4>
+<ul class="two-column">
+<li><code><a title="learning.strategy.StrategyManager.create_strategy" href="#learning.strategy.StrategyManager.create_strategy">create_strategy</a></code></li>
+<li><code><a title="learning.strategy.StrategyManager.delete_strategy" href="#learning.strategy.StrategyManager.delete_strategy">delete_strategy</a></code></li>
+<li><code><a title="learning.strategy.StrategyManager.evolve_strategy" href="#learning.strategy.StrategyManager.evolve_strategy">evolve_strategy</a></code></li>
+<li><code><a title="learning.strategy.StrategyManager.get_strategy" href="#learning.strategy.StrategyManager.get_strategy">get_strategy</a></code></li>
+<li><code><a title="learning.strategy.StrategyManager.list_strategies" href="#learning.strategy.StrategyManager.list_strategies">list_strategies</a></code></li>
+<li><code><a title="learning.strategy.StrategyManager.load_strategy" href="#learning.strategy.StrategyManager.load_strategy">load_strategy</a></code></li>
+<li><code><a title="learning.strategy.StrategyManager.merge_strategies" href="#learning.strategy.StrategyManager.merge_strategies">merge_strategies</a></code></li>
+<li><code><a title="learning.strategy.StrategyManager.mutate_strategy" href="#learning.strategy.StrategyManager.mutate_strategy">mutate_strategy</a></code></li>
+<li><code><a title="learning.strategy.StrategyManager.save_strategy" href="#learning.strategy.StrategyManager.save_strategy">save_strategy</a></code></li>
+<li><code><a title="learning.strategy.StrategyManager.update_performance" href="#learning.strategy.StrategyManager.update_performance">update_performance</a></code></li>
+<li><code><a title="learning.strategy.StrategyManager.update_strategy" href="#learning.strategy.StrategyManager.update_strategy">update_strategy</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

@@ -371,11 +371,83 @@ Before deploying the agent, verify:
 
 ## Next Steps
 
+### Quick Test Run
+
+After setup, test the agent with a minimal run:
+
+```bash
+# Activate environment
+source venv/bin/activate
+
+# Launch Cultist Simulator game first
+# Make sure the game window is visible
+
+# Run agent for 1 episode (test mode)
+python -m src.orchestrator.cli --episodes 1 --config config/test_agent.yaml
+
+# Monitor TensorBoard (in separate terminal)
+tensorboard --logdir data/tensorboard/
+```
+
+### Full Training Run
+
+Once testing is successful:
+
+```bash
+# Run full training (100 episodes with aggressive exploration)
+python -m src.orchestrator.cli --episodes 100 --config config/aggressive.yaml
+
+# Or run conservative approach  
+python -m src.orchestrator.cli --episodes 100 --config config/conservative.yaml
+
+# View real-time progress
+# Open browser to http://localhost:6006 for TensorBoard
+```
+
+### Verify Installation
+
+```bash
+# Run library smoke tests
+python -m src.vision.cli analyze --help
+python -m src.automation.cli --help  
+python -m src.safety.cli --help
+python -m src.nlp.cli --help
+python -m src.learning.cli --help
+
+# Run test suite
+pytest tests/contract/ -v
+pytest tests/integration/ -v
+pytest tests/unit/ -v
+```
+
+---
+
+## Training Phases
+
 1. **Phase 1**: Run initial training (10-20 episodes)
+   - Goal: Verify agent executes without crashes
+   - Expected: Agent completes sessions, saves knowledge
+   - Duration: ~1-2 hours
+
 2. **Phase 2**: Analyze results, tune hyperparameters
+   - Review TensorBoard metrics
+   - Adjust exploration rate, learning rate
+   - Iterate on reward function
+
 3. **Phase 3**: Scale up training (100-500 episodes target)
+   - Goal: Achieve first win (FR-026 requirement)
+   - Expected: Win within 100-500 attempts
+   - Duration: ~24-48 hours (depends on game complexity)
+
 4. **Phase 4**: Evaluate multi-dimensional metrics
+   - Track survival time, win rate, resources, unique endings
+   - Verify >80% narrative understanding accuracy (FR-022)
+   - Validate performance <1000ms action selection (NFR-001)
+
 5. **Phase 5**: Iterate on reward function and strategy
+   - Refine based on observed patterns
+   - Implement strategy evolution
+   - Achieve consistent wins
 
 ---
 

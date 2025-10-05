@@ -1,0 +1,114 @@
+# Example Configuration: Balanced Training
+# Recommended for most training runs - balances speed, quality, and learning
+
+agent:
+  id: "balanced_learner_001"
+  window_name: "Cultist Simulator"
+  max_actions_per_episode: 150
+  checkpoint_frequency: 50  # Save every 50 actions
+  
+vision:
+  # Balanced vision settings
+  capture_timeout_ms: 400
+  detection_confidence: 0.6  # Medium threshold
+  ocr_confidence: 0.5
+  enable_caching: true
+  capture_resolution: null  # Use game native resolution
+  yolo_model_path: "models/yolov8n.pt"
+  
+automation:
+  # Moderate action speed
+  action_delay_ms: 750  # 0.75 seconds between actions
+  click_duration_ms: 100
+  drag_duration_ms: 200
+  enable_focus_check: true
+  
+safety:
+  # Safety constraints (MANDATORY - DO NOT DISABLE)
+  bounds_validation: true
+  rate_limiting: true
+  max_actions_per_second: 1.5  # Balanced pace
+  window_focus_required: true
+  emergency_stop_key: "f12"
+  
+  # Blacklisted keys (CRITICAL - NEVER REMOVE)
+  blacklisted_keys:
+    - "cmd+q"
+    - "cmd+w"
+    - "cmd+tab"
+    - "alt+f4"
+    - "cmd+option+esc"
+    - "escape"  # Prevent pausing game
+    
+  # Conservative safe area
+  safe_area:
+    margin_top_percent: 5
+    margin_bottom_percent: 5
+    margin_left_percent: 5
+    margin_right_percent: 5
+  
+learning:
+  # Balanced RL hyperparameters
+  algorithm: "PPO"
+  exploration_rate: 0.3  # Moderate exploration
+  exploitation_weight: 0.7
+  learning_rate: 0.0005
+  gamma: 0.97  # Moderate discount factor
+  batch_size: 32
+  
+  # Knowledge base settings
+  kb_path: "data/knowledge_base.db"
+  max_transitions_stored: 10000
+  prune_low_confidence_threshold: 0.1
+  
+  # Strategy evolution
+  strategy_mutation_rate: 0.15
+  strategy_merge_top_n: 3
+  
+nlp:
+  # Text analysis settings
+  model_name: "sentence-transformers/all-MiniLM-L6-v2"
+  max_analysis_latency_ms: 120
+  embedding_cache_size: 1000
+  similarity_threshold: 0.65
+  
+  # Goal extraction
+  goal_confidence_threshold: 0.6
+  max_goals_per_text: 5
+  
+loop_detection:
+  # Pattern detection for breaking loops
+  window_size: 25  # Last 25 actions
+  similarity_threshold: 0.75
+  timeout_minutes: 5  # Auto-break after 5 min of same pattern
+  
+metrics:
+  # Performance tracking
+  track_survival_time: true
+  track_win_rate: true
+  track_resources: true
+  track_unique_endings: true
+  rolling_window_size: 10  # Last 10 episodes
+  
+tensorboard:
+  # Training visualization
+  log_dir: "data/tensorboard/"
+  update_interval_steps: 10
+  enable_histograms: true
+  enable_images: false  # Disable to save disk space
+  
+logging:
+  level: "INFO"
+  json_output: true
+  log_dir: "data/logs/"
+  rotate_size_mb: 100
+  backup_count: 5
+  
+performance:
+  # Performance targets (from NFR requirements)
+  target_action_selection_ms: 500  # Stretch goal
+  max_action_selection_ms: 1000  # Firm requirement (NFR-001)
+  target_vision_processing_ms: 150
+  max_vision_processing_ms: 200  # NFR-002
+  max_knowledge_query_ms: 100  # NFR-003
+  max_safety_validation_ms: 10

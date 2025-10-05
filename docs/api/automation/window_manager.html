@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>automation.window_manager API documentation</title>
+<meta name="description" content="Window Manager - macOS Window Focus Detection and Bounds …">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>automation.window_manager</code></h1>
+</header>
+<section id="section-intro">
+<p>Window Manager - macOS Window Focus Detection and Bounds</p>
+<p>This module provides functions to check window focus state and get window bounds using Quartz.</p>
+<p>Functions:
+- check_window_focus(window_name): Check if window has keyboard focus
+- get_active_window_bounds(window_name): Get bounds of active window
+- is_window_active(window_name): Check if window exists and is focused</p>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="automation.window_manager.CGWindowListCopyWindowInfo"><code class="name flex">
+<span>def <span class="ident">CGWindowListCopyWindowInfo</span></span>(<span>arg0, arg1, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>CFArrayRef CGWindowListCopyWindowInfo(unsigned int arg0, unsigned int arg1);</p></div>
+</dd>
+<dt id="automation.window_manager.check_window_focus"><code class="name flex">
+<span>def <span class="ident">check_window_focus</span></span>(<span>window_name: str) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def check_window_focus(window_name: str) -&gt; bool:
+    &#34;&#34;&#34;
+    Check if the specified window currently has keyboard focus.
+
+    T064: Window focus verification using Quartz.
+    Performance requirement: &lt;10ms (iterates through window list).
+
+    Args:
+        window_name: Name of the window to check (e.g., &#34;Cultist Simulator&#34;)
+
+    Returns:
+        True if window has focus, False otherwise
+    &#34;&#34;&#34;
+    if not QUARTZ_AVAILABLE:
+        logger.warning(&#34;quartz_unavailable&#34;, action=&#34;focus_check&#34;)
+        # For testing on non-macOS, return True
+        return True
+
+    try:
+        # Get list of all windows
+        window_list = CGWindowListCopyWindowInfo(
+            kCGWindowListOptionOnScreenOnly, kCGNullWindowID
+        )
+
+        if not window_list:
+            logger.warning(&#34;no_windows_found&#34;)
+            return False
+
+        # The first window in the list is typically the focused one
+        # But we&#39;ll check the kCGWindowLayer to be sure (layer 0 = focused)
+        for window in window_list:
+            # Get window properties
+            owner_name = window.get(&#34;kCGWindowOwnerName&#34;, &#34;&#34;)
+            window_title = window.get(&#34;kCGWindowName&#34;, &#34;&#34;)
+            window_layer = window.get(&#34;kCGWindowLayer&#34;, 999)
+
+            # Check if this is our target window
+            if (
+                window_name.lower() in owner_name.lower()
+                or window_name.lower() in window_title.lower()
+            ):
+                # Layer 0 means the window is focused
+                is_focused = window_layer == 0
+
+                logger.debug(
+                    &#34;window_focus_check&#34;,
+                    window_name=window_name,
+                    owner=owner_name,
+                    title=window_title,
+                    layer=window_layer,
+                    is_focused=is_focused,
+                )
+
+                return is_focused
+
+        # Window not found
+        logger.debug(&#34;window_not_found&#34;, window_name=window_name)
+        return False
+
+    except Exception as e:
+        logger.error(&#34;focus_check_error&#34;, window_name=window_name, error=str(e))
+        # Return False on error (safer to assume unfocused)
+        return False</code></pre>
+</details>
+<div class="desc"><p>Check if the specified window currently has keyboard focus.</p>
+<p>T064: Window focus verification using Quartz.
+Performance requirement: &lt;10ms (iterates through window list).</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>window_name</code></strong></dt>
+<dd>Name of the window to check (e.g., "Cultist Simulator")</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>True if window has focus, False otherwise</p></div>
+</dd>
+<dt id="automation.window_manager.get_active_window_bounds"><code class="name flex">
+<span>def <span class="ident">get_active_window_bounds</span></span>(<span>window_name: str) ‑> src.lib.types.Rect | None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_active_window_bounds(window_name: str) -&gt; Optional[Rect]:
+    &#34;&#34;&#34;
+    Get the bounds (x, y, width, height) of the active window.
+
+    CRITICAL for single-screen setups: This ensures the agent only
+    interacts within the game window boundaries.
+
+    Args:
+        window_name: Name of the window (e.g., &#34;Cultist Simulator&#34;)
+
+    Returns:
+        Rect with window bounds, or None if window not found/focused
+    &#34;&#34;&#34;
+    if not QUARTZ_AVAILABLE:
+        logger.warning(&#34;quartz_unavailable&#34;, action=&#34;get_bounds&#34;)
+        # Return a safe default for testing
+        return Rect(x=0, y=0, width=DEFAULT_SCREEN_WIDTH, height=DEFAULT_SCREEN_HEIGHT)
+
+    try:
+        window_list = CGWindowListCopyWindowInfo(
+            kCGWindowListOptionOnScreenOnly, kCGNullWindowID
+        )
+
+        if not window_list:
+            logger.warning(&#34;no_windows_found&#34;)
+            return None
+
+        # Find the target window
+        for window in window_list:
+            owner_name = window.get(&#34;kCGWindowOwnerName&#34;, &#34;&#34;)
+            window_title = window.get(&#34;kCGWindowName&#34;, &#34;&#34;)
+            window_layer = window.get(&#34;kCGWindowLayer&#34;, 999)
+
+            # Check if this is our target window and it&#39;s focused
+            if (
+                window_name.lower() in owner_name.lower()
+                or window_name.lower() in window_title.lower()
+            ) and window_layer == 0:
+
+                # Get window bounds
+                bounds_dict = window.get(&#34;kCGWindowBounds&#34;, {})
+                x = int(bounds_dict.get(&#34;X&#34;, 0))
+                y = int(bounds_dict.get(&#34;Y&#34;, 0))
+                width = int(bounds_dict.get(&#34;Width&#34;, 0))
+                height = int(bounds_dict.get(&#34;Height&#34;, 0))
+
+                bounds = Rect(x=x, y=y, width=width, height=height)
+
+                logger.info(
+                    &#34;active_window_bounds&#34;, window_name=window_name, bounds=str(bounds)
+                )
+
+                return bounds
+
+        # Window not found or not focused
+        logger.warning(
+            &#34;window_not_active&#34;,
+            window_name=window_name,
+            message=&#34;Window not found or not focused&#34;,
+        )
+        return None
+
+    except Exception as e:
+        logger.error(&#34;get_bounds_error&#34;, window_name=window_name, error=str(e))
+        return None</code></pre>
+</details>
+<div class="desc"><p>Get the bounds (x, y, width, height) of the active window.</p>
+<p>CRITICAL for single-screen setups: This ensures the agent only
+interacts within the game window boundaries.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>window_name</code></strong></dt>
+<dd>Name of the window (e.g., "Cultist Simulator")</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>Rect with window bounds, or None if window not found/focused</p></div>
+</dd>
+<dt id="automation.window_manager.is_window_active"><code class="name flex">
+<span>def <span class="ident">is_window_active</span></span>(<span>window_name: str) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def is_window_active(window_name: str) -&gt; bool:
+    &#34;&#34;&#34;
+    Check if window exists and is currently the active/focused window.
+
+    SAFETY CRITICAL: For single-screen setups, this ensures we don&#39;t
+    accidentally interact with the wrong application.
+
+    Args:
+        window_name: Name of the window to check
+
+    Returns:
+        True if window is active and focused, False otherwise
+    &#34;&#34;&#34;
+    bounds = get_active_window_bounds(window_name)
+    return bounds is not None</code></pre>
+</details>
+<div class="desc"><p>Check if window exists and is currently the active/focused window.</p>
+<p>SAFETY CRITICAL: For single-screen setups, this ensures we don't
+accidentally interact with the wrong application.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>window_name</code></strong></dt>
+<dd>Name of the window to check</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>True if window is active and focused, False otherwise</p></div>
+</dd>
+<dt id="automation.window_manager.require_active_window"><code class="name flex">
+<span>def <span class="ident">require_active_window</span></span>(<span>window_name: str) ‑> src.lib.types.Rect</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def require_active_window(window_name: str) -&gt; Rect:
+    &#34;&#34;&#34;
+    Require that the specified window is active and return its bounds.
+
+    SAFETY CRITICAL: Call this before ANY automation action to ensure
+    we&#39;re only interacting with the game window.
+
+    Args:
+        window_name: Name of the required window
+
+    Returns:
+        Rect with window bounds
+
+    Raises:
+        RuntimeError: If window is not active/focused
+    &#34;&#34;&#34;
+    bounds = get_active_window_bounds(window_name)
+
+    if bounds is None:
+        error_msg = (
+            f&#34;Window &#39;{window_name}&#39; is not active! &#34;
+            f&#34;Please focus the game window before running the agent. &#34;
+            f&#34;This is required for single-screen setups to prevent &#34;
+            f&#34;accidental interaction with other applications.&#34;
+        )
+        logger.error(&#34;window_not_active_required&#34;, window_name=window_name)
+        raise RuntimeError(error_msg)
+
+    return bounds</code></pre>
+</details>
+<div class="desc"><p>Require that the specified window is active and return its bounds.</p>
+<p>SAFETY CRITICAL: Call this before ANY automation action to ensure
+we're only interacting with the game window.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>window_name</code></strong></dt>
+<dd>Name of the required window</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>Rect with window bounds</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>RuntimeError</code></dt>
+<dd>If window is not active/focused</dd>
+</dl></div>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="automation" href="index.html">automation</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="automation.window_manager.CGWindowListCopyWindowInfo" href="#automation.window_manager.CGWindowListCopyWindowInfo">CGWindowListCopyWindowInfo</a></code></li>
+<li><code><a title="automation.window_manager.check_window_focus" href="#automation.window_manager.check_window_focus">check_window_focus</a></code></li>
+<li><code><a title="automation.window_manager.get_active_window_bounds" href="#automation.window_manager.get_active_window_bounds">get_active_window_bounds</a></code></li>
+<li><code><a title="automation.window_manager.is_window_active" href="#automation.window_manager.is_window_active">is_window_active</a></code></li>
+<li><code><a title="automation.window_manager.require_active_window" href="#automation.window_manager.require_active_window">require_active_window</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

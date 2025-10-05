@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>nlp.text_analyzer API documentation</title>
+<meta name="description" content="Text analysis module using sentence-transformers for semantic understanding …">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>nlp.text_analyzer</code></h1>
+</header>
+<section id="section-intro">
+<p>Text analysis module using sentence-transformers for semantic understanding.</p>
+<p>This module provides:
+- Text embedding generation using pre-trained models
+- Semantic similarity computation
+- Embedding caching for performance</p>
+<p>Performance targets:
+- Embedding generation: &lt;100ms per text
+- Similarity search: &lt;100ms</p>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="nlp.text_analyzer.TextAnalyzer"><code class="flex name class">
+<span>class <span class="ident">TextAnalyzer</span></span>
+<span>(</span><span>model_name: str = 'all-MiniLM-L6-v2')</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class TextAnalyzer:
+    &#34;&#34;&#34;
+    Analyzes text using sentence-transformers for semantic understanding.
+
+    Uses &#39;all-MiniLM-L6-v2&#39; model by default:
+    - Fast inference (~50ms per sentence)
+    - Good quality embeddings (384 dimensions)
+    - Small model size (~80MB)
+    &#34;&#34;&#34;
+
+    def __init__(self, model_name: str = &#34;all-MiniLM-L6-v2&#34;):
+        &#34;&#34;&#34;
+        Initialize text analyzer with sentence-transformer model.
+
+        Args:
+            model_name: Name of sentence-transformers model to use
+        &#34;&#34;&#34;
+        self.model_name = model_name
+        self._model = None
+        self._embedding_cache = {}
+
+    def _load_model(self):
+        &#34;&#34;&#34;Lazy-load the sentence-transformers model.&#34;&#34;&#34;
+        if self._model is None:
+            try:
+                from sentence_transformers import SentenceTransformer
+
+                self._model = SentenceTransformer(self.model_name)
+            except ImportError:
+                raise ImportError(
+                    &#34;sentence-transformers not installed. &#34;
+                    &#34;Install with: pip install sentence-transformers&#34;
+                )
+
+    def _get_cache_key(self, text: str) -&gt; str:
+        &#34;&#34;&#34;Generate cache key for text.&#34;&#34;&#34;
+        return hashlib.md5(text.encode()).hexdigest()
+
+    def embed_text(self, text: str) -&gt; TextEmbedding:
+        &#34;&#34;&#34;
+        Generate semantic embedding for text.
+
+        Args:
+            text: Text to embed
+
+        Returns:
+            TextEmbedding with text and embedding vector
+
+        Performance:
+            &lt;100ms per text (NFR-002)
+        &#34;&#34;&#34;
+        # Check cache first
+        cache_key = self._get_cache_key(text)
+        if cache_key in self._embedding_cache:
+            return self._embedding_cache[cache_key]
+
+        # Load model if needed
+        self._load_model()
+
+        # Generate embedding
+        embedding_vector = self._model.encode(text, convert_to_numpy=True)
+
+        result = TextEmbedding(
+            text=text, embedding=embedding_vector, model_name=self.model_name
+        )
+
+        # Cache result
+        self._embedding_cache[cache_key] = result
+
+        return result
+
+    def compute_similarity(self, text1: str, text2: str) -&gt; float:
+        &#34;&#34;&#34;
+        Compute semantic similarity between two texts.
+
+        Args:
+            text1: First text
+            text2: Second text
+
+        Returns:
+            Cosine similarity score (0.0 to 1.0)
+
+        Performance:
+            &lt;100ms for similarity computation
+        &#34;&#34;&#34;
+        # Get embeddings (may be cached)
+        emb1 = self.embed_text(text1)
+        emb2 = self.embed_text(text2)
+
+        # Compute cosine similarity
+        similarity = self._cosine_similarity(emb1.embedding, emb2.embedding)
+
+        return float(similarity)
+
+    def find_similar_texts(
+        self, query: str, candidates: List[str], top_k: int = 5, threshold: float = 0.0
+    ) -&gt; List[Tuple[str, float]]:
+        &#34;&#34;&#34;
+        Find most similar texts from candidates.
+
+        Args:
+            query: Query text
+            candidates: List of candidate texts to search
+            top_k: Number of top results to return
+            threshold: Minimum similarity threshold (0.0 to 1.0)
+
+        Returns:
+            List of (text, similarity_score) tuples, sorted by similarity
+
+        Performance:
+            &lt;100ms for typical searches
+        &#34;&#34;&#34;
+        # Get query embedding
+        query_emb = self.embed_text(query)
+
+        # Compute similarities
+        similarities = []
+        for candidate in candidates:
+            candidate_emb = self.embed_text(candidate)
+            similarity = self._cosine_similarity(
+                query_emb.embedding, candidate_emb.embedding
+            )
+
+            if similarity &gt;= threshold:
+                similarities.append((candidate, float(similarity)))
+
+        # Sort by similarity (descending) and return top_k
+        similarities.sort(key=lambda x: x[1], reverse=True)
+        return similarities[:top_k]
+
+    @staticmethod
+    def _cosine_similarity(vec1: np.ndarray, vec2: np.ndarray) -&gt; float:
+        &#34;&#34;&#34;
+        Compute cosine similarity between two vectors.
+
+        Args:
+            vec1: First vector
+            vec2: Second vector
+
+        Returns:
+            Cosine similarity (-1.0 to 1.0, typically 0.0 to 1.0)
+        &#34;&#34;&#34;
+        # Normalize vectors
+        vec1_norm = vec1 / (np.linalg.norm(vec1) + 1e-10)
+        vec2_norm = vec2 / (np.linalg.norm(vec2) + 1e-10)
+
+        # Compute dot product
+        similarity = np.dot(vec1_norm, vec2_norm)
+
+        return similarity
+
+    def clear_cache(self):
+        &#34;&#34;&#34;Clear the embedding cache.&#34;&#34;&#34;
+        self._embedding_cache.clear()</code></pre>
+</details>
+<div class="desc"><p>Analyzes text using sentence-transformers for semantic understanding.</p>
+<p>Uses 'all-MiniLM-L6-v2' model by default:
+- Fast inference (~50ms per sentence)
+- Good quality embeddings (384 dimensions)
+- Small model size (~80MB)</p>
+<p>Initialize text analyzer with sentence-transformer model.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>model_name</code></strong></dt>
+<dd>Name of sentence-transformers model to use</dd>
+</dl></div>
+<h3>Methods</h3>
+<dl>
+<dt id="nlp.text_analyzer.TextAnalyzer.clear_cache"><code class="name flex">
+<span>def <span class="ident">clear_cache</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def clear_cache(self):
+    &#34;&#34;&#34;Clear the embedding cache.&#34;&#34;&#34;
+    self._embedding_cache.clear()</code></pre>
+</details>
+<div class="desc"><p>Clear the embedding cache.</p></div>
+</dd>
+<dt id="nlp.text_analyzer.TextAnalyzer.compute_similarity"><code class="name flex">
+<span>def <span class="ident">compute_similarity</span></span>(<span>self, text1: str, text2: str) ‑> float</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute_similarity(self, text1: str, text2: str) -&gt; float:
+    &#34;&#34;&#34;
+    Compute semantic similarity between two texts.
+
+    Args:
+        text1: First text
+        text2: Second text
+
+    Returns:
+        Cosine similarity score (0.0 to 1.0)
+
+    Performance:
+        &lt;100ms for similarity computation
+    &#34;&#34;&#34;
+    # Get embeddings (may be cached)
+    emb1 = self.embed_text(text1)
+    emb2 = self.embed_text(text2)
+
+    # Compute cosine similarity
+    similarity = self._cosine_similarity(emb1.embedding, emb2.embedding)
+
+    return float(similarity)</code></pre>
+</details>
+<div class="desc"><p>Compute semantic similarity between two texts.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>text1</code></strong></dt>
+<dd>First text</dd>
+<dt><strong><code>text2</code></strong></dt>
+<dd>Second text</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>Cosine similarity score (0.0 to 1.0)</p>
+<h2 id="performance">Performance</h2>
+<p>&lt;100ms for similarity computation</p></div>
+</dd>
+<dt id="nlp.text_analyzer.TextAnalyzer.embed_text"><code class="name flex">
+<span>def <span class="ident">embed_text</span></span>(<span>self, text: str) ‑> <a title="nlp.text_analyzer.TextEmbedding" href="#nlp.text_analyzer.TextEmbedding">TextEmbedding</a></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def embed_text(self, text: str) -&gt; TextEmbedding:
+    &#34;&#34;&#34;
+    Generate semantic embedding for text.
+
+    Args:
+        text: Text to embed
+
+    Returns:
+        TextEmbedding with text and embedding vector
+
+    Performance:
+        &lt;100ms per text (NFR-002)
+    &#34;&#34;&#34;
+    # Check cache first
+    cache_key = self._get_cache_key(text)
+    if cache_key in self._embedding_cache:
+        return self._embedding_cache[cache_key]
+
+    # Load model if needed
+    self._load_model()
+
+    # Generate embedding
+    embedding_vector = self._model.encode(text, convert_to_numpy=True)
+
+    result = TextEmbedding(
+        text=text, embedding=embedding_vector, model_name=self.model_name
+    )
+
+    # Cache result
+    self._embedding_cache[cache_key] = result
+
+    return result</code></pre>
+</details>
+<div class="desc"><p>Generate semantic embedding for text.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>text</code></strong></dt>
+<dd>Text to embed</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>TextEmbedding with text and embedding vector</p>
+<h2 id="performance">Performance</h2>
+<p>&lt;100ms per text (NFR-002)</p></div>
+</dd>
+<dt id="nlp.text_analyzer.TextAnalyzer.find_similar_texts"><code class="name flex">
+<span>def <span class="ident">find_similar_texts</span></span>(<span>self, query: str, candidates: List[str], top_k: int = 5, threshold: float = 0.0) ‑> List[Tuple[str, float]]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def find_similar_texts(
+    self, query: str, candidates: List[str], top_k: int = 5, threshold: float = 0.0
+) -&gt; List[Tuple[str, float]]:
+    &#34;&#34;&#34;
+    Find most similar texts from candidates.
+
+    Args:
+        query: Query text
+        candidates: List of candidate texts to search
+        top_k: Number of top results to return
+        threshold: Minimum similarity threshold (0.0 to 1.0)
+
+    Returns:
+        List of (text, similarity_score) tuples, sorted by similarity
+
+    Performance:
+        &lt;100ms for typical searches
+    &#34;&#34;&#34;
+    # Get query embedding
+    query_emb = self.embed_text(query)
+
+    # Compute similarities
+    similarities = []
+    for candidate in candidates:
+        candidate_emb = self.embed_text(candidate)
+        similarity = self._cosine_similarity(
+            query_emb.embedding, candidate_emb.embedding
+        )
+
+        if similarity &gt;= threshold:
+            similarities.append((candidate, float(similarity)))
+
+    # Sort by similarity (descending) and return top_k
+    similarities.sort(key=lambda x: x[1], reverse=True)
+    return similarities[:top_k]</code></pre>
+</details>
+<div class="desc"><p>Find most similar texts from candidates.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>query</code></strong></dt>
+<dd>Query text</dd>
+<dt><strong><code>candidates</code></strong></dt>
+<dd>List of candidate texts to search</dd>
+<dt><strong><code>top_k</code></strong></dt>
+<dd>Number of top results to return</dd>
+<dt><strong><code>threshold</code></strong></dt>
+<dd>Minimum similarity threshold (0.0 to 1.0)</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>List of (text, similarity_score) tuples, sorted by similarity</p>
+<h2 id="performance">Performance</h2>
+<p>&lt;100ms for typical searches</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="nlp.text_analyzer.TextEmbedding"><code class="flex name class">
+<span>class <span class="ident">TextEmbedding</span></span>
+<span>(</span><span>text: str, embedding: numpy.ndarray, model_name: str)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class TextEmbedding:
+    &#34;&#34;&#34;Represents a text&#39;s semantic embedding.&#34;&#34;&#34;
+
+    text: str
+    embedding: np.ndarray
+    model_name: str</code></pre>
+</details>
+<div class="desc"><p>Represents a text's semantic embedding.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="nlp.text_analyzer.TextEmbedding.embedding"><code class="name">var <span class="ident">embedding</span> : numpy.ndarray</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="nlp.text_analyzer.TextEmbedding.model_name"><code class="name">var <span class="ident">model_name</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="nlp.text_analyzer.TextEmbedding.text"><code class="name">var <span class="ident">text</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="nlp" href="index.html">nlp</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="nlp.text_analyzer.TextAnalyzer" href="#nlp.text_analyzer.TextAnalyzer">TextAnalyzer</a></code></h4>
+<ul class="">
+<li><code><a title="nlp.text_analyzer.TextAnalyzer.clear_cache" href="#nlp.text_analyzer.TextAnalyzer.clear_cache">clear_cache</a></code></li>
+<li><code><a title="nlp.text_analyzer.TextAnalyzer.compute_similarity" href="#nlp.text_analyzer.TextAnalyzer.compute_similarity">compute_similarity</a></code></li>
+<li><code><a title="nlp.text_analyzer.TextAnalyzer.embed_text" href="#nlp.text_analyzer.TextAnalyzer.embed_text">embed_text</a></code></li>
+<li><code><a title="nlp.text_analyzer.TextAnalyzer.find_similar_texts" href="#nlp.text_analyzer.TextAnalyzer.find_similar_texts">find_similar_texts</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="nlp.text_analyzer.TextEmbedding" href="#nlp.text_analyzer.TextEmbedding">TextEmbedding</a></code></h4>
+<ul class="">
+<li><code><a title="nlp.text_analyzer.TextEmbedding.embedding" href="#nlp.text_analyzer.TextEmbedding.embedding">embedding</a></code></li>
+<li><code><a title="nlp.text_analyzer.TextEmbedding.model_name" href="#nlp.text_analyzer.TextEmbedding.model_name">model_name</a></code></li>
+<li><code><a title="nlp.text_analyzer.TextEmbedding.text" href="#nlp.text_analyzer.TextEmbedding.text">text</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

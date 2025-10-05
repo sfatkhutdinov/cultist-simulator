@@ -1,0 +1,717 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>safety API documentation</title>
+<meta name="description" content="Safety Library - Critical safety validation for agent actions …">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Package <code>safety</code></h1>
+</header>
+<section id="section-intro">
+<p>Safety Library - Critical safety validation for agent actions.</p>
+<p>Public API:
+- validate_action(action, context) -&gt; ValidationResult
+- is_within_bounds(point, bounds) -&gt; bool
+- is_key_blacklisted(key, modifiers) -&gt; bool
+- check_rate_limit(action_history, max_actions_per_second) -&gt; bool
+- log_violation(violation_type, details) -&gt; None</p>
+<p>CRITICAL: This library MUST have 100% reliability (NFR-004).
+Safety violations could affect the system outside the game.</p>
+<p>All validation functions must complete in &lt;10ms (NFR performance requirement).</p>
+</section>
+<section>
+<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+<dl>
+<dt><code class="name"><a title="safety.cli" href="cli.html">safety.cli</a></code></dt>
+<dd>
+<div class="desc"><p>Safety Library CLI …</p></div>
+</dd>
+<dt><code class="name"><a title="safety.loop_detector" href="loop_detector.html">safety.loop_detector</a></code></dt>
+<dd>
+<div class="desc"><p>Loop Detection Module …</p></div>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="safety.check_rate_limit"><code class="name flex">
+<span>def <span class="ident">check_rate_limit</span></span>(<span>action_history: List[Any], max_actions_per_second: int = 10) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def check_rate_limit(
+    action_history: List[Any], max_actions_per_second: int = 10
+) -&gt; bool:
+    &#34;&#34;&#34;
+    Check if action rate is within allowed limits.
+
+    T066: Rate limiting validation.
+    CRITICAL: Must complete in &lt;10ms.
+
+    Args:
+        action_history: List of recent actions (with timestamps)
+        max_actions_per_second: Maximum allowed action rate
+
+    Returns:
+        True if rate is acceptable, False if rate limit exceeded
+    &#34;&#34;&#34;
+    if not action_history:
+        return True  # No history, allow action
+
+    # Get current time
+    current_time = time.time()
+
+    # Count actions in the last second
+    recent_actions = 0
+    for action in action_history:
+        # Handle both Action objects and dicts
+        if isinstance(action, Action):
+            action_time = action.timestamp.timestamp()
+        elif isinstance(action, dict) and &#34;timestamp&#34; in action:
+            # Handle dict with timestamp (from tests)
+            timestamp = action[&#34;timestamp&#34;]
+            if isinstance(timestamp, datetime):
+                action_time = timestamp.timestamp()
+            else:
+                action_time = float(timestamp)
+        else:
+            continue
+
+        # Check if action was within last second
+        if current_time - action_time &lt;= 1.0:
+            recent_actions += 1
+
+    # Check if rate limit exceeded
+    is_allowed = recent_actions &lt; max_actions_per_second
+
+    logger.debug(
+        &#34;rate_limit_check&#34;,
+        recent_actions=recent_actions,
+        max_allowed=max_actions_per_second,
+        is_allowed=is_allowed,
+    )
+
+    return is_allowed</code></pre>
+</details>
+<div class="desc"><p>Check if action rate is within allowed limits.</p>
+<p>T066: Rate limiting validation.
+CRITICAL: Must complete in &lt;10ms.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>action_history</code></strong></dt>
+<dd>List of recent actions (with timestamps)</dd>
+<dt><strong><code>max_actions_per_second</code></strong></dt>
+<dd>Maximum allowed action rate</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>True if rate is acceptable, False if rate limit exceeded</p></div>
+</dd>
+<dt id="safety.is_key_blacklisted"><code class="name flex">
+<span>def <span class="ident">is_key_blacklisted</span></span>(<span>key: str, modifiers: List[str] | None = None) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def is_key_blacklisted(key: str, modifiers: Optional[List[str]] = None) -&gt; bool:
+    &#34;&#34;&#34;
+    Check if a key combination is blacklisted.
+
+    T065: Key blacklist validation.
+    CRITICAL: Must complete in &lt;1ms.
+
+    Blacklisted combinations:
+    - Cmd+Q (quit application)
+    - Cmd+W (close window)
+    - Cmd+Tab (switch application)
+    - Cmd+` (switch window)
+    - Escape (menu navigation that could exit)
+    - F4 (Alt+F4 equivalent)
+
+    Args:
+        key: The key being pressed (lowercase)
+        modifiers: List of modifier keys (cmd, alt, ctrl, shift)
+
+    Returns:
+        True if key combination is blacklisted, False otherwise
+    &#34;&#34;&#34;
+    if modifiers is None:
+        modifiers = []
+
+    # Normalize key and modifiers to lowercase
+    key = key.lower()
+    modifiers = [m.lower() for m in modifiers]
+
+    # Build key combination string
+    if modifiers:
+        # Sort modifiers for consistent comparison
+        sorted_mods = sorted(modifiers)
+        combo = &#34;+&#34;.join(sorted_mods) + &#34;+&#34; + key
+    else:
+        combo = key
+
+    # Check against blacklist
+    is_blacklisted = combo in BLACKLISTED_KEYS
+
+    logger.debug(
+        &#34;key_blacklist_check&#34;,
+        key=key,
+        modifiers=modifiers,
+        combo=combo,
+        is_blacklisted=is_blacklisted,
+    )
+
+    return is_blacklisted</code></pre>
+</details>
+<div class="desc"><p>Check if a key combination is blacklisted.</p>
+<p>T065: Key blacklist validation.
+CRITICAL: Must complete in &lt;1ms.</p>
+<p>Blacklisted combinations:
+- Cmd+Q (quit application)
+- Cmd+W (close window)
+- Cmd+Tab (switch application)
+- Cmd+` (switch window)
+- Escape (menu navigation that could exit)
+- F4 (Alt+F4 equivalent)</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>key</code></strong></dt>
+<dd>The key being pressed (lowercase)</dd>
+<dt><strong><code>modifiers</code></strong></dt>
+<dd>List of modifier keys (cmd, alt, ctrl, shift)</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>True if key combination is blacklisted, False otherwise</p></div>
+</dd>
+<dt id="safety.is_within_bounds"><code class="name flex">
+<span>def <span class="ident">is_within_bounds</span></span>(<span>point: src.lib.types.Point, bounds: src.lib.types.Rect) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def is_within_bounds(point: Point, bounds: Rect) -&gt; bool:
+    &#34;&#34;&#34;
+    Check if a point is within the specified bounds.
+
+    T064: Spatial containment validation.
+    CRITICAL: Must complete in &lt;1ms.
+
+    Args:
+        point: Point to check
+        bounds: Rectangle defining valid area
+
+    Returns:
+        True if point is inside bounds, False otherwise
+    &#34;&#34;&#34;
+    result = bounds.contains(point)
+
+    logger.debug(&#34;bounds_check&#34;, point=str(point), bounds=str(bounds), is_within=result)
+
+    return result</code></pre>
+</details>
+<div class="desc"><p>Check if a point is within the specified bounds.</p>
+<p>T064: Spatial containment validation.
+CRITICAL: Must complete in &lt;1ms.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>point</code></strong></dt>
+<dd>Point to check</dd>
+<dt><strong><code>bounds</code></strong></dt>
+<dd>Rectangle defining valid area</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>True if point is inside bounds, False otherwise</p></div>
+</dd>
+<dt id="safety.log_violation"><code class="name flex">
+<span>def <span class="ident">log_violation</span></span>(<span>violation_type: str, details: Dict[str, Any], severity: str = 'WARNING') ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def log_violation(
+    violation_type: str, details: Dict[str, Any], severity: str = &#34;WARNING&#34;
+) -&gt; None:
+    &#34;&#34;&#34;
+    Log a safety violation to file.
+
+    T078: Safety violation logging for audit trail.
+
+    Args:
+        violation_type: Type of violation (e.g., &#34;OUT_OF_BOUNDS&#34;, &#34;BLACKLISTED_KEY&#34;)
+        details: Additional details about the violation
+        severity: Severity level (&#34;WARNING&#34;, &#34;ERROR&#34;, &#34;CRITICAL&#34;)
+    &#34;&#34;&#34;
+    try:
+        # Ensure log directory exists
+        VIOLATION_LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
+
+        # Create log entry
+        log_entry = {
+            &#34;timestamp&#34;: datetime.now().isoformat(),
+            &#34;violation_type&#34;: violation_type,
+            &#34;severity&#34;: severity,
+            &#34;details&#34;: details,
+        }
+
+        # Append to log file
+        with open(VIOLATION_LOG_PATH, &#34;a&#34;) as f:
+            f.write(json.dumps(log_entry) + &#34;\n&#34;)
+
+        logger.warning(
+            &#34;safety_violation_logged&#34;, violation_type=violation_type, severity=severity
+        )
+
+    except Exception as e:
+        logger.error(
+            &#34;violation_logging_failed&#34;, error=str(e), violation_type=violation_type
+        )</code></pre>
+</details>
+<div class="desc"><p>Log a safety violation to file.</p>
+<p>T078: Safety violation logging for audit trail.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>violation_type</code></strong></dt>
+<dd>Type of violation (e.g., "OUT_OF_BOUNDS", "BLACKLISTED_KEY")</dd>
+<dt><strong><code>details</code></strong></dt>
+<dd>Additional details about the violation</dd>
+<dt><strong><code>severity</code></strong></dt>
+<dd>Severity level ("WARNING", "ERROR", "CRITICAL")</dd>
+</dl></div>
+</dd>
+<dt id="safety.validate_action"><code class="name flex">
+<span>def <span class="ident">validate_action</span></span>(<span>action: Any, context: Dict[str, Any]) ‑> src.lib.types.ValidationResult</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def validate_action(action: Any, context: Dict[str, Any]) -&gt; ValidationResult:
+    &#34;&#34;&#34;
+    Validate an action against all safety constraints.
+
+    T067: Complete action validation.
+    CRITICAL: Must complete in &lt;10ms and have 100% reliability.
+
+    This is the main safety validation function that combines all checks:
+    - Action type validation (must be valid ActionType enum)
+    - Spatial containment (window bounds)
+    - Key blacklist
+    - Window focus requirement
+    - Rate limiting
+    - Input validation (no malformed inputs)
+
+    Args:
+        action: Action object or dict to validate
+        context: Context dict with:
+            - window_bounds: Rect defining valid click area
+            - window_focused: bool indicating if window has focus
+            - recent_actions: List of recent actions for rate limiting
+
+    Returns:
+        ValidationResult with is_allowed flag and reason
+    &#34;&#34;&#34;
+    start_time = time.perf_counter()
+
+    constraints_violated = []
+    blocked_reason = None
+
+    # CRITICAL: Validate context has required fields
+    if not context or not isinstance(context, dict):
+        return ValidationResult(
+            is_allowed=False,
+            reason=&#34;Invalid context - must be a dictionary with required fields&#34;,
+            constraints_violated=[],
+            metadata={&#34;performance_ms&#34;: (time.perf_counter() - start_time) * 1000},
+        )
+
+    # Handle both Action objects and dicts (for test compatibility)
+    if isinstance(action, Action):
+        action_type = action.action_type
+        parameters = action.parameters
+    elif isinstance(action, dict):
+        action_type = action.get(&#34;action_type&#34;)
+        parameters = action
+    else:
+        return ValidationResult(
+            is_allowed=False,
+            reason=&#34;Invalid action object - must be Action or dict&#34;,
+            constraints_violated=[],
+            metadata={&#34;performance_ms&#34;: (time.perf_counter() - start_time) * 1000},
+        )
+
+    # CRITICAL: Empty dict/action is invalid
+    if isinstance(action, dict) and not action:
+        return ValidationResult(
+            is_allowed=False,
+            reason=&#34;Empty action dictionary - must contain action_type and parameters&#34;,
+            constraints_violated=[],
+            metadata={&#34;performance_ms&#34;: (time.perf_counter() - start_time) * 1000},
+        )
+
+    # CRITICAL: action_type must not be None
+    if action_type is None:
+        return ValidationResult(
+            is_allowed=False,
+            reason=&#34;Action type cannot be None - must be CLICK, DRAG, or KEY_PRESS&#34;,
+            constraints_violated=[],
+            metadata={&#34;performance_ms&#34;: (time.perf_counter() - start_time) * 1000},
+        )
+
+    # CRITICAL: Validate action_type is a valid ActionType enum
+    # This blocks arbitrary strings, SQL injection, XSS, path traversal
+    valid_action_types = [ActionType.CLICK, ActionType.DRAG, ActionType.KEY_PRESS]
+
+    # If it&#39;s already an ActionType enum and it&#39;s in our list, it&#39;s valid
+    if isinstance(action_type, ActionType):
+        if action_type not in valid_action_types:
+            return ValidationResult(
+                is_allowed=False,
+                reason=f&#34;Invalid action type {action_type} - must be CLICK, DRAG, or KEY_PRESS&#34;,
+                constraints_violated=[],
+                metadata={&#34;performance_ms&#34;: (time.perf_counter() - start_time) * 1000},
+            )
+        # Valid ActionType enum - continue to other checks
+    else:
+        # Not an ActionType enum - try to validate as string
+        if isinstance(action_type, str):
+            # Check if string matches enum value or string representation (case-insensitive)
+            action_type_lower = action_type.lower()
+            found = False
+            for at in valid_action_types:
+                # Match against enum value (e.g., &#39;click&#39;) or uppercase version (e.g., &#39;CLICK&#39;)
+                if action_type_lower == at.value or action_type == str(at):
+                    found = True
+                    break
+            if not found:
+                return ValidationResult(
+                    is_allowed=False,
+                    reason=f&#34;Invalid action type &#39;{action_type}&#39; - must be CLICK, DRAG, or KEY_PRESS&#34;,
+                    constraints_violated=[],
+                    metadata={
+                        &#34;performance_ms&#34;: (time.perf_counter() - start_time) * 1000
+                    },
+                )
+        else:
+            # Not ActionType enum and not string - reject
+            return ValidationResult(
+                is_allowed=False,
+                reason=f&#34;Invalid action type {type(action_type).__name__} - must be ActionType enum&#34;,
+                constraints_violated=[],
+                metadata={&#34;performance_ms&#34;: (time.perf_counter() - start_time) * 1000},
+            )
+
+    # 1. CHECK WINDOW FOCUS (if context has focus field, must be True)
+    # Missing focus field defaults to unfocused for security
+    window_focused = context.get(&#34;window_focused&#34;, False)
+    if window_focused is False:
+        constraints_violated.append(ConstraintType.FOCUS_REQUIRED)
+        blocked_reason = &#34;Window must be focused before executing actions&#34;
+
+        # T078: Log violation
+        log_violation(
+            &#34;FOCUS_REQUIRED&#34;,
+            {&#34;action_type&#34;: str(action_type), &#34;reason&#34;: blocked_reason},
+            severity=&#34;WARNING&#34;,
+        )
+
+        logger.warning(
+            &#34;action_blocked_focus&#34;, action_type=str(action_type), reason=blocked_reason
+        )
+
+        return ValidationResult(
+            is_allowed=False,
+            reason=blocked_reason,
+            constraints_violated=constraints_violated,
+            metadata={&#34;performance_ms&#34;: (time.perf_counter() - start_time) * 1000},
+        )
+
+    # 2. CHECK SPATIAL BOUNDS (for click/drag actions)
+    if action_type == ActionType.CLICK or (
+        isinstance(action, dict) and &#34;point&#34; in parameters
+    ):
+        window_bounds = context.get(&#34;window_bounds&#34;)
+
+        if window_bounds is not None:
+            # Get point from action
+            point = parameters.get(&#34;point&#34;)
+
+            # CRITICAL: Validate point is a Point object, not string or other type
+            if point is not None and not isinstance(point, Point):
+                constraints_violated.append(ConstraintType.WINDOW_BOUNDS)
+                blocked_reason = (
+                    f&#34;Point must be Point object, not {type(point).__name__}&#34;
+                )
+
+                logger.warning(
+                    &#34;action_blocked_bounds&#34;,
+                    action_type=str(action_type),
+                    point=str(point),
+                    bounds=str(window_bounds),
+                    reason=blocked_reason,
+                )
+
+                return ValidationResult(
+                    is_allowed=False,
+                    reason=blocked_reason,
+                    constraints_violated=constraints_violated,
+                    metadata={
+                        &#34;performance_ms&#34;: (time.perf_counter() - start_time) * 1000
+                    },
+                )
+
+            # Validate point exists and is valid
+            if point is None:
+                constraints_violated.append(ConstraintType.WINDOW_BOUNDS)
+                blocked_reason = &#34;Click action requires valid point coordinates&#34;
+
+                logger.warning(
+                    &#34;action_blocked_bounds&#34;,
+                    action_type=str(action_type),
+                    point=None,
+                    bounds=str(window_bounds),
+                    reason=blocked_reason,
+                )
+
+                return ValidationResult(
+                    is_allowed=False,
+                    reason=blocked_reason,
+                    constraints_violated=constraints_violated,
+                    metadata={
+                        &#34;performance_ms&#34;: (time.perf_counter() - start_time) * 1000
+                    },
+                )
+
+            # CRITICAL: Check if point coordinates are valid integers
+            # This blocks float injection attacks
+            if not isinstance(point.x, int) or not isinstance(point.y, int):
+                constraints_violated.append(ConstraintType.WINDOW_BOUNDS)
+                blocked_reason = f&#34;Point coordinates must be integers, got x={type(point.x).__name__}, y={type(point.y).__name__}&#34;
+
+                logger.warning(
+                    &#34;action_blocked_bounds&#34;,
+                    action_type=str(action_type),
+                    point=str(point),
+                    bounds=str(window_bounds),
+                    reason=blocked_reason,
+                )
+
+                return ValidationResult(
+                    is_allowed=False,
+                    reason=blocked_reason,
+                    constraints_violated=constraints_violated,
+                    metadata={
+                        &#34;performance_ms&#34;: (time.perf_counter() - start_time) * 1000
+                    },
+                )
+
+            if not is_within_bounds(point, window_bounds):
+                constraints_violated.append(ConstraintType.WINDOW_BOUNDS)
+                blocked_reason = (
+                    f&#34;Click point {point} is outside window bounds {window_bounds}&#34;
+                )
+
+                # T078: Log violation
+                log_violation(
+                    &#34;OUT_OF_BOUNDS&#34;,
+                    {
+                        &#34;action_type&#34;: str(action_type),
+                        &#34;point&#34;: str(point),
+                        &#34;bounds&#34;: str(window_bounds),
+                        &#34;reason&#34;: blocked_reason,
+                    },
+                    severity=&#34;WARNING&#34;,
+                )
+
+                logger.warning(
+                    &#34;action_blocked_bounds&#34;,
+                    action_type=str(action_type),
+                    point=str(point),
+                    bounds=str(window_bounds),
+                    reason=blocked_reason,
+                )
+
+                return ValidationResult(
+                    is_allowed=False,
+                    reason=blocked_reason,
+                    constraints_violated=constraints_violated,
+                    metadata={
+                        &#34;performance_ms&#34;: (time.perf_counter() - start_time) * 1000
+                    },
+                )
+
+    # 3. CHECK KEY BLACKLIST (for key press actions)
+    if action_type == ActionType.KEY_PRESS or (
+        isinstance(action, dict) and &#34;key&#34; in parameters
+    ):
+        key = parameters.get(&#34;key&#34;, &#34;&#34;)
+        modifiers = parameters.get(&#34;modifiers&#34;, [])
+
+        if is_key_blacklisted(key, modifiers):
+            constraints_violated.append(ConstraintType.KEY_BLACKLIST)
+            blocked_reason = (
+                f&#34;Key combination &#39;{&#39;+&#39;.join(modifiers + [key])}&#39; is blacklisted&#34;
+            )
+
+            # T078: Log violation
+            log_violation(
+                &#34;BLACKLISTED_KEY&#34;,
+                {
+                    &#34;action_type&#34;: str(action_type),
+                    &#34;key&#34;: key,
+                    &#34;modifiers&#34;: modifiers,
+                    &#34;reason&#34;: blocked_reason,
+                },
+                severity=&#34;WARNING&#34;,
+            )
+
+            logger.warning(
+                &#34;action_blocked_blacklist&#34;,
+                action_type=str(action_type),
+                key=key,
+                modifiers=modifiers,
+                reason=blocked_reason,
+            )
+
+            return ValidationResult(
+                is_allowed=False,
+                reason=blocked_reason,
+                constraints_violated=constraints_violated,
+                metadata={&#34;performance_ms&#34;: (time.perf_counter() - start_time) * 1000},
+            )
+
+    # 4. CHECK RATE LIMIT
+    recent_actions = context.get(&#34;recent_actions&#34;, [])
+    max_rate = context.get(&#34;max_actions_per_second&#34;, 10)
+
+    if not check_rate_limit(recent_actions, max_rate):
+        constraints_violated.append(ConstraintType.RATE_LIMIT)
+        blocked_reason = f&#34;Action rate exceeds {max_rate} actions/second&#34;
+
+        logger.warning(
+            &#34;action_blocked_rate_limit&#34;,
+            action_type=str(action_type),
+            max_rate=max_rate,
+            recent_count=len(recent_actions),
+            reason=blocked_reason,
+        )
+
+        return ValidationResult(
+            is_allowed=False,
+            reason=blocked_reason,
+            constraints_violated=constraints_violated,
+            metadata={&#34;performance_ms&#34;: (time.perf_counter() - start_time) * 1000},
+        )
+
+    # ALL CHECKS PASSED - Action is safe
+    elapsed_ms = (time.perf_counter() - start_time) * 1000
+
+    logger.debug(
+        &#34;action_validated&#34;,
+        action_type=str(action_type),
+        is_allowed=True,
+        performance_ms=elapsed_ms,
+    )
+
+    return ValidationResult(
+        is_allowed=True,
+        reason=&#34;All safety checks passed&#34;,
+        constraints_violated=[],
+        metadata={&#34;performance_ms&#34;: elapsed_ms},
+    )</code></pre>
+</details>
+<div class="desc"><p>Validate an action against all safety constraints.</p>
+<p>T067: Complete action validation.
+CRITICAL: Must complete in &lt;10ms and have 100% reliability.</p>
+<p>This is the main safety validation function that combines all checks:
+- Action type validation (must be valid ActionType enum)
+- Spatial containment (window bounds)
+- Key blacklist
+- Window focus requirement
+- Rate limiting
+- Input validation (no malformed inputs)</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>action</code></strong></dt>
+<dd>Action object or dict to validate</dd>
+<dt><strong><code>context</code></strong></dt>
+<dd>Context dict with:
+- window_bounds: Rect defining valid click area
+- window_focused: bool indicating if window has focus
+- recent_actions: List of recent actions for rate limiting</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>ValidationResult with is_allowed flag and reason</p></div>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-submodules">Sub-modules</a></h3>
+<ul>
+<li><code><a title="safety.cli" href="cli.html">safety.cli</a></code></li>
+<li><code><a title="safety.loop_detector" href="loop_detector.html">safety.loop_detector</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="safety.check_rate_limit" href="#safety.check_rate_limit">check_rate_limit</a></code></li>
+<li><code><a title="safety.is_key_blacklisted" href="#safety.is_key_blacklisted">is_key_blacklisted</a></code></li>
+<li><code><a title="safety.is_within_bounds" href="#safety.is_within_bounds">is_within_bounds</a></code></li>
+<li><code><a title="safety.log_violation" href="#safety.log_violation">log_violation</a></code></li>
+<li><code><a title="safety.validate_action" href="#safety.validate_action">validate_action</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

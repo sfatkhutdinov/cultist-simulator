@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>vision API documentation</title>
+<meta name="description" content="Vision Library - Screen capture and element detection for Cultist Simulator …">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Package <code>vision</code></h1>
+</header>
+<section id="section-intro">
+<p>Vision Library - Screen capture and element detection for Cultist Simulator.</p>
+<p>Public API:
+- capture_game_state(window_name) -&gt; GameState
+- detect_elements(image) -&gt; List[GameElement]
+- extract_text_regions(image) -&gt; List[TextRegion]
+- track_element_changes(prev_state, curr_state) -&gt; List[Change]
+- get_window_bounds(window_name) -&gt; Rect</p>
+<p>T049: Initialize vision library structure and <strong>init</strong>.py
+T055: Implement capture_game_state() integrating all vision components
+T056: Implement detect_elements() public interface
+T057: Implement extract_text_regions() public interface
+T058: Implement track_element_changes() state comparison</p>
+</section>
+<section>
+<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+<dl>
+<dt><code class="name"><a title="vision.cli" href="cli.html">vision.cli</a></code></dt>
+<dd>
+<div class="desc"><p>Vision Library CLI …</p></div>
+</dd>
+<dt><code class="name"><a title="vision.element_detector" href="element_detector.html">vision.element_detector</a></code></dt>
+<dd>
+<div class="desc"><p>Element detection using YOLO and template matching.
+T052: Implement YOLO-based element detection.
+T053: Implement template matching for UI elements.</p></div>
+</dd>
+<dt><code class="name"><a title="vision.ocr" href="ocr.html">vision.ocr</a></code></dt>
+<dd>
+<div class="desc"><p>OCR text extraction using EasyOCR.
+T054: Implement OCR text extraction using EasyOCR.</p></div>
+</dd>
+<dt><code class="name"><a title="vision.screen_capture" href="screen_capture.html">vision.screen_capture</a></code></dt>
+<dd>
+<div class="desc"><p>Screen capture functionality for macOS using Quartz.
+T050: Implement screen capture using Quartz.
+T051: Implement get_window_bounds() for game window …</p></div>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="vision.capture_game_state"><code class="name flex">
+<span>def <span class="ident">capture_game_state</span></span>(<span>window_name: str = 'Cultist Simulator') ‑> src.lib.types.GameState</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def capture_game_state(window_name: str = &#34;Cultist Simulator&#34;) -&gt; GameState:
+    &#34;&#34;&#34;
+    Capture complete game state including screenshot, elements, and text.
+
+    T055: Main integration function combining all vision components.
+
+    Args:
+        window_name: Name of the game window to capture (default: &#34;Cultist Simulator&#34;)
+
+    Returns:
+        GameState object containing all captured information
+
+    Raises:
+        WindowNotFoundError: If window is not found
+    &#34;&#34;&#34;
+    start_time = time.perf_counter()
+
+    # Capture screenshot and window bounds
+    screenshot, window_bounds = capture_window_screenshot(window_name)
+
+    # Detect elements in the screenshot
+    elements = detect_elements(screenshot)
+
+    # Extract text regions
+    text_regions = extract_text_regions(screenshot)
+
+    # Create GameState object
+    game_state = GameState(
+        timestamp=datetime.now(),
+        window_bounds=window_bounds,
+        elements=elements,
+        text_regions=text_regions,
+        screenshot=screenshot,
+        metadata={},
+    )
+
+    elapsed_ms = (time.perf_counter() - start_time) * 1000
+
+    logger.info(
+        &#34;game_state_captured&#34;,
+        window_name=window_name,
+        element_count=len(elements),
+        text_region_count=len(text_regions),
+        elapsed_ms=elapsed_ms,
+    )
+
+    return game_state</code></pre>
+</details>
+<div class="desc"><p>Capture complete game state including screenshot, elements, and text.</p>
+<p>T055: Main integration function combining all vision components.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>window_name</code></strong></dt>
+<dd>Name of the game window to capture (default: "Cultist Simulator")</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>GameState object containing all captured information</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code><a title="vision.WindowNotFoundError" href="#vision.WindowNotFoundError">WindowNotFoundError</a></code></dt>
+<dd>If window is not found</dd>
+</dl></div>
+</dd>
+<dt id="vision.detect_elements"><code class="name flex">
+<span>def <span class="ident">detect_elements</span></span>(<span>screenshot: numpy.ndarray, element_types: List | None = None) ‑> List[src.lib.types.GameElement]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def detect_elements(
+    screenshot: np.ndarray, element_types: Optional[List] = None
+) -&gt; List[GameElement]:
+    &#34;&#34;&#34;
+    Detect game elements in an image.
+
+    T056: Public interface for element detection.
+
+    Args:
+        screenshot: RGB image as numpy array (H, W, 3)
+        element_types: Optional list of ElementType to filter for
+
+    Returns:
+        List of detected GameElement objects
+
+    Raises:
+        InvalidImageError: If image format is invalid
+    &#34;&#34;&#34;
+    start_time = time.perf_counter()
+
+    elements = _detect_elements_internal(screenshot)
+
+    # Filter by element types if specified
+    if element_types is not None:
+        elements = [e for e in elements if e.element_type in element_types]
+
+    elapsed_ms = (time.perf_counter() - start_time) * 1000
+
+    logger.debug(
+        &#34;detect_elements_complete&#34;, element_count=len(elements), elapsed_ms=elapsed_ms
+    )
+
+    return elements</code></pre>
+</details>
+<div class="desc"><p>Detect game elements in an image.</p>
+<p>T056: Public interface for element detection.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>screenshot</code></strong></dt>
+<dd>RGB image as numpy array (H, W, 3)</dd>
+<dt><strong><code>element_types</code></strong></dt>
+<dd>Optional list of ElementType to filter for</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>List of detected GameElement objects</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code><a title="vision.InvalidImageError" href="#vision.InvalidImageError">InvalidImageError</a></code></dt>
+<dd>If image format is invalid</dd>
+</dl></div>
+</dd>
+<dt id="vision.extract_text_regions"><code class="name flex">
+<span>def <span class="ident">extract_text_regions</span></span>(<span>screenshot: numpy.ndarray, regions: List[src.lib.types.Rect] | None = None) ‑> List[src.lib.types.TextRegion]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def extract_text_regions(
+    screenshot: np.ndarray, regions: Optional[List[Rect]] = None
+) -&gt; List[TextRegion]:
+    &#34;&#34;&#34;
+    Extract text regions from an image using OCR.
+
+    T057: Public interface for text extraction.
+
+    Args:
+        screenshot: RGB image as numpy array (H, W, 3)
+        regions: Optional list of Rect regions to extract text from (if None, extract from entire image)
+
+    Returns:
+        List of TextRegion objects containing detected text
+    &#34;&#34;&#34;
+    start_time = time.perf_counter()
+
+    if regions is None:
+        # Extract text from entire image
+        text_regions = _extract_text_regions_internal(screenshot)
+    else:
+        # Extract text from specific regions
+        text_regions = []
+        for region in regions:
+            # Crop to region
+            cropped = screenshot[
+                region.y : region.y + region.height, region.x : region.x + region.width
+            ]
+            # Extract text from cropped region
+            region_texts = _extract_text_regions_internal(cropped)
+            # Adjust coordinates back to full image
+            for text_region in region_texts:
+                adjusted_bounds = Rect(
+                    x=text_region.bounds.x + region.x,
+                    y=text_region.bounds.y + region.y,
+                    width=text_region.bounds.width,
+                    height=text_region.bounds.height,
+                )
+                adjusted_region = TextRegion(
+                    text=text_region.text,
+                    bounds=adjusted_bounds,
+                    confidence=text_region.confidence,
+                )
+                text_regions.append(adjusted_region)
+
+    elapsed_ms = (time.perf_counter() - start_time) * 1000
+
+    logger.debug(
+        &#34;extract_text_regions_complete&#34;,
+        region_count=len(text_regions),
+        elapsed_ms=elapsed_ms,
+    )
+
+    return text_regions</code></pre>
+</details>
+<div class="desc"><p>Extract text regions from an image using OCR.</p>
+<p>T057: Public interface for text extraction.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>screenshot</code></strong></dt>
+<dd>RGB image as numpy array (H, W, 3)</dd>
+<dt><strong><code>regions</code></strong></dt>
+<dd>Optional list of Rect regions to extract text from (if None, extract from entire image)</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>List of TextRegion objects containing detected text</p></div>
+</dd>
+<dt id="vision.get_window_bounds"><code class="name flex">
+<span>def <span class="ident">get_window_bounds</span></span>(<span>window_name: str) ‑> src.lib.types.Rect</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_window_bounds(window_name: str) -&gt; Rect:
+    &#34;&#34;&#34;
+    Get the bounding rectangle of a window by name.
+
+    Args:
+        window_name: Name of the window to find
+
+    Returns:
+        Rect object with window bounds
+
+    Raises:
+        WindowNotFoundError: If window is not found
+    &#34;&#34;&#34;
+    return _get_window_bounds(window_name)</code></pre>
+</details>
+<div class="desc"><p>Get the bounding rectangle of a window by name.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>window_name</code></strong></dt>
+<dd>Name of the window to find</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>Rect object with window bounds</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code><a title="vision.WindowNotFoundError" href="#vision.WindowNotFoundError">WindowNotFoundError</a></code></dt>
+<dd>If window is not found</dd>
+</dl></div>
+</dd>
+<dt id="vision.track_element_changes"><code class="name flex">
+<span>def <span class="ident">track_element_changes</span></span>(<span>prev_state: src.lib.types.GameState, curr_state: src.lib.types.GameState) ‑> List[Dict[str, Any]]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def track_element_changes(
+    prev_state: GameState, curr_state: GameState
+) -&gt; List[Dict[str, Any]]:
+    &#34;&#34;&#34;
+    Track changes in game elements between two states.
+
+    T058: State comparison for detecting element changes.
+
+    Identifies:
+    - New elements that appeared
+    - Elements that disappeared
+    - Elements that moved
+    - Elements whose state changed
+
+    Args:
+        prev_state: Previous game state
+        curr_state: Current game state
+
+    Returns:
+        List of change dictionaries describing what changed
+    &#34;&#34;&#34;
+    changes = []
+
+    # Build sets of element identifiers (simplified)
+    prev_elements = {
+        (e.element_type, e.bounds.x, e.bounds.y): e for e in prev_state.elements
+    }
+    curr_elements = {
+        (e.element_type, e.bounds.x, e.bounds.y): e for e in curr_state.elements
+    }
+
+    # Find new elements
+    new_keys = set(curr_elements.keys()) - set(prev_elements.keys())
+    for key in new_keys:
+        changes.append(
+            {
+                &#34;type&#34;: &#34;element_appeared&#34;,
+                &#34;element&#34;: curr_elements[key],
+                &#34;timestamp&#34;: curr_state.timestamp,
+            }
+        )
+
+    # Find removed elements
+    removed_keys = set(prev_elements.keys()) - set(curr_elements.keys())
+    for key in removed_keys:
+        changes.append(
+            {
+                &#34;type&#34;: &#34;element_disappeared&#34;,
+                &#34;element&#34;: prev_elements[key],
+                &#34;timestamp&#34;: curr_state.timestamp,
+            }
+        )
+
+    # Find changed elements (same position, different state)
+    common_keys = set(prev_elements.keys()) &amp; set(curr_elements.keys())
+    for key in common_keys:
+        prev_elem = prev_elements[key]
+        curr_elem = curr_elements[key]
+
+        if prev_elem.state != curr_elem.state:
+            changes.append(
+                {
+                    &#34;type&#34;: &#34;element_state_changed&#34;,
+                    &#34;element&#34;: curr_elem,
+                    &#34;prev_state&#34;: prev_elem.state,
+                    &#34;curr_state&#34;: curr_elem.state,
+                    &#34;timestamp&#34;: curr_state.timestamp,
+                }
+            )
+
+    logger.debug(
+        &#34;element_changes_tracked&#34;,
+        change_count=len(changes),
+        appeared=len([c for c in changes if c[&#34;type&#34;] == &#34;element_appeared&#34;]),
+        disappeared=len([c for c in changes if c[&#34;type&#34;] == &#34;element_disappeared&#34;]),
+        changed=len([c for c in changes if c[&#34;type&#34;] == &#34;element_state_changed&#34;]),
+    )
+
+    return changes</code></pre>
+</details>
+<div class="desc"><p>Track changes in game elements between two states.</p>
+<p>T058: State comparison for detecting element changes.</p>
+<p>Identifies:
+- New elements that appeared
+- Elements that disappeared
+- Elements that moved
+- Elements whose state changed</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>prev_state</code></strong></dt>
+<dd>Previous game state</dd>
+<dt><strong><code>curr_state</code></strong></dt>
+<dd>Current game state</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>List of change dictionaries describing what changed</p></div>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="vision.InvalidImageError"><code class="flex name class">
+<span>class <span class="ident">InvalidImageError</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class InvalidImageError(Exception):
+    &#34;&#34;&#34;Raised when the provided image is invalid.&#34;&#34;&#34;
+
+    pass</code></pre>
+</details>
+<div class="desc"><p>Raised when the provided image is invalid.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.Exception</li>
+<li>builtins.BaseException</li>
+</ul>
+</dd>
+<dt id="vision.WindowNotFoundError"><code class="flex name class">
+<span>class <span class="ident">WindowNotFoundError</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class WindowNotFoundError(Exception):
+    &#34;&#34;&#34;Raised when the specified window cannot be found.&#34;&#34;&#34;
+
+    pass</code></pre>
+</details>
+<div class="desc"><p>Raised when the specified window cannot be found.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.Exception</li>
+<li>builtins.BaseException</li>
+</ul>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-submodules">Sub-modules</a></h3>
+<ul>
+<li><code><a title="vision.cli" href="cli.html">vision.cli</a></code></li>
+<li><code><a title="vision.element_detector" href="element_detector.html">vision.element_detector</a></code></li>
+<li><code><a title="vision.ocr" href="ocr.html">vision.ocr</a></code></li>
+<li><code><a title="vision.screen_capture" href="screen_capture.html">vision.screen_capture</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="vision.capture_game_state" href="#vision.capture_game_state">capture_game_state</a></code></li>
+<li><code><a title="vision.detect_elements" href="#vision.detect_elements">detect_elements</a></code></li>
+<li><code><a title="vision.extract_text_regions" href="#vision.extract_text_regions">extract_text_regions</a></code></li>
+<li><code><a title="vision.get_window_bounds" href="#vision.get_window_bounds">get_window_bounds</a></code></li>
+<li><code><a title="vision.track_element_changes" href="#vision.track_element_changes">track_element_changes</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="vision.InvalidImageError" href="#vision.InvalidImageError">InvalidImageError</a></code></h4>
+</li>
+<li>
+<h4><code><a title="vision.WindowNotFoundError" href="#vision.WindowNotFoundError">WindowNotFoundError</a></code></h4>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

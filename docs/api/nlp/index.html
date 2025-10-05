@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>nlp API documentation</title>
+<meta name="description" content="NLP Library - Natural Language Processing for Cultist Simulator AI Agent …">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Package <code>nlp</code></h1>
+</header>
+<section id="section-intro">
+<p>NLP Library - Natural Language Processing for Cultist Simulator AI Agent.</p>
+<p>This library provides narrative understanding capabilities:
+- Semantic text analysis using sentence-transformers
+- Goal extraction from narrative text
+- Similarity search for finding related content</p>
+<p>Public API:
+- analyze_text(text) -&gt; TextAnalysis
+- extract_goals(narrative_text) -&gt; List[Goal]
+- find_similar_narratives(query_text, knowledge_base) -&gt; List[SimilarityResult]</p>
+<p>Performance requirements:
+- analyze_text: &lt;100ms (NFR-002)
+- extract_goals: &lt;150ms (NFR-002)
+- find_similar_narratives: &lt;100ms (NFR-002)</p>
+<p>Dependencies:
+- sentence-transformers: For semantic embeddings
+- numpy: For vector operations</p>
+</section>
+<section>
+<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+<dl>
+<dt><code class="name"><a title="nlp.cli" href="cli.html">nlp.cli</a></code></dt>
+<dd>
+<div class="desc"><p>NLP Library CLI …</p></div>
+</dd>
+<dt><code class="name"><a title="nlp.goal_extractor" href="goal_extractor.html">nlp.goal_extractor</a></code></dt>
+<dd>
+<div class="desc"><p>Goal extraction module for narrative text analysis …</p></div>
+</dd>
+<dt><code class="name"><a title="nlp.text_analyzer" href="text_analyzer.html">nlp.text_analyzer</a></code></dt>
+<dd>
+<div class="desc"><p>Text analysis module using sentence-transformers for semantic understanding …</p></div>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="nlp.analyze_text"><code class="name flex">
+<span>def <span class="ident">analyze_text</span></span>(<span>text: str) ‑> <a title="nlp.TextAnalysis" href="#nlp.TextAnalysis">TextAnalysis</a></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def analyze_text(text: str) -&gt; TextAnalysis:
+    &#34;&#34;&#34;
+    Analyze text and generate semantic embedding.
+
+    This function uses sentence-transformers to create a dense vector
+    representation of the text that captures its semantic meaning.
+
+    Args:
+        text: Text to analyze
+
+    Returns:
+        TextAnalysis with embedding and metadata
+
+    Performance:
+        &lt;100ms per text (NFR-002)
+
+    Example:
+        &gt;&gt;&gt; result = analyze_text(&#34;You feel a sense of dread.&#34;)
+        &gt;&gt;&gt; len(result.embedding)
+        384
+        &gt;&gt;&gt; result.processing_time_ms &lt; 100
+        True
+    &#34;&#34;&#34;
+    start_time = time.perf_counter()
+
+    # Handle empty input
+    if not text or not text.strip():
+        return TextAnalysis(
+            text=text, embedding=[], model_name=&#34;none&#34;, processing_time_ms=0.0
+        )
+
+    # Get analyzer and generate embedding
+    analyzer = _get_text_analyzer()
+    text_embedding = analyzer.embed_text(text)
+
+    # Convert numpy array to list for JSON serialization
+    embedding_list = text_embedding.embedding.tolist()
+
+    processing_time = (time.perf_counter() - start_time) * 1000
+
+    return TextAnalysis(
+        text=text,
+        embedding=embedding_list,
+        model_name=text_embedding.model_name,
+        processing_time_ms=processing_time,
+    )</code></pre>
+</details>
+<div class="desc"><p>Analyze text and generate semantic embedding.</p>
+<p>This function uses sentence-transformers to create a dense vector
+representation of the text that captures its semantic meaning.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>text</code></strong></dt>
+<dd>Text to analyze</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>TextAnalysis with embedding and metadata</p>
+<h2 id="performance">Performance</h2>
+<p>&lt;100ms per text (NFR-002)</p>
+<h2 id="example">Example</h2>
+<pre><code class="language-python-repl">&gt;&gt;&gt; result = analyze_text(&quot;You feel a sense of dread.&quot;)
+&gt;&gt;&gt; len(result.embedding)
+384
+&gt;&gt;&gt; result.processing_time_ms &lt; 100
+True
+</code></pre></div>
+</dd>
+<dt id="nlp.extract_goals"><code class="name flex">
+<span>def <span class="ident">extract_goals</span></span>(<span>narrative_text: str) ‑> List[<a title="nlp.goal_extractor.Goal" href="goal_extractor.html#nlp.goal_extractor.Goal">Goal</a>]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def extract_goals(narrative_text: str) -&gt; List[Goal]:
+    &#34;&#34;&#34;
+    Extract gameplay objectives from narrative text.
+
+    Uses pattern matching and keyword analysis to identify:
+    - Explicit goals (&#34;You must collect five coins&#34;)
+    - Implicit objectives (&#34;The door is locked&#34;)
+    - Survival imperatives (&#34;The shadows approach&#34;)
+
+    Args:
+        narrative_text: Game narrative or description text
+
+    Returns:
+        List of identified goals with types and confidence scores
+
+    Performance:
+        &lt;150ms per extraction (NFR-002)
+
+    Example:
+        &gt;&gt;&gt; goals = extract_goals(&#34;You must collect five coins to unlock the door.&#34;)
+        &gt;&gt;&gt; len(goals) &gt; 0
+        True
+        &gt;&gt;&gt; any(g.goal_type == GoalType.COLLECT for g in goals)
+        True
+    &#34;&#34;&#34;
+    extractor = _get_goal_extractor()
+    return extractor.extract_goals(narrative_text)</code></pre>
+</details>
+<div class="desc"><p>Extract gameplay objectives from narrative text.</p>
+<p>Uses pattern matching and keyword analysis to identify:
+- Explicit goals ("You must collect five coins")
+- Implicit objectives ("The door is locked")
+- Survival imperatives ("The shadows approach")</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>narrative_text</code></strong></dt>
+<dd>Game narrative or description text</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>List of identified goals with types and confidence scores</p>
+<h2 id="performance">Performance</h2>
+<p>&lt;150ms per extraction (NFR-002)</p>
+<h2 id="example">Example</h2>
+<pre><code class="language-python-repl">&gt;&gt;&gt; goals = extract_goals(&quot;You must collect five coins to unlock the door.&quot;)
+&gt;&gt;&gt; len(goals) &gt; 0
+True
+&gt;&gt;&gt; any(g.goal_type == GoalType.COLLECT for g in goals)
+True
+</code></pre></div>
+</dd>
+<dt id="nlp.find_similar_narratives"><code class="name flex">
+<span>def <span class="ident">find_similar_narratives</span></span>(<span>query_text: str,<br>knowledge_base: object | None = None,<br>top_k: int = 5,<br>threshold: float = 0.5) ‑> List[<a title="nlp.SimilarityResult" href="#nlp.SimilarityResult">SimilarityResult</a>]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def find_similar_narratives(
+    query_text: str,
+    knowledge_base: Optional[object] = None,
+    top_k: int = 5,
+    threshold: float = 0.5,
+) -&gt; List[SimilarityResult]:
+    &#34;&#34;&#34;
+    Find narratives similar to query using semantic search.
+
+    Uses cosine similarity of embeddings to find semantically related
+    content, not just keyword matches.
+
+    Args:
+        query_text: Text to search for
+        knowledge_base: Knowledge base to search (if None, returns empty list)
+        top_k: Maximum number of results to return
+        threshold: Minimum similarity score (0.0 to 1.0)
+
+    Returns:
+        List of similar narratives with similarity scores
+
+    Performance:
+        &lt;100ms for typical searches (NFR-002)
+
+    Example:
+        &gt;&gt;&gt; results = find_similar_narratives(
+        ...     &#34;A dark ritual is performed.&#34;,
+        ...     knowledge_base=my_kb,
+        ...     top_k=3
+        ... )
+        &gt;&gt;&gt; all(0.0 &lt;= r.similarity_score &lt;= 1.0 for r in results)
+        True
+    &#34;&#34;&#34;
+    start_time = time.perf_counter()
+
+    # Handle no knowledge base case
+    if knowledge_base is None:
+        return []
+
+    # Get analyzer
+    analyzer = _get_text_analyzer()
+
+    # If knowledge_base is a list of strings, search directly
+    if isinstance(knowledge_base, list):
+        candidates = knowledge_base
+    # If knowledge_base has a query method, use it
+    elif hasattr(knowledge_base, &#34;get_all_narratives&#34;):
+        candidates = knowledge_base.get_all_narratives()
+    else:
+        # Unsupported knowledge base type
+        return []
+
+    # Find similar texts
+    similar_texts = analyzer.find_similar_texts(
+        query=query_text, candidates=candidates, top_k=top_k, threshold=threshold
+    )
+
+    # Convert to SimilarityResult objects
+    results = [
+        SimilarityResult(
+            text=text,
+            similarity_score=score,
+            metadata={&#34;processing_time_ms&#34;: (time.perf_counter() - start_time) * 1000},
+        )
+        for text, score in similar_texts
+    ]
+
+    return results</code></pre>
+</details>
+<div class="desc"><p>Find narratives similar to query using semantic search.</p>
+<p>Uses cosine similarity of embeddings to find semantically related
+content, not just keyword matches.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>query_text</code></strong></dt>
+<dd>Text to search for</dd>
+<dt><strong><code>knowledge_base</code></strong></dt>
+<dd>Knowledge base to search (if None, returns empty list)</dd>
+<dt><strong><code>top_k</code></strong></dt>
+<dd>Maximum number of results to return</dd>
+<dt><strong><code>threshold</code></strong></dt>
+<dd>Minimum similarity score (0.0 to 1.0)</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>List of similar narratives with similarity scores</p>
+<h2 id="performance">Performance</h2>
+<p>&lt;100ms for typical searches (NFR-002)</p>
+<h2 id="example">Example</h2>
+<pre><code class="language-python-repl">&gt;&gt;&gt; results = find_similar_narratives(
+...     &quot;A dark ritual is performed.&quot;,
+...     knowledge_base=my_kb,
+...     top_k=3
+... )
+&gt;&gt;&gt; all(0.0 &lt;= r.similarity_score &lt;= 1.0 for r in results)
+True
+</code></pre></div>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="nlp.Goal"><code class="flex name class">
+<span>class <span class="ident">Goal</span></span>
+<span>(</span><span>description: str,<br>goal_type: <a title="nlp.goal_extractor.GoalType" href="goal_extractor.html#nlp.goal_extractor.GoalType">GoalType</a>,<br>confidence: float,<br>keywords: List[str])</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class Goal:
+    &#34;&#34;&#34;Represents an extracted goal from narrative text.&#34;&#34;&#34;
+
+    description: str
+    goal_type: GoalType
+    confidence: float  # 0.0 to 1.0
+    keywords: List[str]</code></pre>
+</details>
+<div class="desc"><p>Represents an extracted goal from narrative text.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="nlp.Goal.confidence"><code class="name">var <span class="ident">confidence</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="nlp.Goal.description"><code class="name">var <span class="ident">description</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="nlp.Goal.goal_type"><code class="name">var <span class="ident">goal_type</span> : <a title="nlp.goal_extractor.GoalType" href="goal_extractor.html#nlp.goal_extractor.GoalType">GoalType</a></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="nlp.Goal.keywords"><code class="name">var <span class="ident">keywords</span> : List[str]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="nlp.GoalType"><code class="flex name class">
+<span>class <span class="ident">GoalType</span></span>
+<span>(</span><span>*args, **kwds)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class GoalType(Enum):
+    &#34;&#34;&#34;Types of gameplay goals.&#34;&#34;&#34;
+
+    COLLECT = &#34;collect&#34;
+    SURVIVE = &#34;survive&#34;
+    REACH = &#34;reach&#34;
+    AVOID = &#34;avoid&#34;
+    UNLOCK = &#34;unlock&#34;
+    DISCOVER = &#34;discover&#34;
+    PROTECT = &#34;protect&#34;
+    UNKNOWN = &#34;unknown&#34;</code></pre>
+</details>
+<div class="desc"><p>Types of gameplay goals.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="nlp.GoalType.AVOID"><code class="name">var <span class="ident">AVOID</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="nlp.GoalType.COLLECT"><code class="name">var <span class="ident">COLLECT</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="nlp.GoalType.DISCOVER"><code class="name">var <span class="ident">DISCOVER</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="nlp.GoalType.PROTECT"><code class="name">var <span class="ident">PROTECT</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="nlp.GoalType.REACH"><code class="name">var <span class="ident">REACH</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="nlp.GoalType.SURVIVE"><code class="name">var <span class="ident">SURVIVE</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="nlp.GoalType.UNKNOWN"><code class="name">var <span class="ident">UNKNOWN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="nlp.GoalType.UNLOCK"><code class="name">var <span class="ident">UNLOCK</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="nlp.SimilarityResult"><code class="flex name class">
+<span>class <span class="ident">SimilarityResult</span></span>
+<span>(</span><span>text: str, similarity_score: float, metadata: dict | None = None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class SimilarityResult:
+    &#34;&#34;&#34;Result from similarity search.&#34;&#34;&#34;
+
+    text: str
+    similarity_score: float
+    metadata: Optional[dict] = None</code></pre>
+</details>
+<div class="desc"><p>Result from similarity search.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="nlp.SimilarityResult.metadata"><code class="name">var <span class="ident">metadata</span> : dict | None</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="nlp.SimilarityResult.similarity_score"><code class="name">var <span class="ident">similarity_score</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="nlp.SimilarityResult.text"><code class="name">var <span class="ident">text</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="nlp.TextAnalysis"><code class="flex name class">
+<span>class <span class="ident">TextAnalysis</span></span>
+<span>(</span><span>text: str, embedding: list, model_name: str, processing_time_ms: float)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class TextAnalysis:
+    &#34;&#34;&#34;Result of text semantic analysis.&#34;&#34;&#34;
+
+    text: str
+    embedding: list  # Convert numpy array to list for serialization
+    model_name: str
+    processing_time_ms: float</code></pre>
+</details>
+<div class="desc"><p>Result of text semantic analysis.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="nlp.TextAnalysis.embedding"><code class="name">var <span class="ident">embedding</span> : list</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="nlp.TextAnalysis.model_name"><code class="name">var <span class="ident">model_name</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="nlp.TextAnalysis.processing_time_ms"><code class="name">var <span class="ident">processing_time_ms</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="nlp.TextAnalysis.text"><code class="name">var <span class="ident">text</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-submodules">Sub-modules</a></h3>
+<ul>
+<li><code><a title="nlp.cli" href="cli.html">nlp.cli</a></code></li>
+<li><code><a title="nlp.goal_extractor" href="goal_extractor.html">nlp.goal_extractor</a></code></li>
+<li><code><a title="nlp.text_analyzer" href="text_analyzer.html">nlp.text_analyzer</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="nlp.analyze_text" href="#nlp.analyze_text">analyze_text</a></code></li>
+<li><code><a title="nlp.extract_goals" href="#nlp.extract_goals">extract_goals</a></code></li>
+<li><code><a title="nlp.find_similar_narratives" href="#nlp.find_similar_narratives">find_similar_narratives</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="nlp.Goal" href="#nlp.Goal">Goal</a></code></h4>
+<ul class="">
+<li><code><a title="nlp.Goal.confidence" href="#nlp.Goal.confidence">confidence</a></code></li>
+<li><code><a title="nlp.Goal.description" href="#nlp.Goal.description">description</a></code></li>
+<li><code><a title="nlp.Goal.goal_type" href="#nlp.Goal.goal_type">goal_type</a></code></li>
+<li><code><a title="nlp.Goal.keywords" href="#nlp.Goal.keywords">keywords</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="nlp.GoalType" href="#nlp.GoalType">GoalType</a></code></h4>
+<ul class="two-column">
+<li><code><a title="nlp.GoalType.AVOID" href="#nlp.GoalType.AVOID">AVOID</a></code></li>
+<li><code><a title="nlp.GoalType.COLLECT" href="#nlp.GoalType.COLLECT">COLLECT</a></code></li>
+<li><code><a title="nlp.GoalType.DISCOVER" href="#nlp.GoalType.DISCOVER">DISCOVER</a></code></li>
+<li><code><a title="nlp.GoalType.PROTECT" href="#nlp.GoalType.PROTECT">PROTECT</a></code></li>
+<li><code><a title="nlp.GoalType.REACH" href="#nlp.GoalType.REACH">REACH</a></code></li>
+<li><code><a title="nlp.GoalType.SURVIVE" href="#nlp.GoalType.SURVIVE">SURVIVE</a></code></li>
+<li><code><a title="nlp.GoalType.UNKNOWN" href="#nlp.GoalType.UNKNOWN">UNKNOWN</a></code></li>
+<li><code><a title="nlp.GoalType.UNLOCK" href="#nlp.GoalType.UNLOCK">UNLOCK</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="nlp.SimilarityResult" href="#nlp.SimilarityResult">SimilarityResult</a></code></h4>
+<ul class="">
+<li><code><a title="nlp.SimilarityResult.metadata" href="#nlp.SimilarityResult.metadata">metadata</a></code></li>
+<li><code><a title="nlp.SimilarityResult.similarity_score" href="#nlp.SimilarityResult.similarity_score">similarity_score</a></code></li>
+<li><code><a title="nlp.SimilarityResult.text" href="#nlp.SimilarityResult.text">text</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="nlp.TextAnalysis" href="#nlp.TextAnalysis">TextAnalysis</a></code></h4>
+<ul class="">
+<li><code><a title="nlp.TextAnalysis.embedding" href="#nlp.TextAnalysis.embedding">embedding</a></code></li>
+<li><code><a title="nlp.TextAnalysis.model_name" href="#nlp.TextAnalysis.model_name">model_name</a></code></li>
+<li><code><a title="nlp.TextAnalysis.processing_time_ms" href="#nlp.TextAnalysis.processing_time_ms">processing_time_ms</a></code></li>
+<li><code><a title="nlp.TextAnalysis.text" href="#nlp.TextAnalysis.text">text</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

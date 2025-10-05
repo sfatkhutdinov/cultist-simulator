@@ -1,0 +1,1906 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>lib.types API documentation</title>
+<meta name="description" content="Shared type definitions for Cultist Simulator AI Agent.
+Provides common data structures used across all libraries.">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>lib.types</code></h1>
+</header>
+<section id="section-intro">
+<p>Shared type definitions for Cultist Simulator AI Agent.
+Provides common data structures used across all libraries.</p>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="lib.types.Action"><code class="flex name class">
+<span>class <span class="ident">Action</span></span>
+<span>(</span><span>action_type: <a title="lib.types.ActionType" href="#lib.types.ActionType">ActionType</a>,<br>parameters: Dict[str, Any],<br>timestamp: datetime.datetime = &lt;factory&gt;,<br>metadata: Dict[str, Any] = &lt;factory&gt;)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class Action:
+    &#34;&#34;&#34;
+    Represents an action to be performed by the agent.
+    T041: Implement Action entity.
+    &#34;&#34;&#34;
+
+    action_type: ActionType
+    parameters: Dict[str, Any]
+    timestamp: datetime = field(default_factory=datetime.now)
+    metadata: Dict[str, Any] = field(default_factory=dict)
+
+    def __str__(self) -&gt; str:
+        params_str = &#34;, &#34;.join(f&#34;{k}={v}&#34; for k, v in list(self.parameters.items())[:2])
+        return f&#34;Action({self.action_type.value}, {params_str})&#34;</code></pre>
+</details>
+<div class="desc"><p>Represents an action to be performed by the agent.
+T041: Implement Action entity.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="lib.types.Action.action_type"><code class="name">var <span class="ident">action_type</span> : <a title="lib.types.ActionType" href="#lib.types.ActionType">ActionType</a></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Action.metadata"><code class="name">var <span class="ident">metadata</span> : Dict[str, Any]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Action.parameters"><code class="name">var <span class="ident">parameters</span> : Dict[str, Any]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Action.timestamp"><code class="name">var <span class="ident">timestamp</span> : datetime.datetime</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="lib.types.ActionResult"><code class="flex name class">
+<span>class <span class="ident">ActionResult</span></span>
+<span>(</span><span>success: bool,<br>safety_validated: bool,<br>blocked_reason: str | None = None,<br>duration_ms: float | None = None,<br>metadata: Dict[str, Any] = &lt;factory&gt;)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class ActionResult:
+    &#34;&#34;&#34;Result from executing an automation action.&#34;&#34;&#34;
+
+    success: bool
+    safety_validated: bool
+    blocked_reason: Optional[str] = None
+    duration_ms: Optional[float] = None
+    metadata: Dict[str, Any] = field(default_factory=dict)</code></pre>
+</details>
+<div class="desc"><p>Result from executing an automation action.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="lib.types.ActionResult.blocked_reason"><code class="name">var <span class="ident">blocked_reason</span> : str | None</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.ActionResult.duration_ms"><code class="name">var <span class="ident">duration_ms</span> : float | None</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.ActionResult.metadata"><code class="name">var <span class="ident">metadata</span> : Dict[str, Any]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.ActionResult.safety_validated"><code class="name">var <span class="ident">safety_validated</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.ActionResult.success"><code class="name">var <span class="ident">success</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="lib.types.ActionType"><code class="flex name class">
+<span>class <span class="ident">ActionType</span></span>
+<span>(</span><span>*args, **kwds)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ActionType(Enum):
+    &#34;&#34;&#34;Types of actions the agent can perform.&#34;&#34;&#34;
+
+    CLICK = &#34;click&#34;
+    DRAG = &#34;drag&#34;
+    KEY_PRESS = &#34;key_press&#34;
+    WAIT = &#34;wait&#34;
+    COMPOSITE = &#34;composite&#34;  # Multiple actions in sequence</code></pre>
+</details>
+<div class="desc"><p>Types of actions the agent can perform.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="lib.types.ActionType.CLICK"><code class="name">var <span class="ident">CLICK</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.ActionType.COMPOSITE"><code class="name">var <span class="ident">COMPOSITE</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.ActionType.DRAG"><code class="name">var <span class="ident">DRAG</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.ActionType.KEY_PRESS"><code class="name">var <span class="ident">KEY_PRESS</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.ActionType.WAIT"><code class="name">var <span class="ident">WAIT</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="lib.types.Agent"><code class="flex name class">
+<span>class <span class="ident">Agent</span></span>
+<span>(</span><span>agent_id: str,<br>name: str,<br>created_at: datetime.datetime,<br>total_sessions: int = 0,<br>total_actions: int = 0,<br>learning_rate: float = 0.001,<br>exploration_rate: float = 0.1,<br>metadata: Dict[str, Any] = &lt;factory&gt;)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class Agent:
+    &#34;&#34;&#34;
+    Represents the AI agent configuration and state.
+    T044: Implement Agent entity.
+    &#34;&#34;&#34;
+
+    agent_id: str
+    name: str
+    created_at: datetime
+    total_sessions: int = 0
+    total_actions: int = 0
+    learning_rate: float = 0.001
+    exploration_rate: float = 0.1
+    metadata: Dict[str, Any] = field(default_factory=dict)
+
+    def __str__(self) -&gt; str:
+        return f&#34;Agent({self.name}, {self.total_sessions} sessions, {self.total_actions} actions)&#34;</code></pre>
+</details>
+<div class="desc"><p>Represents the AI agent configuration and state.
+T044: Implement Agent entity.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="lib.types.Agent.agent_id"><code class="name">var <span class="ident">agent_id</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Agent.created_at"><code class="name">var <span class="ident">created_at</span> : datetime.datetime</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Agent.exploration_rate"><code class="name">var <span class="ident">exploration_rate</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Agent.learning_rate"><code class="name">var <span class="ident">learning_rate</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Agent.metadata"><code class="name">var <span class="ident">metadata</span> : Dict[str, Any]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Agent.name"><code class="name">var <span class="ident">name</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Agent.total_actions"><code class="name">var <span class="ident">total_actions</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Agent.total_sessions"><code class="name">var <span class="ident">total_sessions</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="lib.types.Card"><code class="flex name class">
+<span>class <span class="ident">Card</span></span>
+<span>(</span><span>card_id: str,<br>name: str,<br>card_type: str,<br>state: <a title="lib.types.CardState" href="#lib.types.CardState">CardState</a>,<br>position: <a title="lib.types.Point" href="#lib.types.Point">Point</a> | None = None,<br>slot_id: str | None = None,<br>decay_timer: float | None = None,<br>metadata: Dict[str, Any] = &lt;factory&gt;)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class Card:
+    &#34;&#34;&#34;
+    Represents a card in Cultist Simulator.
+    T042: Implement Card entity.
+    &#34;&#34;&#34;
+
+    card_id: str
+    name: str
+    card_type: str  # aspect, verb, resource, etc.
+    state: CardState
+    position: Optional[Point] = None
+    slot_id: Optional[str] = None
+    decay_timer: Optional[float] = None
+    metadata: Dict[str, Any] = field(default_factory=dict)
+
+    def __str__(self) -&gt; str:
+        return f&#34;Card({self.name}, {self.state.value})&#34;</code></pre>
+</details>
+<div class="desc"><p>Represents a card in Cultist Simulator.
+T042: Implement Card entity.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="lib.types.Card.card_id"><code class="name">var <span class="ident">card_id</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Card.card_type"><code class="name">var <span class="ident">card_type</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Card.decay_timer"><code class="name">var <span class="ident">decay_timer</span> : float | None</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Card.metadata"><code class="name">var <span class="ident">metadata</span> : Dict[str, Any]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Card.name"><code class="name">var <span class="ident">name</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Card.position"><code class="name">var <span class="ident">position</span> : <a title="lib.types.Point" href="#lib.types.Point">Point</a> | None</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Card.slot_id"><code class="name">var <span class="ident">slot_id</span> : str | None</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Card.state"><code class="name">var <span class="ident">state</span> : <a title="lib.types.CardState" href="#lib.types.CardState">CardState</a></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="lib.types.CardState"><code class="flex name class">
+<span>class <span class="ident">CardState</span></span>
+<span>(</span><span>*args, **kwds)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class CardState(Enum):
+    &#34;&#34;&#34;Possible states of a game card.&#34;&#34;&#34;
+
+    IN_HAND = &#34;in_hand&#34;
+    IN_SLOT = &#34;in_slot&#34;
+    DRAGGING = &#34;dragging&#34;
+    DECAYING = &#34;decaying&#34;
+    HIDDEN = &#34;hidden&#34;</code></pre>
+</details>
+<div class="desc"><p>Possible states of a game card.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="lib.types.CardState.DECAYING"><code class="name">var <span class="ident">DECAYING</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.CardState.DRAGGING"><code class="name">var <span class="ident">DRAGGING</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.CardState.HIDDEN"><code class="name">var <span class="ident">HIDDEN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.CardState.IN_HAND"><code class="name">var <span class="ident">IN_HAND</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.CardState.IN_SLOT"><code class="name">var <span class="ident">IN_SLOT</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="lib.types.ConstraintType"><code class="flex name class">
+<span>class <span class="ident">ConstraintType</span></span>
+<span>(</span><span>*args, **kwds)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ConstraintType(Enum):
+    &#34;&#34;&#34;Types of safety constraints.&#34;&#34;&#34;
+
+    WINDOW_BOUNDS = &#34;window_bounds&#34;
+    KEY_BLACKLIST = &#34;key_blacklist&#34;
+    FOCUS_REQUIRED = &#34;focus_required&#34;
+    RATE_LIMIT = &#34;rate_limit&#34;</code></pre>
+</details>
+<div class="desc"><p>Types of safety constraints.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="lib.types.ConstraintType.FOCUS_REQUIRED"><code class="name">var <span class="ident">FOCUS_REQUIRED</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.ConstraintType.KEY_BLACKLIST"><code class="name">var <span class="ident">KEY_BLACKLIST</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.ConstraintType.RATE_LIMIT"><code class="name">var <span class="ident">RATE_LIMIT</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.ConstraintType.WINDOW_BOUNDS"><code class="name">var <span class="ident">WINDOW_BOUNDS</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="lib.types.ElementType"><code class="flex name class">
+<span>class <span class="ident">ElementType</span></span>
+<span>(</span><span>*args, **kwds)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ElementType(Enum):
+    &#34;&#34;&#34;Types of game elements that can be detected.&#34;&#34;&#34;
+
+    CARD = &#34;card&#34;
+    BUTTON = &#34;button&#34;
+    SLOT = &#34;slot&#34;
+    TIMER = &#34;timer&#34;
+    TEXT = &#34;text&#34;
+    RESOURCE_INDICATOR = &#34;resource_indicator&#34;
+    OTHER = &#34;other&#34;</code></pre>
+</details>
+<div class="desc"><p>Types of game elements that can be detected.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="lib.types.ElementType.BUTTON"><code class="name">var <span class="ident">BUTTON</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.ElementType.CARD"><code class="name">var <span class="ident">CARD</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.ElementType.OTHER"><code class="name">var <span class="ident">OTHER</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.ElementType.RESOURCE_INDICATOR"><code class="name">var <span class="ident">RESOURCE_INDICATOR</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.ElementType.SLOT"><code class="name">var <span class="ident">SLOT</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.ElementType.TEXT"><code class="name">var <span class="ident">TEXT</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.ElementType.TIMER"><code class="name">var <span class="ident">TIMER</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="lib.types.EndCondition"><code class="flex name class">
+<span>class <span class="ident">EndCondition</span></span>
+<span>(</span><span>*args, **kwds)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class EndCondition(Enum):
+    &#34;&#34;&#34;How a game session ended.&#34;&#34;&#34;
+
+    GAME_OVER = &#34;game_over&#34;
+    WIN = &#34;win&#34;
+    CRASH = &#34;crash&#34;
+    MANUAL_STOP = &#34;manual_stop&#34;
+    TIMEOUT = &#34;timeout&#34;
+    SAFETY_VIOLATION = &#34;safety_violation&#34;</code></pre>
+</details>
+<div class="desc"><p>How a game session ended.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="lib.types.EndCondition.CRASH"><code class="name">var <span class="ident">CRASH</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.EndCondition.GAME_OVER"><code class="name">var <span class="ident">GAME_OVER</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.EndCondition.MANUAL_STOP"><code class="name">var <span class="ident">MANUAL_STOP</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.EndCondition.SAFETY_VIOLATION"><code class="name">var <span class="ident">SAFETY_VIOLATION</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.EndCondition.TIMEOUT"><code class="name">var <span class="ident">TIMEOUT</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.EndCondition.WIN"><code class="name">var <span class="ident">WIN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="lib.types.ExecutionResult"><code class="flex name class">
+<span>class <span class="ident">ExecutionResult</span></span>
+<span>(</span><span>success: bool,<br>status: <a title="lib.types.ExecutionStatus" href="#lib.types.ExecutionStatus">ExecutionStatus</a>,<br>message: str | None = None,<br>execution_time_ms: float | None = None,<br>metadata: Dict[str, Any] = &lt;factory&gt;)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class ExecutionResult:
+    &#34;&#34;&#34;Result of an action execution.&#34;&#34;&#34;
+
+    success: bool
+    status: ExecutionStatus
+    message: Optional[str] = None
+    execution_time_ms: Optional[float] = None
+    metadata: Dict[str, Any] = field(default_factory=dict)
+
+    def __str__(self) -&gt; str:
+        return f&#34;ExecutionResult({self.status.value}, {self.message or &#39;no message&#39;})&#34;</code></pre>
+</details>
+<div class="desc"><p>Result of an action execution.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="lib.types.ExecutionResult.execution_time_ms"><code class="name">var <span class="ident">execution_time_ms</span> : float | None</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.ExecutionResult.message"><code class="name">var <span class="ident">message</span> : str | None</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.ExecutionResult.metadata"><code class="name">var <span class="ident">metadata</span> : Dict[str, Any]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.ExecutionResult.status"><code class="name">var <span class="ident">status</span> : <a title="lib.types.ExecutionStatus" href="#lib.types.ExecutionStatus">ExecutionStatus</a></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.ExecutionResult.success"><code class="name">var <span class="ident">success</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="lib.types.ExecutionStatus"><code class="flex name class">
+<span>class <span class="ident">ExecutionStatus</span></span>
+<span>(</span><span>*args, **kwds)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ExecutionStatus(Enum):
+    &#34;&#34;&#34;Status of action execution.&#34;&#34;&#34;
+
+    SUCCESS = &#34;success&#34;
+    FAILED = &#34;failed&#34;
+    BLOCKED = &#34;blocked&#34;
+    TIMEOUT = &#34;timeout&#34;
+    PENDING = &#34;pending&#34;</code></pre>
+</details>
+<div class="desc"><p>Status of action execution.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="lib.types.ExecutionStatus.BLOCKED"><code class="name">var <span class="ident">BLOCKED</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.ExecutionStatus.FAILED"><code class="name">var <span class="ident">FAILED</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.ExecutionStatus.PENDING"><code class="name">var <span class="ident">PENDING</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.ExecutionStatus.SUCCESS"><code class="name">var <span class="ident">SUCCESS</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.ExecutionStatus.TIMEOUT"><code class="name">var <span class="ident">TIMEOUT</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="lib.types.GameElement"><code class="flex name class">
+<span>class <span class="ident">GameElement</span></span>
+<span>(</span><span>element_type: <a title="lib.types.ElementType" href="#lib.types.ElementType">ElementType</a>,<br>bounds: <a title="lib.types.Rect" href="#lib.types.Rect">Rect</a>,<br>confidence: float,<br>text: str | None = None,<br>state: str | None = None,<br>metadata: Dict[str, Any] = &lt;factory&gt;)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class GameElement:
+    &#34;&#34;&#34;
+    Represents a detected UI element in the game.
+    T040: Implement GameElement entity.
+    &#34;&#34;&#34;
+
+    element_type: ElementType
+    bounds: Rect
+    confidence: float
+    text: Optional[str] = None
+    state: Optional[str] = None
+    metadata: Dict[str, Any] = field(default_factory=dict)
+
+    @property
+    def center(self) -&gt; Point:
+        &#34;&#34;&#34;Get the center point of the element.&#34;&#34;&#34;
+        return self.bounds.center()
+
+    def __str__(self) -&gt; str:
+        return f&#34;GameElement({self.element_type.value}, {self.bounds}, conf={self.confidence:.2f})&#34;</code></pre>
+</details>
+<div class="desc"><p>Represents a detected UI element in the game.
+T040: Implement GameElement entity.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="lib.types.GameElement.bounds"><code class="name">var <span class="ident">bounds</span> : <a title="lib.types.Rect" href="#lib.types.Rect">Rect</a></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.GameElement.center"><code class="name">prop <span class="ident">center</span> : <a title="lib.types.Point" href="#lib.types.Point">Point</a></code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def center(self) -&gt; Point:
+    &#34;&#34;&#34;Get the center point of the element.&#34;&#34;&#34;
+    return self.bounds.center()</code></pre>
+</details>
+<div class="desc"><p>Get the center point of the element.</p></div>
+</dd>
+<dt id="lib.types.GameElement.confidence"><code class="name">var <span class="ident">confidence</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.GameElement.element_type"><code class="name">var <span class="ident">element_type</span> : <a title="lib.types.ElementType" href="#lib.types.ElementType">ElementType</a></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.GameElement.metadata"><code class="name">var <span class="ident">metadata</span> : Dict[str, Any]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.GameElement.state"><code class="name">var <span class="ident">state</span> : str | None</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.GameElement.text"><code class="name">var <span class="ident">text</span> : str | None</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="lib.types.GameState"><code class="flex name class">
+<span>class <span class="ident">GameState</span></span>
+<span>(</span><span>timestamp: datetime.datetime,<br>window_bounds: <a title="lib.types.Rect" href="#lib.types.Rect">Rect</a>,<br>elements: List[<a title="lib.types.GameElement" href="#lib.types.GameElement">GameElement</a>],<br>text_regions: List[<a title="lib.types.TextRegion" href="#lib.types.TextRegion">TextRegion</a>],<br>screenshot: numpy.ndarray | None = None,<br>metadata: Dict[str, Any] = &lt;factory&gt;)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class GameState:
+    &#34;&#34;&#34;
+    Complete snapshot of the game state at a point in time.
+    T039: Implement GameState entity.
+    &#34;&#34;&#34;
+
+    timestamp: datetime
+    window_bounds: Rect
+    elements: List[GameElement]
+    text_regions: List[TextRegion]
+    screenshot: Optional[np.ndarray] = None  # Raw image data
+    metadata: Dict[str, Any] = field(default_factory=dict)
+
+    def __str__(self) -&gt; str:
+        return f&#34;GameState({len(self.elements)} elements, {len(self.text_regions)} text regions, {self.timestamp})&#34;
+
+    def to_dict(self) -&gt; Dict[str, Any]:
+        &#34;&#34;&#34;Serialize GameState to dictionary (T123).&#34;&#34;&#34;
+        return {
+            &#34;timestamp&#34;: self.timestamp.isoformat(),
+            &#34;window_bounds&#34;: {
+                &#34;x&#34;: self.window_bounds.x,
+                &#34;y&#34;: self.window_bounds.y,
+                &#34;width&#34;: self.window_bounds.width,
+                &#34;height&#34;: self.window_bounds.height,
+            },
+            &#34;elements&#34;: [
+                {
+                    &#34;element_type&#34;: e.element_type.value,
+                    &#34;bounds&#34;: {
+                        &#34;x&#34;: e.bounds.x,
+                        &#34;y&#34;: e.bounds.y,
+                        &#34;width&#34;: e.bounds.width,
+                        &#34;height&#34;: e.bounds.height,
+                    },
+                    &#34;confidence&#34;: e.confidence,
+                    &#34;text&#34;: e.text,
+                    &#34;state&#34;: e.state,
+                    &#34;metadata&#34;: e.metadata,
+                }
+                for e in self.elements
+            ],
+            &#34;text_regions&#34;: [
+                {
+                    &#34;text&#34;: t.text,
+                    &#34;bounds&#34;: {
+                        &#34;x&#34;: t.bounds.x,
+                        &#34;y&#34;: t.bounds.y,
+                        &#34;width&#34;: t.bounds.width,
+                        &#34;height&#34;: t.bounds.height,
+                    },
+                    &#34;confidence&#34;: t.confidence,
+                }
+                for t in self.text_regions
+            ],
+            &#34;metadata&#34;: self.metadata,
+        }
+
+    @staticmethod
+    def from_dict(data: Dict[str, Any]) -&gt; &#34;GameState&#34;:
+        &#34;&#34;&#34;Deserialize GameState from dictionary (T123).&#34;&#34;&#34;
+        return GameState(
+            timestamp=datetime.fromisoformat(data[&#34;timestamp&#34;]),
+            window_bounds=Rect(**data[&#34;window_bounds&#34;]),
+            elements=[
+                GameElement(
+                    element_type=ElementType(e[&#34;element_type&#34;]),
+                    bounds=Rect(**e[&#34;bounds&#34;]),
+                    confidence=e[&#34;confidence&#34;],
+                    text=e.get(&#34;text&#34;),
+                    state=e.get(&#34;state&#34;),
+                    metadata=e.get(&#34;metadata&#34;, {}),
+                )
+                for e in data[&#34;elements&#34;]
+            ],
+            text_regions=[
+                TextRegion(
+                    text=t[&#34;text&#34;],
+                    bounds=Rect(**t[&#34;bounds&#34;]),
+                    confidence=t[&#34;confidence&#34;],
+                )
+                for t in data[&#34;text_regions&#34;]
+            ],
+            metadata=data.get(&#34;metadata&#34;, {}),
+        )</code></pre>
+</details>
+<div class="desc"><p>Complete snapshot of the game state at a point in time.
+T039: Implement GameState entity.</p></div>
+<h3>Static methods</h3>
+<dl>
+<dt id="lib.types.GameState.from_dict"><code class="name flex">
+<span>def <span class="ident">from_dict</span></span>(<span>data: Dict[str, Any]) ‑> <a title="lib.types.GameState" href="#lib.types.GameState">GameState</a></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def from_dict(data: Dict[str, Any]) -&gt; &#34;GameState&#34;:
+    &#34;&#34;&#34;Deserialize GameState from dictionary (T123).&#34;&#34;&#34;
+    return GameState(
+        timestamp=datetime.fromisoformat(data[&#34;timestamp&#34;]),
+        window_bounds=Rect(**data[&#34;window_bounds&#34;]),
+        elements=[
+            GameElement(
+                element_type=ElementType(e[&#34;element_type&#34;]),
+                bounds=Rect(**e[&#34;bounds&#34;]),
+                confidence=e[&#34;confidence&#34;],
+                text=e.get(&#34;text&#34;),
+                state=e.get(&#34;state&#34;),
+                metadata=e.get(&#34;metadata&#34;, {}),
+            )
+            for e in data[&#34;elements&#34;]
+        ],
+        text_regions=[
+            TextRegion(
+                text=t[&#34;text&#34;],
+                bounds=Rect(**t[&#34;bounds&#34;]),
+                confidence=t[&#34;confidence&#34;],
+            )
+            for t in data[&#34;text_regions&#34;]
+        ],
+        metadata=data.get(&#34;metadata&#34;, {}),
+    )</code></pre>
+</details>
+<div class="desc"><p>Deserialize GameState from dictionary (T123).</p></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="lib.types.GameState.elements"><code class="name">var <span class="ident">elements</span> : List[<a title="lib.types.GameElement" href="#lib.types.GameElement">GameElement</a>]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.GameState.metadata"><code class="name">var <span class="ident">metadata</span> : Dict[str, Any]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.GameState.screenshot"><code class="name">var <span class="ident">screenshot</span> : numpy.ndarray | None</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.GameState.text_regions"><code class="name">var <span class="ident">text_regions</span> : List[<a title="lib.types.TextRegion" href="#lib.types.TextRegion">TextRegion</a>]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.GameState.timestamp"><code class="name">var <span class="ident">timestamp</span> : datetime.datetime</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.GameState.window_bounds"><code class="name">var <span class="ident">window_bounds</span> : <a title="lib.types.Rect" href="#lib.types.Rect">Rect</a></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="lib.types.GameState.to_dict"><code class="name flex">
+<span>def <span class="ident">to_dict</span></span>(<span>self) ‑> Dict[str, Any]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def to_dict(self) -&gt; Dict[str, Any]:
+    &#34;&#34;&#34;Serialize GameState to dictionary (T123).&#34;&#34;&#34;
+    return {
+        &#34;timestamp&#34;: self.timestamp.isoformat(),
+        &#34;window_bounds&#34;: {
+            &#34;x&#34;: self.window_bounds.x,
+            &#34;y&#34;: self.window_bounds.y,
+            &#34;width&#34;: self.window_bounds.width,
+            &#34;height&#34;: self.window_bounds.height,
+        },
+        &#34;elements&#34;: [
+            {
+                &#34;element_type&#34;: e.element_type.value,
+                &#34;bounds&#34;: {
+                    &#34;x&#34;: e.bounds.x,
+                    &#34;y&#34;: e.bounds.y,
+                    &#34;width&#34;: e.bounds.width,
+                    &#34;height&#34;: e.bounds.height,
+                },
+                &#34;confidence&#34;: e.confidence,
+                &#34;text&#34;: e.text,
+                &#34;state&#34;: e.state,
+                &#34;metadata&#34;: e.metadata,
+            }
+            for e in self.elements
+        ],
+        &#34;text_regions&#34;: [
+            {
+                &#34;text&#34;: t.text,
+                &#34;bounds&#34;: {
+                    &#34;x&#34;: t.bounds.x,
+                    &#34;y&#34;: t.bounds.y,
+                    &#34;width&#34;: t.bounds.width,
+                    &#34;height&#34;: t.bounds.height,
+                },
+                &#34;confidence&#34;: t.confidence,
+            }
+            for t in self.text_regions
+        ],
+        &#34;metadata&#34;: self.metadata,
+    }</code></pre>
+</details>
+<div class="desc"><p>Serialize GameState to dictionary (T123).</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="lib.types.Goal"><code class="flex name class">
+<span>class <span class="ident">Goal</span></span>
+<span>(</span><span>description: str,<br>confidence: float,<br>goal_type: str | None = None,<br>metadata: Dict[str, Any] = &lt;factory&gt;)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class Goal:
+    &#34;&#34;&#34;Extracted goal from narrative text.&#34;&#34;&#34;
+
+    description: str
+    confidence: float
+    goal_type: Optional[str] = None  # ritual, resource, exploration, etc.
+    metadata: Dict[str, Any] = field(default_factory=dict)
+
+    def __str__(self) -&gt; str:
+        return f&#34;Goal({self.description}, conf={self.confidence:.2f})&#34;</code></pre>
+</details>
+<div class="desc"><p>Extracted goal from narrative text.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="lib.types.Goal.confidence"><code class="name">var <span class="ident">confidence</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Goal.description"><code class="name">var <span class="ident">description</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Goal.goal_type"><code class="name">var <span class="ident">goal_type</span> : str | None</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Goal.metadata"><code class="name">var <span class="ident">metadata</span> : Dict[str, Any]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="lib.types.MetricType"><code class="flex name class">
+<span>class <span class="ident">MetricType</span></span>
+<span>(</span><span>*args, **kwds)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class MetricType(Enum):
+    &#34;&#34;&#34;Types of performance metrics tracked.&#34;&#34;&#34;
+
+    WIN_RATE = &#34;win_rate&#34;
+    SURVIVAL_TIME = &#34;survival_time&#34;
+    RESOURCES_ACCUMULATED = &#34;resources_accumulated&#34;
+    UNIQUE_ENDINGS = &#34;unique_endings&#34;
+    LEARNING_RATE = &#34;learning_rate&#34;
+    MECHANICS_DISCOVERED = &#34;mechanics_discovered&#34;</code></pre>
+</details>
+<div class="desc"><p>Types of performance metrics tracked.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="lib.types.MetricType.LEARNING_RATE"><code class="name">var <span class="ident">LEARNING_RATE</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.MetricType.MECHANICS_DISCOVERED"><code class="name">var <span class="ident">MECHANICS_DISCOVERED</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.MetricType.RESOURCES_ACCUMULATED"><code class="name">var <span class="ident">RESOURCES_ACCUMULATED</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.MetricType.SURVIVAL_TIME"><code class="name">var <span class="ident">SURVIVAL_TIME</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.MetricType.UNIQUE_ENDINGS"><code class="name">var <span class="ident">UNIQUE_ENDINGS</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.MetricType.WIN_RATE"><code class="name">var <span class="ident">WIN_RATE</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="lib.types.MouseButton"><code class="flex name class">
+<span>class <span class="ident">MouseButton</span></span>
+<span>(</span><span>*args, **kwds)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class MouseButton(Enum):
+    &#34;&#34;&#34;Mouse button identifiers.&#34;&#34;&#34;
+
+    LEFT = &#34;left&#34;
+    RIGHT = &#34;right&#34;
+    MIDDLE = &#34;middle&#34;</code></pre>
+</details>
+<div class="desc"><p>Mouse button identifiers.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="lib.types.MouseButton.LEFT"><code class="name">var <span class="ident">LEFT</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.MouseButton.MIDDLE"><code class="name">var <span class="ident">MIDDLE</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.MouseButton.RIGHT"><code class="name">var <span class="ident">RIGHT</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="lib.types.Narrative"><code class="flex name class">
+<span>class <span class="ident">Narrative</span></span>
+<span>(</span><span>narrative_id: str,<br>text: str,<br>embedding: numpy.ndarray | None = None,<br>session_id: str | None = None,<br>timestamp: datetime.datetime | None = None,<br>metadata: Dict[str, Any] = &lt;factory&gt;)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class Narrative:
+    &#34;&#34;&#34;A narrative sequence with semantic embedding.&#34;&#34;&#34;
+
+    narrative_id: str
+    text: str
+    embedding: Optional[np.ndarray] = None
+    session_id: Optional[str] = None
+    timestamp: Optional[datetime] = None
+    metadata: Dict[str, Any] = field(default_factory=dict)
+
+    def __str__(self) -&gt; str:
+        return f&#34;Narrative({self.narrative_id}, &#39;{self.text[:30]}...&#39;)&#34;</code></pre>
+</details>
+<div class="desc"><p>A narrative sequence with semantic embedding.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="lib.types.Narrative.embedding"><code class="name">var <span class="ident">embedding</span> : numpy.ndarray | None</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Narrative.metadata"><code class="name">var <span class="ident">metadata</span> : Dict[str, Any]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Narrative.narrative_id"><code class="name">var <span class="ident">narrative_id</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Narrative.session_id"><code class="name">var <span class="ident">session_id</span> : str | None</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Narrative.text"><code class="name">var <span class="ident">text</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Narrative.timestamp"><code class="name">var <span class="ident">timestamp</span> : datetime.datetime | None</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="lib.types.PerformanceMetric"><code class="flex name class">
+<span>class <span class="ident">PerformanceMetric</span></span>
+<span>(</span><span>metric_type: <a title="lib.types.MetricType" href="#lib.types.MetricType">MetricType</a>,<br>value: float,<br>timestamp: datetime.datetime,<br>session_id: str | None = None,<br>metadata: Dict[str, Any] = &lt;factory&gt;)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class PerformanceMetric:
+    &#34;&#34;&#34;
+    Represents a performance metric tracked over time.
+    T046: Implement PerformanceMetric entity.
+    &#34;&#34;&#34;
+
+    metric_type: MetricType
+    value: float
+    timestamp: datetime
+    session_id: Optional[str] = None
+    metadata: Dict[str, Any] = field(default_factory=dict)
+
+    def __str__(self) -&gt; str:
+        return f&#34;Metric({self.metric_type.value}={self.value:.2f}, {self.timestamp})&#34;</code></pre>
+</details>
+<div class="desc"><p>Represents a performance metric tracked over time.
+T046: Implement PerformanceMetric entity.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="lib.types.PerformanceMetric.metadata"><code class="name">var <span class="ident">metadata</span> : Dict[str, Any]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.PerformanceMetric.metric_type"><code class="name">var <span class="ident">metric_type</span> : <a title="lib.types.MetricType" href="#lib.types.MetricType">MetricType</a></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.PerformanceMetric.session_id"><code class="name">var <span class="ident">session_id</span> : str | None</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.PerformanceMetric.timestamp"><code class="name">var <span class="ident">timestamp</span> : datetime.datetime</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.PerformanceMetric.value"><code class="name">var <span class="ident">value</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="lib.types.Point"><code class="flex name class">
+<span>class <span class="ident">Point</span></span>
+<span>(</span><span>x: int, y: int)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass(frozen=True)
+class Point:
+    &#34;&#34;&#34;A 2D point representing screen coordinates.&#34;&#34;&#34;
+
+    x: int
+    y: int
+
+    def __str__(self) -&gt; str:
+        return f&#34;Point({self.x}, {self.y})&#34;</code></pre>
+</details>
+<div class="desc"><p>A 2D point representing screen coordinates.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="lib.types.Point.x"><code class="name">var <span class="ident">x</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Point.y"><code class="name">var <span class="ident">y</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="lib.types.QueryResult"><code class="flex name class">
+<span>class <span class="ident">QueryResult</span></span>
+<span>(</span><span>results: List[Dict[str, Any]],<br>result_count: int,<br>query_time_ms: float,<br>metadata: Dict[str, Any] = &lt;factory&gt;)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class QueryResult:
+    &#34;&#34;&#34;Result of a knowledge base query.&#34;&#34;&#34;
+
+    results: List[Dict[str, Any]]
+    result_count: int
+    query_time_ms: float
+    metadata: Dict[str, Any] = field(default_factory=dict)
+
+    def __str__(self) -&gt; str:
+        return f&#34;QueryResult({self.result_count} results, {self.query_time_ms:.1f}ms)&#34;</code></pre>
+</details>
+<div class="desc"><p>Result of a knowledge base query.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="lib.types.QueryResult.metadata"><code class="name">var <span class="ident">metadata</span> : Dict[str, Any]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.QueryResult.query_time_ms"><code class="name">var <span class="ident">query_time_ms</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.QueryResult.result_count"><code class="name">var <span class="ident">result_count</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.QueryResult.results"><code class="name">var <span class="ident">results</span> : List[Dict[str, Any]]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="lib.types.Rect"><code class="flex name class">
+<span>class <span class="ident">Rect</span></span>
+<span>(</span><span>x: int, y: int, width: int, height: int)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass(frozen=True)
+class Rect:
+    &#34;&#34;&#34;A rectangle representing a bounding box.&#34;&#34;&#34;
+
+    x: int
+    y: int
+    width: int
+    height: int
+
+    def center(self) -&gt; Point:
+        &#34;&#34;&#34;Get the center point of the rectangle.&#34;&#34;&#34;
+        return Point(x=self.x + self.width // 2, y=self.y + self.height // 2)
+
+    def contains(self, point: Point) -&gt; bool:
+        &#34;&#34;&#34;Check if a point is inside the rectangle.&#34;&#34;&#34;
+        return (
+            self.x &lt;= point.x &lt;= self.x + self.width
+            and self.y &lt;= point.y &lt;= self.y + self.height
+        )
+
+    def __str__(self) -&gt; str:
+        return f&#34;Rect(x={self.x}, y={self.y}, w={self.width}, h={self.height})&#34;</code></pre>
+</details>
+<div class="desc"><p>A rectangle representing a bounding box.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="lib.types.Rect.height"><code class="name">var <span class="ident">height</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Rect.width"><code class="name">var <span class="ident">width</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Rect.x"><code class="name">var <span class="ident">x</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Rect.y"><code class="name">var <span class="ident">y</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="lib.types.Rect.center"><code class="name flex">
+<span>def <span class="ident">center</span></span>(<span>self) ‑> <a title="lib.types.Point" href="#lib.types.Point">Point</a></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def center(self) -&gt; Point:
+    &#34;&#34;&#34;Get the center point of the rectangle.&#34;&#34;&#34;
+    return Point(x=self.x + self.width // 2, y=self.y + self.height // 2)</code></pre>
+</details>
+<div class="desc"><p>Get the center point of the rectangle.</p></div>
+</dd>
+<dt id="lib.types.Rect.contains"><code class="name flex">
+<span>def <span class="ident">contains</span></span>(<span>self, point: <a title="lib.types.Point" href="#lib.types.Point">Point</a>) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def contains(self, point: Point) -&gt; bool:
+    &#34;&#34;&#34;Check if a point is inside the rectangle.&#34;&#34;&#34;
+    return (
+        self.x &lt;= point.x &lt;= self.x + self.width
+        and self.y &lt;= point.y &lt;= self.y + self.height
+    )</code></pre>
+</details>
+<div class="desc"><p>Check if a point is inside the rectangle.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="lib.types.Session"><code class="flex name class">
+<span>class <span class="ident">Session</span></span>
+<span>(</span><span>session_id: str,<br>agent_id: str,<br>start_time: datetime.datetime,<br>end_time: datetime.datetime | None = None,<br>end_condition: <a title="lib.types.EndCondition" href="#lib.types.EndCondition">EndCondition</a> | None = None,<br>total_actions: int = 0,<br>total_reward: float = 0.0,<br>metadata: Dict[str, Any] = &lt;factory&gt;)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class Session:
+    &#34;&#34;&#34;
+    Represents a complete game session.
+    T043: Implement Session entity.
+    &#34;&#34;&#34;
+
+    session_id: str
+    agent_id: str
+    start_time: datetime
+    end_time: Optional[datetime] = None
+    end_condition: Optional[EndCondition] = None
+    total_actions: int = 0
+    total_reward: float = 0.0
+    metadata: Dict[str, Any] = field(default_factory=dict)
+
+    @property
+    def duration_seconds(self) -&gt; Optional[float]:
+        &#34;&#34;&#34;Calculate session duration in seconds.&#34;&#34;&#34;
+        if self.end_time:
+            return (self.end_time - self.start_time).total_seconds()
+        return None
+
+    def __str__(self) -&gt; str:
+        status = (
+            &#34;active&#34;
+            if self.end_time is None
+            else f&#34;ended ({self.end_condition.value if self.end_condition else &#39;unknown&#39;})&#34;
+        )
+        return f&#34;Session({self.session_id}, {status}, {self.total_actions} actions)&#34;</code></pre>
+</details>
+<div class="desc"><p>Represents a complete game session.
+T043: Implement Session entity.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="lib.types.Session.agent_id"><code class="name">var <span class="ident">agent_id</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Session.duration_seconds"><code class="name">prop <span class="ident">duration_seconds</span> : float | None</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def duration_seconds(self) -&gt; Optional[float]:
+    &#34;&#34;&#34;Calculate session duration in seconds.&#34;&#34;&#34;
+    if self.end_time:
+        return (self.end_time - self.start_time).total_seconds()
+    return None</code></pre>
+</details>
+<div class="desc"><p>Calculate session duration in seconds.</p></div>
+</dd>
+<dt id="lib.types.Session.end_condition"><code class="name">var <span class="ident">end_condition</span> : <a title="lib.types.EndCondition" href="#lib.types.EndCondition">EndCondition</a> | None</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Session.end_time"><code class="name">var <span class="ident">end_time</span> : datetime.datetime | None</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Session.metadata"><code class="name">var <span class="ident">metadata</span> : Dict[str, Any]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Session.session_id"><code class="name">var <span class="ident">session_id</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Session.start_time"><code class="name">var <span class="ident">start_time</span> : datetime.datetime</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Session.total_actions"><code class="name">var <span class="ident">total_actions</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Session.total_reward"><code class="name">var <span class="ident">total_reward</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="lib.types.Strategy"><code class="flex name class">
+<span>class <span class="ident">Strategy</span></span>
+<span>(</span><span>strategy_id: str,<br>name: str,<br>goal: str,<br>action_sequence: List[str],<br>success_rate: float,<br>times_used: int = 0,<br>avg_reward: float = 0.0,<br>metadata: Dict[str, Any] = &lt;factory&gt;)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class Strategy:
+    &#34;&#34;&#34;
+    Represents a learned strategy for achieving goals.
+    T045: Implement Strategy entity.
+    &#34;&#34;&#34;
+
+    strategy_id: str
+    name: str
+    goal: str
+    action_sequence: List[str]  # JSON-encoded actions
+    success_rate: float
+    times_used: int = 0
+    avg_reward: float = 0.0
+    metadata: Dict[str, Any] = field(default_factory=dict)
+
+    def __str__(self) -&gt; str:
+        return f&#34;Strategy({self.name}, success={self.success_rate:.1%}, used={self.times_used})&#34;</code></pre>
+</details>
+<div class="desc"><p>Represents a learned strategy for achieving goals.
+T045: Implement Strategy entity.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="lib.types.Strategy.action_sequence"><code class="name">var <span class="ident">action_sequence</span> : List[str]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Strategy.avg_reward"><code class="name">var <span class="ident">avg_reward</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Strategy.goal"><code class="name">var <span class="ident">goal</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Strategy.metadata"><code class="name">var <span class="ident">metadata</span> : Dict[str, Any]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Strategy.name"><code class="name">var <span class="ident">name</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Strategy.strategy_id"><code class="name">var <span class="ident">strategy_id</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Strategy.success_rate"><code class="name">var <span class="ident">success_rate</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.Strategy.times_used"><code class="name">var <span class="ident">times_used</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="lib.types.TextAnalysis"><code class="flex name class">
+<span>class <span class="ident">TextAnalysis</span></span>
+<span>(</span><span>text: str,<br>embedding: numpy.ndarray | None = None,<br>sentiment: str | None = None,<br>entities: List[str] = &lt;factory&gt;,<br>metadata: Dict[str, Any] = &lt;factory&gt;)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class TextAnalysis:
+    &#34;&#34;&#34;Result of NLP text analysis.&#34;&#34;&#34;
+
+    text: str
+    embedding: Optional[np.ndarray] = None
+    sentiment: Optional[str] = None  # positive, negative, neutral
+    entities: List[str] = field(default_factory=list)
+    metadata: Dict[str, Any] = field(default_factory=dict)
+
+    def __str__(self) -&gt; str:
+        return f&#34;TextAnalysis(&#39;{self.text[:30]}...&#39;, sentiment={self.sentiment})&#34;</code></pre>
+</details>
+<div class="desc"><p>Result of NLP text analysis.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="lib.types.TextAnalysis.embedding"><code class="name">var <span class="ident">embedding</span> : numpy.ndarray | None</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.TextAnalysis.entities"><code class="name">var <span class="ident">entities</span> : List[str]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.TextAnalysis.metadata"><code class="name">var <span class="ident">metadata</span> : Dict[str, Any]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.TextAnalysis.sentiment"><code class="name">var <span class="ident">sentiment</span> : str | None</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.TextAnalysis.text"><code class="name">var <span class="ident">text</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="lib.types.TextRegion"><code class="flex name class">
+<span>class <span class="ident">TextRegion</span></span>
+<span>(</span><span>text: str,<br>bounds: <a title="lib.types.Rect" href="#lib.types.Rect">Rect</a>,<br>confidence: float)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class TextRegion:
+    &#34;&#34;&#34;Represents a region of text extracted from the game screen.&#34;&#34;&#34;
+
+    text: str
+    bounds: Rect
+    confidence: float
+
+    def __str__(self) -&gt; str:
+        return f&#34;TextRegion(&#39;{self.text[:20]}...&#39;, conf={self.confidence:.2f})&#34;</code></pre>
+</details>
+<div class="desc"><p>Represents a region of text extracted from the game screen.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="lib.types.TextRegion.bounds"><code class="name">var <span class="ident">bounds</span> : <a title="lib.types.Rect" href="#lib.types.Rect">Rect</a></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.TextRegion.confidence"><code class="name">var <span class="ident">confidence</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.TextRegion.text"><code class="name">var <span class="ident">text</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="lib.types.ValidationResult"><code class="flex name class">
+<span>class <span class="ident">ValidationResult</span></span>
+<span>(</span><span>is_allowed: bool,<br>reason: str | None = None,<br>constraints_violated: List[<a title="lib.types.ConstraintType" href="#lib.types.ConstraintType">ConstraintType</a>] = &lt;factory&gt;,<br>metadata: Dict[str, Any] = &lt;factory&gt;)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class ValidationResult:
+    &#34;&#34;&#34;Result of a safety validation check.&#34;&#34;&#34;
+
+    is_allowed: bool
+    reason: Optional[str] = None
+    constraints_violated: List[ConstraintType] = field(default_factory=list)
+    metadata: Dict[str, Any] = field(default_factory=dict)
+
+    @property
+    def blocked_reason(self) -&gt; Optional[str]:
+        &#34;&#34;&#34;Alias for reason (for test compatibility).&#34;&#34;&#34;
+        return self.reason
+
+    def __str__(self) -&gt; str:
+        status = &#34;ALLOWED&#34; if self.is_allowed else &#34;BLOCKED&#34;
+        return f&#34;ValidationResult({status}, {self.reason or &#39;no reason&#39;})&#34;</code></pre>
+</details>
+<div class="desc"><p>Result of a safety validation check.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="lib.types.ValidationResult.blocked_reason"><code class="name">prop <span class="ident">blocked_reason</span> : str | None</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def blocked_reason(self) -&gt; Optional[str]:
+    &#34;&#34;&#34;Alias for reason (for test compatibility).&#34;&#34;&#34;
+    return self.reason</code></pre>
+</details>
+<div class="desc"><p>Alias for reason (for test compatibility).</p></div>
+</dd>
+<dt id="lib.types.ValidationResult.constraints_violated"><code class="name">var <span class="ident">constraints_violated</span> : List[<a title="lib.types.ConstraintType" href="#lib.types.ConstraintType">ConstraintType</a>]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.ValidationResult.is_allowed"><code class="name">var <span class="ident">is_allowed</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.ValidationResult.metadata"><code class="name">var <span class="ident">metadata</span> : Dict[str, Any]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="lib.types.ValidationResult.reason"><code class="name">var <span class="ident">reason</span> : str | None</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="lib" href="index.html">lib</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="lib.types.Action" href="#lib.types.Action">Action</a></code></h4>
+<ul class="">
+<li><code><a title="lib.types.Action.action_type" href="#lib.types.Action.action_type">action_type</a></code></li>
+<li><code><a title="lib.types.Action.metadata" href="#lib.types.Action.metadata">metadata</a></code></li>
+<li><code><a title="lib.types.Action.parameters" href="#lib.types.Action.parameters">parameters</a></code></li>
+<li><code><a title="lib.types.Action.timestamp" href="#lib.types.Action.timestamp">timestamp</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="lib.types.ActionResult" href="#lib.types.ActionResult">ActionResult</a></code></h4>
+<ul class="">
+<li><code><a title="lib.types.ActionResult.blocked_reason" href="#lib.types.ActionResult.blocked_reason">blocked_reason</a></code></li>
+<li><code><a title="lib.types.ActionResult.duration_ms" href="#lib.types.ActionResult.duration_ms">duration_ms</a></code></li>
+<li><code><a title="lib.types.ActionResult.metadata" href="#lib.types.ActionResult.metadata">metadata</a></code></li>
+<li><code><a title="lib.types.ActionResult.safety_validated" href="#lib.types.ActionResult.safety_validated">safety_validated</a></code></li>
+<li><code><a title="lib.types.ActionResult.success" href="#lib.types.ActionResult.success">success</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="lib.types.ActionType" href="#lib.types.ActionType">ActionType</a></code></h4>
+<ul class="">
+<li><code><a title="lib.types.ActionType.CLICK" href="#lib.types.ActionType.CLICK">CLICK</a></code></li>
+<li><code><a title="lib.types.ActionType.COMPOSITE" href="#lib.types.ActionType.COMPOSITE">COMPOSITE</a></code></li>
+<li><code><a title="lib.types.ActionType.DRAG" href="#lib.types.ActionType.DRAG">DRAG</a></code></li>
+<li><code><a title="lib.types.ActionType.KEY_PRESS" href="#lib.types.ActionType.KEY_PRESS">KEY_PRESS</a></code></li>
+<li><code><a title="lib.types.ActionType.WAIT" href="#lib.types.ActionType.WAIT">WAIT</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="lib.types.Agent" href="#lib.types.Agent">Agent</a></code></h4>
+<ul class="two-column">
+<li><code><a title="lib.types.Agent.agent_id" href="#lib.types.Agent.agent_id">agent_id</a></code></li>
+<li><code><a title="lib.types.Agent.created_at" href="#lib.types.Agent.created_at">created_at</a></code></li>
+<li><code><a title="lib.types.Agent.exploration_rate" href="#lib.types.Agent.exploration_rate">exploration_rate</a></code></li>
+<li><code><a title="lib.types.Agent.learning_rate" href="#lib.types.Agent.learning_rate">learning_rate</a></code></li>
+<li><code><a title="lib.types.Agent.metadata" href="#lib.types.Agent.metadata">metadata</a></code></li>
+<li><code><a title="lib.types.Agent.name" href="#lib.types.Agent.name">name</a></code></li>
+<li><code><a title="lib.types.Agent.total_actions" href="#lib.types.Agent.total_actions">total_actions</a></code></li>
+<li><code><a title="lib.types.Agent.total_sessions" href="#lib.types.Agent.total_sessions">total_sessions</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="lib.types.Card" href="#lib.types.Card">Card</a></code></h4>
+<ul class="two-column">
+<li><code><a title="lib.types.Card.card_id" href="#lib.types.Card.card_id">card_id</a></code></li>
+<li><code><a title="lib.types.Card.card_type" href="#lib.types.Card.card_type">card_type</a></code></li>
+<li><code><a title="lib.types.Card.decay_timer" href="#lib.types.Card.decay_timer">decay_timer</a></code></li>
+<li><code><a title="lib.types.Card.metadata" href="#lib.types.Card.metadata">metadata</a></code></li>
+<li><code><a title="lib.types.Card.name" href="#lib.types.Card.name">name</a></code></li>
+<li><code><a title="lib.types.Card.position" href="#lib.types.Card.position">position</a></code></li>
+<li><code><a title="lib.types.Card.slot_id" href="#lib.types.Card.slot_id">slot_id</a></code></li>
+<li><code><a title="lib.types.Card.state" href="#lib.types.Card.state">state</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="lib.types.CardState" href="#lib.types.CardState">CardState</a></code></h4>
+<ul class="">
+<li><code><a title="lib.types.CardState.DECAYING" href="#lib.types.CardState.DECAYING">DECAYING</a></code></li>
+<li><code><a title="lib.types.CardState.DRAGGING" href="#lib.types.CardState.DRAGGING">DRAGGING</a></code></li>
+<li><code><a title="lib.types.CardState.HIDDEN" href="#lib.types.CardState.HIDDEN">HIDDEN</a></code></li>
+<li><code><a title="lib.types.CardState.IN_HAND" href="#lib.types.CardState.IN_HAND">IN_HAND</a></code></li>
+<li><code><a title="lib.types.CardState.IN_SLOT" href="#lib.types.CardState.IN_SLOT">IN_SLOT</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="lib.types.ConstraintType" href="#lib.types.ConstraintType">ConstraintType</a></code></h4>
+<ul class="">
+<li><code><a title="lib.types.ConstraintType.FOCUS_REQUIRED" href="#lib.types.ConstraintType.FOCUS_REQUIRED">FOCUS_REQUIRED</a></code></li>
+<li><code><a title="lib.types.ConstraintType.KEY_BLACKLIST" href="#lib.types.ConstraintType.KEY_BLACKLIST">KEY_BLACKLIST</a></code></li>
+<li><code><a title="lib.types.ConstraintType.RATE_LIMIT" href="#lib.types.ConstraintType.RATE_LIMIT">RATE_LIMIT</a></code></li>
+<li><code><a title="lib.types.ConstraintType.WINDOW_BOUNDS" href="#lib.types.ConstraintType.WINDOW_BOUNDS">WINDOW_BOUNDS</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="lib.types.ElementType" href="#lib.types.ElementType">ElementType</a></code></h4>
+<ul class="two-column">
+<li><code><a title="lib.types.ElementType.BUTTON" href="#lib.types.ElementType.BUTTON">BUTTON</a></code></li>
+<li><code><a title="lib.types.ElementType.CARD" href="#lib.types.ElementType.CARD">CARD</a></code></li>
+<li><code><a title="lib.types.ElementType.OTHER" href="#lib.types.ElementType.OTHER">OTHER</a></code></li>
+<li><code><a title="lib.types.ElementType.RESOURCE_INDICATOR" href="#lib.types.ElementType.RESOURCE_INDICATOR">RESOURCE_INDICATOR</a></code></li>
+<li><code><a title="lib.types.ElementType.SLOT" href="#lib.types.ElementType.SLOT">SLOT</a></code></li>
+<li><code><a title="lib.types.ElementType.TEXT" href="#lib.types.ElementType.TEXT">TEXT</a></code></li>
+<li><code><a title="lib.types.ElementType.TIMER" href="#lib.types.ElementType.TIMER">TIMER</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="lib.types.EndCondition" href="#lib.types.EndCondition">EndCondition</a></code></h4>
+<ul class="two-column">
+<li><code><a title="lib.types.EndCondition.CRASH" href="#lib.types.EndCondition.CRASH">CRASH</a></code></li>
+<li><code><a title="lib.types.EndCondition.GAME_OVER" href="#lib.types.EndCondition.GAME_OVER">GAME_OVER</a></code></li>
+<li><code><a title="lib.types.EndCondition.MANUAL_STOP" href="#lib.types.EndCondition.MANUAL_STOP">MANUAL_STOP</a></code></li>
+<li><code><a title="lib.types.EndCondition.SAFETY_VIOLATION" href="#lib.types.EndCondition.SAFETY_VIOLATION">SAFETY_VIOLATION</a></code></li>
+<li><code><a title="lib.types.EndCondition.TIMEOUT" href="#lib.types.EndCondition.TIMEOUT">TIMEOUT</a></code></li>
+<li><code><a title="lib.types.EndCondition.WIN" href="#lib.types.EndCondition.WIN">WIN</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="lib.types.ExecutionResult" href="#lib.types.ExecutionResult">ExecutionResult</a></code></h4>
+<ul class="">
+<li><code><a title="lib.types.ExecutionResult.execution_time_ms" href="#lib.types.ExecutionResult.execution_time_ms">execution_time_ms</a></code></li>
+<li><code><a title="lib.types.ExecutionResult.message" href="#lib.types.ExecutionResult.message">message</a></code></li>
+<li><code><a title="lib.types.ExecutionResult.metadata" href="#lib.types.ExecutionResult.metadata">metadata</a></code></li>
+<li><code><a title="lib.types.ExecutionResult.status" href="#lib.types.ExecutionResult.status">status</a></code></li>
+<li><code><a title="lib.types.ExecutionResult.success" href="#lib.types.ExecutionResult.success">success</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="lib.types.ExecutionStatus" href="#lib.types.ExecutionStatus">ExecutionStatus</a></code></h4>
+<ul class="">
+<li><code><a title="lib.types.ExecutionStatus.BLOCKED" href="#lib.types.ExecutionStatus.BLOCKED">BLOCKED</a></code></li>
+<li><code><a title="lib.types.ExecutionStatus.FAILED" href="#lib.types.ExecutionStatus.FAILED">FAILED</a></code></li>
+<li><code><a title="lib.types.ExecutionStatus.PENDING" href="#lib.types.ExecutionStatus.PENDING">PENDING</a></code></li>
+<li><code><a title="lib.types.ExecutionStatus.SUCCESS" href="#lib.types.ExecutionStatus.SUCCESS">SUCCESS</a></code></li>
+<li><code><a title="lib.types.ExecutionStatus.TIMEOUT" href="#lib.types.ExecutionStatus.TIMEOUT">TIMEOUT</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="lib.types.GameElement" href="#lib.types.GameElement">GameElement</a></code></h4>
+<ul class="two-column">
+<li><code><a title="lib.types.GameElement.bounds" href="#lib.types.GameElement.bounds">bounds</a></code></li>
+<li><code><a title="lib.types.GameElement.center" href="#lib.types.GameElement.center">center</a></code></li>
+<li><code><a title="lib.types.GameElement.confidence" href="#lib.types.GameElement.confidence">confidence</a></code></li>
+<li><code><a title="lib.types.GameElement.element_type" href="#lib.types.GameElement.element_type">element_type</a></code></li>
+<li><code><a title="lib.types.GameElement.metadata" href="#lib.types.GameElement.metadata">metadata</a></code></li>
+<li><code><a title="lib.types.GameElement.state" href="#lib.types.GameElement.state">state</a></code></li>
+<li><code><a title="lib.types.GameElement.text" href="#lib.types.GameElement.text">text</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="lib.types.GameState" href="#lib.types.GameState">GameState</a></code></h4>
+<ul class="two-column">
+<li><code><a title="lib.types.GameState.elements" href="#lib.types.GameState.elements">elements</a></code></li>
+<li><code><a title="lib.types.GameState.from_dict" href="#lib.types.GameState.from_dict">from_dict</a></code></li>
+<li><code><a title="lib.types.GameState.metadata" href="#lib.types.GameState.metadata">metadata</a></code></li>
+<li><code><a title="lib.types.GameState.screenshot" href="#lib.types.GameState.screenshot">screenshot</a></code></li>
+<li><code><a title="lib.types.GameState.text_regions" href="#lib.types.GameState.text_regions">text_regions</a></code></li>
+<li><code><a title="lib.types.GameState.timestamp" href="#lib.types.GameState.timestamp">timestamp</a></code></li>
+<li><code><a title="lib.types.GameState.to_dict" href="#lib.types.GameState.to_dict">to_dict</a></code></li>
+<li><code><a title="lib.types.GameState.window_bounds" href="#lib.types.GameState.window_bounds">window_bounds</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="lib.types.Goal" href="#lib.types.Goal">Goal</a></code></h4>
+<ul class="">
+<li><code><a title="lib.types.Goal.confidence" href="#lib.types.Goal.confidence">confidence</a></code></li>
+<li><code><a title="lib.types.Goal.description" href="#lib.types.Goal.description">description</a></code></li>
+<li><code><a title="lib.types.Goal.goal_type" href="#lib.types.Goal.goal_type">goal_type</a></code></li>
+<li><code><a title="lib.types.Goal.metadata" href="#lib.types.Goal.metadata">metadata</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="lib.types.MetricType" href="#lib.types.MetricType">MetricType</a></code></h4>
+<ul class="">
+<li><code><a title="lib.types.MetricType.LEARNING_RATE" href="#lib.types.MetricType.LEARNING_RATE">LEARNING_RATE</a></code></li>
+<li><code><a title="lib.types.MetricType.MECHANICS_DISCOVERED" href="#lib.types.MetricType.MECHANICS_DISCOVERED">MECHANICS_DISCOVERED</a></code></li>
+<li><code><a title="lib.types.MetricType.RESOURCES_ACCUMULATED" href="#lib.types.MetricType.RESOURCES_ACCUMULATED">RESOURCES_ACCUMULATED</a></code></li>
+<li><code><a title="lib.types.MetricType.SURVIVAL_TIME" href="#lib.types.MetricType.SURVIVAL_TIME">SURVIVAL_TIME</a></code></li>
+<li><code><a title="lib.types.MetricType.UNIQUE_ENDINGS" href="#lib.types.MetricType.UNIQUE_ENDINGS">UNIQUE_ENDINGS</a></code></li>
+<li><code><a title="lib.types.MetricType.WIN_RATE" href="#lib.types.MetricType.WIN_RATE">WIN_RATE</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="lib.types.MouseButton" href="#lib.types.MouseButton">MouseButton</a></code></h4>
+<ul class="">
+<li><code><a title="lib.types.MouseButton.LEFT" href="#lib.types.MouseButton.LEFT">LEFT</a></code></li>
+<li><code><a title="lib.types.MouseButton.MIDDLE" href="#lib.types.MouseButton.MIDDLE">MIDDLE</a></code></li>
+<li><code><a title="lib.types.MouseButton.RIGHT" href="#lib.types.MouseButton.RIGHT">RIGHT</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="lib.types.Narrative" href="#lib.types.Narrative">Narrative</a></code></h4>
+<ul class="two-column">
+<li><code><a title="lib.types.Narrative.embedding" href="#lib.types.Narrative.embedding">embedding</a></code></li>
+<li><code><a title="lib.types.Narrative.metadata" href="#lib.types.Narrative.metadata">metadata</a></code></li>
+<li><code><a title="lib.types.Narrative.narrative_id" href="#lib.types.Narrative.narrative_id">narrative_id</a></code></li>
+<li><code><a title="lib.types.Narrative.session_id" href="#lib.types.Narrative.session_id">session_id</a></code></li>
+<li><code><a title="lib.types.Narrative.text" href="#lib.types.Narrative.text">text</a></code></li>
+<li><code><a title="lib.types.Narrative.timestamp" href="#lib.types.Narrative.timestamp">timestamp</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="lib.types.PerformanceMetric" href="#lib.types.PerformanceMetric">PerformanceMetric</a></code></h4>
+<ul class="">
+<li><code><a title="lib.types.PerformanceMetric.metadata" href="#lib.types.PerformanceMetric.metadata">metadata</a></code></li>
+<li><code><a title="lib.types.PerformanceMetric.metric_type" href="#lib.types.PerformanceMetric.metric_type">metric_type</a></code></li>
+<li><code><a title="lib.types.PerformanceMetric.session_id" href="#lib.types.PerformanceMetric.session_id">session_id</a></code></li>
+<li><code><a title="lib.types.PerformanceMetric.timestamp" href="#lib.types.PerformanceMetric.timestamp">timestamp</a></code></li>
+<li><code><a title="lib.types.PerformanceMetric.value" href="#lib.types.PerformanceMetric.value">value</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="lib.types.Point" href="#lib.types.Point">Point</a></code></h4>
+<ul class="">
+<li><code><a title="lib.types.Point.x" href="#lib.types.Point.x">x</a></code></li>
+<li><code><a title="lib.types.Point.y" href="#lib.types.Point.y">y</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="lib.types.QueryResult" href="#lib.types.QueryResult">QueryResult</a></code></h4>
+<ul class="">
+<li><code><a title="lib.types.QueryResult.metadata" href="#lib.types.QueryResult.metadata">metadata</a></code></li>
+<li><code><a title="lib.types.QueryResult.query_time_ms" href="#lib.types.QueryResult.query_time_ms">query_time_ms</a></code></li>
+<li><code><a title="lib.types.QueryResult.result_count" href="#lib.types.QueryResult.result_count">result_count</a></code></li>
+<li><code><a title="lib.types.QueryResult.results" href="#lib.types.QueryResult.results">results</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="lib.types.Rect" href="#lib.types.Rect">Rect</a></code></h4>
+<ul class="two-column">
+<li><code><a title="lib.types.Rect.center" href="#lib.types.Rect.center">center</a></code></li>
+<li><code><a title="lib.types.Rect.contains" href="#lib.types.Rect.contains">contains</a></code></li>
+<li><code><a title="lib.types.Rect.height" href="#lib.types.Rect.height">height</a></code></li>
+<li><code><a title="lib.types.Rect.width" href="#lib.types.Rect.width">width</a></code></li>
+<li><code><a title="lib.types.Rect.x" href="#lib.types.Rect.x">x</a></code></li>
+<li><code><a title="lib.types.Rect.y" href="#lib.types.Rect.y">y</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="lib.types.Session" href="#lib.types.Session">Session</a></code></h4>
+<ul class="two-column">
+<li><code><a title="lib.types.Session.agent_id" href="#lib.types.Session.agent_id">agent_id</a></code></li>
+<li><code><a title="lib.types.Session.duration_seconds" href="#lib.types.Session.duration_seconds">duration_seconds</a></code></li>
+<li><code><a title="lib.types.Session.end_condition" href="#lib.types.Session.end_condition">end_condition</a></code></li>
+<li><code><a title="lib.types.Session.end_time" href="#lib.types.Session.end_time">end_time</a></code></li>
+<li><code><a title="lib.types.Session.metadata" href="#lib.types.Session.metadata">metadata</a></code></li>
+<li><code><a title="lib.types.Session.session_id" href="#lib.types.Session.session_id">session_id</a></code></li>
+<li><code><a title="lib.types.Session.start_time" href="#lib.types.Session.start_time">start_time</a></code></li>
+<li><code><a title="lib.types.Session.total_actions" href="#lib.types.Session.total_actions">total_actions</a></code></li>
+<li><code><a title="lib.types.Session.total_reward" href="#lib.types.Session.total_reward">total_reward</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="lib.types.Strategy" href="#lib.types.Strategy">Strategy</a></code></h4>
+<ul class="two-column">
+<li><code><a title="lib.types.Strategy.action_sequence" href="#lib.types.Strategy.action_sequence">action_sequence</a></code></li>
+<li><code><a title="lib.types.Strategy.avg_reward" href="#lib.types.Strategy.avg_reward">avg_reward</a></code></li>
+<li><code><a title="lib.types.Strategy.goal" href="#lib.types.Strategy.goal">goal</a></code></li>
+<li><code><a title="lib.types.Strategy.metadata" href="#lib.types.Strategy.metadata">metadata</a></code></li>
+<li><code><a title="lib.types.Strategy.name" href="#lib.types.Strategy.name">name</a></code></li>
+<li><code><a title="lib.types.Strategy.strategy_id" href="#lib.types.Strategy.strategy_id">strategy_id</a></code></li>
+<li><code><a title="lib.types.Strategy.success_rate" href="#lib.types.Strategy.success_rate">success_rate</a></code></li>
+<li><code><a title="lib.types.Strategy.times_used" href="#lib.types.Strategy.times_used">times_used</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="lib.types.TextAnalysis" href="#lib.types.TextAnalysis">TextAnalysis</a></code></h4>
+<ul class="">
+<li><code><a title="lib.types.TextAnalysis.embedding" href="#lib.types.TextAnalysis.embedding">embedding</a></code></li>
+<li><code><a title="lib.types.TextAnalysis.entities" href="#lib.types.TextAnalysis.entities">entities</a></code></li>
+<li><code><a title="lib.types.TextAnalysis.metadata" href="#lib.types.TextAnalysis.metadata">metadata</a></code></li>
+<li><code><a title="lib.types.TextAnalysis.sentiment" href="#lib.types.TextAnalysis.sentiment">sentiment</a></code></li>
+<li><code><a title="lib.types.TextAnalysis.text" href="#lib.types.TextAnalysis.text">text</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="lib.types.TextRegion" href="#lib.types.TextRegion">TextRegion</a></code></h4>
+<ul class="">
+<li><code><a title="lib.types.TextRegion.bounds" href="#lib.types.TextRegion.bounds">bounds</a></code></li>
+<li><code><a title="lib.types.TextRegion.confidence" href="#lib.types.TextRegion.confidence">confidence</a></code></li>
+<li><code><a title="lib.types.TextRegion.text" href="#lib.types.TextRegion.text">text</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="lib.types.ValidationResult" href="#lib.types.ValidationResult">ValidationResult</a></code></h4>
+<ul class="">
+<li><code><a title="lib.types.ValidationResult.blocked_reason" href="#lib.types.ValidationResult.blocked_reason">blocked_reason</a></code></li>
+<li><code><a title="lib.types.ValidationResult.constraints_violated" href="#lib.types.ValidationResult.constraints_violated">constraints_violated</a></code></li>
+<li><code><a title="lib.types.ValidationResult.is_allowed" href="#lib.types.ValidationResult.is_allowed">is_allowed</a></code></li>
+<li><code><a title="lib.types.ValidationResult.metadata" href="#lib.types.ValidationResult.metadata">metadata</a></code></li>
+<li><code><a title="lib.types.ValidationResult.reason" href="#lib.types.ValidationResult.reason">reason</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>
