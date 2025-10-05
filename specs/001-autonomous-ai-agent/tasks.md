@@ -1,7 +1,17 @@
 # Tasks: Autonomous AI Agent for Cultist Simulator
 
 **Input**: Design documents from `/specs/001-autonomous-ai-agent/`
-**Prerequisites**: plan.md ✓, research.md ✓, data-model.md ✓, contracts/ ✓
+**Prerequisites**: plan.md ✓, research.md ✓, data-mo### Orchestrator (src/orchestrator/)
+
+- [x] **T105** Initialize orchestrator structure in src/orchestrator/__init__.py
+- [x] **T106** Implement episode execution loop in src/orchestrator/agent_runner.py
+- [x] **T107** Integrate vision → action selection → automation pipeline in src/orchestrator/agent_runner.py
+- [x] **T108** Implement session recording and persistence in src/orchestrator/agent_runner.py
+- [x] **T109** Implement training loop (100-500 episodes) in src/orchestrator/agent_runner.py
+- [x] **T110** Implement real-time metrics tracking in src/orchestrator/agent_runner.py
+- [x] **T111** Implement articulate_strategy() for human-readable output in src/orchestrator/agent_runner.py
+- [x] **T112** Implement crash recovery and resume logic in src/orchestrator/agent_runner.py
+- [x] **T113** Implement main orchestrator CLI in src/orchestrator/cli.pyontracts/ ✓
 
 ---
 
