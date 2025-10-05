@@ -32,8 +32,10 @@ from src.learning import (
 from src.safety import validate_action
 from src.automation import (
     simulate_click, simulate_key_press, wait,
-    OutOfBoundsError, BlacklistedKeyError, WindowNotFocusedError
+    OutOfBoundsError, BlacklistedKeyError, WindowNotFocusedError,
+    is_emergency_stop_requested
 )
+from src.automation.window_manager import require_active_window, is_window_active
 
 logger = get_logger(__name__)
 
@@ -103,6 +105,10 @@ class AgentRunner:
         T106: Episode execution loop.
         T107: Vision → action selection → automation pipeline.
         
+        SAFETY: Validates game window is active before starting.
+        For single-screen setups, this prevents accidental interaction
+        with other applications.
+        
         Args:
             max_duration_seconds: Maximum episode duration (None = no limit)
             
@@ -110,8 +116,24 @@ class AgentRunner:
             Completed session object
             
         Raises:
-            RuntimeError: If episode fails to start
+            RuntimeError: If episode fails to start or window not active
         """
+        # CRITICAL: Verify game window is active before starting
+        try:
+            window_bounds = require_active_window(self.window_name)
+            logger.info(
+                "active_window_verified",
+                window_name=self.window_name,
+                bounds=str(window_bounds)
+            )
+        except RuntimeError as e:
+            logger.error(
+                "episode_start_failed_window_inactive",
+                window_name=self.window_name,
+                error=str(e)
+            )
+            raise
+        
         # Initialize session
         session = self._start_session()
         episode_start = time.time()
@@ -125,6 +147,23 @@ class AgentRunner:
         try:
             # Main episode loop
             while True:
+                # SAFETY: Check if window is still active
+                if not is_window_active(self.window_name):
+                    logger.warning(
+                        "window_lost_focus",
+                        window_name=self.window_name,
+                        message="Game window lost focus - pausing episode"
+                    )
+                    # Wait for window to regain focus
+                    wait(1000)  # Wait 1 second
+                    continue
+                
+                # Check emergency stop
+                if is_emergency_stop_requested():
+                    logger.warning("emergency_stop_detected")
+                    session.end_condition = EndCondition.INTERRUPTED
+                    break
+                
                 # Check termination conditions
                 if self._should_terminate_episode(session, episode_start, max_duration_seconds):
                     break

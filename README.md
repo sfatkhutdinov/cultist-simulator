@@ -9,6 +9,20 @@ An autonomous AI agent that learns to play and win Cultist Simulator through sel
 - **Natural Language Processing**: Semantic understanding of narrative text and goal extraction
 - **Safe Automation**: macOS input simulation with 100% reliable safety containment
 - **Knowledge Base**: Persistent SQLite storage of game mechanics and learned patterns
+- **🛡️ Single-Screen Safe**: Strictly confined to game window with focus monitoring
+
+## 🚨 Safety First
+
+**Perfect for single-screen Mac setups!** The agent includes multiple safety layers:
+
+✅ **Active Window Validation** - Only runs when game window is focused  
+✅ **Strict Boundary Enforcement** - All clicks validated against window bounds  
+✅ **Focus Monitoring** - Pauses immediately if window loses focus  
+✅ **Emergency Stop** - Instant shutdown via Ctrl+C or F12  
+✅ **Keyboard Blacklist** - Cmd+Q, Cmd+W, etc. are blocked  
+✅ **Violation Logging** - Complete audit trail of all safety checks  
+
+👉 **See [docs/SINGLE_SCREEN_SAFETY.md](docs/SINGLE_SCREEN_SAFETY.md) for details**
 
 ## Quick Start
 
@@ -23,9 +37,15 @@ pip install -r requirements.txt
 # Run setup
 python -m pytest tests/  # Verify installation
 
-# Start training
-python -m src.orchestrator.cli --run-episode
+# IMPORTANT: Focus Cultist Simulator window, then:
+python -m src.orchestrator.cli run --agent-id my_agent --window "Cultist Simulator"
 ```
+
+**First time setup:**
+1. Grant macOS permissions (Screen Recording + Accessibility)
+2. Open Cultist Simulator
+3. Click on game window to make it active
+4. Run agent command (agent will verify window is focused)
 
 ## Project Structure
 
