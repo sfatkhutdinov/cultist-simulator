@@ -28,6 +28,11 @@ from dataclasses import dataclass
 from src.lib.types import GameState, Action, Session
 from src.lib.logging_config import get_logger
 
+# Export classes for CLI access
+from .knowledge_base import KnowledgeBase
+from .metrics import MetricsTracker
+from .strategy import StrategyManager
+
 logger = get_logger(__name__)
 
 
