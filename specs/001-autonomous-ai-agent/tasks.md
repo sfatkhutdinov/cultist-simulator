@@ -232,13 +232,52 @@ This tasks document breaks down the implementation of an autonomous AI agent tha
 - [x] **T133** Create example configs for different training scenarios
 - [x] **T134** Run end-to-end test with actual Cultist Simulator game (success criteria: agent executes 10+ actions without crash) ✅ READY
 - [ ] **T134a** Test vision pipeline across multiple resolutions (1920x1080, 2560x1440, 3840x2160) in tests/performance/test_multi_resolution.py
-- [ ] **T135** Verify all safety constraints with adversarial testing
+  - Verify element detection accuracy >90% at each resolution
+  - Verify OCR text extraction works at all resolutions
+  - Verify performance meets NFR-002 (<200ms) at all resolutions
+  - Test automatic window scaling and coordinate transformation
+- [ ] **T135** Verify all safety constraints with adversarial testing (CRITICAL - NFR-004 requires 100% reliability)
+  - Attempt out-of-bounds clicks (should be blocked 100% of times)
+  - Attempt to trigger Cmd+Q, Cmd+W, Cmd+Tab (should be blocked 100%)
+  - Attempt actions while window unfocused (should be blocked 100%)
+  - Attempt to exceed rate limits (should be throttled)
+  - Attempt to minimize/hide game window (should be blocked 100%)
+  - Test emergency stop (F12) interrupts all operations within 100ms
+  - Document all attack vectors tested and verify zero bypasses
 - [ ] **T136** Code cleanup: remove duplication, improve naming
 - [x] **T137** Final linting and type checking (mypy, black, pylint) - Black: ✓, Pylint: 8.96/10, MyPy: 83 minor issues (mostly missing return annotations)
 - [ ] **T138** End-to-end validation: Verify agent achieves first win within 500 attempts on benchmark scenario (FR-026 compliance test)
+  - Run agent for 500 episodes maximum on standardized starting scenario
+  - Track win count and attempt number of first win
+  - Verify first win occurs within 500 attempts
+  - Document winning strategy discovered by agent
+  - Acceptance criteria: At least 1 win within 500 episodes
 - [ ] **T139** Endurance test: Agent runs autonomously for 24 hours or 50 episodes without human intervention (FR-027 compliance test)
+  - Start agent with continuous operation mode
+  - Monitor for 24 hours or 50 complete episodes (whichever comes first)
+  - Verify no crashes, hangs, or human intervention required
+  - Verify knowledge base persists correctly across sessions
+  - Verify memory usage stays within bounds (<512MB per NFR game design standards)
+  - Acceptance criteria: Zero crashes, zero manual interventions
 - [ ] **T140** Unit test: Verify GameState change detection explicitly tests FR-005 (detect_state_changes)
+  - Test state comparison detects card movements
+  - Test state comparison detects timer changes
+  - Test state comparison detects resource value changes
+  - Test state comparison detects new UI elements appearing
+  - Acceptance criteria: All state change types detected with >95% accuracy
 - [ ] **T141** Integration test: Verify agent identifies available actions correctly (FR-023 validation with test scenarios)
+  - Given various game states, verify agent correctly identifies clickable elements
+  - Verify agent distinguishes interactive vs non-interactive UI elements
+  - Verify agent identifies drag-and-drop opportunities
+  - Verify agent identifies keyboard input opportunities
+  - Acceptance criteria: >90% accuracy on action identification test suite
+- [ ] **T142** NFR-011 validation: Test game UI change detection and YOLO model retraining workflow in tests/integration/test_ui_adaptation.py
+  - Simulate minor UI change (button position shift)
+  - Verify detection of reduced element detection accuracy
+  - Test YOLO model retraining trigger mechanism
+  - Verify retraining improves detection accuracy back to >90%
+  - Document retraining workflow and time requirements
+  - Acceptance criteria: System auto-adapts to UI changes within 24 hours
 
 ---
 
@@ -387,6 +426,7 @@ Before declaring tasks complete:
 - [x] Continuous operation test added (T139: 24h/50 episode endurance test)
 - [x] State change detection test added (T140: explicit FR-005 validation)
 - [x] Action identification test added (T141: explicit FR-023 validation)
+- [x] Game adaptation test added (T142: explicit NFR-011 validation for UI changes)
 
 ---
 
@@ -404,8 +444,9 @@ Before declaring tasks complete:
   - Orchestrator: 2-3 days
 - **Integration**: 3-5 days (T114-T122)
 - **Polish**: 2-3 days (T123-T137)
+- **Final Validation**: 2-3 days (T138-T142)
 
-**Total**: ~30-40 days for full implementation
+**Total**: ~32-43 days for full implementation (updated from 30-40 days)
 
 **To First Win**: Agent should achieve first win within 100-500 game attempts after training begins (FR-026)
 

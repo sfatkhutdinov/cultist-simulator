@@ -327,7 +327,7 @@ All contracts include:
 - [x] Phase 0: Research complete (/plan command) - research.md created
 - [x] Phase 1: Design complete (/plan command) - data-model.md, contracts/, quickstart.md created
 - [x] Phase 2: Task planning complete (/plan command - describe approach only) - See below
-- [ ] Phase 3: Tasks generated (/tasks command) - Ready for /tasks
+- [x] Phase 3: Tasks generated (/tasks command) - tasks.md created
 - [ ] Phase 4: Implementation complete
 - [ ] Phase 5: Validation passed
 
@@ -397,8 +397,8 @@ Estimated 145-155 tasks total (updated from initial 85-125 estimate):
 - Contract tests: ~26 tasks (5 per library + narrative decision test)
 - Core implementation: ~50 tasks (including crash recovery, save game support, and subtasks T113a-f)
 - Integration: ~15 tasks
-- Polish: ~15 tasks (including validation tasks T138-T141)
+- Polish: ~15 tasks (including validation tasks T138-T142)
 - Performance/validation: ~8 tasks (multi-resolution, endurance, win validation)
 
 ---
-*Based on Constitution v1.0.0 - See `.specify/memory/constitution.md`*
+*Based on Constitution v1.0.1 - See `.specify/memory/constitution.md`*

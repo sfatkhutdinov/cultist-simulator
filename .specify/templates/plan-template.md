@@ -47,7 +47,37 @@
 ## Constitution Check
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+**I. Library-First Architecture**
+- [ ] Feature implemented as standalone library with clear boundaries
+- [ ] Library is self-contained and independently testable
+- [ ] Single, well-defined purpose (no organizational-only libraries)
+- [ ] Violation justification: [if applicable]
+
+**II. CLI Interface Requirement**
+- [ ] Library exposes functionality via command-line interface
+- [ ] Follows text-based I/O protocol (stdin/args → stdout, errors → stderr)
+- [ ] Supports both JSON and human-readable formats
+- [ ] Violation justification: [if applicable]
+
+**III. Test-First Development (NON-NEGOTIABLE)**
+- [ ] Tests written before implementation
+- [ ] Tests fail initially, then implementation makes them pass
+- [ ] Red-Green-Refactor cycle enforced
+- [ ] No code merges without corresponding tests
+- [ ] Violation justification: [NONE ALLOWED - this is non-negotiable]
+
+**IV. Integration Testing Requirements**
+- [ ] Contract tests for new library interfaces
+- [ ] Contract tests for interface changes
+- [ ] Cross-system tests for shared schemas
+- [ ] Integration tests verify system consistency
+- [ ] Violation justification: [if applicable]
+
+**V. Observability and Debugging**
+- [ ] All I/O ensures debuggability
+- [ ] Structured logging for state changes, actions, and events
+- [ ] State is serializable and inspectable
+- [ ] Violation justification: [if applicable]
 
 ## Project Structure
 
@@ -216,4 +246,4 @@ directories captured above]
 - [ ] Complexity deviations documented
 
 ---
-*Based on Constitution v2.1.1 - See `/memory/constitution.md`*
+*Based on Constitution v1.0.1 - See `/memory/constitution.md`*

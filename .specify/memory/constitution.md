@@ -1,15 +1,16 @@
 <!--
 Sync Impact Report:
-- Version change: Initial → 1.0.0
-- Modified principles: All principles defined (initial constitution)
-- Added sections: Core Principles, Game Design Standards, Development Workflow, Governance
-- Removed sections: None (initial setup)
+- Version change: 1.0.0 → 1.0.1
+- Modified principles: None
+- Added sections: None
+- Removed sections: None
 - Templates requiring updates:
-  ✅ plan-template.md: Constitution Check section aligns with principles
+  ✅ plan-template.md: Updated version reference from v2.1.1 to v1.0.1
   ✅ spec-template.md: Scope/requirements alignment confirmed
   ✅ tasks-template.md: Task categorization reflects principle-driven task types
-  ✅ constitution.prompt.md: No outdated references found
+  ✅ agent-file-template.md: No constitution references
 - Follow-up TODOs: None
+- Change type: PATCH (version reference correction only)
 -->
 
 # Cultist Simulator Constitution
@@ -65,4 +66,4 @@ Amendments to this Constitution require documentation of impact, stakeholder app
 
 Complexity that violates constitutional principles MUST be justified or the approach MUST be simplified. Use template-based guidance files for runtime development decisions aligned with these principles.
 
-**Version**: 1.0.0 | **Ratified**: 2025-10-04 | **Last Amended**: 2025-10-04
+**Version**: 1.0.1 | **Ratified**: 2025-10-04 | **Last Amended**: 2025-10-06
