@@ -217,8 +217,15 @@ def cmd_train(args):
     # Load configuration
     config = load_config()
 
-    # Apply config defaults - prioritize config over CLI defaults
-    max_actions = config.get('learning', {}).get('max_actions_per_episode', getattr(args, 'max_actions', 30))
+    # Apply config defaults - prioritize CLI args over config
+    # If user specified --max-actions on command line, use that instead of config
+    if hasattr(args, 'max_actions') and args.max_actions != 1000:
+        # User explicitly set max-actions (not using default)
+        max_actions = args.max_actions
+    else:
+        # Use config file or default
+        max_actions = config.get('learning', {}).get('max_actions_per_episode', 30)
+    
     vision_config = config.get('vision', {})
     enable_ocr = vision_config.get('enable_ocr', True)
     enable_yolo = vision_config.get('enable_yolo', False)
