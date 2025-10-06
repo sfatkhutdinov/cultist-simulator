@@ -1,0 +1,46 @@
+# Storage Configuration
+# Controls data collection, persistence, and cleanup behavior
+
+storage:
+  # Database settings
+  enable_database_storage: true  # Store to SQLite database
+  db_path: "data/knowledge_base.db"
+  
+  # Screenshot settings
+  save_screenshots: false  # Enable to save screenshots for YOLO training
+  screenshot_interval: 5  # Save every N actions (if enabled)
+  screenshot_format: "png"  # png or jpg
+  screenshot_quality: 85  # 1-100 for JPEG quality
+  
+  # Log settings
+  log_to_file: true
+  log_level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  max_log_size_mb: 100  # Rotate log when it reaches this size
+  log_retention_days: 30  # Archive logs older than this
+  compress_archived_logs: true  # Gzip archived logs
+  
+  # TensorBoard settings
+  tensorboard_enabled: true
+  tensorboard_keep_runs: 10  # Keep N most recent runs, delete older
+  
+  # Checkpoint settings
+  checkpoint_interval: 20  # Save checkpoint every N episodes
+  checkpoint_retention: 50  # Keep N most recent checkpoints
+  
+  # Data cleanup settings
+  auto_cleanup_enabled: false  # Automatically clean old data
+  cleanup_interval_hours: 24  # Run cleanup every N hours
+  
+  # Storage limits
+  max_total_storage_gb: 10  # Stop collecting if storage exceeds this
+  warn_storage_gb: 5  # Warn when storage reaches this threshold
+  
+  # Export settings
+  export_format: "jsonl"  # jsonl, csv, or parquet
+  enable_compression: true  # Compress exported data
+
+# Performance settings
+performance:
+  batch_insert_size: 100  # Batch database inserts for performance
+  commit_interval_seconds: 5  # Commit database every N seconds
+  enable_write_ahead_log: true  # SQLite WAL mode for better concurrency

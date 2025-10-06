@@ -53,6 +53,7 @@ from src.automation import (
     start_emergency_stop_listener,
 )
 from src.automation.window_manager import require_active_window, is_window_active
+from src.orchestrator.storage_manager import StorageManager
 
 logger = get_logger(__name__)
 
@@ -147,6 +148,14 @@ class AgentRunner:
 
         # Setup graceful interrupt handler
         setup_interrupt_handler()
+        
+        # Initialize storage manager
+        try:
+            self.storage = StorageManager()
+            logger.info("storage_manager_initialized")
+        except Exception as e:
+            logger.warning("storage_manager_initialization_failed", error=str(e))
+            self.storage = None  # Continue without storage if it fails
 
         # Current episode state
         self.current_session: Optional[Session] = None
@@ -588,6 +597,17 @@ class AgentRunner:
         self.current_session = session
         self.action_history = []
         self.episode_count += 1
+        
+        # Start episode storage if storage manager available
+        if self.storage:
+            try:
+                episode_id = self.storage.start_episode(self.agent_id)
+                session.metadata['episode_id'] = episode_id
+                session.metadata['storage_enabled'] = True
+                logger.info("episode_storage_started", episode_id=episode_id)
+            except Exception as e:
+                logger.warning("failed_to_start_episode_storage", error=str(e))
+                session.metadata['storage_enabled'] = False
 
         return session
 
@@ -599,6 +619,22 @@ class AgentRunner:
         """
         session.end_time = datetime.now()
         session.end_condition = end_condition
+        
+        # End episode storage if enabled
+        if self.storage and session.metadata.get('storage_enabled'):
+            try:
+                outcome_map = {
+                    EndCondition.TIMEOUT: 'timeout',
+                    EndCondition.MANUAL_STOP: 'interrupted',
+                    EndCondition.CRASH: 'defeat',
+                    EndCondition.GAME_OVER: 'defeat',
+                    EndCondition.WIN: 'victory',
+                    EndCondition.SAFETY_VIOLATION: 'interrupted',
+                }
+                self.storage.end_episode(outcome=outcome_map.get(end_condition, 'completed'))
+                logger.info("episode_storage_ended", outcome=outcome_map.get(end_condition, 'completed'))
+            except Exception as e:
+                logger.warning("failed_to_end_episode_storage", error=str(e))
 
         # Print user-friendly completion message
         print("\n" + "=" * 70)
@@ -612,10 +648,21 @@ class AgentRunner:
         print(f"  End Condition: {end_condition.value}")
         if actions > 0:
             print(f"  Avg per Action: {duration/actions:.2f}s")
+        
+        # Show storage stats if enabled
+        if self.storage and self.storage.kb and session.metadata.get('episode_id'):
+            try:
+                stats = self.storage.kb.get_episode_stats(session.metadata['episode_id'])
+                if stats:
+                    print(f"  States Captured: {stats.get('state_count', 0)}")
+                    print(f"  Experiences Stored: {stats.get('experience_count', 0)}")
+            except Exception:
+                pass
+        
         print("=" * 70)
         print()
 
-        # Store session
+        # Store session (legacy format)
         try:
             store_session(session)
             logger.info(
