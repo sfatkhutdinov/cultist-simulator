@@ -50,7 +50,7 @@ class TensorBoardLogger:
 
         if log_dir is None:
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            log_dir = Path(f"data/logs/tensorboard/{agent_id}_{timestamp}")
+            log_dir = Path(f"data/tensorboard/{agent_id}_{timestamp}")
 
         self.log_dir = Path(log_dir)
         self.log_dir.mkdir(parents=True, exist_ok=True)

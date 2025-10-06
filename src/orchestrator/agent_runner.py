@@ -512,9 +512,20 @@ class AgentRunner:
             )
 
         # Otherwise, do random exploration click
-        # Generate random point within window bounds (with margin)
-        bounds = game_state.window_bounds
+        # CRITICAL: Generate random point WITHIN ACTUAL WINDOW BOUNDS (absolute screen coordinates)
+        # Re-verify window bounds in case window moved
+        try:
+            from src.automation.window_manager import require_active_window
+            current_bounds = require_active_window(self.window_name)
+            bounds = current_bounds
+        except Exception:
+            bounds = game_state.window_bounds
+        
         margin = 50
+        # Ensure we don't go outside bounds
+        if bounds.width <= 2 * margin or bounds.height <= 2 * margin:
+            margin = 10
+        
         random_x = random.randint(bounds.x + margin, bounds.x + bounds.width - margin)
         random_y = random.randint(bounds.y + margin, bounds.y + bounds.height - margin)
         
@@ -725,6 +736,11 @@ class TrainingRunner:
         signal.signal(signal.SIGINT, self._signal_handler)
         signal.signal(signal.SIGTERM, self._signal_handler)
 
+        # Initialize TensorBoard logger
+        from src.orchestrator.tensorboard_logger import TensorBoardLogger
+        # Don't specify log_dir - let it create timestamped subdirectory
+        self.tensorboard = TensorBoardLogger(agent_id=agent_runner.agent_id)
+
         logger.info("training_runner_initialized", agent_id=agent_runner.agent_id)
 
     def _signal_handler(self, signum, frame):
@@ -784,6 +800,17 @@ class TrainingRunner:
                     success_rate=metrics["success_rate"],
                 )
 
+                # Log to TensorBoard
+                self.tensorboard.log_episode(episode_num, {
+                    "actions": session.total_actions,
+                    "duration_seconds": session.duration_seconds,
+                    "success_rate": metrics["success_rate"],
+                    "successful_actions": metrics["successful_actions"],
+                    "failed_actions": metrics["failed_actions"],
+                    "loops_detected": metrics["loops_detected"],
+                    "average_episode_length": metrics["average_episode_length"],
+                })
+
                 # Checkpoint
                 if episode_num % checkpoint_interval == 0:
                     self._save_checkpoint(episode_num)
@@ -808,6 +835,11 @@ class TrainingRunner:
             episodes=len(self.training_sessions),
             total_actions=self.agent_runner.metrics["total_actions"],
         )
+
+        # Close TensorBoard writer
+        if hasattr(self.tensorboard, 'writer') and self.tensorboard.writer:
+            self.tensorboard.writer.close()
+            logger.info("tensorboard_writer_closed")
 
         return self.training_sessions
 
